@@ -9,7 +9,7 @@ if (require('electron-squirrel-startup')) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1000,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -17,7 +17,7 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'www/splash/page1.html'));
+  mainWindow.loadFile(path.join(__dirname, 'www/splash/loader.html'));
 
   // Remove top bar
   mainWindow.setMenu(null);
