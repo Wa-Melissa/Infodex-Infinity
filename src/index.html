@@ -2,11 +2,32 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>The Data Librarian Game</title>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <h1>The Data Librarian Gam</h1>
+    <p>Welcome to your Electron application. <i class="fa-solid fa-envelope"></i></p>
   </body>
+  <script>
+    class sessionHandler {
+      constructor(key) {
+        this.innerKey = key;
+      }
+      get v() {
+        return sessionStorage.getItem(this.innerKey);
+      }
+      set v(val) {
+        sessionStorage.setItem(this.innerKey, val);
+      } 
+    }
+
+
+    let score = new sessionHandler("score");
+    let vie = new sessionHandler("vie");
+    
+
+    score.v = "fzrnfuj"
+    score.v
+  </script>
 </html>
