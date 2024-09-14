@@ -1,4 +1,4 @@
 setTimeout(() => {
-    sessionStorage.setItem("score", 60);
-    document.location.href="../../index.html";
+    node.maximizeWindow();
+    document.location.href="../login/page.html";
 }, 2000)

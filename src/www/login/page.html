@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../w3.css" />
+    <link rel="stylesheet" href="../fontawesome/css/all.css" />
+    <link rel="stylesheet" href="../common.css" />
+    <title>The Librarian Game - Login</title>
+    <style>
+        body {
+            background-image: url('bg.jpg'); /* Remplacez par le chemin de votre image */
+            background-size: cover; /* L'image couvre tout l'arrière-plan */
+            background-repeat: no-repeat; /* Pas de répétition de l'image */
+            background-position: center; /* Centre l'image pour s'assurer que le recadrage est équilibré */
+            background-attachment: fixed; /* Optionnel : l'image reste fixe lors du défilement */
+        }
+    </style>
+</head>
+<body>
+    <div id="ostext" class="w3-display-topleft">
+        <h2 class="w3-text-white w3-margin"><i class="fa-solid fa-computer"></i> DataLibrarian OS</h2>
+    </div>
+    <div id="login" class="w3-display-middle w3-margin-bottom">
+        <center><span><img src="defaultpp.png" height="100px" class="w3-margin"/></span></center>
+        <div style="width: 250px;">
+            
+            <center><label for="difficulty-select" class="w3-text-white w3-bold">Selectionnez une difficulté:</label></center>
+            <select id="difficulty-select" class="w3-input w3-round-xlarge" style="height: 38.5px;">
+                <option value=""></option>
+                <option value="1">Debutant</option>
+                <option value="2">Confirmé</option>
+                <option value="3">Expert</option>
+                <option value="4">Extreme</option>
+            </select> 
+            <button id="difficulty-submit" class="w3-button w3-round-xlarge w3-white w3-text-grey" style="position: absolute; right: 0; bottom: 0;"><i class="fa-solid fa-right-to-bracket"></i></button>
+        </div>
+
+    </div>
+</body>
+<script src="../sa.js"></script>
+<script src="../common.js"></script>
+<script src="renderer.js"></script>
+</html>
