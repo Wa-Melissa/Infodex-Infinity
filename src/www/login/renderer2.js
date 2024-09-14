@@ -21,7 +21,7 @@ DOM.difficulty_submit.addEventListener("click", (e) => {
     DOM.difficulty_select_logo.classList.add("fa-circle-notch");
     DOM.difficulty_select_logo.classList.add("w3-spin");
     setTimeout(() => {
-        fadeOutBody("../../index.html")
+        fadeOutBody("../desktop/page.html")
     }, 2000)
 })
 
