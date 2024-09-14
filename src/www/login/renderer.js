@@ -1,6 +1,7 @@
 const DOM = {
     difficulty_submit: document.getElementById("difficulty-submit"),
-    difficulty_select: document.getElementById("difficulty-select")
+    difficulty_select: document.getElementById("difficulty-select"),
+    difficulty_select_logo: document.getElementById("difficulty-submit-logo")
 }
 Object.freeze(DOM);
 
@@ -16,5 +17,10 @@ DOM.difficulty_submit.addEventListener("click", (e) => {
         return;
     }
     difficulty.v = DOM.difficulty_select.value;
-    goto("../../index.html")
+    DOM.difficulty_select_logo.classList.remove("fa-right-to-bracket");
+    DOM.difficulty_select_logo.classList.add("fa-circle-notch");
+    DOM.difficulty_select_logo.classList.add("w3-spin");
+    setTimeout(() => {
+        fadeOutBodyAndGoToPage("../../index.html")
+    }, 2000)
 })
