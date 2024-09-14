@@ -5,8 +5,6 @@ const DOM = {
 }
 Object.freeze(DOM);
 
-node.maximizeWindow();
-
 const difficulty = new sessionHandler("difficulty");
 
 DOM.difficulty_submit.addEventListener("click", (e) => {
@@ -26,3 +24,8 @@ DOM.difficulty_submit.addEventListener("click", (e) => {
         fadeOutBody("../../index.html")
     }, 2000)
 })
+
+document.addEventListener('keydown', (event) => {
+    if (event.code !== 'Escape') return;
+    goToPage("page.html")
+});
