@@ -5,6 +5,7 @@ const path = require('node:path');
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
+const debug = process.argv[2] == "--devtools";
 let mainWindow;
 const createWindow = () => {
   // Create the browser window.
@@ -18,13 +19,13 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'www/splash/loader.html'));
+  mainWindow.loadFile(path.join(__dirname, debug ? 'www/login/page.html' :'www/splash/loader.html'));
 
   // Remove top bar
   mainWindow.setMenu(null);
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools();
+  if (debug) mainWindow.webContents.openDevTools({ mode: 'detach' });
 };
 
 // This method will be called when Electron has finished

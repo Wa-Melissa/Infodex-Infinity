@@ -5,6 +5,8 @@ const DOM = {
 }
 Object.freeze(DOM);
 
+node.maximizeWindow();
+
 const difficulty = new sessionHandler("difficulty");
 
 DOM.difficulty_submit.addEventListener("click", (e) => {
@@ -21,6 +23,6 @@ DOM.difficulty_submit.addEventListener("click", (e) => {
     DOM.difficulty_select_logo.classList.add("fa-circle-notch");
     DOM.difficulty_select_logo.classList.add("w3-spin");
     setTimeout(() => {
-        fadeOutBodyAndGoToPage("../../index.html")
+        fadeOutBody("../../index.html")
     }, 2000)
 })

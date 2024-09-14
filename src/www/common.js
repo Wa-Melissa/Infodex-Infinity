@@ -26,25 +26,14 @@ const goToPage = (url) => {
     document.location.href = url;
 }
 
-const fadeOutBody = () => {
-    let opacity = 1;
-    const body = document.body;
-    const fadeOutInterval = setInterval(() => {
-        if (opacity <= 0.01) {
-            clearInterval(fadeOutInterval);
-        }
-        body.style.opacity = opacity;
-        opacity -= 0.05;
-    }, 25);
-}
 
-const fadeOutBodyAndGoToPage = (url) => {
+const fadeOutBody = (url = null) => {
     let opacity = 1;
     const body = document.body;
     const fadeOutInterval = setInterval(() => {
         if (opacity <= 0.01) {
             clearInterval(fadeOutInterval);
-            setTimeout(() => goToPage(url), 1000)
+            if (url != null) setTimeout(() => goToPage(url), 1000)
         }
         body.style.opacity = opacity;
         opacity -= 0.05;

@@ -6,6 +6,5 @@ setTimeout(() => {
         document.location.href= "page2.html";
         return;
     }
-    document.location.href= "../login/page.html";
-    node.maximizeWindow();
+    goToPage("../login/page.html");
 }, 3000)
