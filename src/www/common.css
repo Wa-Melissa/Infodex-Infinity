@@ -7,3 +7,31 @@
 .drop-shadow {
     filter: drop-shadow(0 0 0.5rem rgba(50, 50, 93, 0.25));
 }
+.no-margin {
+    margin: 0 !important;
+}
+.border-radius-top {
+    border-radius: 8px 8px 0px 0px;
+}
+.border-radius-bottom {
+    border-radius: 0px 0px 8px 8px;
+}
+.hidden {
+    display: none;
+}
+.backdrop-blur {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+}
+.backdrop-blur-light {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(2px);
+}
+.desktop-icon {
+    position:absolute;
+    width: 100px; 
+    height: 140px;
+}
+.cursor-pointer {
+    cursor: pointer;
+}

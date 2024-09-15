@@ -223,6 +223,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .w3-border-purple,.w3-hover-border-purple:hover{border-color:#9c27b0!important}
 .w3-border-deep-purple,.w3-hover-border-deep-purple:hover{border-color:#673ab7!important}
 .w3-border-red,.w3-hover-border-red:hover{border-color:#f44336!important}
+.w3-border-transparent,.w3-hover-border-transparent:hover{border-color:transparent!important}
 .w3-border-sand,.w3-hover-border-sand:hover{border-color:#fdf5e6!important}
 .w3-border-teal,.w3-hover-border-teal:hover{border-color:#009688!important}
 .w3-border-yellow,.w3-hover-border-yellow:hover{border-color:#ffeb3b!important}
