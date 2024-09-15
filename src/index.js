@@ -12,6 +12,8 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
+    disableHtmlFullscreenWindowResize: true,
+
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
@@ -20,7 +22,7 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, debug ? 'www/login/page.html' :'www/splash/loader.html'));
-
+  if (debug) mainWindow.maximize();
   // Remove top bar
   mainWindow.setMenu(null);
 
@@ -53,5 +55,11 @@ app.on('window-all-closed', () => {
 });
 
 ipcMain.on('maximizeWindow', (evt, arg) => {
-  mainWindow.maximize()
+  if (mainWindow.isFullScreen()) return;
+  mainWindow.maximize();
+});
+
+ipcMain.on('toggleFullscreen', (evt, arg) => {
+  if (mainWindow.isFullScreen()) return mainWindow.maximize();
+  mainWindow.setFullScreen(true);
 });

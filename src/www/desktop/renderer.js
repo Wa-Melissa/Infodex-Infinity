@@ -24,6 +24,7 @@ DOM.logout_btn.addEventListener("click", async (event) => {
 const closeApp = () => {
     DOM.app_iframe.src = "blank.html";
     DOM.app_container.style.display = "none";
+    document.title = "The Librarian Game - Desktop" 
 }
 DOM.app_close_btn.addEventListener("click", closeApp);
 
@@ -31,6 +32,7 @@ const loadApp = async (appName) => {
     let fetcher = await fetch("app/" + appName + "/app.name");
     let name = (await fetcher.text()).trim();
     DOM.app_name.innerHTML = name;
+    document.title = "The Librarian Game - " + name;
     DOM.app_iframe.src = "app/" + appName + "/app.html";
     DOM.app_container.style.display = "block";
 };

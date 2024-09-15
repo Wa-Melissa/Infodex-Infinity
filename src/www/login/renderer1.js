@@ -3,8 +3,6 @@ const DOM = {
 }
 Object.freeze(DOM);
 
-node.maximizeWindow();
-
 
 document.addEventListener('click', () => {
     goToPage("page2.html")
