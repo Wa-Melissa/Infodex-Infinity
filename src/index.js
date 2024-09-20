@@ -60,6 +60,6 @@ ipcMain.on('maximizeWindow', (evt, arg) => {
 });
 
 ipcMain.on('toggleFullscreen', (evt, arg) => {
-  if (mainWindow.isFullScreen()) return mainWindow.maximize();
+  if (mainWindow.isFullScreen()) return (mainWindow.setFullScreen(false), mainWindow.maximize());
   mainWindow.setFullScreen(true);
 });
