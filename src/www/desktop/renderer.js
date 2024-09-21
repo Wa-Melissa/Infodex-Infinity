@@ -37,8 +37,29 @@ const loadApp = async (appName) => {
     DOM.app_container.style.display = "block";
 };
 
+const reloadApp = () => {
+    let oldSrc = DOM.app_iframe.src;
+    DOM.app_iframe.src = "blank.html";
+    DOM.app_iframe.src = oldSrc;
+}
+
 DOM.desktop_icons.map((e) => {
     e.addEventListener("click", () => {
         loadApp(e.getAttribute("appname"));
     })
-})
+});
+
+(async () => {
+    if (!(await node.isDebug())) return;
+    console.log("Debug shortcuts enabled.");
+    document.addEventListener('keydown', (event) => {
+        if (event.ctrlKey && event.key === 'r') {
+            document.location.reload();
+            return;
+        }
+        if (event.ctrlKey && event.key === 'm') {
+            reloadApp();
+            return;
+        }
+    });
+})()

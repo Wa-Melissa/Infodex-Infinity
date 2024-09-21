@@ -25,9 +25,6 @@ const createWindow = () => {
   if (debug) mainWindow.maximize();
   // Remove top bar
   mainWindow.setMenu(null);
-
-  // Open the DevTools.
-  if (debug) mainWindow.webContents.openDevTools({ mode: 'detach' });
 };
 
 // This method will be called when Electron has finished
@@ -54,12 +51,18 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.on('maximizeWindow', (evt, arg) => {
+ipcMain.on('maximizeWindow', () => {
   if (mainWindow.isFullScreen()) return;
   mainWindow.maximize();
 });
 
-ipcMain.on('toggleFullscreen', (evt, arg) => {
+ipcMain.on('toggleFullscreen', () => {
   if (mainWindow.isFullScreen()) return (mainWindow.setFullScreen(false), mainWindow.maximize());
   mainWindow.setFullScreen(true);
 });
+
+ipcMain.on('openDevTools', () => {
+  mainWindow.webContents.openDevTools({ mode: 'detach' });
+})
+
+ipcMain.handle('getDebugStatus', async () => debug);
