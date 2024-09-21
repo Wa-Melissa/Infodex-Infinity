@@ -66,3 +66,5 @@ ipcMain.on('openDevTools', () => {
 })
 
 ipcMain.handle('getDebugStatus', async () => debug);
+
+ipcMain.on("quitApp", () => app.quit());

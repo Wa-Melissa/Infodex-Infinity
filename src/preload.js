@@ -5,7 +5,9 @@ const { contextBridge, ipcRenderer } = require('electron')
 
 const maximizeWindow = () => ipcRenderer.send('maximizeWindow');
 const isDebug = async () => await ipcRenderer.invoke('getDebugStatus');
-contextBridge.exposeInMainWorld('node', {maximizeWindow, isDebug});
+const quitApp = async () => await ipcRenderer.send('quitApp');
+
+contextBridge.exposeInMainWorld('node', {maximizeWindow, isDebug, quitApp});
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'F11') {
