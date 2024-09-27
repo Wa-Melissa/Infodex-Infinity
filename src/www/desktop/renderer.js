@@ -62,4 +62,5 @@ DOM.desktop_icons.map((e) => {
             return;
         }
     });
-})()
+})();
+

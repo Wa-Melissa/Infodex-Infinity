@@ -45,6 +45,11 @@ Justifications :
 - [ ] Le jeu n'est compatible qu'avec 2 plateformes
 - [ ] Le jeu n'est pas cross-platform
 
+### Responsivité
+- [ ] Le jeu est complétement responsif.
+- [ ] Le jeu est partiellement responsif.
+- [ ] La taille de la fenêtre est fixe.
+
 ### Stabilité
 - [ ] Le prototype est parfaitement stable — il ne plante pas, ne se bloque pas dans une situation, et n’a aucun bug majeur. Il n’y a rien de bloquant dans le gameplay.
 - [ ] Le prototype est rarement instable — il présente quelques bugs mineurs mais n'empêchant pas le jeu. Un redémarrage peut être nécessaire pour relancer le jeu.
