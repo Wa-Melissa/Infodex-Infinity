@@ -5,7 +5,7 @@ const path = require('node:path');
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
-const debug = process.argv[2] == "--devtools";
+const debug = process.argv[2] == "--debugmode";
 let mainWindow;
 const createWindow = () => {
   // Create the browser window.

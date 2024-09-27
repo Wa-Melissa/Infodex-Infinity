@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
-    "debug": "electron-forge start -- --devtools",
+    "debug": "electron-forge start -- --debugmode",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
