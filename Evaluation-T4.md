@@ -54,10 +54,18 @@ Justifications :
 - [ ] J'ai appris quelque chose en jouant.
 - [ ] J'ai eu de l'intérêt en jouant, mais sans rien apprendre.
 - [x] Je n'ai pas eu d'intérêt en jouant.
-Résumer en une phrase ce que vous avez éventuellement appris :
 
-Autres justifications :
 
+Quel est le sujet general que vous avez eventuellement appris ?
+____
+
+Des elements en particulier
+ - Element 1
+ - Element 2
+ - Element 3
+
+Autres justifications ou commentaires:
+____
 ## Présentation README.md
 
 - Présentation du projet
