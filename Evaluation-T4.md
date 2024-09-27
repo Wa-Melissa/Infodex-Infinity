@@ -40,6 +40,11 @@ Justifications :
 - [ ] Le prototype s'exécute en suivant une procédure spécifique. Par exemple : utiliser une commande dans le terminal.
 - [x] Le prototype ne s'exécute pas ou plante.
 
+### Compatibilité
+- [ ] Le jeu est compatible Linux (Deb + Rpm), Windows (10+) et MacOS
+- [ ] Le jeu n'est compatible qu'avec 2 plateformes
+- [ ] Le jeu n'est pas cross-platform
+
 ### Stabilité
 - [ ] Le prototype est parfaitement stable — il ne plante pas, ne se bloque pas dans une situation, et n’a aucun bug majeur. Il n’y a rien de bloquant dans le gameplay.
 - [ ] Le prototype est rarement instable — il présente quelques bugs mineurs mais n'empêchant pas le jeu. Un redémarrage peut être nécessaire pour relancer le jeu.
@@ -50,36 +55,45 @@ Justifications :
 - [ ] Les instructions de jeu sont fournies sous la forme d'un manuel ou d'un tutoriel séparé.
 - [x] Les instructions de jeu ne sont pas fournies.
 
+### Ergonomie et esthetique
+- [ ] Le jeu est plaisant esthetiquement ET les interfaces sont intuitives.
+- [ ] Le jeu est plaisant esthetiquement OU les interfaces sont intuitives.
+- [ ] Aucun des deux.
+
 ### Transmission du concept
 - [ ] J'ai appris quelque chose en jouant.
 - [ ] J'ai eu de l'intérêt en jouant, mais sans rien apprendre.
 - [x] Je n'ai pas eu d'intérêt en jouant.
 
 
-Quel est le sujet general que vous avez eventuellement appris ?
-____
+Quel est le sujet général que vous pourriez avoir appris ?
+Réponse : 
 
-Des elements en particulier
- - Element 1
- - Element 2
- - Element 3
+Éléments spécifiques :
+- Élément 1
+- Élément 2
+- Élément 3
 
-Autres justifications ou commentaires:
-____
+Autres justifications ou commentaires :
+Réponse :
+
 ## Présentation README.md
 
-- Présentation du projet
-  - [ ] Cette partie est informative et succincte (1 phrase).
-  - [ ] Cette partie est informative.
-  - [ ] Cette partie n'est pas informative.
-- Captures d'écran
-  - [ ] Des captures d'écran soignées sont données.
-  - [ ] Une capture d'écran est donnée.
-  - [ ] Aucune capture d'écran n'est donnée.
-- Procédures d'installation et d'exécution
-  - [ ] Cette partie est informative et succincte (1 phrase).
-  - [ ] Cette partie est informative.
-  - [ ] Cette partie n'est pas informative.
+### Présentation du projet
+- [ ] Cette section est informative : elle présente le but du jeu et le thème, est correctement synthétisée et permet de comprendre les grandes lignes du projet même en lecture en diagonale.
+- [ ] Cette section est informative mais ne rassemble pas toutes les caractéristiques demandées.
+- [ ] Cette section n'est pas ou est trop peu informative.
+
+### Captures d'écran
+- [ ] Des captures d'écran bien soignées sont fournies. Elles sont représentatives, certaines sont animées (GIF) et elles sont facilement identifiables et compréhensibles.
+- [ ] Une seule capture d'écran est fournie.
+- [ ] Aucune capture d'écran n'est fournie ou les captures n'apportent pas d'informations.
+
+### Procédures d'installation et d'exécution
+- [ ] Cette section est informative et permet l'installation du jeu pas à pas sans contenir d'instructions inutiles.
+- [ ] Cette section est informative mais certaines actions sont implicites ou doivent être connues de l'utilisateur au préalable.
+- [ ] Cette section n'est pas informative ou contient des informations erronées.
+
 
 ## Cahier des charges 
 
