@@ -31,7 +31,6 @@ document.addEventListener('keydown', (event) => {
     goToPage("page.html")
 });
 
-DOM.shutdown.addEventListener("click", (e) => 
-{   
-    window.node.quitApp();
+DOM.shutdown.addEventListener("click", (e) => { 
+    fadeOutBody("page3.html");   
 })
