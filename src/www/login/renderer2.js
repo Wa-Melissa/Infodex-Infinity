@@ -1,7 +1,8 @@
 const DOM = {
     difficulty_submit: document.getElementById("difficulty-submit"),
     difficulty_select: document.getElementById("difficulty-select"),
-    difficulty_select_logo: document.getElementById("difficulty-submit-logo")
+    difficulty_select_logo: document.getElementById("difficulty-submit-logo"),
+    shutdown : document.getElementById("shutdown")
 }
 Object.freeze(DOM);
 
@@ -29,3 +30,8 @@ document.addEventListener('keydown', (event) => {
     if (event.code !== 'Escape') return;
     goToPage("page.html")
 });
+
+DOM.shutdown.addEventListener("click", (e) => 
+{   
+    window.node.quitApp();
+})
