@@ -554,5 +554,31 @@ const cities = [
     "Sawyer",
     "Harley"
   ];
+
+
+  //Liste de legumes
+  const vegetables = [
+    "Carotte", "Pomme de terre", "Patate douce", "Navet", "Radis", "Betterave", "Rutabaga", "Topinambour",
+    "Céleri-rave", "Igname", "Manioc", "Salsifis", "Oignon", "Ail", "Échalote", "Poireau", "Fenouil", 
+    "Ciboule", "Cive", "Oignon rouge", "Oignon blanc", "Asperge", "Brocoli", "Chou-fleur", "Chou vert", 
+    "Chou rouge", "Chou de Bruxelles", "Kale", "Pak-choï", "Romanesco", "Artichaut", "Cardon", "Endive", 
+    "Scarole", "Chicorée", "Laitue", "Batavia", "Frisée", "Sucrine", "Roquette", "Épinard", "Bette", 
+    "Chou chinois", "Cresson", "Pourpier", "Liseron d'eau", "Mizuna", "Trévise", "Mâche", "Radicchio", 
+    "Pois mange-tout", "Haricot vert", "Haricot beurre", "Haricot borlotti", "Pois cassé", "Fève", "Lentille verte", 
+    "Lentille corail", "Pois chiche", "Soja", "Edamame", "Pois", "Petits pois", "Maïs", "Courgette", 
+    "Aubergine", "Concombre", "Cornichon", "Courge butternut", "Courge spaghetti", "Potiron", "Potimarron", 
+    "Citrouille", "Kabocha", "Chayote", "Melon amer", "Gombo", "Tomate", "Tomate cerise", "Poivron", 
+    "Piment", "Jalapeño", "Piment d'Espelette", "Cayenne", "Tabasco", "Habanero", "Ancho", "Paprika"
+  ];
+
+  //Liste de sports
+  const sports = [
+    "Football", "Basketball", "Tennis", "Volleyball", "Baseball", "Rugby", "Golf", "Natation", "Athlétisme", "Escrime",
+    "Hockey sur glace", "Hockey sur gazon", "Handball", "Badminton", "Squash", "Boxe", "Karaté", "Judo", "Taekwondo",
+    "Lutte", "Gymnastique", "Cyclisme", "Voile", "Canoë-kayak", "Escalade", "Ski alpin", "Snowboard", "Patinage artistique",
+    "Patinage de vitesse", "Surf", "Planche à voile", "Tir à l'arc", "Triathlon", "Course automobile", "Moto GP",
+    "Basket-ball", "Athlétisme", "Tennis de table", "Golf", "Hockey sur glace", "Hockey sur gazon", "Badminton",
+    "Squash", "Escrime", "Canoë-kayak", "Surf", "Boxe", "Football"
+  ];
   
-  module.exports = {cities, countries, socialNetworks, names};
+  
