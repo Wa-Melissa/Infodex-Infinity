@@ -10,8 +10,8 @@
 
    class Dataset{
     _columnsList;
-    _nbRows;
     _bigTitle = "Résultats de recherche";
+    _nbRows;
   
     constructor(){
       //détermine le nombre de colonnes
@@ -40,14 +40,14 @@
         default:
           nbRowsMin = 5, nbRowsMax = 200;
       }
-      let nbRows =  Math.floor(Math.random() * (nbRowsMax - nbRowsMin + 1)) + nbRowsMin;
+      this._nbRows =  Math.floor(Math.random() * (nbRowsMax - nbRowsMin + 1)) + nbRowsMin;
       
   
       //détermine le type de chaque colonne, la crée et l'ajoute à la liste
       this._columnsList = Array(nbCols).fill(0).map(() => {
         let randomIndex = Math.floor(Math.random() * settings.columnCreators.length); //determine un index aléatoire 
         let creator = settings.columnCreators[randomIndex];
-        let column = creator(nbRows); // Créer la colonne
+        let column = creator(this._nbRows); // Créer la colonne
         return column;
       });
   
@@ -65,10 +65,38 @@
       });
       return myString;
     }
+
+    //Met le dataset dans un tableau html intégré a une div (id="maDiv")
+    toTab(){
+      let monHtml = "<table>";
+      
+      //Affichage du titre du tableau
+      monHtml += "\n\t<caption align=\"TOP\">" + this._bigTitle + "</caption>\n\t<thead>\n\t\t<tr>";
+      
+      //Affichage du titre de chaque colonnes
+      this._columnsList.map((v) => {
+        monHtml += "\n\t\t\t<th scope=\"col\">" + v._title + "</th>";
+      });
+      monHtml += "\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t<tr>";
+
+      //Affichage du contenu de toutes les lignes
+      Array(this._nbRows).fill(0).map((_,i) => { //Pour chaque ligne du tab
+        monHtml += "\n\t\t<tr>";
+        this._columnsList.map((v) => { //Pour chaque colonne
+          monHtml += "\n\t\t\t<td>" + v._dataList[i] + "</td>";//On affiche la valeur de la colone
+        });
+        monHtml += "\n\t\t</tr>";
+      });
+
+      //fermeture
+      monHtml += "\n\t\t</tr>\n\t</tbody>\n</table>";
+      document.getElementById("maDiv").innerHTML = monHtml;
+      return monHtml;
+    }
   }
-  
+
 
 document.getElementById("inspect-btn").addEventListener("click", async(event) => {
     let dataset = new Dataset();
-    alert(dataset.toString());  
+    dataset.toTab();  
 });
