@@ -1,3 +1,3 @@
 setTimeout(() => {
     node.quitApp();
-}, 2500)
+}, 3000)
