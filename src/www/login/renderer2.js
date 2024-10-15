@@ -2,7 +2,7 @@ const DOM = {
     difficulty_submit: document.getElementById("difficulty-submit"),
     difficulty_select: document.getElementById("difficulty-select"),
     difficulty_select_logo: document.getElementById("difficulty-submit-logo"),
-    shutdown : document.getElementById("shutdown")
+    shutdown: document.getElementById("shutdown")
 }
 Object.freeze(DOM);
 
