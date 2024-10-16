@@ -1,7 +1,20 @@
 const DOM = {
-    clock: document.getElementById("clock")
+    clock: document.getElementById("clock"),
+    black_fader: document.getElementById("black-fader"),
 }
 Object.freeze(DOM);
+
+window.addEventListener("load", async () => {
+    let opacity = 1;
+    const fadeOutInterval = setInterval(() => {
+        if (opacity <= 0.01) {
+            DOM.black_fader.style.display = "none";
+            clearInterval(fadeOutInterval);
+        }
+        DOM.black_fader.style.opacity = opacity;
+        opacity -= 0.03;
+    }, 25);        
+})
 
 
 document.addEventListener('click', () => {
