@@ -68,10 +68,11 @@
 
     //Met le dataset dans un tableau html intégré a une div (id="maDiv")
     toTab(){
-      let monHtml = "<table>";
-      
+      let tableClass = "class=\"w3-table w3-striped w3-bordered w3-table-all w3-hoverable w3-card-4\"";//Les classes pour la presentation esthetique
+      let monHtml = "<table "+tableClass+">";
+
       //Affichage du titre du tableau
-      monHtml += "\n\t<caption align=\"TOP\">" + this._bigTitle + "</caption>\n\t<thead>\n\t\t<tr>";
+      monHtml += "\n\t<caption class=\"w3-panel w3-pink\" align=\"TOP\"><b>" + this._bigTitle + "</b></caption>\n\t<thead>\n\t\t<tr class=\"w3-black\">";
       
       //Affichage du titre de chaque colonnes
       this._columnsList.map((v) => {
@@ -91,7 +92,6 @@
       //fermeture
       monHtml += "\n\t\t</tr>\n\t</tbody>\n</table>";
       document.getElementById("maDiv").innerHTML = monHtml;
-      return monHtml;
     }
   }
 
