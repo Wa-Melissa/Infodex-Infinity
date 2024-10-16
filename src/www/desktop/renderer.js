@@ -5,6 +5,7 @@ const DOM = {
     app_close_btn: document.getElementById("app-close-btn"),
     app_name: document.getElementById("app-name"),
     desktop_icons:  Array.prototype.slice.call(document.getElementsByClassName("desktop-icon")),
+    black_fader: document.getElementById("black-fader"),
 };
 Object.freeze(DOM);
 
@@ -17,7 +18,19 @@ DOM.logout_btn.addEventListener("click", async (event) => {
         icon: "warning",
         confirmButtonColor: "#d33",
     })
-    if (result.isConfirmed) fadeOutBody("../login/page.html")
+    if (result.isConfirmed) {
+        let opacity = 0;
+        DOM.black_fader.style.display = "block";
+        DOM.black_fader.style.opacity = opacity;
+        const fadeOutInterval = setInterval(() => {
+            if (opacity >= 1) {
+                clearInterval(fadeOutInterval);
+                setTimeout(() => goToPage("../login/page.html"), 1000);
+            }
+            DOM.black_fader.style.opacity = opacity;
+            opacity += 0.03;
+        }, 25);
+    }
 });
 
 
@@ -48,6 +61,18 @@ DOM.desktop_icons.map((e) => {
         loadApp(e.getAttribute("appname"));
     })
 });
+
+window.addEventListener("load", async () => {
+    let opacity = 1;
+    const fadeOutInterval = setInterval(() => {
+        if (opacity <= 0.01) {
+            DOM.black_fader.style.display = "none";
+            clearInterval(fadeOutInterval);
+        }
+        DOM.black_fader.style.opacity = opacity;
+        opacity -= 0.03;
+    }, 25);        
+})
 
 (async () => {
     if (!(await node.isDebug())) return;

@@ -2,7 +2,8 @@ const DOM = {
     difficulty_submit: document.getElementById("difficulty-submit"),
     difficulty_select: document.getElementById("difficulty-select"),
     difficulty_select_logo: document.getElementById("difficulty-submit-logo"),
-    shutdown: document.getElementById("shutdown")
+    shutdown: document.getElementById("shutdown"),
+    black_fader: document.getElementById("black-fader"),
 }
 Object.freeze(DOM);
 
@@ -22,7 +23,17 @@ DOM.difficulty_submit.addEventListener("click", (e) => {
     DOM.difficulty_select_logo.classList.add("fa-circle-notch");
     DOM.difficulty_select_logo.classList.add("w3-spin");
     setTimeout(() => {
-        fadeOutBody("../desktop/page.html")
+        let opacity = 0;
+        DOM.black_fader.style.display = "block";
+        DOM.black_fader.style.opacity = opacity;
+        const fadeOutInterval = setInterval(() => {
+            if (opacity >= 1) {
+                clearInterval(fadeOutInterval);
+                setTimeout(() => goToPage("../desktop/page.html"), 1000);
+            }
+            DOM.black_fader.style.opacity = opacity;
+            opacity += 0.05;
+        }, 25);
     }, 2000)
 })
 
