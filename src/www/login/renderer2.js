@@ -32,5 +32,17 @@ document.addEventListener('keydown', (event) => {
 });
 
 DOM.shutdown.addEventListener("click", (e) => { 
-    fadeOutBody("page3.html");   
-})
+        Swal.fire({
+        title: "Êtes-vous sûr de vouloir quitter ?",
+        showCancelButton: true,
+        confirmButtonText: "Quitter",
+        cancelButtonText: "Annuler",
+        confirmButtonColor: "#d33",
+      }).then((result) => {
+        if (result.isConfirmed) {
+            fadeOutBody("page3.html");  
+        } 
+      });
+    }
+     
+)
