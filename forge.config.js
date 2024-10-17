@@ -16,13 +16,16 @@ module.exports = {
       platforms: ['darwin', "linux", "win32"],
     },
     {
+      name: '@electron-forge/maker-dmg',
+      config: {
+        background: './src/www/desktop/bg.jpg',
+        format: 'ULFO'
+      }
+    },
+    {
       name: '@electron-forge/maker-deb',
       config: {},
-    }/*,
-    {
-      name: '@electron-forge/maker-rpm',
-      config: {},
-    },*/
+    }
   ],
   plugins: [
     {
