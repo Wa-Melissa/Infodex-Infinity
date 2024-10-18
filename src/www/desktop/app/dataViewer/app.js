@@ -1,3 +1,11 @@
+   
+   const DOM = {
+    tab_container: document.getElementById("maDiv"),
+    inspect_button: document.getElementById("inspect-btn"),
+    btn: document.getElementById("endSelection-btn"),
+  };
+  Object.freeze(DOM);
+   
    //param de gestion du jeu
    let settings = {
     maxErrors: 0.01, // maximum d'erreurs (en %)
@@ -7,12 +15,6 @@
     minCols: 3, //Le nb min de colonnes dans le dataset
     maxCols: 10
    }
-
-   const DOM = {
-    tab_container: document.getElementById("maDiv"),
-    inspect_button: document.getElementById("inspect-btn"),
-  };
-  Object.freeze(DOM);
 
    class Dataset{
     _columnsList;
@@ -29,18 +31,17 @@
       //determiner le nombre de rows en fonction de la difficulté fixée 
       // A METTRE HORS DE LA CLASSE EN PARAM ?
       let nbRowsMin, nbRowsMax;
-      const difficulty = new sessionHandler("difficulty");
-      switch (difficulty.v) { //A CHANGER POUR LE VRAI NOM
-        case "1":
+      switch (sessionDifficulty.v) { //A CHANGER POUR LE VRAI NOM
+        case 1:
           nbRowsMin = 5, nbRowsMax = 10;
           break;
-        case "2":
+        case 2:
           nbRowsMin = 10, nbRowsMax = 20;
           break;
-        case "3":
+        case 3:
           nbRowsMin = 50, nbRowsMax = 100;
           break;
-        case "4":
+        case 4:
           nbRowsMin = 500, nbRowsMax = 1000;
           break;
         default:
@@ -136,9 +137,7 @@
   };
 
   const selectionEnd = () => {
-    const btn =  document.getElementById("endSelection-btn");
-
-    btn.addEventListener("click", function(event) {
+    DOM.btn.addEventListener("click", function(event) {
       Array(selectionList.length).fill(0).map((v,i)=>{
 
       });
