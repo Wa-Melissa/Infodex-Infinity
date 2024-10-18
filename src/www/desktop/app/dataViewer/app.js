@@ -1,12 +1,18 @@
-    //param de gestion du jeu
-  let settings = {
-    maxErrors: 0.5, // maximum d'erreurs (en %)
-    minErrors: 0.1,
+   //param de gestion du jeu
+   let settings = {
+    maxErrors: 0.01, // maximum d'erreurs (en %)
+    minErrors: 0.005,
     columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports], //La liste des différents créateurs de colonne
     difficulty: "easy",
     minCols: 3, //Le nb min de colonnes dans le dataset
-    maxCols: 5
+    maxCols: 10
    }
+
+   const DOM = {
+    tab_container: document.getElementById("maDiv"),
+    inspect_button: document.getElementById("inspect-btn"),
+  };
+  Object.freeze(DOM);
 
    class Dataset{
     _columnsList;
@@ -69,10 +75,11 @@
     //Met le dataset dans un tableau html intégré a une div (id="maDiv")
     toTab(){
       let tableClass = "class=\"w3-table w3-striped w3-bordered w3-table-all w3-hoverable w3-card-4\"";//Les classes pour la presentation esthetique
-      let monHtml = "<table "+tableClass+">";
+      let tableStyle = "style=\"border-top:none;\"";
+      let monHtml = "<table "+tableClass+tableStyle+" id=\"myTable\" >";
 
       //Affichage du titre du tableau
-      monHtml += "\n\t<caption class=\"w3-panel w3-pink\" align=\"TOP\"><b>" + this._bigTitle + "</b></caption>\n\t<thead>\n\t\t<tr class=\"w3-black\">";
+      monHtml += "\n\t<caption style=\"margin:0class=\"w3-panel w3-pink\" align=\"TOP\"><b>" + this._bigTitle + "</b></caption>\n\t<thead>\n\t\t<tr class=\"w3-black\">";
       
       //Affichage du titre de chaque colonnes
       this._columnsList.map((v) => {
@@ -91,12 +98,49 @@
 
       //fermeture
       monHtml += "\n\t\t</tr>\n\t</tbody>\n</table>";
-      document.getElementById("maDiv").innerHTML = monHtml;
+      DOM.tab_container.innerHTML = monHtml;
+      
     }
   }
 
-
-document.getElementById("inspect-btn").addEventListener("click", async(event) => {
+  DOM.inspect_button.addEventListener("click", async(event) => {
     let dataset = new Dataset();
-    dataset.toTab();  
-});
+    dataset.toTab();
+
+    let selectionList = [];
+    selectionManagement();
+    selectionEnd();
+  });
+
+
+  const selectionManagement = () => {
+    const table =  document.getElementById("myTable");
+    //se déclenche quand l'utilisateur clique
+    table.addEventListener("click", function(event) {
+      if (event.target.tagName === "TD") {
+        // Changer le style
+        event.target.classList.toggle("w3-pink");
+
+        // Obtenir l'index de la ligne et de la colonne
+        const rowIndex = event.target.parentNode.rowIndex; // index de la ligne
+        const colIndex = event.target.cellIndex; // index de la colonne
+        //mise a jour de la liste des selections
+        if(selectionList.includes([rowIndex,colIndex])){
+          selectionList.push([rowIndex,colIndex]);
+        }
+        else{
+          selectionList.splice(selectionList.indexOf([rowIndex,colIndex]),1);
+        }
+      }
+    });
+  };
+
+  const selectionEnd = () => {
+    const btn =  document.getElementById("endSelection-btn");
+
+    btn.addEventListener("click", function(event) {
+      Array(selectionList.length).fill(0).map((v,i)=>{
+
+      });
+    });
+  };
