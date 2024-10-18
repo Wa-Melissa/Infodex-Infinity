@@ -22,6 +22,10 @@ class storageHandler {
     } 
 }
 
+const sessionDbTotalRows = new sessionHandler("db_total_rows");
+const sessionDbCorruptedRows = new sessionHandler("db_corrupted_rows");
+const sessionDifficulty = new sessionHandler("difficulty");
+
 const goToPage = (url) => {
     document.location.href = url;
 }
@@ -38,4 +42,10 @@ const fadeOutBody = (url = null) => {
         body.style.opacity = opacity;
         opacity -= 0.05;
     }, 25);
+}
+
+const initGameSession = (difficulty  = 1) => {
+    sessionDifficulty.v = difficulty;
+    sessionDbCorruptedRows.v = 0;
+    sessionDbTotalRows.v = 0;
 }

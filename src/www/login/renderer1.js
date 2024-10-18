@@ -33,4 +33,11 @@ const updateHour = () => {
     DOM.clock.innerText = hour + ":" + min;
 }
 updateHour();
-setInterval(updateHour,1000)
+setInterval(updateHour,1000);
+
+
+(async () => {
+    if (!(await node.isDebug())) return;
+    initGameSession();
+    goToPage("../desktop/page.html");
+})();

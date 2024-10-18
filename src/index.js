@@ -1,11 +1,13 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
+const isPackaged = require('electron-is-packaged').isPackaged;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
-const debug = process.argv[2] == "--debugmode";
+
+const debug = process.argv[2] == "--debugmode" && !isPackaged;
 let mainWindow;
 const createWindow = () => {
   // Create the browser window.
