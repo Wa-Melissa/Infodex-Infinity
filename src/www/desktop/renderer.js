@@ -6,6 +6,7 @@ const DOM = {
     app_name: document.getElementById("app-name"),
     desktop_icons:  Array.prototype.slice.call(document.getElementsByClassName("desktop-icon")),
     black_fader: document.getElementById("black-fader"),
+    clock: document.getElementById("clock"),
 };
 Object.freeze(DOM);
 
@@ -76,6 +77,18 @@ window.addEventListener("load", async () => {
         opacity -= 0.03;
     }, 25);        
 });
+
+let hourHasColon = false;
+const updateHour = () => {
+    const date = new Date();
+    const hour = date.getHours();
+    let min = date.getMinutes();
+    if (min < 10) min = "0" + min;
+    DOM.clock.innerHTML = hour + (hourHasColon ? ":" : '<span style="color: transparent">:</span>') + min;
+    hourHasColon = !hourHasColon;
+}
+updateHour();
+setInterval(updateHour,1000);
 
 (async () => {
     if (!(await node.isDebug())) return;
