@@ -17,7 +17,7 @@ DOM.difficulty_submit.addEventListener("click", (e) => {
         });
         return;
     }
-    initGameSession(DOM.difficulty_select.value);
+    initGameSession(parseInt(DOM.difficulty_select.value));
     DOM.difficulty_select_logo.classList.remove("fa-right-to-bracket");
     DOM.difficulty_select_logo.classList.add("fa-circle-notch");
     DOM.difficulty_select_logo.classList.add("w3-spin");
