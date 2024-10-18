@@ -1,145 +1,146 @@
-   
-   const DOM = {
-    tab_container: document.getElementById("maDiv"),
-    inspect_button: document.getElementById("inspect-btn"),
-    btn: document.getElementById("endSelection-btn"),
-  };
-  Object.freeze(DOM);
-   
-   //param de gestion du jeu
-   let settings = {
-    maxErrors: 0.01, // maximum d'erreurs (en %)
-    minErrors: 0.005,
-    columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports], //La liste des différents créateurs de colonne
-    difficulty: "easy",
-    minCols: 3, //Le nb min de colonnes dans le dataset
-    maxCols: 10
-   }
+  
+const DOM = createDOMReferences({
+  tab_container: "#maDiv",
+  inspect_button: "#inspect-btn",
+  btn: "#selectionEnd-btn",
+  my_table: "-myTable"
+});
 
-   class Dataset{
-    _columnsList;
-    _bigTitle = "Résultats de recherche";
-    _nbRows;
   
-    constructor(){
-      //détermine le nombre de colonnes
-      settings.minCols = (settings.minCols < 1) ? 1 : settings.minCols;
-      settings.maxCols = (settings.minCols > settings.maxCols) ? settings.minCols : settings.maxCols;
-      let nbCols = Math.floor(Math.random() * (settings.maxCols - settings.minCols + 1)) + settings.minCols;
-  
-  
-      //determiner le nombre de rows en fonction de la difficulté fixée 
-      // A METTRE HORS DE LA CLASSE EN PARAM ?
-      let nbRowsMin, nbRowsMax;
-      switch (sessionDifficulty.v) { //A CHANGER POUR LE VRAI NOM
-        case 1:
-          nbRowsMin = 5, nbRowsMax = 10;
-          break;
-        case 2:
-          nbRowsMin = 10, nbRowsMax = 20;
-          break;
-        case 3:
-          nbRowsMin = 50, nbRowsMax = 100;
-          break;
-        case 4:
-          nbRowsMin = 500, nbRowsMax = 1000;
-          break;
-        default:
-          nbRowsMin = 5, nbRowsMax = 200;
-      }
-      this._nbRows =  Math.floor(Math.random() * (nbRowsMax - nbRowsMin + 1)) + nbRowsMin;
-      
-  
-      //détermine le type de chaque colonne, la crée et l'ajoute à la liste
-      this._columnsList = Array(nbCols).fill(0).map(() => {
-        let randomIndex = Math.floor(Math.random() * settings.columnCreators.length); //determine un index aléatoire 
-        let creator = settings.columnCreators[randomIndex];
-        let column = creator(this._nbRows); // Créer la colonne
-        return column;
-      });
-  
+//param de gestion du jeu
+let settings = {
+  maxErrors: 0.01, // maximum d'erreurs (en %)
+  minErrors: 0.005,
+  columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports], //La liste des différents créateurs de colonne
+  difficulty: "easy",
+  minCols: 3, //Le nb min de colonnes dans le dataset
+  maxCols: 10
+}
+
+class Dataset{
+  _columnsList;
+  _bigTitle = "Résultats de recherche";
+  _nbRows;
+
+  constructor(){
+    //détermine le nombre de colonnes
+    settings.minCols = (settings.minCols < 1) ? 1 : settings.minCols;
+    settings.maxCols = (settings.minCols > settings.maxCols) ? settings.minCols : settings.maxCols;
+    let nbCols = Math.floor(Math.random() * (settings.maxCols - settings.minCols + 1)) + settings.minCols;
+
+
+    //determiner le nombre de rows en fonction de la difficulté fixée 
+    // A METTRE HORS DE LA CLASSE EN PARAM ?
+    let nbRowsMin, nbRowsMax;
+    switch (sessionDifficulty.v) { //A CHANGER POUR LE VRAI NOM
+      case 1:
+        nbRowsMin = 5, nbRowsMax = 10;
+        break;
+      case 2:
+        nbRowsMin = 10, nbRowsMax = 20;
+        break;
+      case 3:
+        nbRowsMin = 50, nbRowsMax = 100;
+        break;
+      case 4:
+        nbRowsMin = 500, nbRowsMax = 1000;
+        break;
+      default:
+        nbRowsMin = 5, nbRowsMax = 200;
     }
-  
-   /**
-       * renvoie la string permettant d'afficher toutes les colonnes .
-       * @returns {string} - le titre et les informations de chaque colonne.
-       */
-    toString(){
-      let myString = "";
-      myString += this._bigTitle + "\n";
-      this._columnsList.map((v) => {
-        myString += v.toString() + "\n";
-      });
-      return myString;
-    }
+    this._nbRows =  Math.floor(Math.random() * (nbRowsMax - nbRowsMin + 1)) + nbRowsMin;
+    
 
-    //Met le dataset dans un tableau html intégré a une div (id="maDiv")
-    toTab(){
-      let tableClass = "class=\"w3-table w3-striped w3-bordered w3-table-all w3-hoverable w3-card-4\"";//Les classes pour la presentation esthetique
-      let tableStyle = "style=\"border-top:none;\"";
-      let monHtml = "<table "+tableClass+tableStyle+" id=\"myTable\" >";
+    //détermine le type de chaque colonne, la crée et l'ajoute à la liste
+    this._columnsList = Array(nbCols).fill(0).map(() => {
+      let randomIndex = Math.floor(Math.random() * settings.columnCreators.length); //determine un index aléatoire 
+      let creator = settings.columnCreators[randomIndex];
+      let column = creator(this._nbRows); // Créer la colonne
+      return column;
+    });
 
-      //Affichage du titre du tableau
-      monHtml += "\n\t<caption style=\"margin:0class=\"w3-panel w3-pink\" align=\"TOP\"><b>" + this._bigTitle + "</b></caption>\n\t<thead>\n\t\t<tr class=\"w3-black\">";
-      
-      //Affichage du titre de chaque colonnes
-      this._columnsList.map((v) => {
-        monHtml += "\n\t\t\t<th scope=\"col\">" + v._title + "</th>";
-      });
-      monHtml += "\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t<tr>";
-
-      //Affichage du contenu de toutes les lignes
-      Array(this._nbRows).fill(0).map((_,i) => { //Pour chaque ligne du tab
-        monHtml += "\n\t\t<tr>";
-        this._columnsList.map((v) => { //Pour chaque colonne
-          monHtml += "\n\t\t\t<td>" + v._dataList[i] + "</td>";//On affiche la valeur de la colone
-        });
-        monHtml += "\n\t\t</tr>";
-      });
-
-      //fermeture
-      monHtml += "\n\t\t</tr>\n\t</tbody>\n</table>";
-      DOM.tab_container.innerHTML = monHtml;
-      
-    }
   }
 
-  DOM.inspect_button.addEventListener("click", async(event) => {
-    let dataset = new Dataset();
-    dataset.toTab();
-
-    let selectionList = [];
-    selectionManagement();
-    selectionEnd();
-  });
-
-
-  const selectionManagement = () => {
-    const table =  document.getElementById("myTable");
-    //se déclenche quand l'utilisateur clique
-    table.addEventListener("click", function(event) {
-      if (event.target.tagName === "TD") {
-        // Changer le style
-        event.target.classList.toggle("w3-pink");
-
-        // Obtenir l'index de la ligne et de la colonne
-        const rowIndex = event.target.parentNode.rowIndex; // index de la ligne
-        const colIndex = event.target.cellIndex; // index de la colonne
-        //mise a jour de la liste des selections
-        if(selectionList.includes([rowIndex,colIndex])){
-          selectionList.push([rowIndex,colIndex]);
-        }
-        else{
-          selectionList.splice(selectionList.indexOf([rowIndex,colIndex]),1);
-        }
-      }
+  /**
+     * renvoie la string permettant d'afficher toutes les colonnes .
+     * @returns {string} - le titre et les informations de chaque colonne.
+     */
+  toString(){
+    let myString = "";
+    myString += this._bigTitle + "\n";
+    this._columnsList.map((v) => {
+      myString += v.toString() + "\n";
     });
-  };
+    return myString;
+  }
 
-  const selectionEnd = () => {
-    DOM.btn.addEventListener("click", function(event) {
-      Array(selectionList.length).fill(0).map((v,i)=>{
+  //Met le dataset dans un tableau html intégré a une div (id="maDiv")
+  toTab(){
+    let tableClass = "class=\"w3-table w3-striped w3-bordered w3-table-all w3-hoverable w3-card-4\"";//Les classes pour la presentation esthetique
+    let tableStyle = "style=\"border-top:none;\"";
+    let monHtml = "<table "+tableClass+tableStyle+" id=\"myTable\" >";
 
+    //Affichage du titre du tableau
+    monHtml += "\n\t<caption style=\"margin:0class=\"w3-panel w3-pink\" align=\"TOP\"><b>" + this._bigTitle + "</b></caption>\n\t<thead>\n\t\t<tr class=\"w3-black\">";
+    
+    //Affichage du titre de chaque colonnes
+    this._columnsList.map((v) => {
+      monHtml += "\n\t\t\t<th scope=\"col\">" + v._title + "</th>";
+    });
+    monHtml += "\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t<tr>";
+
+    //Affichage du contenu de toutes les lignes
+    Array(this._nbRows).fill(0).map((_,i) => { //Pour chaque ligne du tab
+      monHtml += "\n\t\t<tr>";
+      this._columnsList.map((v) => { //Pour chaque colonne
+        monHtml += "\n\t\t\t<td>" + v._dataList[i] + "</td>";//On affiche la valeur de la colone
       });
+      monHtml += "\n\t\t</tr>";
     });
-  };
+
+    //fermeture
+    monHtml += "\n\t\t</tr>\n\t</tbody>\n</table>";
+    DOM.tab_container.innerHTML = monHtml;
+    
+  }
+}
+
+DOM.inspect_button.addEventListener("click", async(event) => {
+  let dataset = new Dataset();
+  dataset.toTab();
+
+  let selectionList = [];
+  selectionManagement();
+  selectionEnd();
+});
+
+
+const selectionManagement = () => {
+  const table =  DOM.my_table();
+  //se déclenche quand l'utilisateur clique
+  table.addEventListener("click", function(event) {
+    if (event.target.tagName === "TD") {
+      // Changer le style
+      event.target.classList.toggle("w3-pink");
+
+      // Obtenir l'index de la ligne et de la colonne
+      const rowIndex = event.target.parentNode.rowIndex; // index de la ligne
+      const colIndex = event.target.cellIndex; // index de la colonne
+      //mise a jour de la liste des selections
+      if(selectionList.includes([rowIndex,colIndex])){
+        selectionList.push([rowIndex,colIndex]);
+      }
+      else{
+        selectionList.splice(selectionList.indexOf([rowIndex,colIndex]),1);
+      }
+    }
+  });
+};
+
+const selectionEnd = () => {
+  DOM.btn.addEventListener("click", function(event) {
+    Array(selectionList.length).fill(0).map((v,i)=>{
+
+    });
+  });
+};
