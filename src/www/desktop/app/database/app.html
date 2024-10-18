@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Base de données</title>
+  <link rel="stylesheet" href="../../../w3.css">
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../../fontawesome/css/all.css">
+  <style>
+    body {
+      background-color: black;
+      background-image: url('bg.webp');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .w3-container {
+      padding: 16px;
+    }
+
+    .w3-panel {
+      margin-top: 20px;
+    }
+
+    .data-card {
+        max-width: 400px;
+        margin: auto;
+    }
+
+    .progress-bar {
+      height: 20px;
+      width: 100%;
+      background: linear-gradient(to right, green, red);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0;
+      background: rgba(255, 255, 255, 0.2);
+      transition: width 1s ease-in-out;
+    }
+</style>
+</head>
+<body>
+
+  <div class="w3-container w3-teal">
+    <h2><i class="fas fa-database"></i> Miracle DB</h2>
+  </div>
+  
+  <div class="w3-container data-card">
+    <div class="w3-card-4 w3-light-grey w3-panel w3-round-xlarge">
+      <h3>Statistiques de la Base</h3>
+      <p><i class="fas fa-list-ul"></i> <strong>Nombre de lignes:</strong> <span id="totalRows">0</span></p>
+      <p><i class="fas fa-exclamation-triangle"></i> <strong>Nombre de lignes corrompues:</strong> <span id="corruptRows">0</span></p>
+      <p><i class="fas fa-percentage"></i> <strong>Taux de corruption:</strong> <span id="corruptionRate">0%</span></p>
+
+      <div class="w3-border">
+        <div class="w3-grey" style="height:24px;width:20%"></div>
+      </div>
+      
+      <p><i class="fas fa-star"></i> <strong>Score:</strong> <span id="score">0</span></p>
+    </div>
+    <div class="w3-card-4 w3-white w3-panel w3-round-xlarge">
+      <h3>Informations Complémentaires</h3>
+      <p><i class="fas fa-info-circle"></i> Gardez votre base de données en bonne santé en surveillant régulièrement le taux de corruption.</p>
+      <p><i class="fas fa-bullseye"></i> Utilisez ces données pour prendre des décisions éclairées concernant l'intégrité des données.</p>
+      <p><i class="fas fa-envelope"></i> Attention à vos emails, si vous autorisez l'insertion de données corrompues, l'integrité de la base de données baissera, votre score aussi.</p>
+    </div>
+  </div>
+
+  <script src="../../../common.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

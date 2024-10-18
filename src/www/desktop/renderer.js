@@ -72,7 +72,7 @@ window.addEventListener("load", async () => {
         DOM.black_fader.style.opacity = opacity;
         opacity -= 0.03;
     }, 25);        
-})
+});
 
 (async () => {
     if (!(await node.isDebug())) return;
