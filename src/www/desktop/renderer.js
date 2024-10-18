@@ -25,7 +25,10 @@ DOM.logout_btn.addEventListener("click", async (event) => {
         const fadeOutInterval = setInterval(() => {
             if (opacity >= 1) {
                 clearInterval(fadeOutInterval);
-                setTimeout(() => goToPage("../login/page.html"), 1000);
+                setTimeout(async () => {
+                    if (await node.isDebug()) return goToPage("../login/page2.html") ;
+                    goToPage("../login/page.html")
+                }, 1000);
             }
             DOM.black_fader.style.opacity = opacity;
             opacity += 0.03;
