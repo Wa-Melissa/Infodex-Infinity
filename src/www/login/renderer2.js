@@ -7,7 +7,6 @@ const DOM = {
 }
 Object.freeze(DOM);
 
-const difficulty = new sessionHandler("difficulty");
 
 DOM.difficulty_submit.addEventListener("click", (e) => {
     if (DOM.difficulty_select.value == "") {
@@ -18,7 +17,7 @@ DOM.difficulty_submit.addEventListener("click", (e) => {
         });
         return;
     }
-    difficulty.v = DOM.difficulty_select.value;
+    initGameSession(DOM.difficulty_select.value);
     DOM.difficulty_select_logo.classList.remove("fa-right-to-bracket");
     DOM.difficulty_select_logo.classList.add("fa-circle-notch");
     DOM.difficulty_select_logo.classList.add("w3-spin");
