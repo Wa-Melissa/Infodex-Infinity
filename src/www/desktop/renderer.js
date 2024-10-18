@@ -1,14 +1,13 @@
-const DOM = {
-    logout_btn: document.getElementById("logout-btn"),
-    app_iframe: document.getElementById("app-iframe"),
-    app_container: document.getElementById("app-container"),
-    app_close_btn: document.getElementById("app-close-btn"),
-    app_name: document.getElementById("app-name"),
-    desktop_icons:  Array.prototype.slice.call(document.getElementsByClassName("desktop-icon")),
-    black_fader: document.getElementById("black-fader"),
-    clock: document.getElementById("clock"),
-};
-Object.freeze(DOM);
+const DOM = createDOMReferences({
+    logout_btn: "#logout-btn",
+    app_iframe: "#app-iframe",
+    app_container: "#app-container",
+    app_close_btn: "#app-close-btn",
+    app_name: "#app-name",
+    desktop_icons:  ".desktop-icon",
+    black_fader: "#black-fader",
+    clock: "#clock",
+});
 
 DOM.logout_btn.addEventListener("click", async (event) => {
     const result = await Swal.fire({

@@ -49,3 +49,20 @@ const initGameSession = (difficulty  = 1) => {
     sessionDbCorruptedRows.v = 0;
     sessionDbTotalRows.v = 0;
 }
+
+const createDOMReferences = (request) => {
+    let result = new Object;
+    Object.entries(request).map(([k, v]) => {
+        if (v.startsWith("#")) {
+            result[k] = document.getElementById(v.slice(1));
+        } else if (v.startsWith(".")) {
+            result[k] = Array.prototype.slice.call(document.getElementsByClassName(v.slice(1)));
+        } else if (v.startsWith("*")) {
+            result[k] = document.querySelector(v.slice(1));
+        } else {
+            throw new Error("Failed to get DOM reference: " + v + " is not a valid identifier.");
+        }
+    })
+    Object.freeze(result);
+    return result;
+}

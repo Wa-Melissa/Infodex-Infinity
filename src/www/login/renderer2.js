@@ -1,11 +1,10 @@
-const DOM = {
-    difficulty_submit: document.getElementById("difficulty-submit"),
-    difficulty_select: document.getElementById("difficulty-select"),
-    difficulty_select_logo: document.getElementById("difficulty-submit-logo"),
-    shutdown: document.getElementById("shutdown"),
-    black_fader: document.getElementById("black-fader"),
-}
-Object.freeze(DOM);
+const DOM = createDOMReferences({
+    difficulty_submit: "#difficulty-submit",
+    difficulty_select: "#difficulty-select",
+    difficulty_select_logo: "#difficulty-submit-logo",
+    shutdown: "#shutdown",
+    black_fader: "#black-fader",
+});
 
 
 DOM.difficulty_submit.addEventListener("click", (e) => {

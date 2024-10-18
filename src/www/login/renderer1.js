@@ -1,8 +1,8 @@
-const DOM = {
-    clock: document.getElementById("clock"),
-    black_fader: document.getElementById("black-fader"),
-}
-Object.freeze(DOM);
+const DOM = createDOMReferences({
+    clock: "#clock",
+    black_fader: "#black-fader",
+});
+
 
 window.addEventListener("load", async () => {
     let opacity = 1;
