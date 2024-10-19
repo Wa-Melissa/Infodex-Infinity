@@ -2,6 +2,10 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
 const isPackaged = require('electron-is-packaged').isPackaged;
 
+//Enable MacOS Scaling
+app.commandLine.appendSwitch('high-dpi-support', 1)
+app.commandLine.appendSwitch('force-device-scale-factor', 1)
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();

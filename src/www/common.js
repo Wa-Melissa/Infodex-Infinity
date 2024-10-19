@@ -22,6 +22,7 @@ class storageHandler {
     } 
 }
 
+//session Variable Handler
 const sessionDbTotalRows = new sessionHandler("db_total_rows");
 const sessionDbCorruptedRows = new sessionHandler("db_corrupted_rows");
 const sessionDifficulty = new sessionHandler("difficulty");
