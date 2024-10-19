@@ -9,8 +9,8 @@ const DOM = createDOMReferences({
   
 //param de gestion du jeu
 let settings = {
-  maxErrors: 0.01, // maximum d'erreurs (en %)
-  minErrors: 0.005,
+  maxErrors: 0.1, // maximum d'erreurs (en %)
+  minErrors: 0.02,
   columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports], //La liste des différents créateurs de colonne
   difficulty: "easy",
   minCols: 3, //Le nb min de colonnes dans le dataset
@@ -30,9 +30,8 @@ class Dataset{
 
 
     //determiner le nombre de rows en fonction de la difficulté fixée 
-    // A METTRE HORS DE LA CLASSE EN PARAM ?
     let nbRowsMin, nbRowsMax;
-    switch (sessionDifficulty.v) { //A CHANGER POUR LE VRAI NOM
+    switch (sessionDifficulty.v) {
       case 1:
         nbRowsMin = 5, nbRowsMax = 10;
         break;
@@ -81,7 +80,7 @@ class Dataset{
     let monHtml = "<table "+tableClass+tableStyle+" id=\"myTable\" >";
 
     //Affichage du titre du tableau
-    monHtml += "\n\t<caption style=\"margin:0class=\"w3-panel w3-pink\" align=\"TOP\"><b>" + this._bigTitle + "</b></caption>\n\t<thead>\n\t\t<tr class=\"w3-black\">";
+    monHtml += "\n\t<caption style=\"margin:0;\" class=\"w3-panel w3-pink\" align=\"TOP\"><b>" + this._bigTitle + "</b></caption>\n\t<thead>\n\t\t<tr class=\"w3-black\">";
     
     //Affichage du titre de chaque colonnes
     this._columnsList.map((v) => {
@@ -110,12 +109,12 @@ DOM.inspect_button.addEventListener("click", async(event) => {
   dataset.toTab();
 
   let selectionList = [];
-  selectionManagement();
-  selectionEnd();
+  selectionManagement(selectionList);
+  selectionEnd(selectionList, dataset);
 });
 
 
-const selectionManagement = () => {
+const selectionManagement = (selectionList) => {
   const table =  DOM.my_table();
   //se déclenche quand l'utilisateur clique
   table.addEventListener("click", function(event) {
@@ -126,21 +125,50 @@ const selectionManagement = () => {
       // Obtenir l'index de la ligne et de la colonne
       const rowIndex = event.target.parentNode.rowIndex; // index de la ligne
       const colIndex = event.target.cellIndex; // index de la colonne
+      const coord = [rowIndex, colIndex];
+
+
+      // Vérification si la coordonnée existe déjà dans selectionList
+      const index = selectionList.findIndex(item => item[0] === rowIndex && item[1] === colIndex);
       //mise a jour de la liste des selections
-      if(selectionList.includes([rowIndex,colIndex])){
-        selectionList.push([rowIndex,colIndex]);
+      if(index === -1){
+        selectionList.push(coord);
       }
       else{
-        selectionList.splice(selectionList.indexOf([rowIndex,colIndex]),1);
+        selectionList.splice(index,1);
       }
     }
   });
 };
-
-const selectionEnd = () => {
+ 
+//Compte les erreurs trouvées et non trouvées une fois la selection validée
+const selectionEnd = (selectionList, dataset) => {
   DOM.btn.addEventListener("click", function(event) {
-    Array(selectionList.length).fill(0).map((v,i)=>{
-
+    let nbFound = 0;
+    let nbNotFound = 0;
+    let nbSelec = 0;
+    let currentColIndex = -1 ;
+    let errorIndices = [] ;
+    selectionList.sort((a, b) => a[1] - b[1]); //On trie d'abord la liste pour avoir les colonnes dans l'ordre
+    selectionList.map((v)=>{
+      if(v[1] != currentColIndex){ //Si on a change de colonne, on fait les maj necessaires
+        nbNotFound += errorIndices.length ; //On compte le nombre d'erreurs qu'il restait dans la colonne
+        currentColIndex = v[1]; //On sauvegarde dans quelle colonne on se trouve desormais
+        let currentCol= dataset._columnsList[currentColIndex];
+        errorIndices = currentCol._errorIndices ; //on recupere la liste des erreurs de cette colonne
+      }
+      //Puis on compare cette liste avec la liste des cellules selectionnees
+      if(errorIndices.includes(v[0]-2)){
+        nbFound ++;
+        errorIndices.splice(errorIndices.indexOf(v[0]-2),1);//On l'enleve de la liste
+        nbSelec ++;
+      }
+      else{
+        //Diminuer le score (pour pénaliser le joueur si il selectionne tout quand ce n'est pas nécéssaire)
+        nbSelec ++;
+      }
     });
+    let nbTot = nbFound + nbNotFound;
+    alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbTot+"---"+selectionList.length);
   });
 };

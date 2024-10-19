@@ -1,7 +1,7 @@
 class Column {
     _dataList ; // Attribut contenant une liste de données générées aléatoirement
     _title = "Probabilités(en %)\n"; //exemple de titre
-    _errorIndices = [];
+    _errorIndices ; //Stocke l'indice des lignes fausses
     _nbErrors;
   
     /**
@@ -10,6 +10,7 @@ class Column {
      * @param {number} size -longeur du dataset
      */
     constructor(size) {
+      this._errorIndices = [];
       this._dataList = Array(size).fill(0);
       this._nbErrors = Math.floor(Math.random() * (settings.maxErrors * size - settings.minErrors * size) + settings.minErrors * size);
   
