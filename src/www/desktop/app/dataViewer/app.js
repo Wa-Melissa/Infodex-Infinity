@@ -117,7 +117,7 @@ DOM.inspect_button.addEventListener("click", async(event) => {
 const selectionManagement = (selectionList) => {
   const table =  DOM.my_table();
   //se déclenche quand l'utilisateur clique
-  table.addEventListener("click", function(event) {
+  table.onclick = (event) => {
     if (event.target.tagName === "TD") {
       // Changer le style
       event.target.classList.toggle("w3-pink");
@@ -138,7 +138,7 @@ const selectionManagement = (selectionList) => {
         selectionList.splice(index,1);
       }
     }
-  });
+  };
 };
  
 //Compte les erreurs trouvées et non trouvées une fois la selection validée
