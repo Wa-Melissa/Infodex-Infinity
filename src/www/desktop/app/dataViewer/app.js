@@ -145,30 +145,35 @@ const selectionManagement = (selectionList) => {
 const selectionEnd = (selectionList, dataset) => {
   DOM.btn.addEventListener("click", function(event) {
     let nbFound = 0;
-    let nbNotFound = 0;
-    let nbSelec = 0;
+    let nbErr = 0;
     let currentColIndex = -1 ;
     let errorIndices = [] ;
     selectionList.sort((a, b) => a[1] - b[1]); //On trie d'abord la liste pour avoir les colonnes dans l'ordre
     selectionList.map((v)=>{
       if(v[1] != currentColIndex){ //Si on a change de colonne, on fait les maj necessaires
-        nbNotFound += errorIndices.length ; //On compte le nombre d'erreurs qu'il restait dans la colonne
-        currentColIndex = v[1]; //On sauvegarde dans quelle colonne on se trouve desormais
-        let currentCol= dataset._columnsList[currentColIndex];
-        errorIndices = currentCol._errorIndices ; //on recupere la liste des erreurs de cette colonne
+        while(currentColIndex != v[1]){
+          currentColIndex ++;
+          let currentCol= dataset._columnsList[currentColIndex];
+          errorIndices = currentCol._errorIndices ; //on recupere la liste des erreurs de cette colonne
+          nbErr += errorIndices.length ; //On compte le nombre d'erreurs dans la col
+        }
       }
       //Puis on compare cette liste avec la liste des cellules selectionnees
       if(errorIndices.includes(v[0]-2)){
         nbFound ++;
-        errorIndices.splice(errorIndices.indexOf(v[0]-2),1);//On l'enleve de la liste
-        nbSelec ++;
       }
       else{
         //Diminuer le score (pour pénaliser le joueur si il selectionne tout quand ce n'est pas nécéssaire)
-        nbSelec ++;
       }
     });
-    let nbTot = nbFound + nbNotFound;
-    alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbTot+"---"+selectionList.length);
+    if(currentColIndex < dataset._columnsList.length -1){ //On ajoute les erreurs des dernières colonnes si elles n'ont pas été comptées
+      while(currentColIndex < dataset._columnsList.length -1){
+        currentColIndex ++;
+        let currentCol= dataset._columnsList[currentColIndex];
+        errorIndices = currentCol._errorIndices ;
+        nbErr += errorIndices.length ;
+      }
+    }
+    alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbErr+"---"+selectionList.length);
   });
 };
