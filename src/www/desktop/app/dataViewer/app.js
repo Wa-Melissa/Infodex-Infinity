@@ -143,7 +143,7 @@ const selectionManagement = (selectionList) => {
  
 //Compte les erreurs trouvées et non trouvées une fois la selection validée
 const selectionEnd = (selectionList, dataset) => {
-  DOM.btn.addEventListener("click", function(event) {
+  DOM.btn.onclick = () => {
     let nbFound = 0;
     let nbNotFound = 0;
     let nbSelec = 0;
@@ -170,5 +170,5 @@ const selectionEnd = (selectionList, dataset) => {
     });
     let nbTot = nbFound + nbNotFound;
     alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbTot+"---"+selectionList.length);
-  });
+  };
 };
