@@ -424,7 +424,6 @@ const cities = [
     "Badoo",
     "Meetup",
     "MySpace",
-    "Hi5",
     "Periscope",
     "Clubhouse",
     "Nextdoor",
@@ -451,10 +450,8 @@ const cities = [
     "Couchsurfing",
     "Goodreads",
     "Steam",
-    "XING",
     "ResearchGate",
     "Doximity",
-    "Last.fm",
     "Ravelry",
     "Patreon",
     "Ning"
@@ -576,7 +573,7 @@ const cities = [
     "Football", "Basketball", "Tennis", "Volleyball", "Baseball", "Rugby", "Golf", "Natation", "Athlétisme", "Escrime",
     "Hockey sur glace", "Hockey sur gazon", "Handball", "Badminton", "Squash", "Boxe", "Karaté", "Judo", "Taekwondo",
     "Lutte", "Gymnastique", "Cyclisme", "Voile", "Canoë-kayak", "Escalade", "Ski alpin", "Snowboard", "Patinage artistique",
-    "Patinage de vitesse", "Surf", "Planche à voile", "Tir à l'arc", "Triathlon", "Course automobile", "Moto GP",
+    "Patinage de vitesse", "Surf", "Planche à voile", "Tir à l'arc", "Triathlon", "Course automobile",
     "Basket-ball", "Athlétisme", "Tennis de table", "Golf", "Hockey sur glace", "Hockey sur gazon", "Badminton",
     "Squash", "Escrime", "Canoë-kayak", "Surf", "Boxe", "Football"
   ];

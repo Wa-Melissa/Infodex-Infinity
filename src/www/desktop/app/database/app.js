@@ -13,4 +13,4 @@ DOM.corrupted_rows.innerText = sessionDbCorruptedRows.v;
 
 DOM.corruption_rate.innerText = corruptionRate;
 
-DOM.corruption_rate_bar.style.width = corruptionRate + "%";
+DOM.corruption_rate_bar.style.width = corruptionRate * 20 + "%";
