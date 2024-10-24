@@ -27,6 +27,7 @@ const createWindow = () => {
 			nodeIntegrationInWorker: true,
 			spellcheck: false
 		},
+		icon: 'icons/app.png'
 	});
 
 	// and load the index.html of the app.
