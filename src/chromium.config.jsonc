@@ -1,0 +1,12 @@
+{
+    //Support high dpi screen (MacOS)
+    "high-dpi-support": 1,
+    "force-device-scale-factor": 1,
+
+    //Authorize audio autoplay with no user interaction
+    "autoplay-policy": "no-user-gesture-required",
+
+    //Enable ozone platform
+    "enable-features": "UseOzonePlatform",
+    "ozone-platform-hint": "auto"
+}

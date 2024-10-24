@@ -1,13 +1,11 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
 const isPackaged = require('electron-is-packaged').isPackaged;
+const fs = require("fs");
+const JSON5 = require("json5");
 
-//Enable MacOS Scaling
-app.commandLine.appendSwitch('high-dpi-support', 1)
-app.commandLine.appendSwitch('force-device-scale-factor', 1)
-
-//Authorize sound autoplay with no user interaction
-app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+//Configuring app (Chromium switches)
+Object.entries(JSON5.parse(fs.readFileSync(path.join(__dirname, 'chromium.config.jsonc')))).map(([k,v]) => app.commandLine.appendSwitch(k, v)) 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -38,7 +36,6 @@ const createWindow = () => {
   //Prevents users from navigating in history
   mainWindow.webContents.navigationHistory.canGoBack(false);
   mainWindow.webContents.navigationHistory.canGoForward(false);
-  mainWindow.webContents.navigationHistory.canGoToOffset(false);
 };
 
 // This method will be called when Electron has finished
@@ -65,20 +62,8 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.on('maximizeWindow', () => {
-  if (mainWindow.isFullScreen()) return;
-  mainWindow.maximize();
+require("./ipcEvents.js")({
+  mainWindow,
+  ipcMain,
+  debug
 });
-
-ipcMain.on('toggleFullscreen', () => {
-  if (mainWindow.isFullScreen()) return (mainWindow.setFullScreen(false), mainWindow.maximize());
-  mainWindow.setFullScreen(true);
-});
-
-ipcMain.on('openDevTools', () => {
-  mainWindow.webContents.openDevTools({ mode: 'detach' });
-})
-
-ipcMain.handle('getDebugStatus', async () => debug);
-
-ipcMain.on("quitApp", () => app.quit());
