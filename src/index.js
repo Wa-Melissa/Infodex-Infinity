@@ -34,6 +34,11 @@ const createWindow = () => {
   if (debug) mainWindow.maximize();
   // Remove top bar
   mainWindow.setMenu(null);
+
+  //Prevents users from navigating in history
+  mainWindow.webContents.navigationHistory.canGoBack(false);
+  mainWindow.webContents.navigationHistory.canGoForward(false);
+  mainWindow.webContents.navigationHistory.canGoToOffset(false);
 };
 
 // This method will be called when Electron has finished
