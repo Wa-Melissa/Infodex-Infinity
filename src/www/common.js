@@ -23,8 +23,8 @@ class storageHandler {
 }
 
 //session Variable Handler
-const sessionDbTotalRows = new sessionHandler("db_total_rows");
-const sessionDbCorruptedRows = new sessionHandler("db_corrupted_rows");
+const sessionDbTotalCells = new sessionHandler("db_total_rows");
+const sessionDbCorruptedCells = new sessionHandler("db_corrupted_rows");
 const sessionDifficulty = new sessionHandler("difficulty");
 
 const goToPage = (url) => {
@@ -47,8 +47,8 @@ const fadeOutBody = (url = null) => {
 
 const initGameSession = (difficulty  = 1) => {
     sessionDifficulty.v = difficulty;
-    sessionDbCorruptedRows.v = 0;
-    sessionDbTotalRows.v = 0;
+    sessionDbCorruptedCells.v = 0;
+    sessionDbTotalCells.v = 0;
 }
 
 

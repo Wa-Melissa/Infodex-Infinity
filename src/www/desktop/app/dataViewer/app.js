@@ -174,8 +174,8 @@ const selectionEnd = (selectionList, dataset) => {
         nbErr += errorIndices.length ;
       }
     }
-    sessionDbCorruptedRows.v += nbErr - nbFound;
-    sessionDbTotalRows.v += dataset._columnsList.length * dataset._nbRows;
+    sessionDbCorruptedCells.v += nbErr - nbFound;
+    sessionDbTotalCells.v += dataset._columnsList.length * dataset._nbRows;
     alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbErr+"---"+selectionList.length);
   };
 };

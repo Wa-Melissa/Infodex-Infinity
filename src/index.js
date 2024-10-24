@@ -6,6 +6,9 @@ const isPackaged = require('electron-is-packaged').isPackaged;
 app.commandLine.appendSwitch('high-dpi-support', 1)
 app.commandLine.appendSwitch('force-device-scale-factor', 1)
 
+//Authorize sound autoplay with no user interaction
+app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();

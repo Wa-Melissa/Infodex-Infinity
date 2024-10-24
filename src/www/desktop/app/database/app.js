@@ -5,12 +5,12 @@ const DOM = createDOMReferences({
   corruption_rate: "#corruption-rate",
 });
 
-const corruptionRate = (sessionDbTotalRows.v == 0) ? 0 : sessionDbCorruptedRows.v / sessionDbTotalRows.v * 100;
+const corruptionRate = (sessionDbTotalCells.v == 0) ? 0 : sessionDbCorruptedCells.v / sessionDbTotalCells.v * 100;
 
-DOM.total_rows.innerText = sessionDbTotalRows.v;
+DOM.total_rows.innerText = sessionDbTotalCells.v;
 
-DOM.corrupted_rows.innerText = sessionDbCorruptedRows.v;
+DOM.corrupted_rows.innerText = sessionDbCorruptedCells.v;
 
-DOM.corruption_rate.innerText = corruptionRate;
+DOM.corruption_rate.innerText = Math.floor(corruptionRate * 10) / 100 + "%";
 
-DOM.corruption_rate_bar.style.width = corruptionRate * 20 + "%";
+DOM.corruption_rate_bar.style.width = corruptionRate * (100 / 5) + "%";
