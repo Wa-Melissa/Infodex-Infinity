@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Base de données</title>
-  <link rel="stylesheet" href="../../../w3.css">
-  <link rel="stylesheet" href="../../../common.css">
-  <link rel="stylesheet" href="../../../fontawesome/css/all.css">
-  <style>
-    body {
-      background-color: black;
-      background-image: url('bg.webp');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
-    }
+	<meta charset="UTF-8">
+	<title>Base de données</title>
+	<link rel="stylesheet" href="../../../w3.css">
+	<link rel="stylesheet" href="../../../common.css">
+	<link rel="stylesheet" href="../../../fontawesome/css/all.css">
+	<style>
+		body {
+			background-color: black;
+			background-image: url('bg.webp');
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-attachment: fixed;
+		}
 
-    .w3-panel {
-      margin-top: 20px;
-    }
+		.w3-panel {
+			margin-top: 20px;
+		}
 
-    .data-card {
-      max-width: 500px;
-      margin: auto;
-    }
+		.data-card {
+			max-width: 500px;
+			margin: auto;
+		}
 
 </style>
 </head>
 <body>
 
-  <div class="w3-container w3-teal w3-padding">
-    <h2><i class="fas fa-database"></i> <b>Miracle DataBase</b></h2>
-  </div>
-  
-  <div class="w3-container data-card w3-padding">
-    <div class="w3-card-4 w3-light-grey w3-panel w3-round-xlarge">
-      <h3>Statistiques de la Base</h3>
-      <p><i class="fas fa-list-ul"></i> <strong>Nombre de données:</strong> <span id="total-rows">0</span></p>
-      <p><i class="fas fa-exclamation-triangle"></i> <strong>Nombre de données corrompues:</strong> <span id="corrupted-rows">0</span></p>
-      <p><i class="fas fa-percentage"></i> <strong>Taux de corruption:</strong> <span id="corruption-rate">0%</span></p>
+	<div class="w3-container w3-teal w3-padding">
+		<h2><i class="fas fa-database"></i> <b>Miracle DataBase</b></h2>
+	</div>
+	
+	<div class="w3-container data-card w3-padding">
+		<div class="w3-card-4 w3-light-grey w3-panel w3-round-xlarge">
+			<h3>Statistiques de la Base</h3>
+			<p><i class="fas fa-list-ul"></i> <strong>Nombre de données:</strong> <span id="total-rows">0</span></p>
+			<p><i class="fas fa-exclamation-triangle"></i> <strong>Nombre de données corrompues:</strong> <span id="corrupted-rows">0</span></p>
+			<p><i class="fas fa-percentage"></i> <strong>Taux de corruption:</strong> <span id="corruption-rate">0%</span></p>
 
-      <div class="w3-border w3-round-xlarge">
-        <div class="w3-grey w3-round-xlarge" style="height:12px;" id="corruption-rate-bar"></div>
-      </div>
-      
-      <p><i class="fas fa-star"></i> <strong>Score:</strong> <span id="score">0</span></p>
-    </div>
-    <div class="w3-card-4 w3-white w3-panel w3-round-xlarge">
-      <h3>Informations Complémentaires</h3>
-      <p><i class="fas fa-info-circle"></i> Gardez votre base de données en bonne santé en surveillant régulièrement le taux de corruption.</p>
-      <p><i class="fas fa-bullseye"></i> Utilisez ces données pour prendre des décisions éclairées concernant l'intégrité des données.</p>
-      <p><i class="fas fa-envelope"></i> Attention à vos emails, si vous autorisez l'insertion de données corrompues, l'integrité de la base de données baissera, votre score aussi.</p>
-    </div>
-  </div>
+			<div class="w3-border w3-round-xlarge">
+				<div class="w3-grey w3-round-xlarge" style="height:12px;" id="corruption-rate-bar"></div>
+			</div>
+			
+			<p><i class="fas fa-star"></i> <strong>Score:</strong> <span id="score">0</span></p>
+		</div>
+		<div class="w3-card-4 w3-white w3-panel w3-round-xlarge">
+			<h3>Informations Complémentaires</h3>
+			<p><i class="fas fa-info-circle"></i> Gardez votre base de données en bonne santé en surveillant régulièrement le taux de corruption.</p>
+			<p><i class="fas fa-bullseye"></i> Utilisez ces données pour prendre des décisions éclairées concernant l'intégrité des données.</p>
+			<p><i class="fas fa-envelope"></i> Attention à vos emails, si vous autorisez l'insertion de données corrompues, l'integrité de la base de données baissera, votre score aussi.</p>
+		</div>
+	</div>
 
-  <script src="../../../common.js"></script>
-  <script src="app.js"></script>
+	<script src="../../../common.js"></script>
+	<script src="app.js"></script>
 
 </body>
 </html>

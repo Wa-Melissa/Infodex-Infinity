@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'">
-    <link rel="stylesheet" href="../w3.css" />
-    <link rel="stylesheet" href="../fontawesome/css/all.css" />
-    <link rel="stylesheet" href="../common.css" />
-    <link rel="preload" as="image" href="bg-blur.jpg">
-    <title>Infodex Infinity - Login</title>
-    <style>
-        body {
-            background-color: black;
-            background-image: url('bg-blur.jpg'); /* Remplacez par le chemin de votre image */
-            background-size: cover; /* L'image couvre tout l'arrière-plan */
-            background-repeat: no-repeat; /* Pas de répétition de l'image */
-            background-position: center; /* Centre l'image pour s'assurer que le recadrage est équilibré */
-            background-attachment: fixed; /* Optionnel : l'image reste fixe lors du défilement */
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'">
+	<link rel="stylesheet" href="../w3.css" />
+	<link rel="stylesheet" href="../fontawesome/css/all.css" />
+	<link rel="stylesheet" href="../common.css" />
+	<link rel="preload" as="image" href="bg-blur.jpg">
+	<title>Infodex Infinity - Login</title>
+	<style>
+		body {
+			background-color: black;
+			background-image: url('bg-blur.jpg'); /* Remplacez par le chemin de votre image */
+			background-size: cover; /* L'image couvre tout l'arrière-plan */
+			background-repeat: no-repeat; /* Pas de répétition de l'image */
+			background-position: center; /* Centre l'image pour s'assurer que le recadrage est équilibré */
+			background-attachment: fixed; /* Optionnel : l'image reste fixe lors du défilement */
+		}
+	</style>
 </head>
 <body>
-    <div id="black-fader" style="position:absolute; width: 100%; height: 100%; background-color: black; z-index: 100; pointer-events: none; display: none;"></div>
-    <div id="ostext" class="w3-display-topleft">
-        <h2 class="w3-text-white w3-margin"><i class="fa-solid fa-computer"></i> DataLibrarian OS</h2>
-    </div>
-    <div id="login" class="w3-display-middle w3-margin-bottom w3-animate-opacity">
-        <center><span><img src="user.png" height="100px" class="w3-margin drop-shadow" style="opacity: 80%;"/></span></center>
-        <div style="width: 300px;">
-            <center><label for="difficulty-select" class="w3-text-white"><b>Selectionnez une difficulté:</b></label></center>
-            <select id="difficulty-select" class="w3-input w3-round-xxlarge box-shadow" style="height: 38.5px; opacity: 90%;">
-                <option value=""></option>
-                <option value="1">Debutant</option>
-                <option value="2">Confirmé</option>
-                <option value="3">Expert</option>
-                <option value="4">Extreme</option>
-            </select> 
-            <button id="difficulty-submit" class="w3-button w3-round-xxlarge w3-white w3-text-grey" style="position: absolute; right: 0; bottom: 0;"><i id="difficulty-submit-logo" class="fa-solid fa-right-to-bracket"></i></button>
-        </div>
-    </div>
-    <button id="shutdown" class="w3-button w3-circle w3-black w3-large w3-round-xxlarge" style="background: rgba(255, 255, 255, 0.2) !important; position: absolute; right: 15px; bottom: 15px; height: 50px;"><i class="fa-solid fa-power-off"></i></button>
-    
+	<div id="black-fader" style="position:absolute; width: 100%; height: 100%; background-color: black; z-index: 100; pointer-events: none; display: none;"></div>
+	<div id="ostext" class="w3-display-topleft">
+		<h2 class="w3-text-white w3-margin"><i class="fa-solid fa-computer"></i> DataLibrarian OS</h2>
+	</div>
+	<div id="login" class="w3-display-middle w3-margin-bottom w3-animate-opacity">
+		<center><span><img src="user.png" height="100px" class="w3-margin drop-shadow" style="opacity: 80%;"/></span></center>
+		<div style="width: 300px;">
+			<center><label for="difficulty-select" class="w3-text-white"><b>Selectionnez une difficulté:</b></label></center>
+			<select id="difficulty-select" class="w3-input w3-round-xxlarge box-shadow" style="height: 38.5px; opacity: 90%;">
+				<option value=""></option>
+				<option value="1">Debutant</option>
+				<option value="2">Confirmé</option>
+				<option value="3">Expert</option>
+				<option value="4">Extreme</option>
+			</select> 
+			<button id="difficulty-submit" class="w3-button w3-round-xxlarge w3-white w3-text-grey" style="position: absolute; right: 0; bottom: 0;"><i id="difficulty-submit-logo" class="fa-solid fa-right-to-bracket"></i></button>
+		</div>
+	</div>
+	<button id="shutdown" class="w3-button w3-circle w3-black w3-large w3-round-xxlarge" style="background: rgba(255, 255, 255, 0.2) !important; position: absolute; right: 15px; bottom: 15px; height: 50px;"><i class="fa-solid fa-power-off"></i></button>
+	
 <script src="../sa.js"></script>
 <script src="../common.js"></script>
 <script src="renderer2.js"></script>

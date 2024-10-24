@@ -1,8 +1,8 @@
 const DOM = createDOMReferences({
-  total_rows: "#total-rows",
-  corrupted_rows: "#corrupted-rows",
-  corruption_rate_bar: "#corruption-rate-bar",
-  corruption_rate: "#corruption-rate",
+	total_rows: "#total-rows",
+	corrupted_rows: "#corrupted-rows",
+	corruption_rate_bar: "#corruption-rate-bar",
+	corruption_rate: "#corruption-rate",
 });
 
 const corruptionRate = (sessionDbTotalCells.v == 0) ? 0 : sessionDbCorruptedCells.v / sessionDbTotalCells.v * 100;

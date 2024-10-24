@@ -10,19 +10,19 @@ const quitApp = async () => await ipcRenderer.send('quitApp');
 contextBridge.exposeInMainWorld('node', {maximizeWindow, isDebug, quitApp});
 
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'F11') {
-        event.preventDefault();
-        ipcRenderer.send('toggleFullscreen');
-    }
+	if (event.key === 'F11') {
+		event.preventDefault();
+		ipcRenderer.send('toggleFullscreen');
+	}
 });
 
 (async () => {
-    if (!(await isDebug())) return;
-    console.log("DevTools shortcut enabled.");
-    document.addEventListener('keydown', (event) => {
-        if (event.ctrlKey && event.key === 'd') {
-            ipcRenderer.send('openDevTools');
-            return;
-        }
-    });
+	if (!(await isDebug())) return;
+	console.log("DevTools shortcut enabled.");
+	document.addEventListener('keydown', (event) => {
+		if (event.ctrlKey && event.key === 'd') {
+			ipcRenderer.send('openDevTools');
+			return;
+		}
+	});
 })()
