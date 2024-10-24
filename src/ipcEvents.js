@@ -1,6 +1,5 @@
 module.exports = (contextBridge) => {
 	contextBridge.ipcMain.on('maximizeWindow', () => {
-		console.log(contextBridge);
 		if (contextBridge.mainWindow.isFullScreen()) return;
 		contextBridge.mainWindow.maximize();
 	});
