@@ -9,6 +9,14 @@
 	<link rel="stylesheet" href="../fontawesome/css/all.css" />
 	<title>The Librarian Game - Game Over</title>
 	<style>
+		@font-face {
+			font-family: 'FontFail'; 
+			src: url('../fonts/FontFail.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		/* Styles pour centrer le contenu de la page */
 		body {
 			background-color: black;
 			background-image: url('explosion2.webp');
@@ -16,20 +24,52 @@
 			background-repeat: no-repeat;
 			background-position: center;
 			background-attachment: fixed;
+			margin: 0;
+			padding: 0;
+			height: 100vh;
+			display: flex;
+			justify-content: center;  /* Centrage horizontal */
+			align-items: center;      /* Centrage vertical */
+			text-align: center;
+		}
+
+		h1 {
+			color: rgb(255, 20, 20);
+			font-family: 'FontFail', sans-serif;
+			font-size: 8vw; /* Taille de police responsive */
+			margin: 0;
+			text-shadow:1px 2px 0 rgb(152, 5, 5);
+		}
+
+		.flash {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background-color: white;
+			animation: opacites 1s forwards;
+			pointer-events: none;
+		}
+
+		@keyframes opacites {
+			0% { opacity: 0; }
+			30% { opacity: 0; }
+			40% { opacity: 1; }
+			100% { opacity: 0; }
+		}
+
+		audio {
+			display: none;
 		}
 	</style>
 </head>
 <body>
-	<!--universal-soundbank.com 
-		uppbeat.io
-	-->
+	<div class="flash"></div>
 	<audio controls autoplay>
 		<source src="bruitageExplosion2.mp3" type="audio/mp3">
 	</audio>
 
-
+	<h1>You failed ...</h1>
 </body>
-<script src="../sa.js"></script>
-<script src="../common.js"></script>
-<script src="renderer.js"></script>
-</html>
+<script
