@@ -10,10 +10,10 @@ const DOM = createDOMReferences({
 let settings = {
 	maxErrors: 0.1, // maximum d'erreurs (en %)
 	minErrors: 0.02,
-	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports], //La liste des différents créateurs de colonne
+	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance], //La liste des différents créateurs de colonne
 	difficulty: "easy",
 	minCols: 3, //Le nb min de colonnes dans le dataset
-	maxCols: 10
+	maxCols: 8
 }
 
 class Dataset{

@@ -577,3 +577,35 @@ const sports = [
 	"Squash", "Escrime", "Canoë-kayak", "Surf", "Boxe", "Football"
 ];
 
+
+//Liste de climats
+const climates = [
+    "Équatorial", "Tropical", "Subtropical", "Désertique", "Méditerranéen",
+    "Océanique", "Continental", "Polaire", "Montagnard", "Tempéré",
+    "Humide", "Aride", "Mousson", "Semi-aride", "Steppe", 
+    "Subpolaire", "Subtropical humide", "Subtropical sec", "Toundra",
+    "Marin de l'Ouest", "Hémiboréal", "Humide continental", "Continental sec",
+    "Savane", "Forêt tempérée", "Forêt tropicale humide", "Forêt boréale", 
+    "Taïga", "Tropical sec", "Tempéré humide", "Désert froid"
+];
+
+//Liste de couleurs
+const colors = [
+    "Rouge", "Bleu", "Vert", "Jaune", "Orange", "Violet", "Rose", "Marron", "Noir", "Blanc",
+    "Gris", "Cyan", "Magenta", "Turquoise", "Beige", "Bordeaux", "Ivoire", "Lavande",
+    "Olive", "Or", "Argent", "Corail", "Menthe", "Chocolat", "Indigo", "Pêche", "Ocre",
+    "Sable", "Bronze", "Aqua", "Saphir", "Émeraude", "Rubis", "Améthyste", "Moutarde", 
+    "Fuchsia", "Bleu ciel", "Prune", "Blé", "Cerise", "Cramoisi", "Marine", "Aubergine", 
+    "Anis", "Azalée", "Chartreuse", "Absinthe", "Tomate", "Fauve", "Pastel", "Bleu nuit", 
+    "Orchidée", "Perle", "Noisette", "Kaki", "Sépia", "Acajou", "Safran", "Citron", 
+    "Topaze", "Vert sapin", "Étain", "Rose vif", "Cuivre", "Rose pâle", "Framboise", 
+    "Carmin", "Bleu pétrole", "Bleu roi", "Lilac", "Jaune canari", "Anthracite", 
+    "Vert pomme", "Rose poudré", "Mauve", "Opale", "Ébène", "Bleu glacier", "Gris perle", 
+    "Bleu cobalt", "Rouge sang", "Sable chaud", "Mimosa", "Lilas", "Bleu électrique", 
+    "Abricot", "Turquoise clair", "Rose thé", "Grenat", "Orange brûlée", "Vert pastel", 
+    "Bleu clair", "Vert citron", "Rose bonbon", "Gris fumé", "Rouge vermillon", 
+    "Bleu denim", "Vert d'eau", "Jaune poussin", "Or rose", "Bleu pastel", "Vert tilleul"
+];
+
+
+
