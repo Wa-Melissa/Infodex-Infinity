@@ -19,13 +19,14 @@ class storageHandler {
 	}
 	set v(val) {
 		localStorage.setItem(this.innerKey, JSON.stringify(val));
-	} 
+	} 	
 }
 
 //session Variable Handler
 const sessionDbTotalCells = new sessionHandler("db_total_rows");
 const sessionDbCorruptedCells = new sessionHandler("db_corrupted_rows");
 const sessionDifficulty = new sessionHandler("difficulty");
+const sessionEmails = new sessionHandler("emails");
 
 const goToPage = (url) => {
 	document.location.href = url;
@@ -49,6 +50,7 @@ const initGameSession = (difficulty  = 1) => {
 	sessionDifficulty.v = difficulty;
 	sessionDbCorruptedCells.v = 0;
 	sessionDbTotalCells.v = 0;
+	sessionEmails.v = []; 
 }
 
 

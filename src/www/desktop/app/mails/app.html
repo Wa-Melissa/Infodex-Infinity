@@ -1,21 +1,60 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="stylesheet" href="../../../w3.css">
-		<link rel="stylesheet" href="../../../common.css">
-		<link rel="stylesheet" href="../../../fontawesome/css/all.css">
-		<title>The Data Librarian Game</title>
-	</head>
-	<body>
-		 <!-- test...
-		<div class="w3-container w3-top w3-padding" style="background-color: #47B3B1; height: 40px; display: flex; align-items: center;">
-			<i class="fas fa-envelope w3-large w3-text-white" style="margin-right: 10px;"></i>
-			<h2 class="w3-text-white" style="margin: 0;">Mails</h2>
-		</div>-->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../../../w3.css">
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../../fontawesome/css/all.css">
+  <title>The Data Librarian Game</title>
+</head>
+<style> 
+  .btn-lu
+  {
+      width: 5px;             
+      height: 5px;             
+      border-radius: 50%;      
+      background-color: blue;
+      margin: 5px
+  }
+            
+</style>
+<body>
+  <!-- Barre de titre -->
+  <div class="w3-container w3-top w3-padding w3-teal" style="height: 60px; display: flex; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+    <i class="fas fa-envelope w3-xxlarge w3-text-white" style="margin-right: 15px;"></i>
+    <h1 class="w3-text-white" style="margin: 0; font-size: 24px; font-weight: 400;">Bienvenue sur vos mails</h1>
+  </div>
 
-		
+  <!-- Conteneur principal -->
+  <div class="w3-row" style="margin-top: 60px;">
 
-	</body>
-	<script src="../../../common.js"></script>
+    <!-- La sidebar/menu des dossiers -->
+    <nav class="w3-sidebar w3-light-grey w3-bar-block w3-rightbar" style="width:250px;">
+      <h3 class="w3-bar-item">Dossiers</h3>
+      <a href="#" class="w3-bar-item w3-button" id = "boite-reception">Boîte de réception</a>
+      <a href="#" class="w3-bar-item w3-button" id="corbeille">Corbeille</a>
+    </nav>
+
+    <div class="w3-col" style="margin-left: 250px;">
+      <div class="w3-row">  
+        <!-- Colonne de la liste des emails (au centre) -->
+        <div class="w3-col m5" style="height: 100vh">
+          <ul class="w3-ul" id="message-list">
+          </ul>
+        </div>
+
+        <!-- Colonne du contenu de l'email (à droite) -->
+        <div class="w3-col m6 " style="border-left: 1px solid lightgray; height: 100vh ">
+          <div class="w3-center" id ="contenu-mail">
+            <h2>Contenu de l'email</h2>
+            <p>Veuillez séléctionner un email pour afficher son contenu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../../common.js"></script>
+<script src="mails.js"></script> 
+<script src="app.js"></script>
 </html>
