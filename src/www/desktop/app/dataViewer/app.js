@@ -174,6 +174,10 @@ const selectionEnd = (selectionList, dataset) => {
 		}
 		sessionDbCorruptedCells.v += nbErr - nbFound;
 		sessionDbTotalCells.v += dataset._columnsList.length * dataset._nbRows;
+
+		if (nbErr == nbFound) {
+			sessionScore.v += 10;
+		}
 		alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbErr+"---"+selectionList.length);
 	};
 };

@@ -52,7 +52,7 @@ const initGameSession = (difficulty  = 1) => {
 	sessionDifficulty.v = difficulty;
 	sessionDbCorruptedCells.v = 1;
 	sessionDbTotalCells.v = 50;
-	sessionScore.v = 2;
+	sessionScore.v = 20;
 }
 
 
