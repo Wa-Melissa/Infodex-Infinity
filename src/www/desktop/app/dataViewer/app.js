@@ -8,10 +8,9 @@ const DOM = createDOMReferences({
 	
 //param de gestion du jeu
 let settings = {
-	maxErrors: 0.1, // maximum d'erreurs (en %)
-	minErrors: 0.02,
+	maxErrors: 0.12, // maximum d'erreurs (en %)
+	minErrors: 0.1,
 	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance], //La liste des différents créateurs de colonne
-	difficulty: "easy",
 	minCols: 3, //Le nb min de colonnes dans le dataset
 	maxCols: 8
 }

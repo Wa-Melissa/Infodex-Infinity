@@ -105,6 +105,7 @@ setInterval(updateHour,1000);
 })();
 
 window.addEventListener("storage", (event) => {
-	if (event.key != "db_total_rows");
-	
+	if (event.key != "db_total_rows") return;
+	if ((sessionDbCorruptedCells.v / sessionDbTotalCells.v) < 0.05) return;
+	goToPage("../gameover/page.html");
 })
