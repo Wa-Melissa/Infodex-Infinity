@@ -47,8 +47,8 @@ const fadeOutBody = (url = null) => {
 
 const initGameSession = (difficulty  = 1) => {
 	sessionDifficulty.v = difficulty;
-	sessionDbCorruptedCells.v = 0;
-	sessionDbTotalCells.v = 0;
+	sessionDbCorruptedCells.v = 1;
+	sessionDbTotalCells.v = 50;
 }
 
 

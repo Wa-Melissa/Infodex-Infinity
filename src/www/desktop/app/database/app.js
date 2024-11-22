@@ -11,6 +11,6 @@ DOM.total_rows.innerText = sessionDbTotalCells.v;
 
 DOM.corrupted_rows.innerText = sessionDbCorruptedCells.v;
 
-DOM.corruption_rate.innerText = Math.floor(corruptionRate * 10) / 100 + "%";
+DOM.corruption_rate.innerText = Math.floor(corruptionRate * 10) / 10 + "%";
 
 DOM.corruption_rate_bar.style.width = corruptionRate * (100 / 5) + "%";
