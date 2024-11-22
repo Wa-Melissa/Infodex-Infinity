@@ -109,3 +109,7 @@ window.addEventListener("storage", (event) => {
 	if ((sessionDbCorruptedCells.v / sessionDbTotalCells.v) < 0.05) return;
 	goToPage("../gameover/page.html");
 })
+
+setInterval(() => {
+	sessionScore.v -= 2;
+}, 60000)
