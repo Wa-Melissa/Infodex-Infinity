@@ -104,3 +104,7 @@ setInterval(updateHour,1000);
 	});
 })();
 
+window.addEventListener("storage", (event) => {
+	if (event.key != "db_total_rows");
+	
+})
