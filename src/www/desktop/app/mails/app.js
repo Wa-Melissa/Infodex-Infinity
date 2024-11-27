@@ -16,6 +16,7 @@ DOM.boitereception.addEventListener("click", () => switchFolder("inbox"));
 DOM.corbeille.addEventListener("click", () => switchFolder("trash"));
 
 function afficherMail(mail, li) {
+    
     // Change l'affichage selon si le mail est déjà lu ou pas
     if(mail.lu) {
         li.innerHTML = `${mail.nom} <br> <em>${mail.objet}</em>`;
@@ -25,10 +26,25 @@ function afficherMail(mail, li) {
 
     // Affiche la date à droite
     li.innerHTML += `<span class="w3-right-align" style="float: right; witdh : auto">${mail.date}</span>`;
+    
+    // Ajoute le bouton pour marquer comme non lu
+    const btnLu = document.createElement('div');
+    btnLu.className = 'btn-lu';
+    btnLu.addEventListener('click', (event) => {
+        event.stopPropagation(); // pour pas que le mail s'ouvre en même temps
+        mail.lu = false;
+        afficherMail(mail, li);
+        let index = emails.findIndex(item => item.id === mail.id);
+        if (index !== -1) {
+            emails[index] = mail;
+            sessionEmails.v = emails;
+        }
+    });
 
+    li.prepend(btnLu);
 }
 
-/* V0
+/* V0 Test du début
 
 // Colonne du milieu
 function afficherMessages() {
@@ -59,6 +75,8 @@ function afficherMessages() {
         li.addEventListener('click', () => afficherContenuMail(mail, li));
         DOM.messageList.appendChild(li);
     });
+
+    
 }
 
 // Colonne à droite
@@ -75,7 +93,7 @@ function afficherContenuMail(mail, li) {
     li.style.backgroundColor = "#e0f7fa";
     
     
-    const index = emails.findIndex(item => item.id === mail.id);  // Assumes emails have unique 'id'
+    const index = emails.findIndex(item => item.id === mail.id);  //un mail = un od
     if (index !== -1) {
         emails[index] = mail;  // Met à jour l'email dans le tableau
         sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
@@ -111,13 +129,29 @@ function recupererEmailsAleatoires() {
         let emailsFromSource = mails; 
         melangerTableau(emailsFromSource); 
         
+        let nbEmail;
         // Prendre les 5 premiers emails mélangés
-        emails = emailsFromSource.slice(0, 5);
+        switch (sessionDifficulty.v) {
+			case 1:
+				nbEmail = 10;
+				break;
+			case 2:
+				nbEmail = 25;
+				break;
+			case 3:
+				nbEmail = 35;
+				break;
+			case 4:
+				nbEmail = 50;
+				break;
+			default:
+				nbEmail = 8;
+		}
+        emails = emailsFromSource.slice(0, nbEmail);
         
         // Sauvegarder ces emails dans sessionStorage
         sessionEmails.v = emails;
     }
-    
     // Afficher les emails dans la liste
     afficherMessages();
 }

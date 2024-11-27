@@ -1,11 +1,14 @@
 const mails = [
     {
+
+        //faire un 1 er mail venant du Z qui explique ce qu'il doit faire en intégrant une base de donnnée spécifique
         id: 1,
         destinataire: "charlotte.brunet@dataflow.com",
         objet: "Transmission des éléments pour analyse",
         contenu: `Bonjour Charlotte,\n\nComme convenu, je vous fais suivre en pièce jointe un jeu de données consolidé. Ces éléments ont été compilés à partir des informations disponibles pour la période définie.\n\nVous y trouverez les informations nécessaires pour la suite de vos travaux. N’hésitez pas à me solliciter si vous avez besoin de précisions ou d’une mise en contexte supplémentaire.\n\nCordialement,\nDavid Lefèvre`,
         piecesJointes: ["consolidated_data_2024.xlsx"],
-        date: "2024-05-25 09:00:00",
+        date: "2024-11-20",
+        heure: "09:00:00",
         nom: "David Lefèvre",
         lu : false
     },
@@ -15,7 +18,8 @@ const mails = [
         objet: "Envoi des données complémentaires",
         contenu: `Bonjour Thomas,\n\nJe vous transmets en pièce jointe les éléments complémentaires demandés lors de notre dernière réunion. Ce fichier regroupe plusieurs entrées pertinentes pour avancer dans l’analyse.\n\nN’hésitez pas à revenir vers moi pour toute question ou pour discuter de ces éléments plus en détail.\n\nBien cordialement,\nEmma Caron`,
         piecesJointes: ["supplementary_data.xlsx"],
-        date: "2024-10-18 09:30:00",
+        date: "2024-11-20",
+        heure: "10:30:00",
         nom: "Emma Caron",
         lu : false
     },
@@ -25,7 +29,8 @@ const mails = [
         objet: "Données consolidées prêtes à être exploitées",
         contenu: `Bonjour Paul,\n\nVeuillez trouver en pièce jointe les données compilées pour le projet en cours. Elles ont été organisées selon les paramètres évoqués précédemment afin de faciliter leur exploitation.\n\nJe reste disponible pour échanger si nécessaire.\n\nCordialement,\nJulie Reynaud`,
         piecesJointes: ["project_data_final.csv"],
-        date: "2024-11-15 10:00:00",
+        date: "2024-11-20",
+        heure: "12:00:00",
         nom: "Julie Reynaud",
         lu : false
     },
@@ -35,7 +40,8 @@ const mails = [
         objet: "Transmission des fichiers pour validation",
         contenu: `Bonjour Lucas,\n\nJe vous fais parvenir le fichier que nous avons préparé pour la validation. Celui-ci contient l’ensemble des informations demandées, organisées en sections distinctes pour en faciliter la lecture.\n\nN’hésitez pas à me tenir informé si vous avez des remarques ou si des ajustements sont nécessaires.\n\nBien à vous,\nClara Vasseur`,
         piecesJointes: ["validation_file.xlsx"],
-        date: "2024-11-18 10:30:00",
+        date: "2024-11-21",
+        heure: "08:00:00",
         nom: "Clara Vasseur",
         lu : false
     },
@@ -45,7 +51,8 @@ const mails = [
         objet: "Fichier de données pour préparation de rapport",
         contenu: `Bonjour Julie,\n\nVous trouverez en pièce jointe le fichier contenant les informations que vous avez demandées. Ces données ont été structurées pour répondre aux objectifs définis lors de notre dernier échange.\n\nJe suis disponible si vous souhaitez que nous approfondissions certains points.\n\nCordialement,\nVictor Legrand`,
         piecesJointes: ["report_preparation_data.xlsx"],
-        date: "2020-11-18 11:00:00",
+        date: "2024-11-21",
+        heure: "11:00:00",
         nom: "Victor Legrand",
         lu : false
     },
@@ -55,7 +62,8 @@ const mails = [
         objet: "Données préparées pour votre revue",
         contenu: `Bonjour Sarah,\n\nJe vous joins un fichier regroupant des informations pertinentes pour votre revue. Ce document a été préparé en tenant compte des échanges préalables.\n\nN’hésitez pas à me faire savoir si vous souhaitez organiser un point pour en discuter.\n\nCordialement,\nHugo Dumas`,
         piecesJointes: ["review_data_file.xlsx"],
-        date: "2024-11-18 11:30:00",
+        date: "2024-11-22",
+        heure: "14:00:00",
         nom: "Hugo Dumas",
         lu : false
     },
@@ -65,7 +73,8 @@ const mails = [
         objet: "Compilation des données pour le projet",
         contenu: `Bonjour Laura,\n\nVoici les données consolidées nécessaires à la prochaine étape du projet. Ce fichier regroupe les informations sous une forme exploitable pour vos travaux.\n\nJe reste à votre disposition pour toute clarification.\n\nBien à vous,\nLucas Garnier`,
         piecesJointes: ["compiled_project_data.csv"],
-        date: "2024-11-14 12:00:00",
+        date: "2024-11-22",
+        heure: "15:30:00",
         nom: "Lucas Garnier",
         lu : false
     },
@@ -75,7 +84,8 @@ const mails = [
         objet: "Fichier transmis pour analyse",
         contenu: `Bonjour Sophie,\n\nVous trouverez en pièce jointe un fichier regroupant des informations clés collectées dans le cadre des travaux en cours. Ce document a été formaté selon les standards habituels.\n\nN’hésitez pas à revenir vers moi si vous avez besoin d’éclaircissements.\n\nCordialement,\nNathalie Durand`,
         piecesJointes: ["analysis_file_2024.xlsx"],
-        date: "2024-11-18 12:30:00",
+        date: "2024-11-22",
+        heure: "16:00:00",
         nom: "Nathalie Durand",
         lu : false
     },
@@ -85,7 +95,8 @@ const mails = [
         objet: "Transmission des éléments nécessaires",
         contenu: `Bonjour Olivier,\n\nJe vous fais parvenir en pièce jointe le fichier que nous avons compilé pour répondre à vos besoins. Celui-ci est prêt à être intégré dans les travaux en cours.\n\nJe reste à votre disposition pour tout complément d’information.\n\nCordialement,\nCamille Bernard`,
         piecesJointes: ["necessary_elements.csv"],
-        date: "2024-11-18 13:00:00",
+        date: "2024-11-22",
+        heure: "17:00:00",
         nom: "Camille Bernard",
         lu : false
     },
@@ -95,8 +106,408 @@ const mails = [
         objet: "Données transmises pour revue",
         contenu: `Bonjour Julien,\n\nVoici le fichier contenant des informations pertinentes pour votre revue. Ce document a été structuré pour être facilement exploitable dans le cadre des travaux à venir.\n\nJe suis disponible pour répondre à vos éventuelles questions.\n\nBien à vous,\nAlice Fournier`,
         piecesJointes: ["review_file_2024.xlsx"],
-        date: "2024-11-18 13:30:00",
+        date: "2024-11-23",
+        heure: "09:00:00",
         nom: "Alice Fournier",
         lu : false
-    }
+    },
+    // Plus d'emails avec des dates différentes mais dans les 3 prochains mois
+    {
+        id: 11,
+        destinataire: "emily.doe@techsolutions.com",
+        objet: "Données pour révision finale",
+        contenu: `Bonjour Emily,\n\nVous trouverez en pièce jointe les dernières données pour la révision finale avant la soumission du rapport.\n\nN'hésitez pas à me contacter pour toute question.\n\nCordialement,\nJacques Martin`,
+        piecesJointes: ["final_revision_data.xlsx"],
+        date: "2024-11-23",
+        heure: "10:30:00",
+        nom: "Jacques Martin",
+        lu: false
+    },
+    {
+        id: 12,
+        destinataire: "emily.doe@techsolutions.com",
+        objet: "Finalisation des données",
+        contenu: `Bonjour Emily,\n\nJe vous transmets les derniers fichiers mis à jour pour la phase finale du projet. Tout est prêt pour la révision.\n\nBien à vous,\nJacques Martin`,
+        piecesJointes: ["final_data_2024.xlsx"],
+        date: "2024-11-23",
+        heure: "11:30:00",
+        nom: "Jacques Martin",
+        lu: false
+    },
+    {
+        id: 13,
+        destinataire: "laura.moreau@collaborateurs.com",
+        objet: "Mise à jour des données",
+        contenu: `Bonjour Laura,\n\nVoici les fichiers mis à jour, intégrant les dernières révisions selon vos demandes.\n\nN'hésitez pas à me faire savoir si vous avez besoin d'un complément.\n\nCordialement,\nLucas Garnier`,
+        piecesJointes: ["updated_project_data.csv"],
+        date: "2024-11-23",
+        heure: "13:00:00",
+        nom: "Lucas Garnier",
+        lu: false
+    },
+    {
+        id: 14,
+        destinataire: "olivier.martinez@strategygroupe.com",
+        objet: "Rapport de progrès à jour",
+        contenu: `Bonjour Olivier,\n\nVeuillez trouver ci-joint le rapport de progrès à jour avec toutes les informations révisées.\n\nBien cordialement,\nCamille Bernard`,
+        piecesJointes: ["progress_report_2024.docx"],
+        date: "2024-11-24",
+        heure: "09:00:00",
+        nom: "Camille Bernard",
+        lu: false
+    },
+    {
+        id: 15,
+        destinataire: "jean.louis@analyticsgroup.com",
+        objet: "Fichier complémentaire pour analyse",
+        contenu: `Bonjour Jean-Louis,\n\nJe vous envoie un fichier supplémentaire pour compléter votre analyse.\n\nN'hésitez pas à revenir vers moi pour toute question.\n\nCordialement,\nÉlodie Simon`,
+        piecesJointes: ["complementary_analysis_data.xlsx"],
+        date: "2024-11-24",
+        heure: "10:30:00",
+        nom: "Élodie Simon",
+        lu: false
+    },
+
+    {   
+        id: 16,
+        destinataire: "mario.durant@techventures.com",
+        objet: "Données pour rapport intermédiaire",
+        contenu: `Bonjour Mario,\n\nVoici les données collectées pour le rapport intermédiaire. Ce fichier contient toutes les informations pertinentes jusqu'à la date actuelle.\n\nN'hésitez pas à me faire part de vos retours.\n\nCordialement,\nSophie Leclerc`,
+        piecesJointes: ["intermediate_report_data.xlsx"],
+        date: "2024-11-24",
+        heure: "11:30:00",
+        nom: "Sophie Leclerc",
+        lu: false
+    },
+    {
+        id: 17,
+        destinataire: "nicolas.benjamin@datasolutions.com",
+        objet: "Suivi des actions pour le projet",
+        contenu: `Bonjour Nicolas,\n\nJe vous fais un point sur les actions à mener pour le projet, en pièce jointe vous trouverez la mise à jour des informations.\n\nCordialement,\nMarc Delon`,
+        piecesJointes: ["project_actions_follow_up.xlsx"],
+        date: "2024-11-24",
+        heure: "14:00:00",
+        nom: "Marc Delon",
+        lu: false
+    },
+    {
+        id: 18,
+        destinataire: "lucas.perrin@dataexpertise.com",
+        objet: "Fichiers de données mis à jour",
+        contenu: `Bonjour Lucas,\n\nJe vous envoie la version mise à jour des fichiers, intégrant les révisions effectuées suite à nos dernières discussions.\n\nBien à vous,\nClara Vasseur`,
+        piecesJointes: ["updated_files_2024.xlsx"],
+        date: "2024-11-24",
+        heure: "15:30:00",
+        nom: "Clara Vasseur",
+        lu: false
+    },
+    {
+        id: 19,
+        destinataire: "audrey.martin@enterprise.com",
+        objet: "Mise à jour du rapport final",
+        contenu: `Bonjour Audrey,\n\nVous trouverez ci-joint la dernière version du rapport, prête à être présentée.\n\nCordialement,\nValérie Dupont`,
+        piecesJointes: ["final_report_2024.docx"],
+        date: "2024-11-25",
+        heure: "09:00:00",
+        nom: "Valérie Dupont",
+        lu: false
+    },
+    {
+        id: 20,
+        destinataire: "olivier.martinez@strategygroupe.com",
+        objet: "Fichiers supplémentaires pour le projet",
+        contenu: `Bonjour Olivier,\n\nJe vous fais suivre les fichiers supplémentaires demandés pour le projet, organisés selon vos spécifications.\n\nBien cordialement,\nCamille Bernard`,
+        piecesJointes: ["additional_files_for_project.xlsx"],
+        date: "2024-11-25",
+        heure: "10:30:00",
+        nom: "Camille Bernard",
+        lu: false
+    },
+    {
+        id: 21,
+        destinataire: "sophie.mallet@datasolutions.com",
+        objet: "Données révisées pour analyse approfondie",
+        contenu: `Bonjour Sophie,\n\nJe vous transmets la dernière version des données, prête pour une analyse approfondie.\n\nN'hésitez pas à me faire part de vos retours.\n\nCordialement,\nNathalie Durand`,
+        piecesJointes: ["revised_analysis_data_2024.xlsx"],
+        date: "2024-11-25",
+        heure: "11:00:00",
+        nom: "Nathalie Durand",
+        lu: false
+    },
+    {
+        id: 22,
+        destinataire: "laura.moreau@collaborateurs.com",
+        objet: "Données et révisions pour récapitulatif",
+        contenu: `Bonjour Laura,\n\nVoici les dernières données et révisions que nous avons effectuées, à intégrer dans le récapitulatif.\n\nCordialement,\nLucas Garnier`,
+        piecesJointes: ["data_recap_2024.xlsx"],
+        date: "2024-11-25",
+        heure: "12:00:00",
+        nom: "Lucas Garnier",
+        lu: false
+    },
+    {
+        id: 23,
+        destinataire: "thomas.rigal@consultingexpert.com",
+        objet: "Dossier mis à jour pour la phase suivante",
+        contenu: `Bonjour Thomas,\n\nVeuillez trouver ci-joint le dossier mis à jour pour la phase suivante du projet.\n\nN'hésitez pas à revenir vers moi si vous avez des questions.\n\nBien cordialement,\nEmma Caron`,
+        piecesJointes: ["updated_project_dossier.xlsx"],
+        date: "2024-11-26",
+        heure: "09:00:00",
+        nom: "Emma Caron",
+        lu: false
+    },
+    {
+        id: 24,
+        destinataire: "paul.martin@solutionsgroup.com",
+        objet: "Documents mis à jour pour finalisation",
+        contenu: `Bonjour Paul,\n\nJe vous envoie les derniers documents révisés pour la finalisation du projet. Nous restons disponibles pour toute clarification.\n\nCordialement,\nJulie Reynaud`,
+        piecesJointes: ["finalization_documents_2024.xlsx"],
+        date: "2024-11-26",
+        heure: "10:30:00",
+        nom: "Julie Reynaud",
+        lu: false
+    },
+    {
+        id: 25,
+        destinataire: "jean.louis@analyticsgroup.com",
+        objet: "Dernières données avant présentation finale",
+        contenu: `Bonjour Jean-Louis,\n\nVoici les dernières données avant la présentation finale. Ce sont les données clés pour la réunion à venir.\n\nBien cordialement,\nÉlodie Simon`,
+        piecesJointes: ["final_presentation_data.xlsx"],
+        date: "2024-11-26",
+        heure: "11:30:00",
+        nom: "Élodie Simon",
+        lu: false
+    },
+    {
+        id: 26,
+        destinataire: "audrey.martin@enterprise.com",
+        objet: "Révision des documents pour soumission",
+        contenu: `Bonjour Audrey,\n\nJe vous envoie la révision des documents nécessaires pour la soumission du rapport. Tout est prêt pour l'étape finale.\n\nCordialement,\nValérie Dupont`,
+        piecesJointes: ["documents_for_submission_2024.docx"],
+        date: "2024-11-27",
+        heure: "09:00:00",
+        nom: "Valérie Dupont",
+        lu: false
+    },
+    {
+        id: 27,
+        destinataire: "sarah.bernard@analyticsteam.com",
+        objet: "Données pour revue et validation finale",
+        contenu: `Bonjour Sarah,\n\nJe vous transmets les dernières données à valider pour la présentation finale.\n\nCordialement,\nHugo Dumas`,
+        piecesJointes: ["final_validation_data.xlsx"],
+        date: "2024-11-27",
+        heure: "10:30:00",
+        nom: "Hugo Dumas",
+        lu: false
+    },
+    {
+        id: 28,
+        destinataire: "charlotte.brunet@dataflow.com",
+        objet: "Transmission des fichiers finaux",
+        contenu: `Bonjour Charlotte,\n\nVous trouverez en pièce jointe les fichiers finaux pour la soumission du projet. N'hésitez pas à me faire part de toute remarque ou demande d'ajustement.\n\nCordialement,\nDavid Lefèvre`,
+        piecesJointes: ["final_submission_files.xlsx"],
+        date: "2024-11-27",
+        heure: "11:30:00",
+        nom: "David Lefèvre",
+        lu: false
+    },
+    {
+        id: 29,
+        destinataire: "nicolas.benjamin@datasolutions.com",
+        objet: "Révision du rapport avant validation",
+        contenu: `Bonjour Nicolas,\n\nJe vous fais parvenir la révision finale du rapport avant la validation officielle. Merci de confirmer dès que possible.\n\nCordialement,\nMarc Delon`,
+        piecesJointes: ["final_report_revision_2024.docx"],
+        date: "2024-11-27",
+        heure: "14:00:00",
+        nom: "Marc Delon",
+        lu: false
+    },
+    {
+        id: 30,
+        destinataire: "olivier.martinez@strategygroupe.com",
+        objet: "Mise à jour des fichiers de projet",
+        contenu: `Bonjour Olivier,\n\nJe vous transmets la dernière mise à jour des fichiers du projet. Merci de vérifier si tout est en ordre.\n\nBien cordialement,\nCamille Bernard`,
+        piecesJointes: ["updated_project_files.xlsx"],
+        date: "2024-11-28",
+        heure: "09:00:00",
+        nom: "Camille Bernard",
+        lu: false
+    },
+    
+    {
+        id: 31,
+        destinataire: "mario.durant@techventures.com",
+        objet: "Données révisées pour récapitulatif final",
+        contenu: `Bonjour Mario,\n\nVoici les données révisées pour le récapitulatif final, prêtes à être soumises.\n\nN'hésitez pas à me faire part de vos retours.\n\nCordialement,\nSophie Leclerc`,
+        piecesJointes: ["final_summary_data.xlsx"],
+        date: "2024-11-28",
+        heure: "10:00:00",
+        nom: "Sophie Leclerc",
+        lu: false
+    },
+    {
+        id: 32,
+        destinataire: "nicolas.benjamin@datasolutions.com",
+        objet: "Dossier mis à jour avec les derniers éléments",
+        contenu: `Bonjour Nicolas,\n\nJe vous transmets le dossier mis à jour avec les derniers éléments du projet, à prendre en compte pour la réunion de demain.\n\nCordialement,\nMarc Delon`,
+        piecesJointes: ["updated_project_folder.xlsx"],
+        date: "2024-11-28",
+        heure: "11:30:00",
+        nom: "Marc Delon",
+        lu: false
+    },
+    {
+        id: 33,
+        destinataire: "lucas.perrin@dataexpertise.com",
+        objet: "Revue des fichiers avant finalisation",
+        contenu: `Bonjour Lucas,\n\nVoici la revue des fichiers avant leur finalisation. Merci de vérifier si tout est conforme.\n\nBien à vous,\nClara Vasseur`,
+        piecesJointes: ["file_review_2024.xlsx"],
+        date: "2024-11-28",
+        heure: "13:00:00",
+        nom: "Clara Vasseur",
+        lu: false
+    },
+    {
+        id: 34,
+        destinataire: "audrey.martin@enterprise.com",
+        objet: "Documents pour soumission à la direction",
+        contenu: `Bonjour Audrey,\n\nJe vous envoie les documents finaux pour soumission à la direction. Merci de me confirmer la réception.\n\nCordialement,\nValérie Dupont`,
+        piecesJointes: ["submission_documents_2024.docx"],
+        date: "2024-11-29",
+        heure: "09:00:00",
+        nom: "Valérie Dupont",
+        lu: false
+    },
+    {
+        id: 35,
+        destinataire: "olivier.martinez@strategygroupe.com",
+        objet: "Dernière version des fichiers de projet",
+        contenu: `Bonjour Olivier,\n\nJe vous transmets la dernière version des fichiers pour votre validation finale.\n\nBien cordialement,\nCamille Bernard`,
+        piecesJointes: ["final_project_files.xlsx"],
+        date: "2024-11-29",
+        heure: "10:30:00",
+        nom: "Camille Bernard",
+        lu: false
+    },
+    {
+        id: 36,
+        destinataire: "sophie.mallet@datasolutions.com",
+        objet: "Révision du fichier de données",
+        contenu: `Bonjour Sophie,\n\nVoici la révision du fichier de données avec les ajustements demandés.\n\nN'hésitez pas à me faire savoir si tout est en ordre.\n\nCordialement,\nNathalie Durand`,
+        piecesJointes: ["data_revision_2024.xlsx"],
+        date: "2024-11-29",
+        heure: "12:00:00",
+        nom: "Nathalie Durand",
+        lu: false
+    },
+    {
+        id: 37,
+        destinataire: "laura.moreau@collaborateurs.com",
+        objet: "Mise à jour des données pour la prochaine phase",
+        contenu: `Bonjour Laura,\n\nJe vous envoie les données mises à jour pour la phase suivante du projet.\n\nCordialement,\nLucas Garnier`,
+        piecesJointes: ["next_phase_data_2024.xlsx"],
+        date: "2024-11-29",
+        heure: "13:30:00",
+        nom: "Lucas Garnier",
+        lu: false
+    },
+    {
+        id: 38,
+        destinataire: "thomas.rigal@consultingexpert.com",
+        objet: "Documents révisés pour présentation finale",
+        contenu: `Bonjour Thomas,\n\nJe vous envoie la version révisée des documents à présenter lors de la réunion finale.\n\nBien cordialement,\nEmma Caron`,
+        piecesJointes: ["final_presentation_documents.xlsx"],
+        date: "2024-11-30",
+        heure: "09:00:00",
+        nom: "Emma Caron",
+        lu: false
+    },
+    {
+        id: 39,
+        destinataire: "paul.martin@solutionsgroup.com",
+        objet: "Mise à jour des rapports pour validation",
+        contenu: `Bonjour Paul,\n\nJe vous transmets la mise à jour des rapports pour votre validation.\n\nCordialement,\nJulie Reynaud`,
+        piecesJointes: ["updated_reports_2024.xlsx"],
+        date: "2024-11-30",
+        heure: "10:30:00",
+        nom: "Julie Reynaud",
+        lu: false
+    },
+    {
+        id: 40,
+        destinataire: "jean.louis@analyticsgroup.com",
+        objet: "Finalisation des données pour revue",
+        contenu: `Bonjour Jean-Louis,\n\nVoici la version finale des données pour votre revue. Merci de les examiner à votre convenance.\n\nCordialement,\nÉlodie Simon`,
+        piecesJointes: ["final_review_data.xlsx"],
+        date: "2024-11-30",
+        heure: "11:30:00",
+        nom: "Élodie Simon",
+        lu: false
+    },
+    {
+        id: 41,
+        destinataire: "audrey.martin@enterprise.com",
+        objet: "Révision des fichiers avant présentation finale",
+        contenu: `Bonjour Audrey,\n\nJe vous envoie les fichiers révisés pour la présentation finale. Merci de confirmer si tout est en ordre.\n\nCordialement,\nValérie Dupont`,
+        piecesJointes: ["final_presentation_files_2024.docx"],
+        date: "2024-12-01",
+        heure: "09:30:00",
+        nom: "Valérie Dupont",
+        lu: false
+    },
+    {
+        id: 42,
+        destinataire: "sarah.bernard@analyticsteam.com",
+        objet: "Dossier révisé pour validation finale",
+        contenu: `Bonjour Sarah,\n\nVoici le dossier révisé pour votre validation finale.\n\nBien à vous,\nHugo Dumas`,
+        piecesJointes: ["final_validation_folder.xlsx"],
+        date: "2024-12-01",
+        heure: "10:00:00",
+        nom: "Hugo Dumas",
+        lu: false
+    },
+    {
+        id: 43,
+        destinataire: "charlotte.brunet@dataflow.com",
+        objet: "Révision des fichiers pour validation",
+        contenu: `Bonjour Charlotte,\n\nVeuillez trouver la révision des fichiers avant leur soumission finale.\n\nCordialement,\nDavid Lefèvre`,
+        piecesJointes: ["validation_revision_2024.xlsx"],
+        date: "2024-12-01",
+        heure: "11:30:00",
+        nom: "David Lefèvre",
+        lu: false
+    },
+    {
+        id: 44,
+        destinataire: "nicolas.benjamin@datasolutions.com",
+        objet: "Documents pour le rapport final",
+        contenu: `Bonjour Nicolas,\n\nJe vous fais parvenir les documents nécessaires pour le rapport final.\n\nCordialement,\nMarc Delon`,
+        piecesJointes: ["final_report_documents.xlsx"],
+        date: "2024-12-01",
+        heure: "14:00:00",
+        nom: "Marc Delon",
+        lu: false
+    },
+    {
+        id: 45,
+        destinataire: "olivier.martinez@strategygroupe.com",
+        objet: "Dernière version des fichiers pour revue",
+        contenu: `Bonjour Olivier,\n\nVoici la dernière version des fichiers pour votre revue finale.\n\nBien cordialement,\nCamille Bernard`,
+        piecesJointes: ["last_version_for_review_2024.xlsx"],
+        date: "2024-12-02",
+        heure: "09:00:00",
+        nom: "Camille Bernard",
+        lu: false
+    },
+    {
+        id: 46,
+        destinataire: "sophie.mallet@datasolutions.com",
+        objet: "Mise à jour des données pour phase finale",
+        contenu: `Bonjour Sophie,\n\nVoici la mise à jour des données pour la phase finale du projet.\n\nN'hésitez pas à revenir vers moi si nécessaire.\n\nCordialement,\nNathalie Durand`,
+        piecesJointes: ["final_phase_data_2024.xlsx"],
+        date: "2024-12-02",
+        heure: "10:30:00",
+        nom: "Nathalie Durand",
+        lu: false
+    },
 ];
