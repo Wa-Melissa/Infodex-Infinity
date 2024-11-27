@@ -2,6 +2,17 @@ const mails = [
     {
 
         //faire un 1 er mail venant du Z qui explique ce qu'il doit faire en intégrant une base de donnnée spécifique
+        id: 0,
+        destinataire: "ma.zimmmerman@unistra.fr",
+        objet: "Bienvenue nouveau data librarian",
+        contenu: `Bonjour,\n\nComme convenu, je vous fais suivre en pièce jointe un jeu de données consolidé. Ces éléments ont été compilés à partir des informations disponibles pour la période définie.\n\nVous y trouverez les informations nécessaires pour la suite de vos travaux. N’hésitez pas à me solliciter si vous avez besoin de précisions ou d’une mise en contexte supplémentaire.\n\nCordialement,\nDavid Lefèvre`,
+        piecesJointes: ["exemple.xlsx"],
+        date: "2024-11-20",
+        heure: "09:00:00",
+        nom: "David Lefèvre",
+        lu : false
+    },
+    {
         id: 1,
         destinataire: "charlotte.brunet@dataflow.com",
         objet: "Transmission des éléments pour analyse",

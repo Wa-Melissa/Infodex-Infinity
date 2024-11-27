@@ -9,27 +9,69 @@ const DOM = createDOMReferences({
 // # id, . class , - classe dynamique (qui peut ne pas exister quand on créer le DOM)
 // Récupérer le dernier mail séléctionné
 let lastSelectedLi = null;
-let activeBox = "inbox";
+let activeBox = "inbox"; //savoir où on est 
 let emails = sessionEmails.v || [];
+DOM.boitereception.classList.add('active');
 
 DOM.boitereception.addEventListener("click", () => switchFolder("inbox"));
 DOM.corbeille.addEventListener("click", () => switchFolder("trash"));
 
 function afficherMail(mail, li) {
-    
-    // Change l'affichage selon si le mail est déjà lu ou pas
-    if(mail.lu) {
-        li.innerHTML = `${mail.nom} <br> <em>${mail.objet}</em>`;
-    } else {
-        li.innerHTML = `<strong>${mail.nom}<br> <em>${mail.objet}</em></strong>`;
-    }
 
-    // Affiche la date à droite
-    li.innerHTML += `<span class="w3-right-align" style="float: right; witdh : auto">${mail.date}</span>`;
+    const nameContainer = document.createElement('div');
+    nameContainer.style.display = 'flex';
+    nameContainer.style.alignItems = 'center';
     
+     // Ajoute le bouton et le nom au conteneur
+     nameContainer.appendChild(btnLu);
+     if(mail.lu) nameContainer = `${mail.nom} <br> <em>${mail.objet}</em>`;
+     else nameContainer = `<strong>${mail.nom}<br> <em>${mail.objet}</em></strong>`;
+ 
+     // Ajoute le conteneur à l'élément li
+     li.innerHTML = ''; // Efface le contenu existant
+     li.appendChild(nameContainer);
+ 
+     // Ajoute l'objet et la date
+     const contentElement = document.createElement('div');
+     if (mail.lu) contentElement.innerHTML = `<em>${mail.objet}</em>`;
+     else contentElement.innerHTML = `<strong><em>${mail.objet}</em></strong>`;
+ 
+     contentElement.innerHTML += `<span class="w3-right-align" style="float: right; width: auto;">${mail.date}</span>`;
+ 
+     // Ajoute le contenu à l'élément li
+     li.appendChild(contentElement);
+ }
+
     // Ajoute le bouton pour marquer comme non lu
     const btnLu = document.createElement('div');
     btnLu.className = 'btn-lu';
+    btnLu.addEventListener('click', (event) => {
+        event.stopPropagation(); // pour pas que le mail s'ouvre en même temps
+        if (mail.lu) {
+            mail.lu = false;
+        } else {
+            mail.lu = true;
+        }
+        afficherMail(mail, li);
+        let index = emails.findIndex(item => item.id === mail.id);
+        if (index !== -1) {
+            emails[index] = mail;
+            sessionEmails.v = emails;
+        }
+    });
+
+
+
+function afficherMail(mail, li) {
+    // Crée un conteneur pour le nom et le bouton
+    const nameContainer = document.createElement('div');
+    nameContainer.style.display = 'flex';
+    nameContainer.style.alignItems = 'center';
+
+    // Ajoute le bouton pour marquer comme non lu
+    const btnLu = document.createElement('div');
+    btnLu.className = 'btn-lu';
+    btnLu.style.marginRight = '10px'; // Ajoute une marge à droite pour espacer le bouton du nom
     btnLu.addEventListener('click', (event) => {
         event.stopPropagation(); // pour pas que le mail s'ouvre en même temps
         mail.lu = false;
@@ -41,7 +83,33 @@ function afficherMail(mail, li) {
         }
     });
 
-    li.prepend(btnLu);
+    // Ajoute le nom de l'expéditeur
+    const nameElement = document.createElement('span');
+    if (mail.lu) {
+        nameElement.innerHTML = `${mail.nom}`;
+    } else {
+        nameElement.innerHTML = `<strong>${mail.nom}</strong>`;
+    }
+
+    // Ajoute le bouton et le nom au conteneur
+    nameContainer.appendChild(btnLu);
+    nameContainer.appendChild(nameElement);
+
+    // Ajoute le conteneur à l'élément li
+    li.innerHTML = ''; // Efface le contenu existant
+    li.appendChild(nameContainer);
+
+    // Ajoute l'objet et la date
+    const contentElement = document.createElement('div');
+    if (mail.lu) {
+        contentElement.innerHTML = `<em>${mail.objet}</em>`;
+    } else {
+        contentElement.innerHTML = `<strong><em>${mail.objet}</em></strong>`;
+    }
+    contentElement.innerHTML += `<span class="w3-right-align" style="float: right; width: auto;">${mail.date}</span>`;
+
+    // Ajoute le contenu à l'élément li
+    li.appendChild(contentElement);
 }
 
 /* V0 Test du début
@@ -75,7 +143,6 @@ function afficherMessages() {
         li.addEventListener('click', () => afficherContenuMail(mail, li));
         DOM.messageList.appendChild(li);
     });
-
     
 }
 
@@ -104,13 +171,22 @@ function afficherContenuMail(mail, li) {
         <h2>${mail.objet}</h2>
         <p><strong>Destinataire : </strong>${mail.destinataire}</p>
         <p>${mail.contenu}</p>
-        
     `;
     
 }
 
 function switchFolder(dossier) {
     activeBox = dossier;
+    if (dossier === "trash") {
+        DOM.messageList.innerHTML = ''; // Vide la liste des messages
+        DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
+        DOM.boitereception.classList.remove('active');
+        DOM.corbeille.classList.add('active');
+    } else {
+        DOM.boitereception.classList.add('active');
+        DOM.corbeille.classList.remove('active');
+        afficherMessages();
+    }
 }
 
 
@@ -133,7 +209,7 @@ function recupererEmailsAleatoires() {
         // Prendre les 5 premiers emails mélangés
         switch (sessionDifficulty.v) {
 			case 1:
-				nbEmail = 10;
+				nbEmail = 15;
 				break;
 			case 2:
 				nbEmail = 25;
@@ -145,7 +221,7 @@ function recupererEmailsAleatoires() {
 				nbEmail = 50;
 				break;
 			default:
-				nbEmail = 8;
+				nbEmail = 15;
 		}
         emails = emailsFromSource.slice(0, nbEmail);
         
@@ -161,8 +237,14 @@ recupererEmailsAleatoires();
 
 /*  
 TODO
- - faire la fonction pour passser en mode lu non lu ? que ça change dynamiqueent psk là ça le fait pas
- - add le btn à gauche 
- - add le "boite de recepetion (1).."
- - add la date en coupant l'horraire  : faire deux catégories
+ - bouton lu/non lu 
+ - mettre en forme (à droite et milieu)
+ - add metttre dans la corbeille
+ - add gris
+ - mail du Z généré automatique au début
+ - mail où on est obligée d'ouvrir le mail du Z sinon peut pas
+ - add les données de mélissa
 */
+
+
+
