@@ -1,8 +1,10 @@
 const DOM = createDOMReferences({
 	clock: "#clock",
 	black_fader: "#black-fader",
+	highscore: "#highscore"
 });
 
+DOM.highscore.innerText = storageMaxScore.v;
 
 window.addEventListener("load", async () => {
 	let opacity = 1;
