@@ -56,6 +56,11 @@ const initGameSession = (difficulty  = 1) => {
 	sessionEmails.v = [];
 }
 
+const endGameSession = (success) => {
+	if (success && sessionScore.v > storageMaxScore.v) storageMaxScore.v = sessionScore.v;
+	goToPage("../gameover/" + (success ? "page2.html?success=true" : "page.html"));
+}
+
 
 const createDOMReferences = (request) => {
 	let result = new Object;
