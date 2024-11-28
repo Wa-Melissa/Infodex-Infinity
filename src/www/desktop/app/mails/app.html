@@ -19,8 +19,17 @@
 
   .active {
     background-color: #D3D3D3; /* Couleur grise */
-    
   }
+
+  .w3-col {
+    position: sticky; 
+    height: 100vh; 
+    border-left: 1px solid lightgray;
+    box-sizing: border-box;
+    overflow-y: auto; 
+}
+
+  
 </style>
 <body>
   <!-- Barre de titre -->
@@ -42,14 +51,14 @@
     <!-- Contenu principal, avec un espace pour la sidebar -->
     <div class="w3-row" style="margin-left: 220px;">
       <!-- Colonne de la liste des emails (à gauche) -->
-      <div class="w3-col" style="width: 45%; height: 100vh; border-right: 1px solid lightgray;">
+      <div class="w3-col" style="width: 45%; height: 100vh; ">
         <ul class="w3-ul" id="message-list">
           <!-- Les emails s'affichent ici -->
         </ul>
       </div>
 
     <!-- Colonne du contenu de l'email (à droite) -->
-    <div class="w3-col" style="width: 55%; height: 100vh;">
+    <div class="w3-col" style="width: 55%; height: 100vh; border-left: 1px solid lightgray;">
       <div class="w3-center" id="contenu-mail">
         <h2>Contenu de l'email</h2>
         <p>Veuillez sélectionner un email pour afficher son contenu.</p>

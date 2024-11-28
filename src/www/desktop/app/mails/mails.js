@@ -7,7 +7,7 @@ const mails = [
         objet: "Bienvenue nouveau data librarian",
         contenu: `Bonjour,\n\nComme convenu, je vous fais suivre en pièce jointe un jeu de données consolidé. Ces éléments ont été compilés à partir des informations disponibles pour la période définie.\n\nVous y trouverez les informations nécessaires pour la suite de vos travaux. N’hésitez pas à me solliciter si vous avez besoin de précisions ou d’une mise en contexte supplémentaire.\n\nCordialement,\nDavid Lefèvre`,
         piecesJointes: ["exemple.xlsx"],
-        date: "2024-11-20",
+        date: "20/11/2024",
         heure: "09:00:00",
         nom: "David Lefèvre",
         lu : false
@@ -18,7 +18,7 @@ const mails = [
         objet: "Transmission des éléments pour analyse",
         contenu: `Bonjour Charlotte,\n\nComme convenu, je vous fais suivre en pièce jointe un jeu de données consolidé. Ces éléments ont été compilés à partir des informations disponibles pour la période définie.\n\nVous y trouverez les informations nécessaires pour la suite de vos travaux. N’hésitez pas à me solliciter si vous avez besoin de précisions ou d’une mise en contexte supplémentaire.\n\nCordialement,\nDavid Lefèvre`,
         piecesJointes: ["consolidated_data_2024.xlsx"],
-        date: "2024-11-20",
+        date: "15/11/2024",
         heure: "09:00:00",
         nom: "David Lefèvre",
         lu : false
@@ -29,7 +29,7 @@ const mails = [
         objet: "Envoi des données complémentaires",
         contenu: `Bonjour Thomas,\n\nJe vous transmets en pièce jointe les éléments complémentaires demandés lors de notre dernière réunion. Ce fichier regroupe plusieurs entrées pertinentes pour avancer dans l’analyse.\n\nN’hésitez pas à revenir vers moi pour toute question ou pour discuter de ces éléments plus en détail.\n\nBien cordialement,\nEmma Caron`,
         piecesJointes: ["supplementary_data.xlsx"],
-        date: "2024-11-20",
+        date: "20//11/2024",
         heure: "10:30:00",
         nom: "Emma Caron",
         lu : false
@@ -40,7 +40,7 @@ const mails = [
         objet: "Données consolidées prêtes à être exploitées",
         contenu: `Bonjour Paul,\n\nVeuillez trouver en pièce jointe les données compilées pour le projet en cours. Elles ont été organisées selon les paramètres évoqués précédemment afin de faciliter leur exploitation.\n\nJe reste disponible pour échanger si nécessaire.\n\nCordialement,\nJulie Reynaud`,
         piecesJointes: ["project_data_final.csv"],
-        date: "2024-11-20",
+        date: "20//11/2024",
         heure: "12:00:00",
         nom: "Julie Reynaud",
         lu : false
@@ -62,7 +62,7 @@ const mails = [
         objet: "Fichier de données pour préparation de rapport",
         contenu: `Bonjour Julie,\n\nVous trouverez en pièce jointe le fichier contenant les informations que vous avez demandées. Ces données ont été structurées pour répondre aux objectifs définis lors de notre dernier échange.\n\nJe suis disponible si vous souhaitez que nous approfondissions certains points.\n\nCordialement,\nVictor Legrand`,
         piecesJointes: ["report_preparation_data.xlsx"],
-        date: "2024-11-21",
+        date: "21/11/2024",
         heure: "11:00:00",
         nom: "Victor Legrand",
         lu : false
@@ -94,7 +94,7 @@ const mails = [
         destinataire: "sophie.mallet@datasolutions.com",
         objet: "Fichier transmis pour analyse",
         contenu: `Bonjour Sophie,\n\nVous trouverez en pièce jointe un fichier regroupant des informations clés collectées dans le cadre des travaux en cours. Ce document a été formaté selon les standards habituels.\n\nN’hésitez pas à revenir vers moi si vous avez besoin d’éclaircissements.\n\nCordialement,\nNathalie Durand`,
-        piecesJointes: ["analysis_file_2024.xlsx"],
+        piecesJointes: ["analysis_file_2        024.xlsx"],
         date: "2024-11-22",
         heure: "16:00:00",
         nom: "Nathalie Durand",
