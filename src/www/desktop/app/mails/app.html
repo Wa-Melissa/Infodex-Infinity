@@ -25,7 +25,6 @@
     position: sticky; 
     height: 100vh; 
     border-left: 1px solid lightgray;
-    box-sizing: border-box;
     overflow-y: auto; 
 }
 
@@ -44,7 +43,9 @@
     <nav class="w3-sidebar w3-light-grey w3-bar-block w3-rightbar" 
         style="width: 220px; height: 100vh; position: fixed;">
       <h3 class="w3-bar-item">Dossiers</h3>
-      <a href="#" class="w3-bar-item w3-button" id="boite-reception">Boîte de réception</a>
+      <a href="#" class="w3-bar-item w3-button" id="boite-reception">
+        Boîte de réception <span id="countmail" class="w3-badge w3-teal" style="margin-left: 10px;">0</span>
+      </a>
       <a href="#" class="w3-bar-item w3-button" id="corbeille">Corbeille</a>
     </nav>
 

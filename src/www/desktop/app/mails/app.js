@@ -3,7 +3,8 @@ const DOM = createDOMReferences({
     contenumail : "#contenu-mail",
     boitereception : "#boite-reception",
     btnlu : ".btn-lu",
-    corbeille: "#corbeille"
+    corbeille: "#corbeille",
+    countmail : "#countmail"
 });
 
 // # id, . class , - classe dynamique (qui peut ne pas exister quand on créer le DOM)
@@ -37,6 +38,7 @@ function afficherMail(mail, li) {
             emails[index] = mail;
             sessionEmails.v = emails;
         }
+        mettreAJourCompteurNonLus();
     });
 
     // add le nom de l'expéditeur
@@ -123,6 +125,9 @@ function afficherContenuMail(mail, li) {
         <p><strong>Destinataire : </strong>${mail.destinataire}</p>
         <p>${mail.contenu}</p>
     `;
+
+    mettreAJourCompteurNonLus();
+
     
 }
 
@@ -131,6 +136,8 @@ function switchFolder(dossier) {
     if (dossier === "trash") {
         DOM.messageList.innerHTML = ''; // Vide la liste des messages
         DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
+        DOM.contenumail.innerHTML = `<h2>Contenu de l'email</h2>
+        <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; // Remet le texte par défaut
         DOM.boitereception.classList.remove('active'); // Pour mettre le fond en gris selon où on est
         DOM.corbeille.classList.add('active'); 
     } else {
@@ -181,7 +188,7 @@ function recupererEmailsAleatoires() {
         // ajoute les emails dans mailsrestants
         for (let i = 0; i < emailsFromSource.length; i++) {
             mailsRestants.push(emailsFromSource[i]);
-            if (mailsRestants.length >= nbEmail) break; // on arrêtes on a assez d'emails
+            if (mailsRestants.length > nbEmail) break; // on arrêtes on a assez d'emails
         }
 
         emails.push(...mailsRestants);
@@ -193,7 +200,31 @@ function recupererEmailsAleatoires() {
 }
 
 
+function mettreAJourCompteurNonLus() {
+    let nonLus = -1; 
+
+    // Parcourt tous les emails
+    for (let i = 0; i < emails.length; i++) {
+        if (!emails[i].lu) { 
+            nonLus++;
+        }
+    }
+
+    // Met à jour le compteur sur l'interface
+    if (nonLus > 0) {
+        DOM.countmail.textContent = nonLus; 
+        DOM.countmail.style.display = "inline-block"; 
+        DOM.boitereception.style.fontWeight = "bold";
+    } else {
+        DOM.countmail.textContent = ""; 
+        DOM.countmail.style.display = "none"; 
+        DOM.boitereception.style.fontWeight = "normal";
+    }
+}
+
+
 recupererEmailsAleatoires();
+mettreAJourCompteurNonLus();
 
 /*  
 TODO
