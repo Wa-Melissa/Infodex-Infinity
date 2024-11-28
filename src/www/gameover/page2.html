@@ -8,13 +8,60 @@
 	<link rel="stylesheet" href="../common.css" />
 	<link rel="stylesheet" href="../fontawesome/css/all.css" />
 	<title>The Librarian Game - Game Over</title>
-</head>
-<body>
-	<img src=":blank" alt="">
+	<style>
+		* {
+		  margin: 0;
+		  padding: 0;
+		  box-sizing: border-box;
+		}
+	
+		body, html {
+			height: 100%;
+			background-image: url('fondAbstrait_censored.jpg');
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-attachment: fixed;
+		}
+	
+		.container {
+		  display: flex;
+		  height: 100%;
+		}
+	
+		.box {
+		  flex: 1; /* Par défaut, toutes les boîtes ont la même largeur */
+		  padding: 1%;
+		  align-items: center;
+		  display: flex;
+		}
+	
+		.box.middle {
+		  flex: 1.5; /* Les deux boîtes du milieu sont plus larges */
+		}
 
-
-
-</body>
+		.box.middle img {
+			width: 100%;       /* L'image prend toute la largeur de la boîte */
+			object-fit: cover; /* L'image remplit la boîte tout en conservant ses proportions */
+		}
+	  </style>
+	</head>
+	<body>
+	  <div class="container">
+		<div class="box"></div> <!-- Première boîte -->
+		<div class="box middle">
+			<div class="w3-panel w3-sand">
+				<span style="font-size:150px;line-height:0.6em;opacity:0.2">❝</span>
+				<p class="w3-xlarge" style="margin-top:-40px"><i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non massa vitae risus fermentum ullamcorper.
+				Phasellus risus urna, ornare in aliquam id, porttitor sit amet sapien. Nulla facilisi.</i></p>
+			</div>
+		</div> <!-- Deuxième boîte plus large -->
+		<div class="box middle">
+			<img src="matthieu_zimerman-fache.png" class="w3-round"> 
+		</div> <!-- Troisième boîte plus large -->
+		<div class="box"></div> <!-- Quatrième boîte -->
+	  </div>
+	</body>
 <script src="../sa.js"></script>
 <script src="../common.js"></script>
 <script src="renderer.js"></script>

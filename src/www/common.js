@@ -27,6 +27,8 @@ const sessionDbTotalCells = new sessionHandler("db_total_rows");
 const sessionDbCorruptedCells = new sessionHandler("db_corrupted_rows");
 const sessionDifficulty = new sessionHandler("difficulty");
 const sessionEmails = new sessionHandler("emails");
+const storageMaxScore = new storageHandler("maxScore");
+const sessionScore = new sessionHandler("score");
 
 const goToPage = (url) => {
 	document.location.href = url;
@@ -48,9 +50,10 @@ const fadeOutBody = (url = null) => {
 
 const initGameSession = (difficulty  = 1) => {
 	sessionDifficulty.v = difficulty;
-	sessionDbCorruptedCells.v = 0;
-	sessionDbTotalCells.v = 0;
-	sessionEmails.v = []; 
+	sessionDbCorruptedCells.v = 1;
+	sessionDbTotalCells.v = 50;
+	sessionScore.v = 20;
+	sessionEmails.v = [];
 }
 
 
