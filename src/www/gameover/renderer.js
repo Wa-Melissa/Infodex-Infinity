@@ -12,15 +12,14 @@ let failure_text = ["Ça ne demandait pas la lune… et pourtant, tu t’es comp
 let success = document.location.href.endsWith("?success=true");
 
 //On choisit une photo aléatoirement
-if (success){
+if (success && document.location.sessionScore > 0){
     let randomIndex = Math.floor(Math.random() * success_photos.length);
     DOM.photo.src = success_photos[randomIndex];
     DOM.text.innerHTML = success_text[randomIndex];
+    DOM.text.innerHTML += "<br>Tu as eu un score de " + sessionScore.v + ".";
 }
 else{
     let randomIndex = Math.floor(Math.random() * failure_photos.length);
     DOM.photo.src = failure_photos[randomIndex];
     DOM.text.innerHTML = failure_text[randomIndex];
 }
-
-DOM.text.innerHTML += "<br>Tu as eu un score de " + sessionScore.v + ".";
