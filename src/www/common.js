@@ -19,14 +19,14 @@ class storageHandler {
 	}
 	set v(val) {
 		localStorage.setItem(this.innerKey, JSON.stringify(val));
-	} 
+	} 	
 }
 
 //session Variable Handler
 const sessionDbTotalCells = new sessionHandler("db_total_rows");
 const sessionDbCorruptedCells = new sessionHandler("db_corrupted_rows");
 const sessionDifficulty = new sessionHandler("difficulty");
-
+const sessionEmails = new sessionHandler("emails");
 const storageMaxScore = new storageHandler("maxScore");
 const sessionScore = new sessionHandler("score");
 
@@ -53,6 +53,7 @@ const initGameSession = (difficulty  = 1) => {
 	sessionDbCorruptedCells.v = 1;
 	sessionDbTotalCells.v = 50;
 	sessionScore.v = 20;
+	sessionEmails.v = [];
 }
 
 const endGameSession = (success) => {
