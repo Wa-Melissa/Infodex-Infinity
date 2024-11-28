@@ -12,7 +12,7 @@ let settings = {
 	minErrors: 0.1,
 	minCols: 3, //Le nb min de colonnes dans le dataset
 	maxCols: 8, //au maximum la length de columnCreators
-	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance], //La liste des différents créateurs de colonne
+	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance, createMetiers, createAnimaux, createMusiques, createUniversites], //La liste des différents créateurs de colonne
 }
 
 class Dataset{

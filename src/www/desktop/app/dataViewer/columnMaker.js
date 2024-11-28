@@ -278,7 +278,8 @@ const createEsperance = (size)=>{//Esperance de vie entre 3 et 80 ans
 		Array(nbErrors).fill(0).map(()=>{
 			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
 			if (!maColonne._errorIndices.includes(randomIndex)){//Pour éviter les (vraies) erreurs
-				maColonne._dataList[randomIndex] = Math.floor(Math.random() * (122 - 58) + 58).map(code => String.fromCharCode(code)).join(''); //passage en caractères ascii
+				console.log("AAAAAAAAAAAAAAAAAAa"); // "bcd"
+				maColonne._dataList[randomIndex] = String.fromCharCode(Math.floor(Math.random() * (122 - 58) + 58)); // Conversion du nombre en caractère ASCII
 			}
 		});
 	}
@@ -286,9 +287,79 @@ const createEsperance = (size)=>{//Esperance de vie entre 3 et 80 ans
 	return maColonne;
 }
 
-/* Liste de créations d'erreurs pas encore utilisé 
-(! tous ne peuvent pas fonctionner pour toutes les listes)
+const createMetiers = (size)=>{//Metiers
+	let maColonne = new Column(size); //creation d'un objet colonne
+	maColonne._title = "Métier";
+	//remplissage de la colonne
+	maColonne._dataList = maColonne._dataList.map(() => {
+		return jobs[Math.floor(Math.random() * jobs.length)];
+	})
+	//insertion d'erreurs
+	maColonne.setErrors = (nbErrors)=>{
+		Array(nbErrors).fill(0).map(()=>{
+			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
+			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].slice(0, 3); //Tronque le mot apres le deuxième caractère
+			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
+		})
+	}
+	maColonne.setErrors(maColonne._nbErrors);
+	return maColonne;
+}
 
-maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].slice(0, 3); //Tronque le mot apres le deuxième caractère
-maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].split('').map(char => char.charCodeAt(0)); //Convertit en caractères ascii
-*/
+const createAnimaux = (size)=>{//Animaux
+	let maColonne = new Column(size); //creation d'un objet colonne
+	maColonne._title = "Animal";
+	//remplissage de la colonne
+	maColonne._dataList = maColonne._dataList.map(() => {
+		return animals[Math.floor(Math.random() * animals.length)];
+	})
+	//insertion d'erreurs
+	maColonne.setErrors = (nbErrors)=>{
+		Array(nbErrors).fill(0).map(()=>{
+			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
+			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].split('').map(char => char.charCodeAt(0)); //Convertit en caractères ascii
+			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
+		})
+	}
+	maColonne.setErrors(maColonne._nbErrors);
+	return maColonne;
+}
+
+const createMusiques = (size)=>{//Genres de musiques
+	let maColonne = new Column(size); //creation d'un objet colonne
+	maColonne._title = "Genre musical";
+	//remplissage de la colonne
+	maColonne._dataList = maColonne._dataList.map(() => {
+		return music[Math.floor(Math.random() * music.length)];
+	})
+	//insertion d'erreurs
+	maColonne.setErrors = (nbErrors)=>{
+		Array(nbErrors).fill(0).map(()=>{
+			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
+			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].split('').reverse().join(''); //Inverse le nom
+			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
+		})
+	}
+	maColonne.setErrors(maColonne._nbErrors);
+	return maColonne;
+}
+
+
+const createUniversites = (size)=>{//Noms d'universites
+	let maColonne = new Column(size); //creation d'un objet colonne
+	maColonne._title = "Université";
+	//remplissage de la colonne
+	maColonne._dataList = maColonne._dataList.map(() => {
+		return universities[Math.floor(Math.random() * universities.length)];
+	})
+	//insertion d'erreurs
+	maColonne.setErrors = (nbErrors)=>{
+		Array(nbErrors).fill(0).map(()=>{
+			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
+			maColonne._dataList[randomIndex] =  maColonne._dataList[randomIndex].replace(/[a-zA-Z]/g, (char) => String.fromCharCode(((char.charCodeAt(0) - (char < 'a' ? 65 : 97) + 5) % 26) + (char < 'a' ? 65 : 97))); //décalde d'une lettre dans l'alphabet
+			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
+		})
+	}
+	maColonne.setErrors(maColonne._nbErrors);
+	return maColonne;
+}

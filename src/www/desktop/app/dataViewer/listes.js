@@ -607,5 +607,99 @@ const colors = [
     "Bleu denim", "Vert d'eau", "Jaune poussin", "Or rose", "Bleu pastel", "Vert tilleul"
 ];
 
+//Liste de métiers
+const jobs = [
+	"Médecin", "Infirmier", "Enseignant", "Développeur", "Avocat", "Architecte", "Ingénieur", "Plombier", "Électricien",
+	"Écrivain", "Journaliste", "Pharmacien", "Comptable", "Chef cuisinier", "Agriculteur", "Chercheur", "Secrétaire",
+	"Policier", "Pompier", "Psychologue", "Acteur", "Musicien", "Artiste peintre", "Photographe", "Directeur",
+	"Vétérinaire", "Designer graphique", "Coiffeur", "Traducteur", "Pilote d'avion", "Dentiste", "Notaire",
+	"Technicien", "Géologue", "Astronome", "Statisticien", "Banquier", "Courtier", "Bibliothécaire", "Historiographe", "Spécialiste marketing",
+	"Urbaniste", "Politicien", "Maire", "Député", "Ambassadeur", "Ministre", "Consultant", "Entrepreneur",
+	"Community manager", "Éditeur", "Scénariste", "Réalisateur", "Coach sportif", "Professeur de yoga",
+	"Nutritionniste", "Kinésithérapeute", "Orthophoniste", "Météorologue", "Cartographe", "Professeur d'université",
+	"Tailleur", "Boulanger", "Boucher", "Pâtissier", "Sculpteur", "Bijoutier", "Menuisier", "Charpentier",
+	"Soudeur", "Mécanicien", "Maçon", "Conducteur de travaux", "Peintre en bâtiment", "Jardinier",
+	"Horloger", "Employé de banque", "Responsable RH", "Gestionnaire de paie", "Agent immobilier", "Courtier d'assurances",
+	"Guide touristique", "Chauffeur de taxi", "Livreur", "Développeur web", "Spécialiste en cybersécurité",
+	"Technicien réseau", "Data scientist", "UX designer", "Ingénieur en IA", "Astrophysicien", "Biologiste marin",
+	"Ecologiste", "Zoologiste", "Ornithologue", "Anthropologue", "Archéologue", "Historien", "Ingénieur civil", "Magicien", 
+	"Clown", "Animateur radio", "Influenceur", "Streamer"
+];
+
+//Liste de grandes universites
+const universities = [
+	"Harvard University", "Stanford University", "Massachusetts Institute of Technology (MIT)",
+	"University of Oxford", "University of Cambridge", "California Institute of Technology (Caltech)",
+	"University of Chicago", "Princeton University", "Yale University", "Columbia University",
+	"Imperial College London", "University College London (UCL)", "ETH Zurich", 
+	"University of Tokyo", "Kyoto University", "University of Toronto", "McGill University",
+	"Sorbonne Université", "Université de Paris", "Sciences Po", "École Polytechnique", 
+	"University of Melbourne", "University of Sydney", "Australian National University",
+	"Tsinghua University", "Peking University","National University of Singapore (NUS)", 
+	"University of Hong Kong (HKU)", "Seoul National University", "Korea University", 
+	"Lomonosov Moscow State University", "University of São Paulo", 
+	"Pontifical Catholic University of Chile", "University of Cape Town", 
+	"Cairo University", "American University of Beirut", 
+	"Johns Hopkins University", "Duke University", "University of Pennsylvania", 
+	"Carnegie Mellon University", "University of California, Berkeley",
+	"UCLA", "New York University (NYU)", "Northwestern University", 
+	"University of Michigan", "University of Wisconsin-Madison", 
+	"University of Edinburgh", "King's College London", "London School of Economics (LSE)", 
+	"University of Manchester", "University of Bristol", "University of Glasgow", 
+	"University of Amsterdam", "Leiden University", 
+	"Universidad Nacional Autónoma de México (UNAM)", "Universidad de Buenos Aires (UBA)",
+	"University of Strasbourg (UNISTRA)"
+  ];
+
+
+  //Liste d'animaux de tous types
+  const animals = [
+	"Chat", "Chien", "Cheval", "Lapin", "Hamster", "Poisson rouge", "Perroquet", 
+	"Canari", "Tortue", "Cochon d'Inde", "Lion", "Tigre", "Éléphant", 
+	"Girafe", "Zèbre", "Hippopotame", "Rhinocéros", "Antilope", "Gorille", 
+	"Chimpanzé", "Babouin", "Crocodile", "Alligator", "Dauphin", "Baleine", 
+	"Requin", "Raie manta", "Méduse", "Poulpe", "Calmar", "Crabe", 
+	"Homard", "Crevette", "Moule", "Escargot", "Serpent", "Boa", 
+	"Python", "Cobra", "Iguane", "Caméléon", "Gecko", "Faucon", 
+	"Aigle", "Pigeon", "Canard", "Cygne", "Héron", "Pingouin", 
+	"Autruche", "Émeu", "Paon", "Hirondelle", "Corbeau", "Pie", 
+	"Moineau", "Chouette", "Hibou", "Loup", "Renard", "Ours brun", 
+	"Ours polaire", "Ours noir", "Cerf", "Daim", "Bison", "Élan", 
+	"Sanglier", "Porc-épic", "Rat", "Souris", "Hérisson", "Taupe", 
+	"Castor", "Loutre", "Blaireau", "Panda géant", "Panda roux", 
+	"Koala", "Kangourou", "Wallaby", "Dingo", "Ornithorynque", 
+	"Abeille", "Fourmi", "Guêpe", "Papillon", "Moustique", "Libellule", 
+	"Coccinelle", "Scarabée", "Scorpion", "Grenouille", 
+	"Crapaud", "Salamandre", "Triton", "Esturgeon", "Morue"
+  ];
+  
+
+  //Liste de genres et de sous-genres de musique
+  const music = [
+	// Genres principaux
+	"Pop", "Rock", "Jazz", "Blues", "Classique", "Hip-hop", "Rap", 
+	"Électro", "R&B", "Soul", "Funk", "Country", "Reggae", "Folk", 
+	"Disco", "Techno", "House", "Trap", "Dubstep", "Trance",
+
+	// Sous-genres du Rock, jazz et electro
+	"Rock alternatif", "Hard rock", "Punk rock", "Metal", "Heavy metal",
+	"Swing", "Ragtime", "Acid jazz", " Free Jazz",
+  	"Drum and bass", "Hardstyle", "Lo-fi", 
+  
+	// Genres traditionnels et  world music
+	"Flamenco", "Samba", "Tango",  "Salsa", "Merengue", 
+	"Reggaeton", "K-pop", "J-pop", "Afrobeats",
+	"Chanson française", "Gospel",
+  
+	// Variétés modernes
+	"Electropop", "Pop rock", "Indie pop", 
+  
+  ];
+  
+  
+  
+   
+  
+
 
 
