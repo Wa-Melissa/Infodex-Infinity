@@ -57,7 +57,7 @@ const initGameSession = (difficulty  = 1) => {
 
 const endGameSession = (success) => {
 	if (success && sessionScore.v > storageMaxScore.v) storageMaxScore.v = sessionScore.v;
-	goToPage("../gameover/" + (success ? "page2.html" : "page.html"));
+	goToPage("../gameover/" + (success ? "page2.html?sucess=true" : "page.html"));
 }
 
 
