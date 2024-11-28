@@ -2,6 +2,7 @@ const DOM = createDOMReferences({
 	difficulty_submit: "#difficulty-submit",
 	difficulty_select: "#difficulty-select",
 	difficulty_select_logo: "#difficulty-submit-logo",
+	difficulty_placeholder: "#difficulty-placeholder",
 	shutdown: "#shutdown",
 	black_fader: "#black-fader",
 });
@@ -55,3 +56,11 @@ DOM.shutdown.addEventListener("click", (e) => {
 	}
 	 
 )
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+		event.preventDefault();
+		if (DOM.difficulty_select.value == "") return;
+        DOM.difficulty_submit.click();
+    }
+});
