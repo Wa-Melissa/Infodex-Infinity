@@ -7,8 +7,12 @@ let failure_photos = ["ali_ayadi-fache.png","cedric_wemmert-triste.png","matthie
 
 let success = false;
 
+//On choisit une photo aléatoirement
 if (success){
-    let randomIndex = Math.floor(Math.random() * success_photos.length); //determine un index aléatoire 
-	let chosenPicture = success_photos[randomIndex];
-   // DOM.photo.src = 
+    let randomIndex = Math.floor(Math.random() * success_photos.length);
+    DOM.photo.src = success_photos[randomIndex];
+}
+else{
+    let randomIndex = Math.floor(Math.random() * failure_photos.length);
+    DOM.photo.src = failure_photos[randomIndex];
 }
