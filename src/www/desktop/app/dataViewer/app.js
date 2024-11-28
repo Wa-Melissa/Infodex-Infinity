@@ -10,17 +10,19 @@ const DOM = createDOMReferences({
 let settings = {
 	maxErrors: 0.17, // maximum d'erreurs (en %)
 	minErrors: 0.1,
-	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance], //La liste des différents créateurs de colonne
 	minCols: 3, //Le nb min de colonnes dans le dataset
-	maxCols: 8
+	maxCols: 8, //au maximum la length de columnCreators
+	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance], //La liste des différents créateurs de colonne
 }
 
 class Dataset{
+	_columnCreators;
 	_columnsList;
 	_bigTitle = "Résultats de recherche";
 	_nbRows;
 
 	constructor(){
+		this._columnCreators = settings.columnCreators.slice();
 		//détermine le nombre de colonnes
 		settings.minCols = (settings.minCols < 1) ? 1 : settings.minCols;
 		settings.maxCols = (settings.minCols > settings.maxCols) ? settings.minCols : settings.maxCols;
@@ -48,10 +50,10 @@ class Dataset{
 		this._nbRows =  Math.floor(Math.random() * (nbRowsMax - nbRowsMin + 1)) + nbRowsMin;
 		
 
-		//détermine le type de chaque colonne, la crée et l'ajoute à la liste
+		//détermine le type de chaque colonne, la crée et l'ajoute à la liste (toutes différentes)
 		this._columnsList = Array(nbCols).fill(0).map(() => {
-			let randomIndex = Math.floor(Math.random() * settings.columnCreators.length); //determine un index aléatoire 
-			let creator = settings.columnCreators[randomIndex];
+			let randomIndex = Math.floor(Math.random() * this._columnCreators.length); //determine un index aléatoire 
+			let creator = this._columnCreators.splice(randomIndex, 1)[0]; //Récupère la colonne a cet index et la retire pour éviter de l'avoir deux fois
 			let column = creator(this._nbRows); // Créer la colonne
 			return column;
 		});
