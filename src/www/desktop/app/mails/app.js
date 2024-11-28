@@ -215,6 +215,7 @@ function mettreAJourCompteurNonLus() {
         DOM.countmail.textContent = nonLus; 
         DOM.countmail.style.display = "inline-block"; 
         DOM.boitereception.style.fontWeight = "bold";
+        DOM.countmail.style.fontSize = "calc(90%)"; 
     } else {
         DOM.countmail.textContent = ""; 
         DOM.countmail.style.display = "none"; 

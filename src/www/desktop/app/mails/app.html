@@ -27,6 +27,15 @@
     border-left: 1px solid lightgray;
     overflow-y: auto; 
 }
+.w3-badge {
+  
+    min-width: 2em; /* Fixe une largeur minimale (proportionnelle à la hauteur) */
+    height: 2em; /* Fixe la hauteur pour garder le badge rond */
+    line-height: 2em; /* Centre le texte verticalement */
+    padding: 0; /* Pas de padding supplémentaire */
+}
+
+
 
   
 </style>
@@ -59,7 +68,7 @@
       </div>
 
     <!-- Colonne du contenu de l'email (à droite) -->
-    <div class="w3-col" style="width: 55%; height: 100vh; border-left: 1px solid lightgray;">
+    <div class="w3-col" style="width: 55%; height: 100vh; border-left: 1px solid lightgray; ">
       <div class="w3-center" id="contenu-mail">
         <h2>Contenu de l'email</h2>
         <p>Veuillez sélectionner un email pour afficher son contenu.</p>
