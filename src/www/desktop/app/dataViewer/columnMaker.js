@@ -356,7 +356,7 @@ const createUniversites = (size)=>{//Noms d'universites
 	maColonne.setErrors = (nbErrors)=>{
 		Array(nbErrors).fill(0).map(()=>{
 			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] =  maColonne._dataList[randomIndex].replace(/[a-zA-Z]/g, (char) => String.fromCharCode(((char.charCodeAt(0) - (char < 'a' ? 65 : 97) + 5) % 26) + (char < 'a' ? 65 : 97))); //décalde d'une lettre dans l'alphabet
+			maColonne._dataList[randomIndex] =  maColonne._dataList[randomIndex].replace(/[a-zA-Z]/g, (char) => String.fromCharCode(((char.charCodeAt(0) - (char < 'a' ? 65 : 97) + 5) % 26) + (char < 'a' ? 65 : 97))); //décale d'une lettre dans l'alphabet
 			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
 		})
 	}
