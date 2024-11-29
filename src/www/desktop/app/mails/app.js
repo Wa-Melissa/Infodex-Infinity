@@ -7,6 +7,8 @@ const DOM = createDOMReferences({
     countmail : "#countmail"
 });
 
+broadcastUpdateAppName("JaiMail - Boite de réception");
+
 // # id, . class , - classe dynamique (qui peut ne pas exister quand on créer le DOM)
 // Récupérer le dernier mail séléctionné
 let lastSelectedLi = null;
@@ -19,7 +21,7 @@ DOM.corbeille.addEventListener("click", () => switchFolder("trash"));
 
 
 
-function afficherMail(mail, li) {
+const afficherMail = (mail, li) => {
     // Crée un conteneur pour le nom et le bouton
     const nameContainer = document.createElement('div');
     nameContainer.style.display = 'flex';
@@ -84,9 +86,9 @@ function afficherMessages() {
     });
 }*/
 
-function afficherMessages() {
+const afficherMessages = () => {
     
-    emails.forEach(mail => {
+    emails.map(mail => {
         const li = document.createElement('li');
         li.style.borderBottom = "1px solid lightgray";
         li.style.cursor = "pointer";
@@ -100,7 +102,7 @@ function afficherMessages() {
 }
 
 // Colonne à droite
-function afficherContenuMail(mail, li) {
+const afficherContenuMail =(mail, li) => {
     if (lastSelectedLi !== null) {
         lastSelectedLi.style.backgroundColor = ""; // Remet la couleur d'origine
     }
@@ -131,9 +133,10 @@ function afficherContenuMail(mail, li) {
     
 }
 
-function switchFolder(dossier) {
+const switchFolder = (dossier) => {
     activeBox = dossier;
     if (dossier === "trash") {
+        broadcastUpdateAppName("JaiMail - Corbeille");
         DOM.messageList.innerHTML = ''; // Vide la liste des messages
         DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
         DOM.contenumail.innerHTML = `<h2>Contenu de l'email</h2>
@@ -141,6 +144,7 @@ function switchFolder(dossier) {
         DOM.boitereception.classList.remove('active'); // Pour mettre le fond en gris selon où on est
         DOM.corbeille.classList.add('active'); 
     } else {
+        broadcastUpdateAppName("JaiMail - Boite de réception");
         DOM.boitereception.classList.add('active');
         DOM.corbeille.classList.remove('active');
         afficherMessages();
@@ -149,7 +153,7 @@ function switchFolder(dossier) {
 
 
 
-function melangerTableau(array) {
+const melangerTableau = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1)); 
         [array[i], array[j]] = [array[j], array[i]]; 
@@ -157,7 +161,7 @@ function melangerTableau(array) {
 }
 
 
-function recupererEmailsAleatoires() {
+const recupererEmailsAleatoires = () => {
     if (emails.length === 0) {  
        
         let emailsFromSource = [...mails]; // on copie
@@ -200,7 +204,7 @@ function recupererEmailsAleatoires() {
 }
 
 
-function mettreAJourCompteurNonLus() {
+const mettreAJourCompteurNonLus = () => {
     let nonLus = -1; 
 
     // Parcourt tous les emails
@@ -215,6 +219,7 @@ function mettreAJourCompteurNonLus() {
         DOM.countmail.textContent = nonLus; 
         DOM.countmail.style.display = "inline-block"; 
         DOM.boitereception.style.fontWeight = "bold";
+        DOM.countmail.style.fontSize = "calc(90%)"; 
     } else {
         DOM.countmail.textContent = ""; 
         DOM.countmail.style.display = "none"; 

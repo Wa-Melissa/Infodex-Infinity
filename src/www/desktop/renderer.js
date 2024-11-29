@@ -40,15 +40,12 @@ DOM.logout_btn.addEventListener("click", async (event) => {
 const closeApp = () => {
 	DOM.app_iframe.src = "blank.html";
 	DOM.app_container.style.display = "none";
-	document.title = "Infodex Infinity - Desktop" 
+	document.title = "Infodex Infinity - Desktop"
+	DOM.app_name.innerHTML = "";
 }
 DOM.app_close_btn.addEventListener("click", closeApp);
 
 const loadApp = async (appName) => {
-	let fetcher = await fetch("app/" + appName + "/app.name");
-	let name = (await fetcher.text()).trim();
-	DOM.app_name.innerHTML = name;
-	document.title = "Infodex Infinity - " + name;
 	DOM.app_iframe.src = "app/" + appName + "/app.html";
 	DOM.app_container.style.display = "block";
 };
@@ -113,3 +110,11 @@ window.addEventListener("storage", (event) => {
 setInterval(() => {
 	sessionScore.v -= 2;
 }, 60000)
+
+
+const broadCastAppTitle = new BroadcastChannel("update_app_title");
+broadCastAppTitle.onmessage = (event) => {
+	console.log(event);
+	DOM.app_name.innerHTML = event.data;
+	document.title = "Infodex Infinity - " + event.data;
+};

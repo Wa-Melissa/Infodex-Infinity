@@ -5,6 +5,7 @@ const DOM = createDOMReferences({
 	corruption_rate: "#corruption-rate",
 	score: "#score"
 });
+broadcastUpdateAppName("Miracle DB - Statistiques");	
 
 const corruptionRate = (sessionDbTotalCells.v == 0) ? 0 : sessionDbCorruptedCells.v / sessionDbTotalCells.v * 100;
 
