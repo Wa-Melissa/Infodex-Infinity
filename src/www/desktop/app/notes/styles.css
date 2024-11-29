@@ -51,7 +51,7 @@ body {
   .content {
     text-align: justify;
     column-count: 2; /* deux colonnes pour l'effet livre */
-    column-gap: 40px;
+    column-gap: 130px;
   }
   
   h1 {
