@@ -7,6 +7,8 @@ const DOM = createDOMReferences({
     countmail : "#countmail"
 });
 
+broadcastUpdateAppName("JaiMail - Boite de réception");
+
 // # id, . class , - classe dynamique (qui peut ne pas exister quand on créer le DOM)
 // Récupérer le dernier mail séléctionné
 let lastSelectedLi = null;
@@ -134,6 +136,7 @@ const afficherContenuMail =(mail, li) => {
 const switchFolder = (dossier) => {
     activeBox = dossier;
     if (dossier === "trash") {
+        broadcastUpdateAppName("JaiMail - Corbeille");
         DOM.messageList.innerHTML = ''; // Vide la liste des messages
         DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
         DOM.contenumail.innerHTML = `<h2>Contenu de l'email</h2>
@@ -141,6 +144,7 @@ const switchFolder = (dossier) => {
         DOM.boitereception.classList.remove('active'); // Pour mettre le fond en gris selon où on est
         DOM.corbeille.classList.add('active'); 
     } else {
+        broadcastUpdateAppName("JaiMail - Boite de réception");
         DOM.boitereception.classList.add('active');
         DOM.corbeille.classList.remove('active');
         afficherMessages();

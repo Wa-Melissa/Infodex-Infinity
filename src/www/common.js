@@ -80,3 +80,8 @@ const createDOMReferences = (request) => {
 	Object.freeze(result);
 	return result;
 }
+
+const broadcastUpdateAppName = (name) => {
+	const bc = new BroadcastChannel("update_app_title");
+	bc.postMessage(name);
+}

@@ -5,7 +5,8 @@ const DOM = createDOMReferences({
 	my_table: "-myTable"
 });
 
-	
+broadcastUpdateAppName("DataViewer");	
+
 //param de gestion du jeu
 let settings = {
 	maxErrors: 0.17, // maximum d'erreurs (en %)
