@@ -1,0 +1,83 @@
+/* styles.css */
+body {
+    margin: 0;
+    background-color: #37322e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .book {
+    width: 97%;
+    height: 97%;
+    display: flex;
+    background: #fff;
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); */
+    border: 1px solid #ccc;
+    /* perspective: 1500px; */ /* Simule une profondeur pour la courbure */
+  }
+  
+  .page {
+    width: 100%;
+    padding: 40px;
+    background: linear-gradient(
+      180deg, 
+      #f8f4e3 98%, 
+      rgba(0, 0, 0, 0.05) 100%
+    ); /* Fond de papier avec légère ombre en bas */
+    box-shadow: inset 9px 7px 10px 4px rgba(0, 0, 0, 0.1);
+    border-left: 1px solid rgb(0 0 0 / 50%);
+    border-right: 1px solid rgb(0 0 0 / 50%);
+    transform: rotateY(1deg); /* Simule une courbure */
+  }
+  
+  /* Effet de lignes sur la page */
+  .page::before {
+    /* content: ''; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      transparent 0px, 
+      rgba(0, 0, 0, 0.02) 1px, 
+      transparent 2px
+    ); /* Lignes fines sur la page */
+    z-index: 0;
+  }
+  
+  .content {
+    text-align: justify;
+    column-count: 2; /* deux colonnes pour l'effet livre */
+    column-gap: 130px;
+  }
+  
+  h1 {
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  p {
+    font-size: 1.2rem;
+  }
+  
+  /* Ajout d'une ombre subtile au centre pour simuler la courbure entre les pages */
+  .book::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 10px;
+    background: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0)
+    );
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  
