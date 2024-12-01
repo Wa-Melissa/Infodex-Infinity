@@ -69,6 +69,8 @@ const createDOMReferences = (request) => {
 			result[k] = document.getElementById(v.slice(1));
 		} else if (v.startsWith(".")) {
 			result[k] = Array.prototype.slice.call(document.getElementsByClassName(v.slice(1)));
+		} else if (v.startsWith("/")) {
+			result[k] = () => Array.prototype.slice.call(document.getElementsByClassName(v.slice(1)));
 		} else if (v.startsWith("*")) {
 			result[k] = document.querySelector(v.slice(1));
 		} else if (v.startsWith("-")) {
@@ -84,4 +86,5 @@ const createDOMReferences = (request) => {
 const broadcastUpdateAppName = (name) => {
 	const bc = new BroadcastChannel("update_app_title");
 	bc.postMessage(name);
+	bc.close();
 }
