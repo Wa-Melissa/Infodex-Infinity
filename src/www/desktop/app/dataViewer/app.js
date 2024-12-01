@@ -1,7 +1,7 @@
 const DOM = createDOMReferences({
 	tab_container: "#maDiv",
 	inspect_button: "#inspect-btn",
-	btn: "#selectionEnd-btn",
+	accept_button: "#selectionEnd-btn",
 	my_table: "-myTable"
 });
 
@@ -141,10 +141,16 @@ const selectionManagement = (selectionList) => {
 		}
 	};
 };
+
+const addToBase = (nbCorrupt, dataset) => {
+	sessionDbCorruptedCells.v += nbCorrupt;
+	sessionDbTotalCells.v += dataset._columnsList.length * dataset._nbRows;
+
+}
  
 //Compte les erreurs trouvées et non trouvées une fois la selection validée
 const selectionEnd = (selectionList, dataset) => {
-	DOM.btn.onclick = (event) => {
+	DOM.accept_button.onclick = async (event) => {
 		let nbFound = 0;
 		let nbErr = 0;
 		let currentColIndex = -1 ;
@@ -164,7 +170,8 @@ const selectionEnd = (selectionList, dataset) => {
 				nbFound ++;
 			}
 			else{
-				//Diminuer le score (pour pénaliser le joueur si il selectionne tout quand ce n'est pas nécéssaire)
+				//!!!!!
+				//Diminuer la satisfaction (pour pénaliser le joueur si il selectionne tout quand ce n'est pas nécéssaire)
 			}
 		});
 		if(currentColIndex < dataset._columnsList.length -1){ //On ajoute les erreurs des dernières colonnes si elles n'ont pas été comptées
@@ -175,12 +182,28 @@ const selectionEnd = (selectionList, dataset) => {
 				nbErr += errorIndices.length ;
 			}
 		}
-		sessionDbCorruptedCells.v += nbErr - nbFound;
-		sessionDbTotalCells.v += dataset._columnsList.length * dataset._nbRows;
-
-		if (nbErr == nbFound) {
-			sessionScore.v += 10;
-		}
+		
 		alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbErr+"---"+selectionList.length);
+
+		if(selectionList.length > 0){//Si le joueur avait selectionné des erreurs
+			if (await Swal.fire({
+				title: "Voulez vous corriger vous-même les données ?",
+				showDenyButton: true,
+				showCancelButton: true,
+				confirmButtonText: 'Corriger et intégrer les données',
+				denyButtonText: `Refuser les données pour correction par le chercheur`,
+				cancelButtonText: 'annuler'
+			}).isConfirmed) {
+				let nbCorrupt = nbErr - nbFound;
+				addToBase(nbCorrupt,dataset);
+			}else{
+				//!!!!!
+				//Diminuer la satisfaction
+			}
+		}
+		else{
+			let nbCorrupt = nbErr - nbFound;
+			addToBase(nbCorrupt,dataset);
+		}
 	};
 };
