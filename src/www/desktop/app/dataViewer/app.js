@@ -2,7 +2,9 @@ const DOM = createDOMReferences({
 	tab_container: "#maDiv",
 	inspect_button: "#inspect-btn",
 	accept_button: "#selectionEnd-btn",
-	my_table: "-myTable"
+	my_table: "-myTable",
+	cells: "/cell",
+	unselect_button: "#unselect-btn",
 });
 
 broadcastUpdateAppName("DataViewer");	
@@ -93,7 +95,7 @@ class Dataset{
 		Array(this._nbRows).fill(0).map((_,i) => { //Pour chaque ligne du tab
 			monHtml += "\n\t\t<tr>";
 			this._columnsList.map((v) => { //Pour chaque colonne
-				monHtml += "\n\t\t\t<td>" + v._dataList[i] + "</td>";//On affiche la valeur de la colone
+				monHtml += '\n\t\t\t<td class="cell">' + v._dataList[i] + "</td>";//On affiche la valeur de la colone
 			});
 			monHtml += "\n\t\t</tr>";
 		});
@@ -142,11 +144,15 @@ const selectionManagement = (selectionList) => {
 	};
 };
 
-const addToBase = (nbCorrupt, dataset) => {
-	sessionDbCorruptedCells.v += nbCorrupt;
-	sessionDbTotalCells.v += dataset._columnsList.length * dataset._nbRows;
-
-}
+//Permet de deselectionner tout le tableau
+DOM.unselect_button.onclick = () => {
+	const  cells = DOM.cells();
+	cells.forEach(cellule => {
+		if(cellule.classList.contains("w3-pink")){
+			cellule.dispatchEvent(new Event('click'));
+		}
+	});
+};
  
 //Compte les erreurs trouvées et non trouvées une fois la selection validée
 const selectionEnd = (selectionList, dataset) => {
@@ -207,3 +213,10 @@ const selectionEnd = (selectionList, dataset) => {
 		}
 	};
 };
+
+
+const addToBase = (nbCorrupt, dataset) => {
+	sessionDbCorruptedCells.v += nbCorrupt;
+	sessionDbTotalCells.v += dataset._columnsList.length * dataset._nbRows;
+
+}
