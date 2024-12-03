@@ -9,14 +9,28 @@ const DOM = createDOMReferences({
 
 broadcastUpdateAppName("DataViewer");	
 
+const convertPercentageToErrorRate = (percentage) => {
+    const minRangeValue = 0.155;
+    const maxRangeValue = 0.17;
+    
+    // Calculer la valeur interpolée
+    const result = maxRangeValue - ((percentage / 100) * (maxRangeValue - minRangeValue));
+    return result;
+}
+
+
+let selectionList = new Array();
+
 //param de gestion du jeu
 let settings = {
-	maxErrors: 0.17, // maximum d'erreurs (en %)
+	maxErrors: convertPercentageToErrorRate(sessionSkill.v), // maximum d'erreurs (en %)
 	minErrors: 0.1,
 	minCols: 3, //Le nb min de colonnes dans le dataset
 	maxCols: 8, //au maximum la length de columnCreators
 	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance, createMetiers, createAnimaux, createMusiques, createUniversites], //La liste des différents créateurs de colonne
 }
+
+console.log(settings.maxErrors);
 
 class Dataset{
 	_columnCreators;
@@ -36,17 +50,16 @@ class Dataset{
 		let nbRowsMin, nbRowsMax;
 		switch (sessionDifficulty.v) {
 			case 1:
-				nbRowsMin = 5, nbRowsMax = 10;
-				break;
-			case 2:
 				nbRowsMin = 10, nbRowsMax = 20;
 				break;
-			case 3:
+			case 2:
 				nbRowsMin = 50, nbRowsMax = 100;
+				break;
+			case 3:
+				nbRowsMin = 200, nbRowsMax = 500;
 				break;
 			case 4:
 				nbRowsMin = 500, nbRowsMax = 1000;
-				break;
 			default:
 				nbRowsMin = 5, nbRowsMax = 200;
 		}
@@ -111,11 +124,11 @@ DOM.inspect_button.addEventListener("click", async(event) => {
 	let dataset = new Dataset();
 	dataset.toTab();
 
-	let selectionList = [];
+	selectionList.splice(0, selectionList.length);
+	
 	selectionManagement(selectionList);
 	selectionEnd(selectionList, dataset);
 });
-
 
 const selectionManagement = (selectionList) => {
 	const table =  DOM.my_table();
@@ -149,9 +162,12 @@ DOM.unselect_button.onclick = () => {
 	const  cells = DOM.cells();
 	cells.forEach(cellule => {
 		if(cellule.classList.contains("w3-pink")){
-			cellule.dispatchEvent(new Event('click'));
+			cellule.classList.toggle("w3-pink");
 		}
+		
 	});
+	selectionList.splice(0, selectionList.length);
+
 };
  
 //Compte les erreurs trouvées et non trouvées une fois la selection validée

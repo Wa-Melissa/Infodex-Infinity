@@ -1,13 +1,14 @@
 class sessionHandler {
 	constructor(key) {
 		this.innerKey = key;
+		this.onChangeEvent = null;
 	}
 	get v() {
 		return JSON.parse(sessionStorage.getItem(this.innerKey));
 	}
 	set v(val) {
 		sessionStorage.setItem(this.innerKey, JSON.stringify(val));
-	} 
+	}
 }
 
 class storageHandler {
@@ -19,7 +20,7 @@ class storageHandler {
 	}
 	set v(val) {
 		localStorage.setItem(this.innerKey, JSON.stringify(val));
-	} 	
+	}	
 }
 
 //session Variable Handler
@@ -27,8 +28,8 @@ const sessionDbTotalCells = new sessionHandler("db_total_rows");
 const sessionDbCorruptedCells = new sessionHandler("db_corrupted_rows");
 const sessionDifficulty = new sessionHandler("difficulty");
 const sessionEmails = new sessionHandler("emails");
-const storageMaxScore = new storageHandler("maxScore");
-const sessionScore = new sessionHandler("score");
+const sessionSatisfaction = new sessionHandler("satisfaction");
+const sessionSkill = new sessionHandler("skill");
 
 const goToPage = (url) => {
 	document.location.href = url;
@@ -52,12 +53,12 @@ const initGameSession = (difficulty  = 1) => {
 	sessionDifficulty.v = difficulty;
 	sessionDbCorruptedCells.v = 1;
 	sessionDbTotalCells.v = 50;
-	sessionScore.v = 20;
+	sessionSatisfaction.v = 50;
+	sessionSkill.v = 10;
 	sessionEmails.v = [];
 }
 
 const endGameSession = (success) => {
-	if (success && sessionScore.v > storageMaxScore.v) storageMaxScore.v = sessionScore.v;
 	goToPage("../gameover/" + (success ? "page2.html?success=true" : "page.html"));
 }
 

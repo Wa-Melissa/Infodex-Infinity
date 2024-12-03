@@ -101,20 +101,20 @@ setInterval(updateHour,1000);
 	});
 })();
 
+
 window.addEventListener("storage", (event) => {
-	if (event.key != "db_total_rows") return;
+	if (event.key != sessionDbTotalCells.innerKey) return;
 	if ((sessionDbCorruptedCells.v / sessionDbTotalCells.v) < 0.05) return;
 	endGameSession(false);
 })
-
-setInterval(() => {
-	sessionScore.v -= 2;
-}, 60000)
-
+window.addEventListener("storage", (event) => {
+	if (event.key != sessionSatisfaction.innerKey) return;
+	if (sessionSatisfaction.v > 0) return;
+	endGameSession(false);
+})
 
 const broadCastAppTitle = new BroadcastChannel("update_app_title");
 broadCastAppTitle.onmessage = (event) => {
-	console.log(event);
 	DOM.app_name.innerHTML = event.data;
 	document.title = "Infodex Infinity - " + event.data;
 };
