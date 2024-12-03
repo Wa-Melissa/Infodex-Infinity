@@ -50,16 +50,16 @@
   <div class="w3-row" style="margin-top: 60px;">
     <!-- La sidebar/menu des dossiers -->
     <nav class="w3-sidebar w3-light-grey w3-bar-block w3-rightbar" 
-        style="width: 220px; height: 100vh; position: fixed;">
+        style="width: 240px; height: 100vh; position: fixed;">
       <h3 class="w3-bar-item">Dossiers</h3>
       <a href="#" class="w3-bar-item w3-button" id="boite-reception">
-        Boîte de réception <span id="countmail" class="w3-badge w3-teal" style="margin-left: 10px;">0</span>
+        <i class="fas fa-inbox" style="margin-right: 10px;"></i>Boîte de réception <span id="countmail" class="w3-badge w3-teal" style="margin-left: 10px;">0</span>
       </a>
-      <a href="#" class="w3-bar-item w3-button" id="corbeille">Corbeille</a>
+      <a href="#" class="w3-bar-item w3-button" id="corbeille"><i class="fa-solid fa-trash" style="margin-right: 10px;"></i>Corbeille</a>
     </nav>
 
     <!-- Contenu principal, avec un espace pour la sidebar -->
-    <div class="w3-row" style="margin-left: 220px;">
+    <div class="w3-row" style="margin-left: 240px;">
       <!-- Colonne de la liste des emails (à gauche) -->
       <div class="w3-col" style="width: 45%; height: 100vh; ">
         <ul class="w3-ul" id="message-list">
@@ -69,9 +69,11 @@
 
     <!-- Colonne du contenu de l'email (à droite) -->
     <div class="w3-col" style="width: 55%; height: 100vh; border-left: 1px solid lightgray; ">
-      <div class="w3-center" id="contenu-mail">
-        <h2>Contenu de l'email</h2>
-        <p>Veuillez sélectionner un email pour afficher son contenu.</p>
+      <div id="contenu-mail">
+        <div class ="w3-center">
+          <h2>Contenu de l'email</h2>
+          <p>Veuillez sélectionner un email pour afficher son contenu.</p>
+        </div>
       </div>
     </div>
   </div>

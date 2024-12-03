@@ -123,10 +123,19 @@ const afficherContenuMail =(mail, li) => {
 
     //contenue à droite du mail séléctionné
     DOM.contenumail.innerHTML = `
-        <h2>${mail.objet}</h2>
-        <p><strong>Destinataire : </strong>${mail.destinataire}</p>
-        <p>${mail.contenu}</p>
+    <div style="margin: 25px 50px 50px 50px; font-size: 17px;">
+        <h2 style="color: #00796b; font-size: 25px; font-weight: bold; margin-bottom: 20px;"><i class="fas fa-user" style = "margin-right :15px;"></i>${mail.objet}</h2>
+        <p style="margin: 5px 0; color: #555;"><strong>Expéditeur : </strong>${mail.expediteur}</p>
+        <p style="margin: 5px 0; color: #555;"><strong>Destinataire : </strong>${mail.destinataire}</p>
+    </div>
+   
+    <div style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
+        ${mail.contenu}
+    </div>
+    
+   
     `;
+
 
     mettreAJourCompteurNonLus();
 
@@ -139,7 +148,9 @@ const switchFolder = (dossier) => {
         broadcastUpdateAppName("JaiMail - Corbeille");
         DOM.messageList.innerHTML = ''; // Vide la liste des messages
         DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
-        DOM.contenumail.innerHTML = `<h2>Contenu de l'email</h2>
+        DOM.contenumail.innerHTML = `
+        <div class ="w3-center">
+        <h2>Contenu de l'email</h2>
         <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; // Remet le texte par défaut
         DOM.boitereception.classList.remove('active'); // Pour mettre le fond en gris selon où on est
         DOM.corbeille.classList.add('active'); 
@@ -226,6 +237,8 @@ const mettreAJourCompteurNonLus = () => {
         DOM.boitereception.style.fontWeight = "normal";
     }
 }
+
+
 
 
 recupererEmailsAleatoires();
