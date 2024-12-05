@@ -228,7 +228,6 @@ const selectionEnd = (selectionList, dataset) => {
 				sessionSatisfaction.v -= settings.statisfactionChange * nbFound;
 				//Augmentation des competences
 				sessionSkill.v += settings.skillsChange * nbFound;
-				console.log("Session skill and Satisafaction updated:", sessionSkill.v, sessionSatisfaction.v)
 			}
 			//Si il annule on fait rien
 		}
