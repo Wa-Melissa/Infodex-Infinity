@@ -345,12 +345,12 @@ const createMusiques = (size)=>{//Genres de musiques
 }
 
 
-const createUniversites = (size)=>{//Noms d'universites
+const createMois = (size)=>{//Mois de l'annee
 	let maColonne = new Column(size); //creation d'un objet colonne
-	maColonne._title = "Université";
+	maColonne._title = "Mois";
 	//remplissage de la colonne
 	maColonne._dataList = maColonne._dataList.map(() => {
-		return universities[Math.floor(Math.random() * universities.length)];
+		return months[Math.floor(Math.random() * months.length)];
 	})
 	//insertion d'erreurs
 	maColonne.setErrors = (nbErrors)=>{
