@@ -222,12 +222,13 @@ const selectionEnd = (selectionList, dataset) => {
 				let nbCorrupt = nbErr - nbFound;
 				addToBase(nbCorrupt,dataset);
 				//Augmentation de la satisfaction
-				sessionSatisfaction.v += statisfactionChange * nbErr;
+				sessionSatisfaction.v += settings.statisfactionChange * nbErr;
 			} else if(result.isDenied){
 				//Diminution de la satisfaction
-				sessionSatisfaction.v -= statisfactionChange * nbFound;
+				sessionSatisfaction.v -= settings.statisfactionChange * nbFound;
 				//Augmentation des competences
-				sessionSkill.v += skillsChange * nbFound;
+				sessionSkill.v += settings.skillsChange * nbFound;
+				console.log("Session skill and Satisafaction updated:", sessionSkill.v, sessionSatisfaction.v)
 			}
 			//Si il annule on fait rien
 		}
