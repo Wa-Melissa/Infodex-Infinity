@@ -27,7 +27,9 @@ let settings = {
 	minErrors: 0.1,
 	minCols: 3, //Le nb min de colonnes dans le dataset
 	maxCols: 8, //au maximum la length de columnCreators
-	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance, createMetiers, createAnimaux, createMusiques, createUniversites], //La liste des différents créateurs de colonne
+	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance, createMetiers, createAnimaux, createMusiques, createMois], //La liste des différents créateurs de colonne
+	statisfactionChange: 0.5, //cgt de la satisfaction par erreur
+	skillsChange: 0.5, //cgt des competences par erreur
 }
 
 console.log(settings.maxErrors);
@@ -191,9 +193,9 @@ const selectionEnd = (selectionList, dataset) => {
 			if(errorIndices.includes(v[0]-2)){
 				nbFound ++;
 			}
-			else{
-				//!!!!!
-				//Diminuer la satisfaction (pour pénaliser le joueur si il selectionne tout quand ce n'est pas nécéssaire)
+			else{// fausses fautes
+				//Diminution de la satisfaction
+				sessionSatisfaction.v -= 0.25;
 			}
 		});
 		if(currentColIndex < dataset._columnsList.length -1){ //On ajoute les erreurs des dernières colonnes si elles n'ont pas été comptées
@@ -208,20 +210,26 @@ const selectionEnd = (selectionList, dataset) => {
 		alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbErr+"---"+selectionList.length);
 
 		if(selectionList.length > 0){//Si le joueur avait selectionné des erreurs
-			if (await Swal.fire({
+			let result = await Swal.fire({
 				title: "Voulez vous corriger vous-même les données ?",
 				showDenyButton: true,
 				showCancelButton: true,
 				confirmButtonText: 'Corriger et intégrer les données',
 				denyButtonText: `Refuser les données pour correction par le chercheur`,
 				cancelButtonText: 'annuler'
-			}).isConfirmed) {
+			});
+			if(result.isConfirmed) {
 				let nbCorrupt = nbErr - nbFound;
 				addToBase(nbCorrupt,dataset);
-			}else{
-				//!!!!!
-				//Diminuer la satisfaction
+				//Augmentation de la satisfaction
+				sessionSatisfaction.v += statisfactionChange * nbErr;
+			} else if(result.isDenied){
+				//Diminution de la satisfaction
+				sessionSatisfaction.v -= statisfactionChange * nbFound;
+				//Augmentation des competences
+				sessionSkill.v += skillsChange * nbFound;
 			}
+			//Si il annule on fait rien
 		}
 		else{
 			let nbCorrupt = nbErr - nbFound;
@@ -230,9 +238,8 @@ const selectionEnd = (selectionList, dataset) => {
 	};
 };
 
-
+//Met à jour le nombre de données et le taux de corruption 
 const addToBase = (nbCorrupt, dataset) => {
 	sessionDbCorruptedCells.v += nbCorrupt;
 	sessionDbTotalCells.v += dataset._columnsList.length * dataset._nbRows;
-
 }
