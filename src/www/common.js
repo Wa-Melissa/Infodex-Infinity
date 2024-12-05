@@ -1,13 +1,13 @@
 class sessionHandler {
 	constructor(key) {
 		this.innerKey = key;
-		this.onChangeEvent = null;
 	}
 	get v() {
 		return JSON.parse(sessionStorage.getItem(this.innerKey));
 	}
 	set v(val) {
 		sessionStorage.setItem(this.innerKey, JSON.stringify(val));
+		this.onChangeEvents.map((e) => e(val));
 	}
 }
 
