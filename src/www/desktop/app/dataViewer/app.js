@@ -50,16 +50,16 @@ class Dataset{
 		let nbRowsMin, nbRowsMax;
 		switch (sessionDifficulty.v) {
 			case 1:
-				nbRowsMin = 10, nbRowsMax = 20;
+				nbRowsMin = 10, nbRowsMax = 15;
 				break;
 			case 2:
-				nbRowsMin = 50, nbRowsMax = 100;
+				nbRowsMin = 20, nbRowsMax = 50;
 				break;
 			case 3:
-				nbRowsMin = 200, nbRowsMax = 500;
+				nbRowsMin = 70, nbRowsMax = 130;
 				break;
 			case 4:
-				nbRowsMin = 500, nbRowsMax = 1000;
+				nbRowsMin = 150, nbRowsMax = 300;
 			default:
 				nbRowsMin = 5, nbRowsMax = 200;
 		}
