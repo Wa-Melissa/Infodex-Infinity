@@ -69,7 +69,7 @@ const Queue = Swal.mixin({
     const bc = new BroadcastChannel("black_screen_fade");
 	bc.postMessage(null);
     bc.close();
-})()
+})();
 
 const formationDoneSwal = async () => {
     await Swal.fire({
