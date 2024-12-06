@@ -74,17 +74,6 @@ window.addEventListener("load", async () => {
 	}, 25);        
 });
 
-let hourHasColon = false;
-const updateHour = () => {
-	const date = new Date();
-	const hour = date.getHours();
-	let min = date.getMinutes();
-	if (min < 10) min = "0" + min;
-	DOM.clock.innerHTML = hour + (hourHasColon ? ":" : '<span style="color: transparent">:</span>') + min;
-	hourHasColon = !hourHasColon;
-}
-updateHour();
-setInterval(updateHour,1000);
 
 (async () => {
 	if (!(await node.isDebug())) return;
@@ -111,6 +100,25 @@ window.addEventListener("storage", (event) => {
 	if (event.key != sessionSatisfaction.innerKey) return;
 	if (sessionSatisfaction.v > 0) return;
 	endGameSession(false);
+})
+
+const updateClock = () => {
+	DOM.clock.innerHTML = `<b>Jour ${Math.floor(sessionTimePassed.v / 8) + 1}</b> (${8 - (sessionTimePassed.v % 8)} heure${(8 - (sessionTimePassed.v % 8) > 1) ? "s" : ""} restante${(8 - (sessionTimePassed.v % 8) > 1) ? "s" : ""})`;
+}
+updateClock();
+window.addEventListener("storage", (event) => {
+	if (event.key != sessionTimePassed.innerKey) return;
+	updateClock();
+	
+	if (Math.floor(event.oldValue / 8) != Math.floor(event.newValue / 8)) Swal.fire({
+		position: "top-end",
+		title: "Vous passez à une nouvelle journée !",
+		showConfirmButton: false,
+		icon: "info",
+		toast: true,
+		timer: 4000,
+		timerProgressBar: true,
+	});
 })
 
 const broadCastAppTitle = new BroadcastChannel("update_app_title");

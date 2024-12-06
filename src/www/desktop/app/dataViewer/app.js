@@ -223,17 +223,20 @@ const selectionEnd = (selectionList, dataset) => {
 				addToBase(nbCorrupt,dataset);
 				//Augmentation de la satisfaction
 				sessionSatisfaction.v += settings.statisfactionChange * nbErr;
+				sessionTimePassed.v += 4;
 			} else if(result.isDenied){
 				//Diminution de la satisfaction
 				sessionSatisfaction.v -= settings.statisfactionChange * nbFound;
 				//Augmentation des competences
 				sessionSkill.v += settings.skillsChange * nbFound;
+				sessionTimePassed.v += 2;
 			}
 			//Si il annule on fait rien
 		}
 		else{
 			let nbCorrupt = nbErr - nbFound;
 			addToBase(nbCorrupt,dataset);
+			sessionTimePassed.v += 2;
 		}
 	};
 };
