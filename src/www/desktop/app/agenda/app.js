@@ -68,7 +68,7 @@ DOM.addEvent_button.addEventListener("click", async () => {
     if (thirdStepResult.isDismissed) return;
 
     sessionEventsPassed.v = [...sessionEventsPassed.v, {
-        title: (typeof inputOptions.Formations[secondStepResult.value] != "undefined") ? inputOptions.Formations[secondStepResult.value] : inputOptions.Congés[secondStepResult.value],
+        title: (typeof inputOptions.Formations[secondStepResult.value] != "undefined") ? "[Formation] " + inputOptions.Formations[secondStepResult.value] : "[Congés] " + inputOptions.Congés[secondStepResult.value],
         date: 1 + Math.floor(sessionTimePassed.v/8)
     }];
 
