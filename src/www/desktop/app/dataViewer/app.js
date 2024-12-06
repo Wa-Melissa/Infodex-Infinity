@@ -155,6 +155,11 @@ const selectionManagement = (selectionList) => {
 			else{
 				selectionList.splice(index,1);
 			}
+
+			if(selectionList.length == 0)
+				DOM.accept_button.innerHTML = "Tout ajouter à la base";
+			else
+				DOM.accept_button.innerHTML = "Corriger";
 		}
 	};
 };
@@ -169,7 +174,7 @@ DOM.unselect_button.onclick = () => {
 		
 	});
 	selectionList.splice(0, selectionList.length);
-
+	DOM.accept_button.innerHTML = "Tout ajouter à la base";
 };
  
 //Compte les erreurs trouvées et non trouvées une fois la selection validée
@@ -214,9 +219,9 @@ const selectionEnd = (selectionList, dataset) => {
 				title: "Voulez vous corriger vous-même les données ?",
 				showDenyButton: true,
 				showCancelButton: true,
-				confirmButtonText: 'Corriger et intégrer les données à la base',
+				confirmButtonText: 'Corriger les erreurs et intégrer les données dans la base',
 				denyButtonText: `Refuser les données pour correction par le chercheur`,
-				cancelButtonText: 'Annuler'
+				cancelButtonText: 'Retour'
 			});
 			if(result.isConfirmed) {
 				let nbCorrupt = nbErr - nbFound;
