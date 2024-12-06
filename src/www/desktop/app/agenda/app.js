@@ -22,7 +22,7 @@ const Queue = Swal.mixin({
 DOM.addEvent_button.addEventListener("click", async () => {
     let firstStepResult = await Queue.fire({
         title: 'Créer un nouvel événement',
-        text: "Un événement est une formation que vous organisez pour les usagers afin d'améliorer leurs compétences, mais cela vous prend du temps. Vous pouvez aussi prendre congé ou simuler une maladie, mais cela aura un impact sur le délai de réponse, donc sur la satisfaction des usagers.",
+        text: "Un évènement est une formation que vous organisez pour les usagers afin d'améliorer leurs compétences, mais cela vous prend du temps. Vous pouvez aussi prendre congé ou simuler une maladie, mais cela aura un impact sur le délai de réponse, donc sur la satisfaction des usagers.",
         currentProgressStep: 0,
     });
     if (firstStepResult.isDismissed) return;
@@ -30,9 +30,9 @@ DOM.addEvent_button.addEventListener("click", async () => {
     let inputOptions = {
         //select: "Selectionnez un type d'évenement...",
         Formations: {
-            format: "L'importance du format de données",
+            format: "L'importance du format des données",
             communication: "Communication et transmission efficace de données",
-            aberrancy: "Gérer et corriger les données aberrante",
+            aberrancy: "Gérer et corriger les données aberrantes",
             verification: "Techniques de vérifications"            
         },
         Congés: {
@@ -84,7 +84,7 @@ const generateAgenda = () =>{
     if(sessionEventsPassed.v.length > 0){
         DOM.agendaContent_div.innerHTML = "";
         sessionEventsPassed.v.forEach(element => {
-            DOM.agendaContent_div.innerHTML += `<div class="agenda-item">${element.title}  -  Jour ${element.date}</div>`;
+            DOM.agendaContent_div.innerHTML += `<div class="agenda-item">${element.title}   -   Jour ${element.date}</div>`;
         });
     }
 }
@@ -102,29 +102,39 @@ const handleEvent = async (eventType) => {
     generateAgenda();
     if (eventType == "oneday") {
         sessionTimePassed.v += 8 - (sessionTimePassed.v % 8);
+        sessionSatisfaction.v -= 8 - (sessionTimePassed.v % 8);
         return;
     }
     if (eventType == "twoday") {
         sessionTimePassed.v += 16 - (sessionTimePassed.v % 8);
+        sessionSatisfaction.v -= 16 - (sessionTimePassed.v % 8);
         return;
     }
     if (eventType == "format") {
         sessionTimePassed.v += 12;
+        sessionSatisfaction.v -= 12;
+        sessionSkill.v += 6;
         await formationDoneSwal();
         return;
     }
     if (eventType == "communication") {
         sessionTimePassed.v += 16;
+        sessionSatisfaction.v -= 16;
+        sessionSkill.v += 8;
         await formationDoneSwal();
         return;
     }
     if (eventType == "aberrancy") {
         sessionTimePassed.v += 24;
+        sessionSatisfaction.v -= 20;
+        sessionSkill.v += 10;
         await formationDoneSwal();
         return;
     }
     if (eventType == "verification") {
         sessionTimePassed.v += 12;
+        sessionSatisfaction.v -= 11;
+        sessionSkill.v += 5;
         await formationDoneSwal();
         return;
     }
