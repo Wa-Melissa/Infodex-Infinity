@@ -1,5 +1,6 @@
 const DOM = createDOMReferences({
-
+    addEvent_button: "#add-event-btn",
+    agendaContent_div: "#agenda-content-div"
 });
 broadcastUpdateAppName("Agenda");	
 
@@ -18,7 +19,7 @@ const Queue = Swal.mixin({
     hideClass: { backdrop: 'swal2-noanimation' },
 });
 
-(async () => {
+DOM.addEvent_button.addEventListener("click", async () => {
     let firstStepResult = await Queue.fire({
         title: 'Créer un nouvel événement',
         text: "Un événement est une formation que vous organisez pour les usagers afin d'améliorer leurs compétences, mais cela vous prend du temps. Vous pouvez aussi prendre congé ou simuler une maladie, mais cela aura un impact sur le délai de réponse, donc sur la satisfaction des usagers.",
@@ -26,23 +27,24 @@ const Queue = Swal.mixin({
     });
     if (firstStepResult.isDismissed) return;
 
+    let inputOptions = {
+        //select: "Selectionnez un type d'évenement...",
+        Formations: {
+            format: "L'importance du format de données.",
+            communication: "Communication et transmission efficace de données.",
+            aberrancy: "Gérer et corriger les données aberrante",
+            verification: "Techniques de vérifications"            
+        },
+        Congés: {
+            oneday: "Prendre sa journée.",
+            twoday: "Prendre sa journée et simuler une maladie demain."
+        }
+    }
     let secondStepResult = await Queue.fire({
         title: 'Créer un nouvel événement',
         input: "select",
         inputPlaceholder: "Selectionnez un type d'évenement...",
-        inputOptions: {
-            //select: "Selectionnez un type d'évenement...",
-            Formations: {
-                format: "L'importance du format de données.",
-                communication: "Communication et transmission efficace de données.",
-                aberrancy: "Gérer et corriger les données aberrante",
-                verification: "Techniques de vérifications"            
-            },
-            Congés: {
-                oneday: "Prendre sa journée.",
-                twoday: "Prendre sa journée et simuler une maladie demain."
-            }
-        },
+        inputOptions,
         currentProgressStep: 1,
         inputValidator: (value) => {
             return new Promise((resolve) => {
@@ -57,19 +59,37 @@ const Queue = Swal.mixin({
     });
     if (secondStepResult.isDismissed) return;
 
-    await Queue.fire({
+    let thirdStepResult = await Queue.fire({
         title: 'Créer un nouvel événement',
         text: "L'événement va se lancer immédiatement. Confirmez-vous l'execution ?",
         currentProgressStep: 2,
         confirmButtonText: 'Confirmer',
-    })
+    });
+    if (thirdStepResult.isDismissed) return;
+
+    let buffer = sessionEventsPassed.v;
+    buffer.push({
+        title: (typeof inputOptions.Formations[secondStepResult.value] != "undefined") ? inputOptions.Formations[secondStepResult.value] : inputOptions.Congés[secondStepResult.value],
+        date: 1 + Math.floor(sessionTimePassed.v/8)
+    });
+    sessionEventsPassed.v = buffer;
+
     setTimeout(() =>{
         handleEvent(secondStepResult.value);        
     }, 1000)
     const bc = new BroadcastChannel("black_screen_fade");
 	bc.postMessage(null);
     bc.close();
-})();
+});
+
+const generateAgenda = () =>{
+    DOM.agendaContent_div.innerHTML = "";
+    sessionEventsPassed.v.forEach(element => {
+        DOM.agendaContent_div.innerHTML += `<div class="agenda-item">${element.title} - Jour ${element.date}</div>`;
+    });
+}
+
+generateAgenda();
 
 const formationDoneSwal = async () => {
     await Swal.fire({
@@ -79,6 +99,7 @@ const formationDoneSwal = async () => {
     });
 }
 const handleEvent = async (eventType) => {
+    generateAgenda();
     if (eventType == "oneday") {
         sessionTimePassed.v += 8 - (sessionTimePassed.v % 8);
         return;
