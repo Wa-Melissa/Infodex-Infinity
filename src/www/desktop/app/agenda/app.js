@@ -67,12 +67,10 @@ DOM.addEvent_button.addEventListener("click", async () => {
     });
     if (thirdStepResult.isDismissed) return;
 
-    let buffer = sessionEventsPassed.v;
-    buffer.push({
+    sessionEventsPassed.v = [...sessionEventsPassed.v, {
         title: (typeof inputOptions.Formations[secondStepResult.value] != "undefined") ? inputOptions.Formations[secondStepResult.value] : inputOptions.Congés[secondStepResult.value],
         date: 1 + Math.floor(sessionTimePassed.v/8)
-    });
-    sessionEventsPassed.v = buffer;
+    }];
 
     setTimeout(() =>{
         handleEvent(secondStepResult.value);        
