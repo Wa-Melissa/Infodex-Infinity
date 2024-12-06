@@ -17,12 +17,13 @@ if (success){
     DOM.photo.src = success_photos[randomIndex];
     DOM.text.innerHTML = success_text[randomIndex];
     DOM.text.innerHTML += "<br>Tu as atteint une satisfaction de " + Math.min(sessionSatisfaction.v,100) 
-    + "% et les usagers ont atteint " + Math.min(sessionSatisfaction.v,100) + "% de compétences  ;)";
+    + "% et les usagers ont atteint " + Math.min(sessionSatisfaction.v,100) + "% de compétences. "
+    + "La base était corrompue à "+ ((sessionDbCorruptedCells.v / sessionDbTotalCells.v) * 100) + "%  ;) <br>";
 }
 else{
     let randomIndex = Math.floor(Math.random() * failure_photos.length);
     DOM.photo.src = failure_photos[randomIndex];
     DOM.text.innerHTML = failure_text[randomIndex];
-    DOM.text.innerHTML += "<br>Tu as été trop négligent.";
+    DOM.text.innerHTML += "<br>Tu as été trop négligent.<br>";
 
 }
