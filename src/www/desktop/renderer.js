@@ -101,6 +101,12 @@ window.addEventListener("storage", (event) => {
 	if (sessionSatisfaction.v > 0) return;
 	endGameSession(false);
 })
+window.addEventListener("storage", (event) => {
+	if (event.key != sessionSatisfaction.innerKey && event.key != sessionSkill.innerKey) return;
+	if (sessionSatisfaction.v <= 80 || sessionSkill.v <= 80) return;
+	endGameSession(true);
+})
+
 
 const updateClock = () => {
 	DOM.clock.innerHTML = `<b>Jour ${Math.floor(sessionTimePassed.v / 8) + 1}</b> (${8 - (sessionTimePassed.v % 8)} heure${(8 - (sessionTimePassed.v % 8) > 1) ? "s" : ""} restante${(8 - (sessionTimePassed.v % 8) > 1) ? "s" : ""})`;
