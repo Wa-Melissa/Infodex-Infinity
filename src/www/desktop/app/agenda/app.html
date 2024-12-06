@@ -7,12 +7,21 @@
 	<link rel="stylesheet" href="../../../common.css">
 	<link rel="stylesheet" href="../../../fontawesome/css/all.css">
 	<style>
-		body {/*
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		
+		body {
+			/*
 			background-color: black;
 			background-image: url('bg.webp');
 			background-size: cover;
 			background-repeat: no-repeat;
 			background-position: center;*/
+			background-color: #f3f3f3;
+			height: 100vh;
 			background-attachment: fixed;
 		}
 
@@ -20,11 +29,62 @@
 			margin-top: 20px;
 		}
 
-		.data-card {
-			max-width: 500px;
-			margin: auto;
+		.agenda-container {
+			background-color: #f8f6f1; /* Blanc cassé */
+			width: 700px;
+			border-radius: 10px;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+			position: relative; /* Nécessaire pour positionner les anneaux */
 		}
 
+		.agenda-rings {
+			position: absolute;
+			top: -20px; /* Place les anneaux au-dessus du cadre */
+			display: flex;
+			gap: 10px; /* Espace entre les anneaux */
+		}
+
+		.agenda-rings.left {
+			left: 20px; /* Positionne les anneaux à gauche du cadre */
+		}
+
+		.agenda-rings.right {
+			right: 20px; /* Positionne les anneaux à droite du cadre */
+		}
+
+		.ring {
+			width: 15px;
+			height: 15px;
+			background-color: #aaa; /* Gris pour les anneaux */
+			border-radius: 50%;
+		}
+
+		.agenda-header {
+			background-color: #d32f2f; /* Rouge */
+			color: white;
+			padding: 15px;
+			text-align: center;
+			font-size: 1.5em;
+			font-weight: bold;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+		}
+
+		.agenda-content {
+			padding: 20px;
+		}
+
+		.agenda-item {
+			font-size: 1em;
+			color: #333;
+			padding-bottom: 10px;
+			margin-bottom: 10px;
+			border-bottom: 1px solid #ccc; /* Fine ligne */
+		}
+
+		.agenda-item:last-child {
+			border-bottom: none; /* Pas de ligne pour le dernier élément */
+		}
 </style>
 </head>
 <body>
@@ -32,10 +92,38 @@
 	<div class="w3-container w3-teal w3-padding">
 		<h2><i class="fas fa-calendar-days"></i> <b>Agenda</b></h2>
 	</div>
-	
-	<div class="w3-container data-card w3-padding">
-
-	</div>
+	<br>
+	<center>
+		<div class="w3-container data-card w3-padding">
+			<div class="agenda-container">
+				<!-- Anneaux à gauche -->
+				<div class="agenda-rings left">
+				<div class="ring"></div>
+				<div class="ring"></div>
+				<div class="ring"></div>
+				</div>
+			
+				<!-- Anneaux à droite -->
+				<div class="agenda-rings right">
+				<div class="ring"></div>
+				<div class="ring"></div>
+				<div class="ring"></div>
+				</div>
+			
+				<!-- En-tête -->
+				<div class="agenda-header">
+				Mon Agenda
+				</div>
+			
+				<!-- Contenu -->
+				<div class="agenda-content">
+				<div class="agenda-item">Formation sur le SQL - 10/12/2024</div>
+				<div class="agenda-item">Prise de congé - 15/12/2024</div>
+				<div class="agenda-item">Réunion projet - 18/12/2024</div>
+				</div>
+			</div>
+		</div>
+	</center>
 
 	<script src="../../../common.js"></script>
 	<script src="app.js"></script>

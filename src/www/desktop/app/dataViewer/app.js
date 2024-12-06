@@ -216,11 +216,11 @@ const selectionEnd = (selectionList, dataset) => {
 
 		if(selectionList.length > 0){//Si le joueur avait selectionné des erreurs
 			let result = await Swal.fire({
-				title: "Voulez vous corriger vous-même les données ?",
+				title: "Voulez-vous corriger vous-même les données sélectionnées ?",
 				showDenyButton: true,
 				showCancelButton: true,
 				confirmButtonText: 'Corriger les erreurs et intégrer les données dans la base',
-				denyButtonText: `Refuser les données pour correction par le chercheur`,
+				denyButtonText: `Renvoyer les données au chercheur pour correction`,
 				cancelButtonText: 'Retour'
 			});
 			if(result.isConfirmed) {
