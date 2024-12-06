@@ -626,29 +626,10 @@ const jobs = [
 	"Clown", "Animateur radio", "Influenceur", "Streamer"
 ];
 
-//Liste de grandes universites
-const universities = [
-	"Harvard University", "Stanford University", "Massachusetts Institute of Technology (MIT)",
-	"University of Oxford", "University of Cambridge", "California Institute of Technology (Caltech)",
-	"University of Chicago", "Princeton University", "Yale University", "Columbia University",
-	"Imperial College London", "University College London (UCL)", "ETH Zurich", 
-	"University of Tokyo", "Kyoto University", "University of Toronto", "McGill University",
-	"Sorbonne Université", "Université de Paris", "Sciences Po", "École Polytechnique", 
-	"University of Melbourne", "University of Sydney", "Australian National University",
-	"Tsinghua University", "Peking University","National University of Singapore (NUS)", 
-	"University of Hong Kong (HKU)", "Seoul National University", "Korea University", 
-	"Lomonosov Moscow State University", "University of São Paulo", 
-	"Pontifical Catholic University of Chile", "University of Cape Town", 
-	"Cairo University", "American University of Beirut", 
-	"Johns Hopkins University", "Duke University", "University of Pennsylvania", 
-	"Carnegie Mellon University", "University of California, Berkeley",
-	"UCLA", "New York University (NYU)", "Northwestern University", 
-	"University of Michigan", "University of Wisconsin-Madison", 
-	"University of Edinburgh", "King's College London", "London School of Economics (LSE)", 
-	"University of Manchester", "University of Bristol", "University of Glasgow", 
-	"University of Amsterdam", "Leiden University", 
-	"Universidad Nacional Autónoma de México (UNAM)", "Universidad de Buenos Aires (UBA)",
-	"University of Strasbourg (UNISTRA)"
+//Liste des mois de l'annee
+const months = [
+	"Janvier","Février","Mars","Avril","Mai","Juin","Juillet",
+	"Aout","Septembre","Octobre","Novembre","Decembre"
   ];
 
 

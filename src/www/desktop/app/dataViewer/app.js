@@ -27,7 +27,9 @@ let settings = {
 	minErrors: 0.1,
 	minCols: 3, //Le nb min de colonnes dans le dataset
 	maxCols: 8, //au maximum la length de columnCreators
-	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance, createMetiers, createAnimaux, createMusiques, createUniversites], //La liste des différents créateurs de colonne
+	columnCreators: [createAnnees,createNaturels,createPays,createProba,createVilles,createReseauSoc, createNoms, createLegumes, createSports, createClimats, createCouleurs, createCout, createEsperance, createMetiers, createAnimaux, createMusiques, createMois], //La liste des différents créateurs de colonne
+	statisfactionChange: 0.5, //cgt de la satisfaction par erreur
+	skillsChange: 0.5, //cgt des competences par erreur
 }
 
 console.log(settings.maxErrors);
@@ -50,16 +52,16 @@ class Dataset{
 		let nbRowsMin, nbRowsMax;
 		switch (sessionDifficulty.v) {
 			case 1:
-				nbRowsMin = 10, nbRowsMax = 20;
+				nbRowsMin = 10, nbRowsMax = 15;
 				break;
 			case 2:
-				nbRowsMin = 50, nbRowsMax = 100;
+				nbRowsMin = 20, nbRowsMax = 50;
 				break;
 			case 3:
-				nbRowsMin = 200, nbRowsMax = 500;
+				nbRowsMin = 70, nbRowsMax = 130;
 				break;
 			case 4:
-				nbRowsMin = 500, nbRowsMax = 1000;
+				nbRowsMin = 150, nbRowsMax = 300;
 			default:
 				nbRowsMin = 5, nbRowsMax = 200;
 		}
@@ -153,6 +155,11 @@ const selectionManagement = (selectionList) => {
 			else{
 				selectionList.splice(index,1);
 			}
+
+			if(selectionList.length == 0)
+				DOM.accept_button.innerHTML = "Tout ajouter à la base";
+			else
+				DOM.accept_button.innerHTML = "Corriger";
 		}
 	};
 };
@@ -167,7 +174,7 @@ DOM.unselect_button.onclick = () => {
 		
 	});
 	selectionList.splice(0, selectionList.length);
-
+	DOM.accept_button.innerHTML = "Tout ajouter à la base";
 };
  
 //Compte les erreurs trouvées et non trouvées une fois la selection validée
@@ -191,9 +198,9 @@ const selectionEnd = (selectionList, dataset) => {
 			if(errorIndices.includes(v[0]-2)){
 				nbFound ++;
 			}
-			else{
-				//!!!!!
-				//Diminuer la satisfaction (pour pénaliser le joueur si il selectionne tout quand ce n'est pas nécéssaire)
+			else{// fausses fautes
+				//Diminution de la satisfaction
+				sessionSatisfaction.v -= settings.statisfactionChange;
 			}
 		});
 		if(currentColIndex < dataset._columnsList.length -1){ //On ajoute les erreurs des dernières colonnes si elles n'ont pas été comptées
@@ -208,31 +215,39 @@ const selectionEnd = (selectionList, dataset) => {
 		alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbErr+"---"+selectionList.length);
 
 		if(selectionList.length > 0){//Si le joueur avait selectionné des erreurs
-			if (await Swal.fire({
+			let result = await Swal.fire({
 				title: "Voulez vous corriger vous-même les données ?",
 				showDenyButton: true,
 				showCancelButton: true,
-				confirmButtonText: 'Corriger et intégrer les données',
+				confirmButtonText: 'Corriger les erreurs et intégrer les données dans la base',
 				denyButtonText: `Refuser les données pour correction par le chercheur`,
-				cancelButtonText: 'annuler'
-			}).isConfirmed) {
+				cancelButtonText: 'Retour'
+			});
+			if(result.isConfirmed) {
 				let nbCorrupt = nbErr - nbFound;
 				addToBase(nbCorrupt,dataset);
-			}else{
-				//!!!!!
-				//Diminuer la satisfaction
+				//Augmentation de la satisfaction
+				sessionSatisfaction.v += settings.statisfactionChange * nbErr;
+				sessionTimePassed.v += 4;
+			} else if(result.isDenied){
+				//Diminution de la satisfaction
+				sessionSatisfaction.v -= settings.statisfactionChange * nbFound;
+				//Augmentation des competences
+				sessionSkill.v += settings.skillsChange * nbFound;
+				sessionTimePassed.v += 2;
 			}
+			//Si il annule on fait rien
 		}
 		else{
 			let nbCorrupt = nbErr - nbFound;
 			addToBase(nbCorrupt,dataset);
+			sessionTimePassed.v += 2;
 		}
 	};
 };
 
-
+//Met à jour le nombre de données et le taux de corruption 
 const addToBase = (nbCorrupt, dataset) => {
 	sessionDbCorruptedCells.v += nbCorrupt;
 	sessionDbTotalCells.v += dataset._columnsList.length * dataset._nbRows;
-
 }
