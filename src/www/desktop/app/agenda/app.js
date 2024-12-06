@@ -30,14 +30,14 @@ DOM.addEvent_button.addEventListener("click", async () => {
     let inputOptions = {
         //select: "Selectionnez un type d'évenement...",
         Formations: {
-            format: "L'importance du format de données.",
-            communication: "Communication et transmission efficace de données.",
+            format: "L'importance du format de données",
+            communication: "Communication et transmission efficace de données",
             aberrancy: "Gérer et corriger les données aberrante",
             verification: "Techniques de vérifications"            
         },
         Congés: {
-            oneday: "Prendre sa journée.",
-            twoday: "Prendre sa journée et simuler une maladie demain."
+            oneday: "Prendre sa journée",
+            twoday: "Prendre sa journée et simuler une maladie demain"
         }
     }
     let secondStepResult = await Queue.fire({
@@ -81,10 +81,12 @@ DOM.addEvent_button.addEventListener("click", async () => {
 });
 
 const generateAgenda = () =>{
-    DOM.agendaContent_div.innerHTML = "";
-    sessionEventsPassed.v.forEach(element => {
-        DOM.agendaContent_div.innerHTML += `<div class="agenda-item">${element.title} - Jour ${element.date}</div>`;
-    });
+    if(sessionEventsPassed.v.length > 0){
+        DOM.agendaContent_div.innerHTML = "";
+        sessionEventsPassed.v.forEach(element => {
+            DOM.agendaContent_div.innerHTML += `<div class="agenda-item">${element.title}  -  Jour ${element.date}</div>`;
+        });
+    }
 }
 
 generateAgenda();
@@ -93,7 +95,7 @@ const formationDoneSwal = async () => {
     await Swal.fire({
         title: "Formation terminée",
         text: "Vous avez terminé la formation des usagers avec brio ! Et ils sont ravis...",
-        icon: "success"
+        icon: "success" 
     });
 }
 const handleEvent = async (eventType) => {
