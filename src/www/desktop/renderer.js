@@ -112,6 +112,12 @@ window.addEventListener("storage", (event) => {
 	if (sessionSatisfaction.v > 0) return;
 	endGameSession(false);
 })
+window.addEventListener("storage", (event) => {
+	if (event.key != sessionSatisfaction.innerKey && event.key != sessionSkill.innerKey) return;
+	if (sessionSatisfaction.v <= 80 || sessionSkill.v <= 80) return;
+	endGameSession(true);
+})
+
 
 const broadCastAppTitle = new BroadcastChannel("update_app_title");
 broadCastAppTitle.onmessage = (event) => {

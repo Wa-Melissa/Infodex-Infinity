@@ -195,7 +195,7 @@ const selectionEnd = (selectionList, dataset) => {
 			}
 			else{// fausses fautes
 				//Diminution de la satisfaction
-				sessionSatisfaction.v -= 0.25;
+				sessionSatisfaction.v -= settings.statisfactionChange;
 			}
 		});
 		if(currentColIndex < dataset._columnsList.length -1){ //On ajoute les erreurs des dernières colonnes si elles n'ont pas été comptées
@@ -214,9 +214,9 @@ const selectionEnd = (selectionList, dataset) => {
 				title: "Voulez vous corriger vous-même les données ?",
 				showDenyButton: true,
 				showCancelButton: true,
-				confirmButtonText: 'Corriger et intégrer les données',
+				confirmButtonText: 'Corriger et intégrer les données à la base',
 				denyButtonText: `Refuser les données pour correction par le chercheur`,
-				cancelButtonText: 'annuler'
+				cancelButtonText: 'Annuler'
 			});
 			if(result.isConfirmed) {
 				let nbCorrupt = nbErr - nbFound;
