@@ -118,7 +118,8 @@ window.addEventListener("storage", (event) => {
 	
 	if (Math.floor(event.oldValue / 8) != Math.floor(event.newValue / 8)) Swal.fire({
 		position: "top-end",
-		title: "Vous passez à une nouvelle journée !",
+		title: "Nouvelle journée",
+		text:"Vous passez à une nouvelle journée de travail !",
 		showConfirmButton: false,
 		icon: "info",
 		toast: true,
