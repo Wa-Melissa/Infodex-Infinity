@@ -121,7 +121,7 @@ const afficherContenuMail = (mail, li) => {
         emails[index] = mail;  // Met à jour l'email dans le tableau
         sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
     }
-
+    const contenuFormate = mail.contenu.replace(/\n/g,"<br>");
     //contenue à droite du mail séléctionné
     DOM.contenumail.innerHTML = `
     <div style="margin: 25px 50px 50px 50px; font-size: 17px;">
@@ -135,7 +135,7 @@ const afficherContenuMail = (mail, li) => {
     </div>
    
     <div id="inspect-btn" style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
-        ${mail.contenu}<br><br>
+        ${contenuFormate}<br><br>
         <button style="cursor:pointer;">${mail.piecesJointes}</button>
     </div>
     
@@ -200,19 +200,19 @@ const recupererEmailsAleatoires = () => {
 
         switch (sessionDifficulty.v) {
 			case 1:
-				nbEmail = 15;
-				break;
-			case 2:
 				nbEmail = 25;
 				break;
-			case 3:
-				nbEmail = 35;
-				break;
-			case 4:
+			case 2:
 				nbEmail = 50;
 				break;
+			case 3:
+				nbEmail = 90;
+				break;
+			case 4:
+				nbEmail = 150;
+				break;
 			default:
-				nbEmail = 15;
+				nbEmail = 25;
 		}
 
         // liste des mails qui restent sans doublons
@@ -311,6 +311,7 @@ const afficherContenuMailDelete = (mail, li) => {
     }
 
     //contenue à droite du mail séléctionné
+    const contenuFormate = mail.contenu.replace(/\n/g,"<br>");
     DOM.contenumail.innerHTML = `
     <div style="margin: 25px 50px 50px 50px; font-size: 17px;">
     <h2 style="color: #00796b; font-size: 25px; font-weight: bold; margin-bottom: 20px;"><i class="fas fa-user" style = "margin-right :15px;"></i>${mail.objet}</h2>
@@ -319,7 +320,7 @@ const afficherContenuMailDelete = (mail, li) => {
     </div>
    
     <div id="inspect-btn" style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
-        ${mail.contenu}<br><br>
+        ${contenuFormate}<br><br>
     </div>
     `;
 
