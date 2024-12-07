@@ -129,7 +129,31 @@ window.addEventListener("storage", (event) => {
 })
 
 const broadCastAppTitle = new BroadcastChannel("update_app_title");
+const broadCastBlackFade =  new BroadcastChannel("black_screen_fade");
 broadCastAppTitle.onmessage = (event) => {
 	DOM.app_name.innerHTML = event.data;
 	document.title = "Infodex Infinity - " + event.data;
 };
+
+broadCastBlackFade.onmessage = (event) => {
+	DOM.black_fader.style.display = "block";
+	let opacity = 0;
+	const fadeInInterval = setInterval(() => {
+		if (opacity >= 1) {
+			clearInterval(fadeInInterval);
+			let opacity = 1;
+			setTimeout(() => {
+				const fadeOutInterval = setInterval(() => {
+					if (opacity <= 0.01) {
+						DOM.black_fader.style.display = "none";
+						clearInterval(fadeOutInterval);
+					}
+					DOM.black_fader.style.opacity = opacity;
+					opacity -= 0.03;
+				}, 25);   
+			}, 1500)
+		}
+		DOM.black_fader.style.opacity = opacity;
+		opacity += 0.03;
+	}, 25);    
+}

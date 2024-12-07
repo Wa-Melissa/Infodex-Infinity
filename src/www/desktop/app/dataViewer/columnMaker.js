@@ -41,6 +41,165 @@ class Column {
 	}
 }  
 
+/*******************************
+ * fonctions pour les string
+ ********************************/
+//décale d'une lettre dans l'alphabet
+const modMoveLetter = (maColonne, randomIndex) => {
+	return maColonne._dataList[randomIndex].replace(/[a-zA-Z]/g, (char) => String.fromCharCode(((char.charCodeAt(0) - (char < 'a' ? 65 : 97) + 5) % 26) + (char < 'a' ? 65 : 97)));
+}
+
+//Inverse le nom
+const modInverseNom = (maColonne, randomIndex) => {
+	return maColonne._dataList[randomIndex].split('').reverse().join('');
+}
+
+//Convertit en caractères ascii
+const modToAscii = (maColonne, randomIndex) => {
+	return maColonne._dataList[randomIndex].split('').map(char => char.charCodeAt(0));
+}
+
+//Tronque le mot apres le deuxième caractère
+const modTrunkAt2 = (maColonne, randomIndex) => {
+	return maColonne._dataList[randomIndex].slice(0, 3);
+}
+
+//Répète le mot une deuxième fois
+const modRepeat = (maColonne, randomIndex) => {
+	return maColonne._dataList[randomIndex].repeat(2);
+}
+
+// ajout d'un chiffre a la fin du mot
+const modAddNb = (maColonne, randomIndex) => {
+	return maColonne._dataList[randomIndex] + Math.floor(Math.random() * 10);
+}
+
+//Tout le mot est passe en maj
+const modToCap = (maColonne, randomIndex) => {
+	return 	maColonne._dataList[randomIndex].toUpperCase();
+}
+
+//passage des majuscules en minuscule
+const modAllLow = (maColonne, randomIndex) => {
+	return 	maColonne._dataList[randomIndex].toLowerCase();
+}
+
+//ajout de lettres a la fin
+const modAddLetters = (maColonne, randomIndex) => {
+	return 	maColonne._dataList[randomIndex] + "yz";
+}
+
+/*******************************
+ * fonctions pour les nombres
+ ********************************/
+//max d'un non signé sur 64 bits
+const modToMax = (maColonne, randomIndex) => {
+	return 18446744073709551615;
+}
+
+// Conversion du nombre en caractère ASCII
+const modAscii = (maColonne, randomIndex) => {
+	return String.fromCharCode(Math.floor(Math.random() * (122 - 58) + 58));
+}
+
+//ajout de la lettre o a la fin
+const modAddO = (maColonne, randomIndex) => {
+	return 	maColonne._dataList[randomIndex]+"o";
+}
+
+//ajout de deux virgules
+const modAddComma = (maColonne, randomIndex) => {
+	return 	maColonne._dataList[randomIndex].toLocaleString('de-DE').replace(',', ',,') + (maColonne._dataList[randomIndex] < 1000 ? ',,' : '');
+}
+
+//Passe au negatif
+const modToNegativ = (maColonne, randomIndex) => {
+	return 	-maColonne._dataList[randomIndex];
+}
+
+/*******************************
+ * fonctions pour les nombres et les string
+ ********************************/
+
+//Nom vide
+const modToEmpty = (maColonne, randomIndex) => {
+	return "";
+}
+
+//Ajoute des + entre chaque caractère
+const modAddPlus = (maColonne, randomIndex) => {
+	return	maColonne._dataList[randomIndex].toString().split('').join('+'); 
+}
+
+const applyRandomModificationStr = (column, randomIndex) => {
+	// Liste des fonctions disponibles
+	//retournent une string
+	const modifications = [
+	  modMoveLetter,
+	  modInverseNom,
+	  modToAscii,
+	  modTrunkAt2,
+	  modRepeat,
+	  modAddPlus,
+	  modAddNb,
+	  modToCap,
+	  modToEmpty,
+	  modAllLow,
+	  modAddLetters
+	];
+
+	// Choix aléatoire et appel d'une fonction
+	const randFunc = Math.floor(Math.random() * modifications.length);
+	return modifications[randFunc](column, randomIndex);
+}
+
+const addErrorsString = (column) => {
+	column.setErrors = (nbErrors)=>{
+		Array(nbErrors).fill(0).map(()=>{
+			let randomIndex = Math.floor(Math.random()*column._dataList.length);  //Choix d'une donnée de la liste à corrompre
+			if(!column._errorIndices.includes(randomIndex)){
+				column._dataList[randomIndex] = applyRandomModificationStr(column, randomIndex); 
+				column._errorIndices.push(randomIndex);
+			}
+		});
+	}
+	column.setErrors(column._nbErrors);
+	
+	return column;
+};
+
+const applyRandomModificationNb = (column, randomIndex) => {
+	// Liste des fonctions disponibles
+	//retournent une ligne pour la colonne
+	const modifications = [
+	  modToMax,
+	  modAscii,
+	  modAddO,
+	  modAddPlus,
+	  modAddComma,
+	  modToEmpty,
+	  modToNegativ
+	];
+
+	// Choix aléatoire et appel d'une fonction
+	const randFunc = Math.floor(Math.random() * modifications.length);
+	return modifications[randFunc](column, randomIndex);
+}
+
+const addErrorsNumber = (column) => {
+	column.setErrors = (nbErrors)=>{
+		Array(nbErrors).fill(0).map(()=>{
+			let randomIndex = Math.floor(Math.random()*column._dataList.length);  //Choix d'une donnée de la liste à corrompre
+			if(!column._errorIndices.includes(randomIndex)){
+				column._dataList[randomIndex] = applyRandomModificationNb(column, randomIndex); 
+				column._errorIndices.push(randomIndex);
+			}
+		})
+	}
+	column.setErrors(column._nbErrors);
+	
+	return column;
+};
 
 const createProba = (size)=>{ //Nombres entre 10 et 100
 	let maColonne = new Column(size); //creation d'un objet colonne
@@ -49,84 +208,6 @@ const createProba = (size)=>{ //Nombres entre 10 et 100
 		return Math.random()*(100-10)+10;
 	});
 	//insertion d'erreurs
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
-}
-
-const createAnnees = (size)=>{//Anee entre 1800 et 2024
-	let maColonne = new Column(size); //creation d'un objet colonne
-	maColonne._title = "Année";
-	//remplissage de la colonne
-	maColonne._dataList = maColonne._dataList.map(() => {
-		return Math.floor(Math.random() * (2025 - 1800) + 1800);
-	})
-	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].toLocaleString('de-DE'); //ajout d'une virgule
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		});
-	}
-	maColonne.setErrors(maColonne.nbErrors);
-	return maColonne;
-}
-
-const createNaturels = (size)=>{//Entier naturel entre 0 et 200
-	let maColonne = new Column(size); //creation d'un objet colonne
-	maColonne._title = "Nombre d'occurrences";
-	//remplissage de la colonne
-	maColonne._dataList = maColonne._dataList.map(() => {
-		return Math.floor(Math.random() * (200 - 0));
-	})
-	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			if (!maColonne._errorIndices.includes(randomIndex)){//Pour éviter de repasser au positif
-				maColonne._dataList[randomIndex] -= 2*(maColonne._dataList[randomIndex]); //passage au négatif
-				maColonne._errorIndices.push(randomIndex);
-			}
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
-}
-
-const createPays = (size)=>{//Pays
-	let maColonne = new Column(size); //creation d'un objet colonne
-	maColonne._title = "Pays";
-	//remplissage de la colonne
-	maColonne._dataList = maColonne._dataList.map(() => {
-		return countries[Math.floor(Math.random() * countries.length)];
-	})
-	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex]+"yz"; //ajout de lettres a la fin
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
-}
-
-const createVilles = (size)=>{//grandes villes
-	let maColonne = new Column(size); //creation d'un objet colonne
-	maColonne._title = "Villes";
-	//remplissage de la colonne
-	maColonne._dataList = maColonne._dataList.map(() => {
-		return cities[Math.floor(Math.random() * cities.length)];
-	})
-	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].toLowerCase(); //passage des majuscules en minuscule
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
 	maColonne.setErrors(maColonne._nbErrors);
 	return maColonne;
 }
@@ -150,6 +231,50 @@ const createReseauSoc = (size)=>{//Reseaux sociaux
 	return maColonne;
 }
 
+const createAnnees = (size)=>{//Anee entre 1800 et 2024
+	let maColonne = new Column(size); //creation d'un objet colonne
+	maColonne._title = "Année";
+	//remplissage de la colonne
+	maColonne._dataList = maColonne._dataList.map(() => {
+		return Math.floor(Math.random() * (2025 - 1800) + 1800);
+	})
+	//insertion d'erreurs
+	return addErrorsNumber(maColonne);
+}
+
+const createNaturels = (size)=>{//Entier naturel entre 0 et 200
+	let maColonne = new Column(size); //creation d'un objet colonne
+	maColonne._title = "Nombre d'occurrences";
+	//remplissage de la colonne
+	maColonne._dataList = maColonne._dataList.map(() => {
+		return Math.floor(Math.random() * (200 - 0));
+	})
+	//insertion d'erreurs
+	return addErrorsNumber(maColonne);
+}
+
+const createPays = (size)=>{//Pays
+	let maColonne = new Column(size); //creation d'un objet colonne
+	maColonne._title = "Pays";
+	//remplissage de la colonne
+	maColonne._dataList = maColonne._dataList.map(() => {
+		return countries[Math.floor(Math.random() * countries.length)];
+	})
+	//insertion d'erreurs
+	return addErrorsString (maColonne);
+}
+
+const createVilles = (size)=>{//grandes villes
+	let maColonne = new Column(size); //creation d'un objet colonne
+	maColonne._title = "Villes";
+	//remplissage de la colonne
+	maColonne._dataList = maColonne._dataList.map(() => {
+		return cities[Math.floor(Math.random() * cities.length)];
+	})
+	//insertion d'erreurs
+	return addErrorsString (maColonne);
+}
+
 const createNoms = (size)=>{//Prenoms H/F/M
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Noms";
@@ -158,15 +283,7 @@ const createNoms = (size)=>{//Prenoms H/F/M
 		return names[Math.floor(Math.random() * names.length)];
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = ""; //Nom vide
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsString (maColonne);
 }
 
 const createLegumes = (size)=>{//legumes
@@ -177,15 +294,7 @@ const createLegumes = (size)=>{//legumes
 		return vegetables[Math.floor(Math.random() * vegetables.length)];
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].toUpperCase(); //Tout le mot est passe en maj
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsString (maColonne);
 }
 
 
@@ -197,15 +306,7 @@ const createSports = (size)=>{//sports de tous types
 		return sports[Math.floor(Math.random() * sports.length)];
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] += Math.floor(Math.random() * 10); // ajout d'un chiffre a la fin du mot
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsString (maColonne);
 }
 
 
@@ -217,15 +318,7 @@ const createClimats = (size)=>{//climats
 		return climates[Math.floor(Math.random() * climates.length)];
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].split('').join('+'); //Ajoute des + entre chaque caractère
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsString (maColonne);
 }
 
 const createCouleurs = (size)=>{//couleurs
@@ -236,15 +329,7 @@ const createCouleurs = (size)=>{//couleurs
 		return colors[Math.floor(Math.random() * colors.length)];
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].repeat(2); //Répète le mot une deuxième fois
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsString (maColonne);
 }
 
 const createCout = (size)=>{//Cout moyen floattant précis a une decimale entre 1 et 300
@@ -255,15 +340,7 @@ const createCout = (size)=>{//Cout moyen floattant précis a une decimale entre 
 		return parseFloat((Math.random() * (300 - 1)+1).toFixed(2));
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = 18446744073709551615; //max d'un non signé sur 64 bits
-			maColonne._errorIndices.push(randomIndex);
-		});
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsNumber(maColonne);
 }
 
 const createEsperance = (size)=>{//Esperance de vie entre 3 et 80 ans
@@ -274,17 +351,7 @@ const createEsperance = (size)=>{//Esperance de vie entre 3 et 80 ans
 		return Math.floor(Math.random() * (80 - 3) + 3);
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			if (!maColonne._errorIndices.includes(randomIndex)){//Pour éviter les (vraies) erreurs
-				console.log("AAAAAAAAAAAAAAAAAAa"); // "bcd"
-				maColonne._dataList[randomIndex] = String.fromCharCode(Math.floor(Math.random() * (122 - 58) + 58)); // Conversion du nombre en caractère ASCII
-			}
-		});
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsNumber(maColonne);
 }
 
 const createMetiers = (size)=>{//Metiers
@@ -295,15 +362,7 @@ const createMetiers = (size)=>{//Metiers
 		return jobs[Math.floor(Math.random() * jobs.length)];
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].slice(0, 3); //Tronque le mot apres le deuxième caractère
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsString (maColonne);
 }
 
 const createAnimaux = (size)=>{//Animaux
@@ -314,15 +373,7 @@ const createAnimaux = (size)=>{//Animaux
 		return animals[Math.floor(Math.random() * animals.length)];
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].split('').map(char => char.charCodeAt(0)); //Convertit en caractères ascii
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsString (maColonne);
 }
 
 const createMusiques = (size)=>{//Genres de musiques
@@ -333,15 +384,7 @@ const createMusiques = (size)=>{//Genres de musiques
 		return music[Math.floor(Math.random() * music.length)];
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] = maColonne._dataList[randomIndex].split('').reverse().join(''); //Inverse le nom
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsString (maColonne);
 }
 
 
@@ -353,13 +396,5 @@ const createMois = (size)=>{//Mois de l'annee
 		return months[Math.floor(Math.random() * months.length)];
 	})
 	//insertion d'erreurs
-	maColonne.setErrors = (nbErrors)=>{
-		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
-			maColonne._dataList[randomIndex] =  maColonne._dataList[randomIndex].replace(/[a-zA-Z]/g, (char) => String.fromCharCode(((char.charCodeAt(0) - (char < 'a' ? 65 : 97) + 5) % 26) + (char < 'a' ? 65 : 97))); //décale d'une lettre dans l'alphabet
-			(!maColonne._errorIndices.includes(randomIndex))?maColonne._errorIndices.push(randomIndex) : null;
-		})
-	}
-	maColonne.setErrors(maColonne._nbErrors);
-	return maColonne;
+	return addErrorsString (maColonne);
 }

@@ -57,7 +57,8 @@ const initGameSession = (difficulty  = 1) => {
 	sessionSatisfaction.v = 50;
 	sessionSkill.v = 10;
 	sessionEmails.v = [];
-	sessionTimePassed.v = 0;
+	sessionTimePassed.v = 0; //en heures
+	sessionEventsPassed.v = []; //titres et dates des sessions
 	sessionEmailsDelete.v = [];
 }
 
