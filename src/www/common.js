@@ -30,6 +30,7 @@ const sessionEmails = new sessionHandler("emails");
 const sessionSatisfaction = new sessionHandler("satisfaction");
 const sessionSkill = new sessionHandler("skill");
 const sessionTimePassed = new sessionHandler("time_passed");
+const sessionEventsPassed = new sessionHandler("events_passed");
 const sessionEmailsDelete = new sessionHandler("emails_detele");
 
 const goToPage = (url) => {
