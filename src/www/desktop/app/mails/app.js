@@ -126,8 +126,8 @@ const afficherContenuMail = (mail, li) => {
     DOM.contenumail.innerHTML = `
     <div style="margin: 25px 50px 50px 50px; font-size: 17px;">
     <h2 style="color: #00796b; font-size: 25px; font-weight: bold; margin-bottom: 20px;"><i class="fas fa-user" style = "margin-right :15px;"></i>${mail.objet}</h2>
-    <div class="w3-hover-light-grey w3-round-large" style="position: absolute; top: 0; right: 0; padding: 10px; cursor: pointer; margin : 5px 5px 0px 0px">
-        <i id="trash" class="fas fa-trash" style="color: #ff0000; font-size: 25px;"></i>
+    <div id="trash" class="w3-hover-light-grey w3-round-large" style="position: absolute; top: 0; right: 0; padding: 10px; cursor: pointer; margin : 5px 5px 0px 0px">
+        <i class="fas fa-trash" style="color: #ff0000; font-size: 25px;"></i>
     </div>
 
         <p style="margin: 5px 0; color: #555;"><strong>Expéditeur : </strong>${mail.expediteur}</p>
@@ -321,12 +321,10 @@ const afficherContenuMailDelete = (mail, li) => {
     <div id="inspect-btn" style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
         ${mail.contenu}<br><br>
     </div>
-    
-    
     `;
 
-    const trashIcon = document.getElementById("trash");
-    trashIcon.addEventListener("click", () => {
+    const trash = document.getElementById("trash");
+    trash.addEventListener("click", () => {
         //ajouter maybe un pop up de confirmation
         supprimerMail(mail);
     });
