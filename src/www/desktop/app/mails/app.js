@@ -14,6 +14,7 @@ broadcastUpdateAppName("JaiMail - Boite de réception");
 let lastSelectedLi = null;
 let activeBox = "inbox"; //savoir où on est 
 let emails = sessionEmails.v;
+let emailsDelete = sessionEmailsDelete.v;
 DOM.boitereception.classList.add('active');
 
 DOM.boitereception.addEventListener("click", () => switchFolder("inbox"));
@@ -102,7 +103,7 @@ const afficherMessages = () => {
 }
 
 // Colonne à droite
-const afficherContenuMail =(mail, li) => {
+const afficherContenuMail = (mail, li) => {
     if (lastSelectedLi !== null) {
         lastSelectedLi.style.backgroundColor = ""; // Remet la couleur d'origine
     }
@@ -133,17 +134,19 @@ const afficherContenuMail =(mail, li) => {
         <p style="margin: 5px 0; color: #555;"><strong>Destinataire : </strong>${mail.destinataire}</p>
     </div>
    
-    <div style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
-        ${mail.contenu}
+    <div id="inspect-btn" style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
+        ${mail.contenu}<br><br>
+        <button style="cursor:pointer;">${mail.piecesJointes}</button>
     </div>
     
+    
     `;
+
 
     const trashIcon = document.getElementById("trash");
     trashIcon.addEventListener("click", () => {
         supprimerMail(mail);
     });
-
 
     mettreAJourCompteurNonLus();
 
@@ -162,8 +165,15 @@ const switchFolder = (dossier) => {
         <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; // Remet le texte par défaut
         DOM.boitereception.classList.remove('active'); // Pour mettre le fond en gris selon où on est
         DOM.corbeille.classList.add('active'); 
+        afficherMessagesDelete();
     } else {
         broadcastUpdateAppName("JaiMail - Boite de réception");
+        DOM.messageList.innerHTML = ''; // Vide la liste des messages
+        DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
+        DOM.contenumail.innerHTML = `
+        <div class ="w3-center">
+        <h2>Contenu de l'email</h2>
+        <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; // Remet le texte par défaut
         DOM.boitereception.classList.add('active');
         DOM.corbeille.classList.remove('active');
         afficherMessages();
@@ -211,7 +221,7 @@ const recupererEmailsAleatoires = () => {
         // ajoute les emails dans mailsrestants
         for (let i = 0; i < emailsFromSource.length; i++) {
             mailsRestants.push(emailsFromSource[i]);
-            if (mailsRestants.length > nbEmail) break; // on arrêtes on a assez d'emails
+            if (mailsRestants.length + 1> nbEmail) break; // on arrêtes on a assez d'emails
         }
 
         emails.push(...mailsRestants);
@@ -224,7 +234,7 @@ const recupererEmailsAleatoires = () => {
 
 
 const mettreAJourCompteurNonLus = () => {
-    let nonLus = -1; 
+    let nonLus = 0; 
 
     // Parcourt tous les emails
     for (let i = 0; i < emails.length; i++) {
@@ -247,6 +257,98 @@ const mettreAJourCompteurNonLus = () => {
 }
 
 const supprimerMail = (mail) => {
+    
+    const index = emails.findIndex(item => item.id === mail.id); // on cherche l'inde du mail que l'on veut supp
+    if (index !== -1) {
+        // on ajoute le mail à la liste des emails supp
+        
+        emailsDelete.push(emails[index]);
+        emails.splice(index, 1);
+        sessionEmails.v = emails;
+        sessionEmailsDelete.v = emailsDelete;
+        DOM.messageList.innerHTML = '';
+        DOM.contenumail.innerHTML = `
+        <div class ="w3-center">
+        <h2>Contenu de l'email</h2>
+        <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; 
+
+        // Met à jour l'affichage
+        afficherMessages();
+        mettreAJourCompteurNonLus();
+        
+
+        // // Réinitialise le contenu affiché (si on supprime un email sélectionné)
+        // if (lastSelectedLi && lastSelectedLi.dataset.id === mail.id) {
+        //     DOM.contenumail.innerHTML = `
+        //     <div class="w3-center">
+        //         <h2>Contenu de l'email</h2>
+        //         <p>Veuillez sélectionner un email pour afficher son contenu.</p>
+        //     </div>`;
+        //     lastSelectedLi = null;
+        // }
+    }
+};
+
+
+// Colonne à droite
+const afficherContenuMailDelete = (mail, li) => {
+    if (lastSelectedLi !== null) {
+        lastSelectedLi.style.backgroundColor = ""; // Remet la couleur d'origine
+    }
+    // met la couleur sur le mail séléctionné
+    li.style.backgroundColor = "#e0f7fa"; 
+    lastSelectedLi = li;
+
+    mail.lu = true;
+    afficherMail(mail, li);
+    li.style.backgroundColor = "#e0f7fa";
+    
+    
+    const index = emails.findIndex(item => item.id === mail.id);  //un mail = un od
+    if (index !== -1) {
+        emails[index] = mail;  // Met à jour l'email dans le tableau
+        sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
+    }
+
+    //contenue à droite du mail séléctionné
+    DOM.contenumail.innerHTML = `
+    <div style="margin: 25px 50px 50px 50px; font-size: 17px;">
+    <h2 style="color: #00796b; font-size: 25px; font-weight: bold; margin-bottom: 20px;"><i class="fas fa-user" style = "margin-right :15px;"></i>${mail.objet}</h2>
+        <p style="margin: 5px 0; color: #555;"><strong>Expéditeur : </strong>${mail.expediteur}</p>
+        <p style="margin: 5px 0; color: #555;"><strong>Destinataire : </strong>${mail.destinataire}</p>
+    </div>
+   
+    <div id="inspect-btn" style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
+        ${mail.contenu}<br><br>
+    </div>
+    
+    
+    `;
+
+    const trashIcon = document.getElementById("trash");
+    trashIcon.addEventListener("click", () => {
+        //ajouter maybe un pop up de confirmation
+        supprimerMail(mail);
+    });
+
+    mettreAJourCompteurNonLus();
+
+}
+
+
+
+const afficherMessagesDelete = () => {
+    emailsDelete.map(mail => {
+        const li = document.createElement('li');
+        li.style.borderBottom = "1px solid lightgray";
+        li.style.cursor = "pointer";
+
+        afficherMail(mail, li);
+
+        li.addEventListener('click', () => afficherContenuMailDelete(mail, li));
+        DOM.messageList.appendChild(li);
+    });
+    
 }
 
 

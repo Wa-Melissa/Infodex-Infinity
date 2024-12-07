@@ -30,6 +30,7 @@ const sessionEmails = new sessionHandler("emails");
 const sessionSatisfaction = new sessionHandler("satisfaction");
 const sessionSkill = new sessionHandler("skill");
 const sessionTimePassed = new sessionHandler("time_passed");
+const sessionEmailsDelete = new sessionHandler("emails_detele");
 
 const goToPage = (url) => {
 	document.location.href = url;
@@ -57,6 +58,7 @@ const initGameSession = (difficulty  = 1) => {
 	sessionSkill.v = 10;
 	sessionEmails.v = [];
 	sessionTimePassed.v = 0;
+	sessionEmailsDelete.v = [];
 }
 
 const endGameSession = (success) => {
