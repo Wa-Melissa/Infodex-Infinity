@@ -11,7 +11,7 @@ const DOM = createDOMReferences({
 
 DOM.logout_btn.addEventListener("click", async (event) => {
 	const result = await Swal.fire({
-		title: "Etes vous certain de vouloir quitter la partie ?",
+		title: "Êtes-vous certain de vouloir quitter la partie ?",
 		showCancelButton: true,
 		confirmButtonText: "Quitter",
 		cancelButtonText: "Annuler",
