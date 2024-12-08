@@ -95,7 +95,7 @@ DOM.addEvent_button.addEventListener("click", async () => {
 const generateAgenda = () =>{
     if(sessionEventsPassed.v.length == 0) return;
     DOM.agendaContent_div.innerHTML = "";
-    sessionEventsPassed.v.forEach(element => {
+    sessionEventsPassed.v.toReversed().forEach(element => {
         const clone = DOM.event_passed_entry.content.cloneNode(true);
         clone.querySelector(".element-type").innerText = element.isFormation ? "Formation" : "Congés";
         clone.querySelector(".element-title").innerText = element.title;
