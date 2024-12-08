@@ -40,6 +40,13 @@ DOM.addEvent_button.addEventListener("click", async () => {
             twoday: "Prendre sa journée et simuler une maladie demain"
         }
     }
+    sessionEventsPassed.v.forEach((e) => {
+        if (!e.isFormation) return;
+        delete inputOptions.Formations[e.id];
+    });
+    if (Object.keys(inputOptions.Formations).length == 0) {
+        delete inputOptions.Formations;
+    }
     let secondStepResult = await Queue.fire({
         title: 'Créer un nouvel événement',
         input: "select",
@@ -67,8 +74,12 @@ DOM.addEvent_button.addEventListener("click", async () => {
     });
     if (thirdStepResult.isDismissed) return;
 
+    const isFormation = (typeof inputOptions.Formations[secondStepResult.value]) != "undefined";
+
     sessionEventsPassed.v = [...sessionEventsPassed.v, {
-        title: (typeof inputOptions.Formations[secondStepResult.value] != "undefined") ? "[Formation] " + inputOptions.Formations[secondStepResult.value] : "[Congés] " + inputOptions.Congés[secondStepResult.value],
+        title: isFormation ? "[Formation] " + inputOptions.Formations[secondStepResult.value] : "[Congés] " + inputOptions.Congés[secondStepResult.value],
+        id: secondStepResult.value,
+        isFormation,
         date: 1 + Math.floor(sessionTimePassed.v/8)
     }];
 
@@ -84,7 +95,7 @@ const generateAgenda = () =>{
     if(sessionEventsPassed.v.length > 0){
         DOM.agendaContent_div.innerHTML = "";
         sessionEventsPassed.v.forEach(element => {
-            DOM.agendaContent_div.innerHTML += `<div class="agenda-item">${element.title}   -   Jour ${element.date}</div>`;
+            DOM.agendaContent_div.innerHTML += `<div class="agenda-item">${element.title} <span class="w3-right">Jour ${element.date}</span></div>`;
         });
     }
 }
