@@ -15,7 +15,6 @@ const Queue = Swal.mixin({
         cancelButton: 'order-1 right-gap',
         confirmButton: 'order-2',
     },
-    // optional classes to avoid backdrop blinking between steps
     showClass: { backdrop: 'swal2-noanimation' },
     hideClass: { backdrop: 'swal2-noanimation' },
 });
