@@ -1,6 +1,7 @@
 const DOM = createDOMReferences({
     addEvent_button: "#add-event-btn",
-    agendaContent_div: "#agenda-content-div"
+    agendaContent_div: "#agenda-content-div",
+    event_passed_entry:  "#event-passed-entry"
 });
 broadcastUpdateAppName("Agenda");	
 
@@ -92,12 +93,16 @@ DOM.addEvent_button.addEventListener("click", async () => {
 });
 
 const generateAgenda = () =>{
-    if(sessionEventsPassed.v.length > 0){
-        DOM.agendaContent_div.innerHTML = "";
-        sessionEventsPassed.v.forEach(element => {
-            DOM.agendaContent_div.innerHTML += `<div class="agenda-item">${element.isFormation ? "[Formation]" : "[Congés]"} ${element.title} <span class="w3-right">Jour ${element.date}</span></div>`;
-        });
-    }
+    if(sessionEventsPassed.v.length == 0) return;
+    DOM.agendaContent_div.innerHTML = "";
+    sessionEventsPassed.v.forEach(element => {
+        const clone = DOM.event_passed_entry.content.cloneNode(true);
+        clone.querySelector(".element-type").innerText = element.isFormation ? "Formation" : "Congés";
+        clone.querySelector(".element-title").innerText = element.title;
+        clone.querySelector(".element-date").innerText = 'Jour ' + element.date;
+        DOM.agendaContent_div.appendChild(clone);
+    });
+    
 }
 
 generateAgenda();
