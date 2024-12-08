@@ -77,7 +77,7 @@ DOM.addEvent_button.addEventListener("click", async () => {
     const isFormation = (typeof inputOptions.Formations[secondStepResult.value]) != "undefined";
 
     sessionEventsPassed.v = [...sessionEventsPassed.v, {
-        title: isFormation ? "[Formation] " + inputOptions.Formations[secondStepResult.value] : "[Congés] " + inputOptions.Congés[secondStepResult.value],
+        title: isFormation ? inputOptions.Formations[secondStepResult.value] : inputOptions.Congés[secondStepResult.value],
         id: secondStepResult.value,
         isFormation,
         date: 1 + Math.floor(sessionTimePassed.v/8)
@@ -95,7 +95,7 @@ const generateAgenda = () =>{
     if(sessionEventsPassed.v.length > 0){
         DOM.agendaContent_div.innerHTML = "";
         sessionEventsPassed.v.forEach(element => {
-            DOM.agendaContent_div.innerHTML += `<div class="agenda-item">${element.title} <span class="w3-right">Jour ${element.date}</span></div>`;
+            DOM.agendaContent_div.innerHTML += `<div class="agenda-item">${element.isFormation ? "[Formation]" : "[Congés]"} ${element.title} <span class="w3-right">Jour ${element.date}</span></div>`;
         });
     }
 }
