@@ -8,6 +8,8 @@ const DOM = createDOMReferences({
 });
 
 broadcastUpdateAppName("JaiMail - Boite de réception");
+const broadCastOpenApp= new BroadcastChannel("open_app");
+
 
 // # id, . class , - classe dynamique (qui peut ne pas exister quand on créer le DOM)
 // Récupérer le dernier mail séléctionné
@@ -136,7 +138,7 @@ const afficherContenuMail = (mail, li) => {
    
     <div id="inspect-btn" style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
         ${contenuFormate}<br><br>
-        <button style="cursor:pointer;">${mail.piecesJointes}</button>
+        <button onclick="broadCastOpenApp.postMessage('dataViewer');">${mail.piecesJointes}</button>
     </div>
     
     

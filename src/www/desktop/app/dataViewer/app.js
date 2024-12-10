@@ -7,7 +7,8 @@ const DOM = createDOMReferences({
 	unselect_button: "#unselect-btn",
 });
 
-broadcastUpdateAppName("DataViewer");	
+broadcastUpdateAppName("DataViewer");
+const broadCastOpenApp = new BroadcastChannel("open_app");	
 
 const convertPercentageToErrorRate = (percentage) => {
     const minRangeValue = 0.155;
@@ -37,7 +38,6 @@ console.log(settings.maxErrors);
 class Dataset{
 	_columnCreators;
 	_columnsList;
-	_bigTitle = "Résultats de recherche";
 	_nbRows;
 
 	constructor(){
@@ -78,19 +78,6 @@ class Dataset{
 
 	}
 
-	/**
-		 * renvoie la string permettant d'afficher toutes les colonnes .
-		 * @returns {string} - le titre et les informations de chaque colonne.
-		 */
-	toString(){
-		let myString = "";
-		myString += this._bigTitle + "\n";
-		this._columnsList.map((v) => {
-			myString += v.toString() + "\n";
-		});
-		return myString;
-	}
-
 	//Met le dataset dans un tableau html intégré a une div (id="maDiv")
 	toTab(){
 		let tableClass = "class=\"w3-table w3-striped w3-bordered w3-table-all w3-hoverable w3-card-4\"";//Les classes pour la presentation esthetique
@@ -98,7 +85,7 @@ class Dataset{
 		let monHtml = "<table "+tableClass+tableStyle+" id=\"myTable\" >";
 
 		//Affichage du titre du tableau
-		monHtml += "\n\t<caption style=\"margin:0;\" class=\"w3-panel w3-pink\" align=\"TOP\"><b>" + this._bigTitle + "</b></caption>\n\t<thead>\n\t\t<tr class=\"w3-black\">";
+		monHtml += "\n\t<thead>\n\t\t<tr class=\"w3-black\">";
 		
 		//Affichage du titre de chaque colonnes
 		this._columnsList.map((v) => {
@@ -121,16 +108,6 @@ class Dataset{
 		
 	}
 }
-
-DOM.inspect_button.addEventListener("click", async(event) => {
-	let dataset = new Dataset();
-	dataset.toTab();
-
-	selectionList.splice(0, selectionList.length);
-	
-	selectionManagement(selectionList);
-	selectionEnd(selectionList, dataset);
-});
 
 const selectionManagement = (selectionList) => {
 	const table =  DOM.my_table();
@@ -243,6 +220,7 @@ const selectionEnd = (selectionList, dataset) => {
 			addToBase(nbCorrupt,dataset);
 			sessionTimePassed.v += 2;
 		}
+		broadCastOpenApp.postMessage("mails");
 	};
 };
 
@@ -251,3 +229,13 @@ const addToBase = (nbCorrupt, dataset) => {
 	sessionDbCorruptedCells.v += nbCorrupt;
 	sessionDbTotalCells.v += dataset._columnsList.length * dataset._nbRows;
 }
+
+(async() => {
+	let dataset = new Dataset();
+	dataset.toTab();
+
+	selectionList.splice(0, selectionList.length);
+	
+	selectionManagement(selectionList);
+	selectionEnd(selectionList, dataset);
+})();

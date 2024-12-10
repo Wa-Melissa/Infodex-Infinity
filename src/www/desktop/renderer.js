@@ -130,9 +130,18 @@ window.addEventListener("storage", (event) => {
 
 const broadCastAppTitle = new BroadcastChannel("update_app_title");
 const broadCastBlackFade =  new BroadcastChannel("black_screen_fade");
+const broadCastOpenApp =  new BroadcastChannel("open_app");
+
 broadCastAppTitle.onmessage = (event) => {
 	DOM.app_name.innerHTML = event.data;
 	document.title = "Infodex Infinity - " + event.data;
+};
+broadCastOpenApp.onmessage = (event) => {
+	closeApp();
+	setTimeout(() => {
+		loadApp(event.data);		
+	}, 100)
+
 };
 
 broadCastBlackFade.onmessage = (event) => {
