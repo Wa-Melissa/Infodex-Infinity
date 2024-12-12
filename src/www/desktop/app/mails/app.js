@@ -123,6 +123,7 @@ const afficherContenuMail = (mail, li) => {
         emails[index] = mail;  // Met à jour l'email dans le tableau
         sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
     }
+    sessionLastOpenedEmail.v = index;
     const contenuFormate = mail.contenu.replace(/\n/g,"<br>");
     //contenue à droite du mail séléctionné
     DOM.contenumail.innerHTML = `

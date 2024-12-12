@@ -38,6 +38,10 @@ DOM.logout_btn.addEventListener("click", async (event) => {
 
 
 const closeApp = () => {
+	if (sessionDesktopAppExitLocked.v) {
+		DOM.app_iframe.contentWindow.swalExitLocked();
+		return;
+	}
 	DOM.app_iframe.src = "blank.html";
 	DOM.app_container.style.display = "none";
 	document.title = "Infodex Infinity - Desktop"
