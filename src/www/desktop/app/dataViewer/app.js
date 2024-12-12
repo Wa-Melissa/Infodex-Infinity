@@ -214,16 +214,14 @@ const selectionEnd = (selectionList, dataset) => {
 				//Augmentation des competences
 				sessionSkill.v += settings.skillsChange * nbFound;
 				sessionTimePassed.v += 2;
-			} else {
-				return;
-			}
-		}
-		else{
+			} else return;
+		} else {
 			let nbCorrupt = nbErr - nbFound;
 			addToBase(nbCorrupt,dataset);
 			sessionTimePassed.v += 2;
 		}
 		const email = sessionEmails.v[sessionLastOpenedEmail.v];
+		console.log(email);
 		email.objet = '<i class="fa-solid fa-reply"></i> ' + email.objet;
 		sessionEmailsDelete.v = [...sessionEmailsDelete.v, email];
 		sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
@@ -247,10 +245,18 @@ const addToBase = (nbCorrupt, dataset) => {
 	selectionEnd(selectionList, dataset);
 })();
 
-function swalExitLocked() {
-	Swal.fire({
+async function swalExitLocked() {
+	let result = await Swal.fire({
 		title: "Non sauvegardé",
-		text: "Un docu",
-		icon: "warning"
+		text: "Un document est en cours de modification. Si vous quittez l'application maintenant, le mail sera supprimé sans l'envoie d'une réponse au chercheur.",
+		icon: "warning",
+		showCancelButton: true,
+		cancelButtonText: "Annuler",
+		confirmButtonText: "Quitter quand même"
 	});
+	if (!result.isConfirmed) return;
+	sessionEmailsDelete.v = [...sessionEmailsDelete.v, sessionEmails.v[sessionLastOpenedEmail.v]];
+	sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
+	sessionSatisfaction.v -= 5;
+	broadCastOpenApp.postMessage("mails");
 }

@@ -125,15 +125,15 @@ const afficherContenuMail = (mail, li) => {
         emails[index] = mail;  // Met à jour l'email dans le tableau
         sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
     }
-
+    sessionLastOpenedEmail.v = index;
     const contenuFormate = mail.contenu.replace(/\n/g, "<br>");
     DOM.contenumail.innerHTML = "";
     const clone = DOM.mailTemplate.content.cloneNode(true);
-    clone.querySelector(".mail-objet").innerText = mail.objet;
-    clone.querySelector(".mail-expediteur").innerText = mail.expediteur;
-    clone.querySelector(".mail-destinataire").innerText = mail.destinataire;
+    clone.querySelector(".mail-objet").innerHTML = mail.objet;
+    clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
+    clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
     clone.querySelector(".mail-contenu").innerHTML = contenuFormate;
-    clone.querySelector(".mail-pieces-jointes-btn").innerText = mail.piecesJointes;
+    clone.querySelector(".mail-pieces-jointes-btn").innerHTML = mail.piecesJointes;
     DOM.contenumail.appendChild(clone);
 
     const trashIcon = document.getElementById("trash");
@@ -253,6 +253,7 @@ const supprimerMail = (mail) => {
     
     const index = emails.findIndex(item => item.id === mail.id); // on cherche l'inde du mail que l'on veut supp
     if (index !== -1) {
+        sessionSatisfaction.v -= 5;
         // on ajoute le mail à la liste des emails supp
         
         emailsDelete.push(emails[index]);
@@ -306,9 +307,9 @@ const afficherContenuMailDelete = (mail, li) => {
     const contenuFormate = mail.contenu.replace(/\n/g, "<br>");
     DOM.contenumail.innerHTML = "";
     const clone = DOM.mailTemplateDelete.content.cloneNode(true);
-    clone.querySelector(".mail-objet").innerText = mail.objet;
-    clone.querySelector(".mail-expediteur").innerText = mail.expediteur;
-    clone.querySelector(".mail-destinataire").innerText = mail.destinataire;
+    clone.querySelector(".mail-objet").innerHTML = mail.objet;
+    clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
+    clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
     clone.querySelector(".mail-contenu").innerHTML = contenuFormate;
     DOM.contenumail.appendChild(clone);
  
