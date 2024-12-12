@@ -36,8 +36,6 @@
 }
 
 
-
-  
 </style>
 <body>
   <!-- Barre de titre -->
@@ -73,6 +71,31 @@
         <div class ="w3-center">
           <h2>Contenu de l'email</h2>
           <p>Veuillez sélectionner un email pour afficher son contenu.</p>
+          
+          <template id="mail-template">
+            <div style="margin: 25px 50px 50px 50px; font-size: 17px;">
+              <h2 style="color: #00796b; font-size: 25px; font-weight: bold; margin-bottom: 20px;"><i class="fas fa-user" style = "margin-right :15px;"></i><span class="mail-objet"></span></h2>
+              <div id="trash" class="w3-hover-light-grey w3-round-large" style="position: absolute; top: 0; right: 0; padding: 10px; cursor: pointer; margin : 5px 5px 0px 0px">
+                  <i class="fas fa-trash" style="color: #ff0000; font-size: 25px;"></i>
+              </div>
+                  <p style="margin: 5px 0; color: #555;"><strong>Expéditeur : </strong><span class="mail-expediteur"></p>
+                  <p style="margin: 5px 0; color: #555;"><strong>Destinataire : </strong><span class="mail-destinataire"></p>
+            </div>
+            <div id="inspect-btn" style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
+                <div class="mail-contenu"></div><br><br>
+                <button onclick="broadCastOpenApp.postMessage('dataViewer');" class="mail-pieces-jointes-btn"></button>
+            </div>
+          </template>
+
+          <template id="mail-template-delete">
+            <div style="margin: 25px 50px 50px 50px; font-size: 17px;">
+              <h2 style="color: #00796b; font-size: 25px; font-weight: bold; margin-bottom: 20px;"><i class="fas fa-user" style = "margin-right :15px;"></i><span class="mail-objet"></span></h2>
+                <p style="margin: 5px 0; color: #555;"><strong>Expéditeur : </strong><span class="mail-expediteur"></p>
+                <p style="margin: 5px 0; color: #555;"><strong>Destinataire : </strong><span class="mail-destinataire"></p>
+            </div>
+            <div style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;" class="mail-contenu"></div>
+          </template>
+          
         </div>
       </div>
     </div>
@@ -84,3 +107,4 @@
 <script src="mails.js"></script> 
 <script src="app.js"></script>
 </html>
+
