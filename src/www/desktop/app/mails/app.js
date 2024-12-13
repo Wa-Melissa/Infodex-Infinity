@@ -318,7 +318,6 @@ const afficherContenuMailDelete = (mail, li) => {
 }
 
 
-
 const afficherMessagesDelete = () => {
     emailsDelete.map(mail => {
         const li = document.createElement('li');
@@ -333,9 +332,47 @@ const afficherMessagesDelete = () => {
     
 }
 
+const verifIfDayPassed = () => {
+    const currentDay = Math.floor(sessionTimePassed.v / 8);
+    let sessionLastCheckedDay = Math.floor(sesssionLastTimePassed.v / 8);
 
+    // Vérifie si le jour a changé depuis la dernière vérification
+    if (currentDay !== sessionLastCheckedDay) {
+        const differenceTime = currentDay - sessionLastCheckedDay;
+
+        if (differenceTime > 0) {
+            addEmailAfterDayPassed(differenceTime);
+        }
+        // Met à jour le jour du dernier 
+        sessionLastCheckedDay = currentDay;
+    }
+};
+
+
+
+const addEmailAfterDayPassed = (differenceTime) => {
+    // Mélange les e-mails disponibles
+    melangerTableau(mails);
+
+    // Filtre les e-mails qui sont dans aucuns des deux (delete & mails)
+    let nouveauxEmails = mails.filter(mail => {
+        return !emails.some(e => e.id === mail.id) && !emailsDelete.some(e => e.id === mail.id); // si mon mail actuelle est pas == a ma liste et delete alors c good
+    });
+
+    // Ajoute 3 nouveaux e-mails (si disponibles)
+    let emailsAjoutes = nouveauxEmails.slice(0, 3 * differenceTime );
+    emails.push(...emailsAjoutes);
+
+    // Met à jour les données et l'affichage
+    sessionEmails.v = emails;
+    sesssionLastTimePassed.v = sessionTimePassed.v;
+    afficherMessages();
+    mettreAJourCompteurNonLus();
+};
+ 
 recupererEmailsAleatoires();
 mettreAJourCompteurNonLus();
+verifIfDayPassed();
 
 /*  
 TODO
@@ -346,7 +383,9 @@ TODO
  - mail du Z généré automatique au début
  - mail où on est obligée d'ouvrir le mail du Z sinon peut pas
  - add les données de mélissa
+ - cheff supreme departement
 */
+
 
 
 
