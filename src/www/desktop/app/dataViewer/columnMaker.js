@@ -50,7 +50,7 @@ const modMoveLetter = (maColonne, randomIndex) => {
 }
 
 //Inverse le nom
-const modInverseNom = (maColonne, randomIndex) => {
+const modInverseName = (maColonne, randomIndex) => {
 	return maColonne._dataList[randomIndex].split('').reverse().join('');
 }
 
@@ -140,7 +140,7 @@ const applyRandomModificationStr = (column, randomIndex) => {
 	//retournent une string
 	const modifications = [
 	  modMoveLetter,
-	  modInverseNom,
+	  modInverseName,
 	  modToAscii,
 	  modTrunkAt2,
 	  modRepeat,
@@ -217,7 +217,7 @@ const createProba = (size)=>{ //Nombres entre 10 et 100
 	return maColonne;
 }
 
-const createReseauSoc = (size)=>{//Reseaux sociaux
+const createSocMedias = (size)=>{//Reseaux sociaux
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Reseau social";
 	//remplissage de la colonne
@@ -236,7 +236,7 @@ const createReseauSoc = (size)=>{//Reseaux sociaux
 	return maColonne;
 }
 
-const createAnnees = (size)=>{//Anee entre 1800 et 2024
+const createYears = (size)=>{//Anee entre 1800 et 2024
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Année";
 	//remplissage de la colonne
@@ -247,7 +247,7 @@ const createAnnees = (size)=>{//Anee entre 1800 et 2024
 	return addErrorsNumber(maColonne);
 }
 
-const createNaturels = (size)=>{//Entier naturel entre 0 et 200
+const createNaturals = (size)=>{//Entier naturel entre 0 et 200
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Nombre d'occurrences";
 	//remplissage de la colonne
@@ -258,7 +258,7 @@ const createNaturels = (size)=>{//Entier naturel entre 0 et 200
 	return addErrorsNumber(maColonne);
 }
 
-const createPays = (size)=>{//Pays
+const createCountries = (size)=>{//Pays
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Pays";
 	//remplissage de la colonne
@@ -269,7 +269,7 @@ const createPays = (size)=>{//Pays
 	return addErrorsString (maColonne);
 }
 
-const createVilles = (size)=>{//grandes villes
+const createCities = (size)=>{//grandes villes
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Villes";
 	//remplissage de la colonne
@@ -280,7 +280,7 @@ const createVilles = (size)=>{//grandes villes
 	return addErrorsString (maColonne);
 }
 
-const createNoms = (size)=>{//Prenoms H/F/M
+const createNames = (size)=>{//Prenoms H/F/M
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Noms";
 	//remplissage de la colonne
@@ -291,7 +291,7 @@ const createNoms = (size)=>{//Prenoms H/F/M
 	return addErrorsString (maColonne);
 }
 
-const createLegumes = (size)=>{//legumes
+const createVegetables = (size)=>{//legumes
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Légumes";
 	//remplissage de la colonne
@@ -315,7 +315,7 @@ const createSports = (size)=>{//sports de tous types
 }
 
 
-const createClimats = (size)=>{//climats
+const createClimates = (size)=>{//climats
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Climat";
 	//remplissage de la colonne
@@ -326,7 +326,7 @@ const createClimats = (size)=>{//climats
 	return addErrorsString (maColonne);
 }
 
-const createCouleurs = (size)=>{//couleurs
+const createCoulors = (size)=>{//couleurs
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Couleur";
 	//remplissage de la colonne
@@ -337,7 +337,7 @@ const createCouleurs = (size)=>{//couleurs
 	return addErrorsString (maColonne);
 }
 
-const createCout = (size)=>{//Cout moyen floattant précis a une decimale entre 1 et 300
+const createCost = (size)=>{//Cout moyen floattant précis a une decimale entre 1 et 300
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Coût moyen";
 	//remplissage de la colonne
@@ -348,7 +348,7 @@ const createCout = (size)=>{//Cout moyen floattant précis a une decimale entre 
 	return addErrorsNumber(maColonne);
 }
 
-const createEsperance = (size)=>{//Esperance de vie entre 3 et 80 ans
+const createLifeExpectancy = (size)=>{//Esperance de vie entre 3 et 80 ans
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Esperance de vie (années)";
 	//remplissage de la colonne
@@ -359,7 +359,7 @@ const createEsperance = (size)=>{//Esperance de vie entre 3 et 80 ans
 	return addErrorsNumber(maColonne);
 }
 
-const createMetiers = (size)=>{//Metiers
+const createJobs = (size)=>{//Metiers
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Métier";
 	//remplissage de la colonne
@@ -370,7 +370,7 @@ const createMetiers = (size)=>{//Metiers
 	return addErrorsString (maColonne);
 }
 
-const createAnimaux = (size)=>{//Animaux
+const createAnimals = (size)=>{//Animaux
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Animal";
 	//remplissage de la colonne
@@ -381,7 +381,7 @@ const createAnimaux = (size)=>{//Animaux
 	return addErrorsString (maColonne);
 }
 
-const createMusiques = (size)=>{//Genres de musiques
+const createMusics = (size)=>{//Genres de musiques
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Genre musical";
 	//remplissage de la colonne
@@ -393,7 +393,7 @@ const createMusiques = (size)=>{//Genres de musiques
 }
 
 
-const createMois = (size)=>{//Mois de l'annee
+const createMonths = (size)=>{//Mois de l'annee
 	let maColonne = new Column(size); //creation d'un objet colonne
 	maColonne._title = "Mois";
 	//remplissage de la colonne

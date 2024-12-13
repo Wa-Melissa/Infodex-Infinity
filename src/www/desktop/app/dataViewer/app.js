@@ -35,11 +35,11 @@ let settings = {
 	minCols: 3, // Minimum number of dataset columns
 	maxCols: 8, // Maximum number of dataset columns (<= columnCreator.size())
 	columnCreators: [ // Functions to generate dataset columns
-		createAnnees,createNaturels,createPays,createProba,
-		createVilles,createReseauSoc, createNoms, createLegumes,
-		createSports, createClimats, createCouleurs, createCout,
-		createEsperance, createMetiers, createAnimaux, createMusiques,
-		createMois
+		createYears,createNaturals,createCountries,createProba,
+		createCities,createSocMedias, createNames, createVegetables,
+		createSports, createClimates, createCoulors, createCost,
+		createLifeExpectancy, createJobs, createAnimals, createMusics,
+		createMonths
 	],
 	statisfactionChange: 0.5, // Satisfaction change per error
 	skillsChange: 0.5, // Skill change per error
