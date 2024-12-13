@@ -117,6 +117,10 @@ const modToNegativ = (maColonne, randomIndex) => {
 	return 	-maColonne._dataList[randomIndex];
 }
 
+const modNaN = (maColonne, randomIndex) => {
+	return "NaN";
+}
+
 /*******************************
  * fonctions pour les nombres et les string
  ********************************/
@@ -178,7 +182,8 @@ const applyRandomModificationNb = (column, randomIndex) => {
 	  modAddPlus,
 	  modAddComma,
 	  modToEmpty,
-	  modToNegativ
+	  modToNegativ,
+	  modNaN
 	];
 
 	// Choix aléatoire et appel d'une fonction
