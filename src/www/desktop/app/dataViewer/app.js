@@ -10,6 +10,8 @@ const DOM = createDOMReferences({
 broadcastUpdateAppName("DataViewer");
 const broadCastOpenApp = new BroadcastChannel("open_app");	
 
+sessionDesktopAppExitLocked.v = true;
+
 const convertPercentageToErrorRate = (percentage) => {
     const minRangeValue = 0.155;
     const maxRangeValue = 0.17;
@@ -212,14 +214,17 @@ const selectionEnd = (selectionList, dataset) => {
 				//Augmentation des competences
 				sessionSkill.v += settings.skillsChange * nbFound;
 				sessionTimePassed.v += 2;
-			}
-			//Si il annule on fait rien
-		}
-		else{
+			} else return;
+		} else {
 			let nbCorrupt = nbErr - nbFound;
 			addToBase(nbCorrupt,dataset);
 			sessionTimePassed.v += 2;
 		}
+		const email = sessionEmails.v[sessionLastOpenedEmail.v];
+		console.log(email);
+		email.objet = '<i class="fa-solid fa-reply"></i> ' + email.objet;
+		sessionEmailsDelete.v = [...sessionEmailsDelete.v, email];
+		sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
 		broadCastOpenApp.postMessage("mails");
 	};
 };
@@ -239,3 +244,19 @@ const addToBase = (nbCorrupt, dataset) => {
 	selectionManagement(selectionList);
 	selectionEnd(selectionList, dataset);
 })();
+
+async function swalExitLocked() {
+	let result = await Swal.fire({
+		title: "Non sauvegardé",
+		text: "Un document est en cours de modification. Si vous quittez l'application maintenant, le mail sera supprimé sans l'envoie d'une réponse au chercheur.",
+		icon: "warning",
+		showCancelButton: true,
+		cancelButtonText: "Annuler",
+		confirmButtonText: "Quitter quand même"
+	});
+	if (!result.isConfirmed) return;
+	sessionEmailsDelete.v = [...sessionEmailsDelete.v, sessionEmails.v[sessionLastOpenedEmail.v]];
+	sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
+	sessionSatisfaction.v -= 5;
+	broadCastOpenApp.postMessage("mails");
+}

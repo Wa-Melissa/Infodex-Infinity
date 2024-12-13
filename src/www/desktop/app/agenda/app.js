@@ -101,7 +101,6 @@ const generateAgenda = () =>{
         clone.querySelector(".element-date").innerText = 'Jour ' + element.date;
         DOM.agendaContent_div.appendChild(clone);
     });
-    
 }
 
 generateAgenda();

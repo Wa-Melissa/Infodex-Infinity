@@ -37,15 +37,20 @@ DOM.logout_btn.addEventListener("click", async (event) => {
 });
 
 
-const closeApp = () => {
+const closeApp = (force = false) => {
+	if (sessionDesktopAppExitLocked.v && !force) {
+		DOM.app_iframe.contentWindow.swalExitLocked();
+		return;
+	}
 	DOM.app_iframe.src = "blank.html";
 	DOM.app_container.style.display = "none";
 	document.title = "Infodex Infinity - Desktop"
 	DOM.app_name.innerHTML = "";
 }
-DOM.app_close_btn.addEventListener("click", closeApp);
+DOM.app_close_btn.addEventListener("click", ()=> (closeApp()));
 
 const loadApp = async (appName) => {
+	sessionDesktopAppExitLocked.v = false;
 	DOM.app_iframe.src = "app/" + appName + "/app.html";
 	DOM.app_container.style.display = "block";
 };
@@ -137,7 +142,7 @@ broadCastAppTitle.onmessage = (event) => {
 	document.title = "Infodex Infinity - " + event.data;
 };
 broadCastOpenApp.onmessage = (event) => {
-	closeApp();
+	closeApp(true);
 	setTimeout(() => {
 		loadApp(event.data);		
 	}, 100)

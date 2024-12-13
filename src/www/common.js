@@ -27,11 +27,13 @@ const sessionDbTotalCells = new sessionHandler("db_total_rows");
 const sessionDbCorruptedCells = new sessionHandler("db_corrupted_rows");
 const sessionDifficulty = new sessionHandler("difficulty");
 const sessionEmails = new sessionHandler("emails");
+const sessionLastOpenedEmail = new sessionHandler("last_open_email");
 const sessionSatisfaction = new sessionHandler("satisfaction");
 const sessionSkill = new sessionHandler("skill");
 const sessionTimePassed = new sessionHandler("time_passed");
 const sessionEventsPassed = new sessionHandler("events_passed");
 const sessionEmailsDelete = new sessionHandler("emails_detele");
+const sessionDesktopAppExitLocked = new sessionHandler("desktop_app_exit_locked");
 
 const goToPage = (url) => {
 	document.location.href = url;
@@ -61,6 +63,8 @@ const initGameSession = (difficulty  = 1) => {
 	sessionTimePassed.v = 0; //en heures
 	sessionEventsPassed.v = []; //titres et dates des sessions
 	sessionEmailsDelete.v = [];
+	sessionLastOpenedEmail.v = -1;
+	sessionDesktopAppExitLocked.v = false;
 }
 
 const endGameSession = (success) => {
