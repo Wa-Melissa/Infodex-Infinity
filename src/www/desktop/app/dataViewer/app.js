@@ -37,7 +37,7 @@ let settings = {
 	columnCreators: [ // Functions to generate dataset columns
 		createYears,createNaturals,createCountries,createProba,
 		createCities,createSocMedias, createNames, createVegetables,
-		createSports, createClimates, createCoulors, createCost,
+		createSports, createClimates, createColors, createCost,
 		createLifeExpectancy, createJobs, createAnimals, createMusics,
 		createMonths
 	],
