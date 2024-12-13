@@ -11,18 +11,17 @@ const DOM = createDOMReferences({
 });
 broadcastUpdateAppName("Miracle DB - Statistiques");	
 
+//Calculate database corruption rate
 const corruptionRate = (sessionDbTotalCells.v == 0) ? 0 : sessionDbCorruptedCells.v / sessionDbTotalCells.v * 100;
 
+//Fill database stats
 DOM.total_rows.innerText = sessionDbTotalCells.v;
-
 DOM.corrupted_rows.innerText = sessionDbCorruptedCells.v;
-
 DOM.corruption_rate.innerText = Math.floor(corruptionRate * 10) / 10 + "%";
-
 DOM.corruption_rate_bar.style.width = corruptionRate * (100 / 5) + "%";
 
+//Fill user stats
 DOM.satisfaction_rate.innerText = sessionSatisfaction.v + "%";
 DOM.satisfaction_rate_bar.style.width = sessionSatisfaction.v + "%";
-
 DOM.skill_rate.innerText = sessionSkill.v + "%";
 DOM.skill_rate_bar.style.width = sessionSkill.v + "%";
