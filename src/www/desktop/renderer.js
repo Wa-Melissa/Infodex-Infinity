@@ -150,13 +150,13 @@ window.addEventListener("storage", (event) => { //Event to detect new day
 	updateClock();
 	
 	if (Math.floor(event.oldValue / 8) != Math.floor(event.newValue / 8)) Swal.fire({
-		position: "top-end",
-		title: "Nouvelle journée",
+		position: "top",
+		title: "<b>Nouvelle journée</b>",
 		text:"Vous passez à une nouvelle journée de travail !",
 		showConfirmButton: false,
 		icon: "info",
 		toast: true,
-		timer: 4000,
+		timer: 3000,
 		timerProgressBar: true,
 	});
 })
@@ -213,3 +213,17 @@ broadCastBlackFade.onmessage = (event) => { //Fade to black and angain to body c
 		opacity += 0.03;
 	}, 25);    
 }
+
+setTimeout(() => { // wait 1sec
+	//Show first message notification
+	Swal.fire({
+		position: "top",
+		title: "<b>Nouveau message</b>",
+		html: "<b>De:</b>\u00a0Mathieu\u00a0Zimmermann<br><b>Object</b>:\u00a0Bienvenue chez nous",
+		showConfirmButton: false,
+		icon: "warning",
+		toast: true,
+		timer: 6000,
+		timerProgressBar: true,
+	});
+}, 1200)
