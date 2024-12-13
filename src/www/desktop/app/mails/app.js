@@ -4,7 +4,9 @@ const DOM = createDOMReferences({
     boitereception : "#boite-reception",
     btnlu : ".btn-lu",
     corbeille: "#corbeille",
-    countmail : "#countmail"
+    countmail : "#countmail",
+    mailTemplate : "#mail-template",
+    mailTemplateDelete : "#mail-template-delete"
 });
 
 broadcastUpdateAppName("JaiMail - Boite de réception");
@@ -123,27 +125,16 @@ const afficherContenuMail = (mail, li) => {
         emails[index] = mail;  // Met à jour l'email dans le tableau
         sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
     }
-    const contenuFormate = mail.contenu.replace(/\n/g,"<br>");
-    //contenue à droite du mail séléctionné
-    DOM.contenumail.innerHTML = `
-    <div style="margin: 25px 50px 50px 50px; font-size: 17px;">
-    <h2 style="color: #00796b; font-size: 25px; font-weight: bold; margin-bottom: 20px;"><i class="fas fa-user" style = "margin-right :15px;"></i>${mail.objet}</h2>
-    <div id="trash" class="w3-hover-light-grey w3-round-large" style="position: absolute; top: 0; right: 0; padding: 10px; cursor: pointer; margin : 5px 5px 0px 0px">
-        <i class="fas fa-trash" style="color: #ff0000; font-size: 25px;"></i>
-    </div>
-
-        <p style="margin: 5px 0; color: #555;"><strong>Expéditeur : </strong>${mail.expediteur}</p>
-        <p style="margin: 5px 0; color: #555;"><strong>Destinataire : </strong>${mail.destinataire}</p>
-    </div>
-   
-    <div id="inspect-btn" style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
-        ${contenuFormate}<br><br>
-        <button onclick="broadCastOpenApp.postMessage('dataViewer');">${mail.piecesJointes}</button>
-    </div>
-    
-    
-    `;
-
+    sessionLastOpenedEmail.v = index;
+    const contenuFormate = mail.contenu.replace(/\n/g, "<br>");
+    DOM.contenumail.innerHTML = "";
+    const clone = DOM.mailTemplate.content.cloneNode(true);
+    clone.querySelector(".mail-objet").innerHTML = mail.objet;
+    clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
+    clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
+    clone.querySelector(".mail-contenu").innerHTML = contenuFormate;
+    clone.querySelector(".mail-pieces-jointes-btn").innerHTML = mail.piecesJointes;
+    DOM.contenumail.appendChild(clone);
 
     const trashIcon = document.getElementById("trash");
     trashIcon.addEventListener("click", () => {
@@ -262,6 +253,7 @@ const supprimerMail = (mail) => {
     
     const index = emails.findIndex(item => item.id === mail.id); // on cherche l'inde du mail que l'on veut supp
     if (index !== -1) {
+        sessionSatisfaction.v -= 5;
         // on ajoute le mail à la liste des emails supp
         
         emailsDelete.push(emails[index]);
@@ -312,26 +304,15 @@ const afficherContenuMailDelete = (mail, li) => {
         sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
     }
 
-    //contenue à droite du mail séléctionné
-    const contenuFormate = mail.contenu.replace(/\n/g,"<br>");
-    DOM.contenumail.innerHTML = `
-    <div style="margin: 25px 50px 50px 50px; font-size: 17px;">
-    <h2 style="color: #00796b; font-size: 25px; font-weight: bold; margin-bottom: 20px;"><i class="fas fa-user" style = "margin-right :15px;"></i>${mail.objet}</h2>
-        <p style="margin: 5px 0; color: #555;"><strong>Expéditeur : </strong>${mail.expediteur}</p>
-        <p style="margin: 5px 0; color: #555;"><strong>Destinataire : </strong>${mail.destinataire}</p>
-    </div>
-   
-    <div id="inspect-btn" style="margin-top: 15px; color: #333; line-height: 1.6; margin : 35px; font-size:17px;">
-        ${contenuFormate}<br><br>
-    </div>
-    `;
-
-    const trash = document.getElementById("trash");
-    trash.addEventListener("click", () => {
-        //ajouter maybe un pop up de confirmation
-        supprimerMail(mail);
-    });
-
+    const contenuFormate = mail.contenu.replace(/\n/g, "<br>");
+    DOM.contenumail.innerHTML = "";
+    const clone = DOM.mailTemplateDelete.content.cloneNode(true);
+    clone.querySelector(".mail-objet").innerHTML = mail.objet;
+    clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
+    clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
+    clone.querySelector(".mail-contenu").innerHTML = contenuFormate;
+    DOM.contenumail.appendChild(clone);
+ 
     mettreAJourCompteurNonLus();
 
 }

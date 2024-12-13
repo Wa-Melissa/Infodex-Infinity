@@ -286,3 +286,19 @@ const selectionEnd = (selectionList, dataset) => {
 	selectionManagement(selectionList); // Manage the selection
 	selectionEnd(selectionList, dataset); // Handles the end of the selection
 })();
+
+async function swalExitLocked() {
+	let result = await Swal.fire({
+		title: "Non sauvegardé",
+		text: "Un document est en cours de modification. Si vous quittez l'application maintenant, le mail sera supprimé sans l'envoie d'une réponse au chercheur.",
+		icon: "warning",
+		showCancelButton: true,
+		cancelButtonText: "Annuler",
+		confirmButtonText: "Quitter quand même"
+	});
+	if (!result.isConfirmed) return;
+	sessionEmailsDelete.v = [...sessionEmailsDelete.v, sessionEmails.v[sessionLastOpenedEmail.v]];
+	sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
+	sessionSatisfaction.v -= 5;
+	broadCastOpenApp.postMessage("mails");
+}
