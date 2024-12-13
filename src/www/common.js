@@ -22,7 +22,7 @@ class storageHandler {
 	}	
 }
 
-//session Variable Handler
+
 const sessionDbTotalCells = new sessionHandler("db_total_rows");
 const sessionDbCorruptedCells = new sessionHandler("db_corrupted_rows");
 const sessionDifficulty = new sessionHandler("difficulty");
@@ -35,6 +35,13 @@ const sessionEventsPassed = new sessionHandler("events_passed");
 const sessionEmailsDelete = new sessionHandler("emails_detele");
 const sessionDesktopAppExitLocked = new sessionHandler("desktop_app_exit_locked");
 
+/**
+ * Redirects main EIC to a Page.
+ *
+ * @param {number} a - Le premier nombre à additionner.
+ * @param {number} b - Le deuxième nombre à additionner.
+ * @returns {number} La somme des deux nombres.
+ */
 const goToPage = (url) => {
 	document.location.href = url;
 }
