@@ -30,15 +30,16 @@
  * @module www_desktop_app_dataviewer_maker
  */
 class Column {
-	_dataList ; // Attribut contenant une liste de données générées aléatoirement
-	_title = "Probabilités(en %)\n"; //exemple de titre
-	_errorIndices ; //Stocke l'indice des lignes fausses
-	_nbErrors;
+	_dataList ; // Attribute containing a list of randomly generated data
+	_title = "Probabilités(en %)\n"; //The title of the column - Example title
+	_errorIndices ; // Stores the indices of the incorrect rows (error rows)
+	_nbErrors; // Number of errors in the column
 
 	/**
-	 * Constructeur de la classe Column.
-	 * Initialise la colonne en remplissant la liste de données
-	 * @param {number} size -longeur du dataset
+	 * Constructor of the Column class.
+	 * Initializes the column by filling the data list with random values.
+	 * 
+	 * @param {number} size - The length of the dataset (number of rows in the column)
 	 */
 	constructor(size) {
 		this._errorIndices = [];
@@ -48,9 +49,9 @@ class Column {
 	}
 
 	/**
-		 * Méthode pourinsérer un certain nombre d'erreurs parmi les données(fonction non implémentée).
-		 * @param {number} nbErrors - Le nombre d'erreurs à définir, doit être &lt; à la taille de la liste.
-		 */
+	* Method to insert a certain number of errors among the data (function not implemented).
+	* @param {number} nbErrors - The number of errors to insert, must be less than the size of the list.
+	*/
 	setErrors(nbErrors){
 		Array(nbErrors).fill(0).map(()=>{
 			let randomIndex = Math.floor(Math.random()*(this._dataList.length-1));  //Choix d'une donnée de la liste à corrompre
@@ -60,9 +61,9 @@ class Column {
 	}
 
 	/**
-		 * renvoie la string permettant d'afficher la colonne.
-		 * @returns {string} - le titre et les informations de la colonne.
-		 */
+	* Returns the string that displays the column.
+	* @returns {string} - The title and the information of the column.
+	*/
 	toString(){
 		let myString = this._title + "\n";
 		this._dataList.map((v) => {
@@ -73,102 +74,197 @@ class Column {
 }  
 
 /*******************************
- * fonctions pour les string
+ * Functions for manipulating strings
  ********************************/
-//décale d'une lettre dans l'alphabet
+
+/**
+ * Shifts a letter by one in the alphabet.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - The modified string with letters shifted.
+ */
 const modMoveLetter = (maColonne, randomIndex) => {
 	return maColonne._dataList[randomIndex].replace(/[a-zA-Z]/g, (char) => String.fromCharCode(((char.charCodeAt(0) - (char &lt; 'a' ? 65 : 97) + 5) % 26) + (char &lt; 'a' ? 65 : 97)));
 }
 
-//Inverse le nom
+/**
+ * Reverses the name (string).
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - The reversed string.
+ */
 const modInverseName = (maColonne, randomIndex) => {
 	return maColonne._dataList[randomIndex].split('').reverse().join('');
 }
 
-//Convertit en caractères ascii
+/**
+ * Converts the string into ASCII characters.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {Array} - An array of ASCII codes corresponding to each character in the string.
+ */
 const modToAscii = (maColonne, randomIndex) => {
 	return maColonne._dataList[randomIndex].split('').map(char => char.charCodeAt(0));
 }
 
-//Tronque le mot apres le deuxième caractère
+/**
+ * Truncates the word after the second character.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - The truncated string.
+ */
 const modTrunkAt2 = (maColonne, randomIndex) => {
 	return maColonne._dataList[randomIndex].slice(0, 3);
 }
 
-//Répète le mot une deuxième fois
+/**
+ * Repeats the word twice.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - The word repeated twice.
+ */
 const modRepeat = (maColonne, randomIndex) => {
 	return maColonne._dataList[randomIndex].repeat(2);
 }
 
-// ajout d'un chiffre a la fin du mot
+/**
+* Adds a random number at the end of the word.
+* @param {Object} maColonne - The column object.
+* @param {number} randomIndex - The index of the random item in the data list.
+* @returns {string} - The word with a random number appended.
+*/
 const modAddNb = (maColonne, randomIndex) => {
 	return maColonne._dataList[randomIndex] + Math.floor(Math.random() * 10);
 }
 
-//Tout le mot est passe en maj
+/**
+* Converts the whole word to uppercase.
+* @param {Object} maColonne - The column object.
+* @param {number} randomIndex - The index of the random item in the data list.
+* @returns {string} - The string in uppercase.
+*/
 const modToCap = (maColonne, randomIndex) => {
 	return 	maColonne._dataList[randomIndex].toUpperCase();
 }
 
-//passage des majuscules en minuscule
+/**
+ * Converts all uppercase letters to lowercase.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - The string in lowercase.
+ */
 const modAllLow = (maColonne, randomIndex) => {
 	return 	maColonne._dataList[randomIndex].toLowerCase();
 }
 
-//ajout de lettres a la fin
+/**
+ * Adds letters ("yz") to the end of the word.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - The word with "yz" appended.
+ */
 const modAddLetters = (maColonne, randomIndex) => {
 	return 	maColonne._dataList[randomIndex] + "yz";
 }
 
 /*******************************
- * fonctions pour les nombres
+ * Functions for manipulating numbers
  ********************************/
-//max d'un non signé sur 64 bits
+
+/**
+ * Returns the maximum value of an unsigned 64-bit integer.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {number} - The maximum value of an unsigned 64-bit integer.
+ */
 const modToMax = (maColonne, randomIndex) => {
 	return 18446744073709551615;
 }
 
-// Conversion du nombre en caractère ASCII
+/**
+ * Converts a number to an ASCII character.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - A random ASCII character.
+ */
 const modAscii = (maColonne, randomIndex) => {
 	return String.fromCharCode(Math.floor(Math.random() * (122 - 58) + 58));
 }
 
-//ajout de la lettre o a la fin
+/**
+ * Adds the letter "o" at the end of the number.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - The number with "o" appended.
+ */
 const modAddO = (maColonne, randomIndex) => {
 	return 	maColonne._dataList[randomIndex]+"o";
 }
 
-//ajout de deux virgules
+/**
+ * Adds two commas in the number.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - The formatted number with two commas.
+ */
 const modAddComma = (maColonne, randomIndex) => {
 	return 	maColonne._dataList[randomIndex].toLocaleString('de-DE').replace(',', ',,') + (maColonne._dataList[randomIndex] &lt; 1000 ? ',,' : '');
 }
 
-//Passe au negatif
+/**
+ * Converts the number to negative.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {number} - The negative value of the number.
+ */
 const modToNegativ = (maColonne, randomIndex) => {
 	return 	-maColonne._dataList[randomIndex];
 }
 
+/**
+ * Returns "NaN".
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - The string "NaN".
+ */
 const modNaN = (maColonne, randomIndex) => {
 	return "NaN";
 }
 
 /*******************************
- * fonctions pour les nombres et les string
+ * Functions for both numbers and strings
  ********************************/
 
-//Nom vide
+/**
+ * Returns an empty string.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - An empty string.
+ */
 const modToEmpty = (maColonne, randomIndex) => {
 	return "";
 }
 
-//Ajoute des + entre chaque caractère
+/**
+ * Adds "+" between each character of the word.
+ * @param {Object} maColonne - The column object.
+ * @param {number} randomIndex - The index of the random item in the data list.
+ * @returns {string} - The string with "+" added between each character.
+ */
 const modAddPlus = (maColonne, randomIndex) => {
 	return	maColonne._dataList[randomIndex].toString().split('').join('+'); 
 }
 
+/**
+ * Applies a random modification to a specific entry in a column's data list.
+ * The modification is selected from a predefined set of functions that operate on strings.
+ * 
+ * @param {Column} column - The column object containing the data list.
+ * @param {number} randomIndex - The index of the data entry in the column's data list to be modified.
+ * @returns {string} - The modified string from the selected random function.
+ */
 const applyRandomModificationStr = (column, randomIndex) => {
-	// Liste des fonctions disponibles
-	//retournent une string
+	// List of available modification functions that return a string
 	const modifications = [
 	  modMoveLetter,
 	  modInverseName,
@@ -183,29 +279,46 @@ const applyRandomModificationStr = (column, randomIndex) => {
 	  modAddLetters
 	];
 
-	// Choix aléatoire et appel d'une fonction
+	// Randomly choose one modification function from the list
 	const randFunc = Math.floor(Math.random() * modifications.length);
+	// Apply and return the result of the selected random modification function
 	return modifications[randFunc](column, randomIndex);
 }
 
+/**
+ * Adds errors to the column's data list by modifying a random selection of entries.
+ * The number of errors added is determined by the column's `_nbErrors` property.
+ * The function ensures that errors are not added to the same index more than once.
+ * 
+ * @param {Column} column - The column object where errors will be added.
+ * @returns {Column} - The modified column object with errors added.
+ */
 const addErrorsString = (column) => {
 	column.setErrors = (nbErrors)=>{
 		Array(nbErrors).fill(0).map(()=>{
-			let randomIndex = Math.floor(Math.random()*column._dataList.length);  //Choix d'une donnée de la liste à corrompre
+			let randomIndex = Math.floor(Math.random()*column._dataList.length); // Randomly choose an index to corrupt
+			// If the index hasn't been corrupted already, modify it
 			if(!column._errorIndices.includes(randomIndex)){
 				column._dataList[randomIndex] = applyRandomModificationStr(column, randomIndex); 
 				column._errorIndices.push(randomIndex);
 			}
 		});
 	}
-	column.setErrors(column._nbErrors);
+	column.setErrors(column._nbErrors); // Add the predefined number of errors to the column
 	
-	return column;
+	return column; // Return the column with the added errors
 };
 
+/**
+ * Applies a random modification to a specific entry in a column's data list, where the data is numerical.
+ * The modification is selected from a predefined set of functions that operate on numbers.
+ * 
+ * @param {Column} column - The column object containing the data list.
+ * @param {number} randomIndex - The index of the data entry in the column's data list to be modified.
+ * @returns {*} - The modified value, which can be a number or a string depending on the selected modification function.
+ */
 const applyRandomModificationNb = (column, randomIndex) => {
-	// Liste des fonctions disponibles
-	//retournent une ligne pour la colonne
+	// List of available modification functions that return a modified number or string
 	const modifications = [
 	  modToMax,
 	  modAscii,
@@ -217,11 +330,19 @@ const applyRandomModificationNb = (column, randomIndex) => {
 	  modNaN
 	];
 
-	// Choix aléatoire et appel d'une fonction
+	// Randomly choose one modification function from the list
 	const randFunc = Math.floor(Math.random() * modifications.length);
+	// Apply and return the result of the selected random modification function
 	return modifications[randFunc](column, randomIndex);
 }
 
+/**
+ * Adds a specified number of errors to the numeric data of a column by modifying random entries.
+ * Each modification is applied to the data using a random modification function.
+ * 
+ * @param {Column} column - The column object containing the data list and error tracking information.
+ * @returns {Column} - The modified column object with errors applied.
+ */
 const addErrorsNumber = (column) => {
 	column.setErrors = (nbErrors)=>{
 		Array(nbErrors).fill(0).map(()=>{
@@ -237,25 +358,37 @@ const addErrorsNumber = (column) => {
 	return column;
 };
 
-const createProba = (size)=>{ //Nombres entre 10 et 100
-	let maColonne = new Column(size); //creation d'un objet colonne
-	//remplissage de la colonne
+/**
+ * Creates a column with random probability values between 10 and 100.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random probability values and errors.
+ */
+const createProba = (size)=>{
+	let maColonne = new Column(size); // Create a new Column object
+	// Fill the column with random probability values between 10 and 100
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return Math.random()*(100-10)+10;
 	});
-	//insertion d'erreurs
+	// Insert errors into the column
 	maColonne.setErrors(maColonne._nbErrors);
 	return maColonne;
 }
 
-const createSocMedias = (size)=>{//Reseaux sociaux
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random social media names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with social media names and errors.
+ */
+const createSocMedias = (size)=>{
+	let maColonne = new Column(size);// Create a new Column object
 	maColonne._title = "Reseau social";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return socialNetworks[Math.floor(Math.random() * socialNetworks.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	maColonne.setErrors = (nbErrors)=>{
 		Array(nbErrors).fill(0).map(()=>{
 			let randomIndex = Math.floor(Math.random()*maColonne._dataList.length);  //Choix d'une donnée de la liste à corrompre
@@ -267,172 +400,259 @@ const createSocMedias = (size)=>{//Reseaux sociaux
 	return maColonne;
 }
 
-const createYears = (size)=>{//Anee entre 1800 et 2024
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random years between 1800 and 2024.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random years and errors.
+ */
+const createYears = (size)=>{
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Année";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return Math.floor(Math.random() * (2025 - 1800) + 1800);
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsNumber(maColonne);
 }
 
-const createNaturals = (size)=>{//Entier naturel entre 0 et 200
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random natural numbers between 0 and 200.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random natural numbers and errors.
+ */
+const createNaturals = (size)=>{
+	let maColonne = new Column(size);// Create a new Column object
 	maColonne._title = "Nombre d'occurrences";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return Math.floor(Math.random() * (200 - 0));
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsNumber(maColonne);
 }
 
-const createCountries = (size)=>{//Pays
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random country names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random country names and errors.
+ */
+const createCountries = (size)=>{
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Pays";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return countries[Math.floor(Math.random() * countries.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsString (maColonne);
 }
 
-const createCities = (size)=>{//grandes villes
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random city names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random city names and errors.
+ */
+const createCities = (size)=>{
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Villes";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return cities[Math.floor(Math.random() * cities.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsString (maColonne);
 }
 
-const createNames = (size)=>{//Prenoms H/F/M
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random first names (Male/Female/Mixte).
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random first names and errors.
+ */
+const createNames = (size)=>{
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Noms";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return names[Math.floor(Math.random() * names.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsString (maColonne);
 }
 
-const createVegetables = (size)=>{//legumes
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random vegetable names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random vegetable names and errors.
+ */
+const createVegetables = (size)=>{
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Légumes";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return vegetables[Math.floor(Math.random() * vegetables.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsString (maColonne);
 }
 
-
-const createSports = (size)=>{//sports de tous types
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random sports names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random sports names and errors.
+ */
+const createSports = (size)=>{
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Sports";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return sports[Math.floor(Math.random() * sports.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsString (maColonne);
 }
 
-
-const createClimates = (size)=>{//climats
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random climate names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random climate names and errors.
+ */
+const createClimates = (size)=>{
+	let maColonne = new Column(size);// Create a new Column object
 	maColonne._title = "Climat";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return climates[Math.floor(Math.random() * climates.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsString (maColonne);
 }
 
-const createCoulors = (size)=>{//couleurs
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random color names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random color names and errors.
+ */
+const createColors = (size)=>{
+	let maColonne = new Column(size);// Create a new Column object
 	maColonne._title = "Couleur";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return colors[Math.floor(Math.random() * colors.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsString (maColonne);
 }
 
-const createCost = (size)=>{//Cout moyen floattant précis a une decimale entre 1 et 300
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random cost values (float) between 1 and 300.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random cost values and errors.
+ */
+const createCost = (size)=>{
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Coût moyen";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return parseFloat((Math.random() * (300 - 1)+1).toFixed(2));
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsNumber(maColonne);
 }
 
-const createLifeExpectancy = (size)=>{//Esperance de vie entre 3 et 80 ans
-	let maColonne = new Column(size); //creation d'un objet colonne
+/**
+ * Creates a column with random life expectancy values between 3 and 80 years.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random life expectancy values and errors.
+ */
+const createLifeExpectancy = (size)=>{
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Esperance de vie (années)";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return Math.floor(Math.random() * (80 - 3) + 3);
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsNumber(maColonne);
 }
 
+/**
+ * Creates a column with random job names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random job names and errors.
+ */
 const createJobs = (size)=>{//Metiers
-	let maColonne = new Column(size); //creation d'un objet colonne
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Métier";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return jobs[Math.floor(Math.random() * jobs.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsString (maColonne);
 }
 
+/**
+ * Creates a column with random animal names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random animal names and errors.
+ */
 const createAnimals = (size)=>{//Animaux
-	let maColonne = new Column(size); //creation d'un objet colonne
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Animal";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return animals[Math.floor(Math.random() * animals.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsString (maColonne);
 }
 
+/**
+ * Creates a column with random music genre names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random music genre names and errors.
+ */
 const createMusics = (size)=>{//Genres de musiques
-	let maColonne = new Column(size); //creation d'un objet colonne
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Genre musical";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return music[Math.floor(Math.random() * music.length)];
 	})
-	//insertion d'erreurs
+	// Insert errors into the column
 	return addErrorsString (maColonne);
 }
 
-
+/**
+ * Creates a column with random month names.
+ * 
+ * @param {number} size - The size of the column (number of rows).
+ * @returns {Column} - The column object filled with random month names and errors.
+ */
 const createMonths = (size)=>{//Mois de l'annee
-	let maColonne = new Column(size); //creation d'un objet colonne
+	let maColonne = new Column(size); // Create a new Column object
 	maColonne._title = "Mois";
-	//remplissage de la colonne
+	// Fill the column
 	maColonne._dataList = maColonne._dataList.map(() => {
 		return months[Math.floor(Math.random() * months.length)];
 	})
-	//insertion d'erreurs
-	return addErrorsString (maColonne);
+	// Insert errors into the column
+	return addErrorsString(maColonne);
 }</code></pre>
         </article>
     </section>
@@ -449,7 +669,7 @@ const createMonths = (size)=>{//Mois de l'annee
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Dec 14 2024 09:14:24 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Dec 14 2024 09:21:01 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
