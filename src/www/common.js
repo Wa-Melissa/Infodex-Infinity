@@ -38,6 +38,7 @@ const sessionTimePassed = new sessionHandler("time_passed");
 const sessionEventsPassed = new sessionHandler("events_passed");
 const sessionEmailsDelete = new sessionHandler("emails_detele");
 const sessionDesktopAppExitLocked = new sessionHandler("desktop_app_exit_locked");
+const sesssionLastTimePassed = new sessionHandler("last_time_passsed");
 
 /**
  * Redirects caller EIC to a Page.
@@ -84,6 +85,7 @@ const initGameSession = (difficulty  = 1) => {
 	sessionEmailsDelete.v = [];
 	sessionLastOpenedEmail.v = -1; // -1 is an instable value
 	sessionDesktopAppExitLocked.v = false;
+	sesssionLastTimePassed.v = 0;
 }
 
 /**
