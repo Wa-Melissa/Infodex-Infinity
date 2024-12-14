@@ -18,7 +18,7 @@ build_application_linux:
     - npm run make
     - mkdir -p out/make/makeself/x64/
     - echo "echo Starting Infodex-Infinity... ; ./infodex-infinity --no-sandbox >/dev/null 2>&1" > out/infodex-infinity-linux-x64/makeselfstartup.sh
-    - makeself --nomd5 --nocomp --nocrc --nox11 out/infodex-infinity-linux-x64/ out/make/makeself/x64/infodex-infinity.run infodex-infinity bash makeselfstartup.sh
+    - makeself --nomd5 --nocrc --nox11 out/infodex-infinity-linux-x64/ out/make/makeself/x64/infodex-infinity.run infodex-infinity bash makeselfstartup.sh
     - rm -r out/infodex-infinity-linux-x64
   artifacts:
     paths:
