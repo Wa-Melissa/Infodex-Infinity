@@ -7,7 +7,7 @@ variables:
   NODE_ENV: production
 
 before_script:
-  - apt-get update && apt-get install -y dpkg-dev fakeroot
+  - apt-get update && apt-get install -y dpkg-dev fakeroot zip
   - npm install --include=dev
 
 build_application:
