@@ -7,14 +7,15 @@ variables:
   NODE_ENV: production
 
 before_script:
-  - apt-get update && apt-get install -y dpkg-dev fakeroot zip
+  - apt-get update && apt-get install -y dpkg-dev fakeroot zip wine mono
   - npm install --include=dev
 
-build_application:
+build_application_linux:
   when: manual
   stage: build
   script:
     - npm run make
+    - npm run make -- --platform win32
     - rm -r out/infodex-infinity-linux-x64
   artifacts:
     paths:
