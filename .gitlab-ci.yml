@@ -9,9 +9,6 @@ stages:
 variables:
   NODE_ENV: production
 
-before_script:
-  - npm install -g electron-forge
-
 install_dependencies:
   stage: install
   script:
