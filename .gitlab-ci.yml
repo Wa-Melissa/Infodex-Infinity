@@ -1,22 +1,2 @@
-image: node:22
-
-stages:
-  - build
-
-variables:
-  NODE_ENV: production
-
-before_script:
-  - apt-get update && apt-get install -y dpkg-dev fakeroot zip
-  - npm install --include=dev
-
-build_application_linux:
-  only:
-    - tags 
-  stage: build
-  script:
-    - npm run make
-    - rm -r out/infodex-infinity-linux-x64
-  artifacts:
-    paths:
-      - out/
+# The Docker image that will be used to build your app
+image: "image: alpine:latest"
