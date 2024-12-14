@@ -1,3 +1,7 @@
+/**
+ * @module www_login_renderer
+ */
+
 const DOM = createDOMReferences({
 	clock: "#clock",
 	black_fader: "#black-fader"

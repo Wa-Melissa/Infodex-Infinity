@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: desktop/app/mails/app.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: desktop/app/mails/app.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @module www_desktop_app_mails
  */
 const DOM = createDOMReferences({
@@ -54,7 +82,7 @@ const afficherMail = (mail, li) => {
     // add le nom de l'expéditeur
     const nameElement = document.createElement('span');
     if (mail.lu) nameElement.innerHTML = `${mail.nom}`;
-    else nameElement.innerHTML = `<strong>${mail.nom}</strong>`;
+    else nameElement.innerHTML = `&lt;strong>${mail.nom}&lt;/strong>`;
 
     //ajoute le bouton et le nom au conteneur
     nameContainer.appendChild(btnLu);
@@ -66,10 +94,10 @@ const afficherMail = (mail, li) => {
 
     // Ajoute l'objet et la date
     const contentElement = document.createElement('div');
-    if (mail.lu) contentElement.innerHTML = `<em>${mail.objet}</em>`;
-    else contentElement.innerHTML = `<strong><em>${mail.objet}</em></strong>`;
+    if (mail.lu) contentElement.innerHTML = `&lt;em>${mail.objet}&lt;/em>`;
+    else contentElement.innerHTML = `&lt;strong>&lt;em>${mail.objet}&lt;/em>&lt;/strong>`;
     
-    contentElement.innerHTML += `<span class="w3-right-align" style="float: right; width: auto;">${mail.date}</span>`;
+    contentElement.innerHTML += `&lt;span class="w3-right-align" style="float: right; width: auto;">${mail.date}&lt;/span>`;
 
     // on ajoute le contenu à l'élément li
     li.appendChild(contentElement);
@@ -129,7 +157,7 @@ const afficherContenuMail = (mail, li) => {
         sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
     }
     sessionLastOpenedEmail.v = index;
-    const contenuFormate = mail.contenu.replace(/\n/g, "<br>");
+    const contenuFormate = mail.contenu.replace(/\n/g, "&lt;br>");
     DOM.contenumail.innerHTML = "";
     const clone = DOM.mailTemplate.content.cloneNode(true);
     clone.querySelector(".mail-objet").innerHTML = mail.objet;
@@ -156,9 +184,9 @@ const switchFolder = (dossier) => {
         DOM.messageList.innerHTML = ''; // Vide la liste des messages
         DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
         DOM.contenumail.innerHTML = `
-        <div class ="w3-center">
-        <h2>Contenu de l'email</h2>
-        <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; // Remet le texte par défaut
+        &lt;div class ="w3-center">
+        &lt;h2>Contenu de l'email&lt;/h2>
+        &lt;p>Veuillez sélectionner un email pour afficher son contenu.&lt;/p>`; // Remet le texte par défaut
         DOM.boitereception.classList.remove('active'); // Pour mettre le fond en gris selon où on est
         DOM.corbeille.classList.add('active'); 
         afficherMessagesDelete();
@@ -167,9 +195,9 @@ const switchFolder = (dossier) => {
         DOM.messageList.innerHTML = ''; // Vide la liste des messages
         DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
         DOM.contenumail.innerHTML = `
-        <div class ="w3-center">
-        <h2>Contenu de l'email</h2>
-        <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; // Remet le texte par défaut
+        &lt;div class ="w3-center">
+        &lt;h2>Contenu de l'email&lt;/h2>
+        &lt;p>Veuillez sélectionner un email pour afficher son contenu.&lt;/p>`; // Remet le texte par défaut
         DOM.boitereception.classList.add('active');
         DOM.corbeille.classList.remove('active');
         afficherMessages();
@@ -215,7 +243,7 @@ const recupererEmailsAleatoires = () => {
         const mailsRestants = [];
         
         // ajoute les emails dans mailsrestants
-        for (let i = 0; i < emailsFromSource.length; i++) {
+        for (let i = 0; i &lt; emailsFromSource.length; i++) {
             mailsRestants.push(emailsFromSource[i]);
             if (mailsRestants.length + 1> nbEmail) break; // on arrêtes on a assez d'emails
         }
@@ -233,7 +261,7 @@ const mettreAJourCompteurNonLus = () => {
     let nonLus = 0; 
 
     // Parcourt tous les emails
-    for (let i = 0; i < emails.length; i++) {
+    for (let i = 0; i &lt; emails.length; i++) {
         if (!emails[i].lu) { 
             nonLus++;
         }
@@ -265,9 +293,9 @@ const supprimerMail = (mail) => {
         sessionEmailsDelete.v = emailsDelete;
         DOM.messageList.innerHTML = '';
         DOM.contenumail.innerHTML = `
-        <div class ="w3-center">
-        <h2>Contenu de l'email</h2>
-        <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; 
+        &lt;div class ="w3-center">
+        &lt;h2>Contenu de l'email&lt;/h2>
+        &lt;p>Veuillez sélectionner un email pour afficher son contenu.&lt;/p>`; 
 
         // Met à jour l'affichage
         afficherMessages();
@@ -275,12 +303,12 @@ const supprimerMail = (mail) => {
         
 
         // // Réinitialise le contenu affiché (si on supprime un email sélectionné)
-        // if (lastSelectedLi && lastSelectedLi.dataset.id === mail.id) {
+        // if (lastSelectedLi &amp;&amp; lastSelectedLi.dataset.id === mail.id) {
         //     DOM.contenumail.innerHTML = `
-        //     <div class="w3-center">
-        //         <h2>Contenu de l'email</h2>
-        //         <p>Veuillez sélectionner un email pour afficher son contenu.</p>
-        //     </div>`;
+        //     &lt;div class="w3-center">
+        //         &lt;h2>Contenu de l'email&lt;/h2>
+        //         &lt;p>Veuillez sélectionner un email pour afficher son contenu.&lt;/p>
+        //     &lt;/div>`;
         //     lastSelectedLi = null;
         // }
     }
@@ -307,7 +335,7 @@ const afficherContenuMailDelete = (mail, li) => {
         sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
     }
 
-    const contenuFormate = mail.contenu.replace(/\n/g, "<br>");
+    const contenuFormate = mail.contenu.replace(/\n/g, "&lt;br>");
     DOM.contenumail.innerHTML = "";
     const clone = DOM.mailTemplateDelete.content.cloneNode(true);
     clone.querySelector(".mail-objet").innerHTML = mail.objet;
@@ -353,3 +381,26 @@ TODO
 
 
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-www_common.html">www_common</a></li><li><a href="module-www_desktop_app_agenda.html">www_desktop_app_agenda</a></li><li><a href="module-www_desktop_app_dataviewer.html">www_desktop_app_dataviewer</a></li><li><a href="module-www_desktop_app_dataviewer_maker.html">www_desktop_app_dataviewer_maker</a></li><li><a href="module-www_desktop_app_mails.html">www_desktop_app_mails</a></li><li><a href="module-www_desktop_renderer.html">www_desktop_renderer</a></li><li><a href="module-www_gameover_renderer.html">www_gameover_renderer</a></li><li><a href="module-www_login_renderer.html">www_login_renderer</a></li><li><a href="module-www_login_renderer2.html">www_login_renderer2</a></li><li><a href="module-www_login_renderer3.html">www_login_renderer3</a></li></ul><h3>Classes</h3><ul><li><a href="module-www_desktop_app_dataviewer_maker-Column.html">Column</a></li><li><a href="module-www_desktop_app_dataviewer-Dataset.html">Dataset</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Dec 14 2024 09:14:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Global</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Global</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addToBase"><span class="type-signature"></span>addToBase<span class="signature">(nbCorrupt, dataset)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates the number of corrupted data cells and the total number of data cells in the dataset in two session variables
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>nbCorrupt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of corrupted cells to add.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dataset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Dataset.html">Dataset</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The dataset containing the columns and rows.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="desktop_app_dataViewer_app.js.html">desktop/app/dataViewer/app.js</a>, <a href="desktop_app_dataViewer_app.js.html#line275">line 275</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="convertPercentageToErrorRate"><span class="type-signature"></span>convertPercentageToErrorRate<span class="signature">(percentage)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Converts a percentage (0-100) to an error rate within a range.
+Higher percentages give lower error rates.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>percentage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The percentage to convert.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="desktop_app_dataViewer_app.js.html">desktop/app/dataViewer/app.js</a>, <a href="desktop_app_dataViewer_app.js.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The error rate in [minRangeValue, maxRangeValue].
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="selectionEnd"><span class="type-signature"></span>selectionEnd<span class="signature">(selectionList, dataset)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Counts the errors found and not found once the selection is validated.
+This function is triggered when the user clicks the "correct the data" button. It compares the selected cells with error indices in the dataset.
+It calculates the number of correct and incorrect errors and updates the satisfaction, skills, and time passed accordingly.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>selectionList</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The list of selected cells with their row and column indices.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dataset</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Dataset.html">Dataset</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The dataset containing the columns with errors.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="desktop_app_dataViewer_app.js.html">desktop/app/dataViewer/app.js</a>, <a href="desktop_app_dataViewer_app.js.html#line196">line 196</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="selectionManagement"><span class="type-signature"></span>selectionManagement<span class="signature">(selectionList)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Manages the selection of table cells when clicked, updating the selection list and button text accordingly.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>selectionList</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The list that stores the coordinates of selected cells.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="desktop_app_dataViewer_app.js.html">desktop/app/dataViewer/app.js</a>, <a href="desktop_app_dataViewer_app.js.html#line142">line 142</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-www_common.html">www_common</a></li><li><a href="module-www_desktop_app_agenda.html">www_desktop_app_agenda</a></li><li><a href="module-www_desktop_renderer.html">www_desktop_renderer</a></li><li><a href="module-www_gameover_renderer.html">www_gameover_renderer</a></li><li><a href="module-www_login_renderer.html">www_login_renderer</a></li><li><a href="module-www_login_renderer2.html">www_login_renderer2</a></li><li><a href="module-www_login_renderer3.html">www_login_renderer3</a></li></ul><h3>Classes</h3><ul><li><a href="Column.html">Column</a></li><li><a href="Dataset.html">Dataset</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addToBase">addToBase</a></li><li><a href="global.html#convertPercentageToErrorRate">convertPercentageToErrorRate</a></li><li><a href="global.html#selectionEnd">selectionEnd</a></li><li><a href="global.html#selectionManagement">selectionManagement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Dec 14 2024 09:10:48 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
