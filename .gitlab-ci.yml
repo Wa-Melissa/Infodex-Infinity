@@ -13,7 +13,7 @@
 image: node:current-bookworm
 
 before_script:
-  - apt install dpkg
+  - apt install dpkg fakeroot
   - npm install
 
 build1:
