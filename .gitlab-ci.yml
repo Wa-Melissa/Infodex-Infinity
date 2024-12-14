@@ -1,4 +1,4 @@
-image: electronuserland/builder:wine # ou une version Node.js adaptée à votre projet
+image: node:22 # ou une version Node.js adaptée à votre projet
 
 stages:
   - build
@@ -15,7 +15,6 @@ build_application_linux:
   stage: build
   script:
     - npm run make
-    - npm run make -- --platform win32
     - rm -r out/infodex-infinity-linux-x64
   artifacts:
     paths:
