@@ -11,6 +11,7 @@ before_script:
   - npm install --include=dev
 
 build_application:
+  when: manual
   stage: build
   script:
     - npm run make
