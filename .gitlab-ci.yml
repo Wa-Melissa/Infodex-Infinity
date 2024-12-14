@@ -11,8 +11,6 @@ before_script:
   - npm install --include=dev
 
 build_application_linux:
-  only:
-    - tags 
   stage: build
   script:
     - npm run make
