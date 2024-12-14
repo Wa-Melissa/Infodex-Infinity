@@ -133,24 +133,19 @@ window.addEventListener("load", async () => {
 
 
 //React to session values changes
-window.addEventListener("storage", (event) => { //Event to database corruption
-	if (event.key != sessionDbTotalCells.innerKey) return;
+sessionDbTotalCells.attachEvent((event) => {  //Event to detect database corruption > 5%
 	if ((sessionDbCorruptedCells.v / sessionDbTotalCells.v) < 0.05) return;
 	endGameSession(false);
 })
-window.addEventListener("storage", (event) => { //Event to detect satisfaction drop
-	if (event.key != sessionSatisfaction.innerKey) return;
+sessionSatisfaction.attachEvent((event) => { //Event to detect satisfaction drop below 0
 	if (sessionSatisfaction.v > 0) return;
 	endGameSession(false);
 })
-window.addEventListener("storage", (event) => { //Event to detect win
-	if (event.key != sessionSatisfaction.innerKey && event.key != sessionSkill.innerKey) return;
+sessionSatisfaction.attachEvent((event) => { //Event to detect win
 	if (sessionSatisfaction.v <= 80 || sessionSkill.v <= 80) return;
 	endGameSession(true);
 })
-
-window.addEventListener("storage", (event) => { //Event to detect new day
-	if (event.key != sessionTimePassed.innerKey) return;
+sessionTimePassed.attachEvent((event) => { //Event to update clock and detect new day
 	updateClock();
 	
 	if (Math.floor(event.oldValue / 8) != Math.floor(event.newValue / 8)) Swal.fire({

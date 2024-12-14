@@ -6,6 +6,7 @@
  * Class for handling sessions using sessionStorage.
  */
 class sessionHandler {
+	innerKey = null;
     /**
      * Creates an instance of sessionHandler.
      * @param {string} key - The key used to store data in sessionStorage.
@@ -29,6 +30,18 @@ class sessionHandler {
     set v(val) {
         sessionStorage.setItem(this.innerKey, JSON.stringify(val));
     }
+
+    /**
+     * Creates a Event Handler (using the window storage event)
+     * @param {Function} fn - The function to be executed on value change.
+     */
+	attachEvent(fn) {
+		let innerKey = structuredClone(this.innerKey);
+		window.addEventListener("storage", (event) => {
+			if (event.key != innerKey) return;
+			fn(event);
+		})
+	}
 }
 
 /**
@@ -58,6 +71,18 @@ class storageHandler {
     set v(val) {
         localStorage.setItem(this.innerKey, JSON.stringify(val));
     }
+
+	/**
+     * Creates a Event Handler (using the window storage event)
+     * @param {Function} fn - The function to be executed on value change.
+     */
+	attachEvent(fn) {
+		let innerKey = structuredClone(this.innerKey);
+		window.addEventListener("storage", (event) => {
+			if (event.key != innerKey) return;
+			fn(event);
+		})
+	}
 }
 
 
