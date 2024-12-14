@@ -9,5 +9,5 @@ variables:
 build_application:
   stage: build
   script:
-    - npm install
+    - npm install --include=dev
     - npm run make
