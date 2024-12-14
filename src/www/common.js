@@ -2,29 +2,64 @@
  * @module www_common
  */
 
+/**
+ * Class for handling sessions using sessionStorage.
+ */
 class sessionHandler {
-	constructor(key) {
-		this.innerKey = key;
-	}
-	get v() {
-		return JSON.parse(sessionStorage.getItem(this.innerKey));
-	}
-	set v(val) {
-		sessionStorage.setItem(this.innerKey, JSON.stringify(val));
-	}
+    /**
+     * Creates an instance of sessionHandler.
+     * @param {string} key - The key used to store data in sessionStorage.
+     */
+    constructor(key) {
+        this.innerKey = key;
+    }
+
+    /**
+     * Gets the value associated with the key in sessionStorage.
+     * @returns {Object|null} The stored value, or null if no value is found.
+     */
+    get v() {
+        return JSON.parse(sessionStorage.getItem(this.innerKey));
+    }
+
+    /**
+     * Sets the value associated with the key in sessionStorage.
+     * @param {Object} val - The value to store in sessionStorage.
+     */
+    set v(val) {
+        sessionStorage.setItem(this.innerKey, JSON.stringify(val));
+    }
 }
 
+/**
+ * Class for handling local storage using localStorage.
+ */
 class storageHandler {
-	constructor(key) {
-		this.innerKey = key;
-	}
-	get v() {
-		return JSON.parse(localStorage.getItem(this.innerKey));
-	}
-	set v(val) {
-		localStorage.setItem(this.innerKey, JSON.stringify(val));
-	}	
+    /**
+     * Creates an instance of storageHandler.
+     * @param {string} key - The key used to store data in localStorage.
+     */
+    constructor(key) {
+        this.innerKey = key;
+    }
+
+    /**
+     * Gets the value associated with the key in localStorage.
+     * @returns {Object|null} The stored value, or null if no value is found.
+     */
+    get v() {
+        return JSON.parse(localStorage.getItem(this.innerKey));
+    }
+
+    /**
+     * Sets the value associated with the key in localStorage.
+     * @param {Object} val - The value to store in localStorage.
+     */
+    set v(val) {
+        localStorage.setItem(this.innerKey, JSON.stringify(val));
+    }
 }
+
 
 // Declare all session variables
 const sessionDbTotalCells = new sessionHandler("db_total_rows");
