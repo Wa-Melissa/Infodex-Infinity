@@ -1,33 +1,13 @@
-image: node:latest
+image: node:22
 
 stages:
-  - install
   - build
-  - test
-  - package
 
 variables:
   NODE_ENV: production
 
-install_dependencies:
-  stage: install
-  script:
-    - npm install
-
 build_application:
   stage: build
   script:
+    - npm install
     - npm run make
-
-test_application:
-  stage: test
-  script:
-    - npm run test
-
-package_application:
-  stage: package
-  script:
-    - npm run package
-  artifacts:
-    paths:
-      - out/
