@@ -13,6 +13,7 @@
 image: node:latest
 
 before_script:
+  - apt install dpkg fakeroot -y
   - npm install
 
 build1:
