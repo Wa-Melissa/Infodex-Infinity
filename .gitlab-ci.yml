@@ -11,7 +11,6 @@ variables:
 
 before_script:
   - apt-get update && apt-get install -y dpkg-dev fakeroot
-  - npm install -g electron-forge
 
 install_dependencies:
   stage: install
