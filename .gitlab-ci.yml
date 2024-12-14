@@ -1,13 +1,37 @@
-image: node:22
+image: node:22 # ou une version Node.js adaptée à votre projet
 
 stages:
+  - install
   - build
+  - test
+  - package
 
 variables:
   NODE_ENV: production
 
+before_script:
+  - apt-get update && apt-get install -y dpkg-dev fakeroot
+  - npm install -g electron-forge
+
+install_dependencies:
+  stage: install
+  script:
+    - npm install --include=dev
+
 build_application:
   stage: build
   script:
-    - npm install --include=dev
     - npm run make
+
+test_application:
+  stage: test
+  script:
+    - npm run test
+
+package_application:
+  stage: package
+  script:
+    - npm run package
+  artifacts:
+    paths:
+      - out/
