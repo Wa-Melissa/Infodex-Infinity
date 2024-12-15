@@ -19,9 +19,10 @@ build_deb:
   stage: makedeb
   script:
     - npm run make
+    - mv out/make/deb/x64/* ./infodex-infinity.deb
   artifacts:
     paths:
-      - out/make/deb/x64/
+      - infodex-infinity.deb
 
 build_makeself:
 #  only:
@@ -29,12 +30,11 @@ build_makeself:
   stage: makeself
   script:
     - npm run package
-    - mkdir -p out/makeself/x64/
-    - echo "echo Starting Infodex-Infinity... ; ./infodex-infinity --no-sandbox >/dev/null 2>&1" > out/infodex-infinity-linux-x64/makeselfstartup.sh
-    - makeself --nomd5 --nocrc --nox11 out/infodex-infinity-linux-x64/ out/makeself/x64/infodex-infinity.run infodex-infinity sh makeselfstartup.sh
+    - echo "clear ; echo Starting Infodex-Infinity... ; ./infodex-infinity --no-sandbox >/dev/null 2>&1" > out/infodex-infinity-linux-x64/makeselfstartup.sh
+    - makeself --nomd5 --nocrc --nox11 out/infodex-infinity-linux-x64/ ./infodex-infinity.run infodex-infinity sh makeselfstartup.sh
   artifacts:
     paths:
-      - out/makeself/x64/
+      - infodex-infinity.run
 
 build_tar:
 #  only:
@@ -42,8 +42,7 @@ build_tar:
   stage: maketar
   script:
     - npm run package
-    - mkdir -p out/maketar/x64/
-    - tar -czvf out/maketar/x64/infodex-infinity.tar.gz out/infodex-infinity-linux-x64/
+    - tar -czvf infodex-infinity.tar.gz out/infodex-infinity-linux-x64/
   artifacts:
     paths:
-      - out/maketar/x64/
+      - infodex-infinity.tar.gz
