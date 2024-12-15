@@ -10,7 +10,7 @@ variables:
   NODE_ENV: production
 
 before_script:
-  - apt-get update && apt-get install -y dpkg-dev fakeroot zip makeself
+  - apt-get update && apt-get install -y dpkg-dev fakeroot makeself xz
   - npm install --include=dev
 
 build_deb:
@@ -42,7 +42,7 @@ build_tar:
   stage: maketar
   script:
     - npm run package
-    - GZIP=-9 tar -czvf infodex-infinity.tar.gz out/infodex-infinity-linux-x64/
+    - XZ_OPT=-e9 tar cJf infodex-infinity.tar.xz out/infodex-infinity-linux-x64/
   artifacts:
     paths:
       - infodex-infinity.tar.gz
