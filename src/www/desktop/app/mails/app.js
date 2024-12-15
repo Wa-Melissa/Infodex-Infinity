@@ -56,7 +56,6 @@ const afficherMail = (mail, li) => {
     if (mail.lu) nameElement.innerHTML = `${mail.nom}`;
     else nameElement.innerHTML = `<strong>${mail.nom}</strong>`;
 
-    //ajoute le bouton et le nom au conteneur
     nameContainer.appendChild(btnLu);
     nameContainer.appendChild(nameElement);
 
@@ -95,8 +94,8 @@ function afficherMessages() {
 }*/
 
 const afficherMessages = () => {
-    
-    emails.map(mail => {
+    DOM.messageList.innerHTML = ''; // Vide la liste des messages
+    emails.forEach(mail => {
         const li = document.createElement('li');
         li.style.borderBottom = "1px solid lightgray";
         li.style.cursor = "pointer";
@@ -106,8 +105,8 @@ const afficherMessages = () => {
         li.addEventListener('click', () => afficherContenuMail(mail, li));
         DOM.messageList.appendChild(li);
     });
-    
-}
+};
+
 
 // Colonne à droite
 const afficherContenuMail = (mail, li) => {
@@ -136,7 +135,11 @@ const afficherContenuMail = (mail, li) => {
     clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
     clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
     clone.querySelector(".mail-contenu").innerHTML = contenuFormate;
-    clone.querySelector(".mail-pieces-jointes-btn").innerHTML = mail.piecesJointes;
+    if (mail.id !== 0) { // Si ce n'est pas le mail de Zimmerman, affiche les pièces jointes
+        clone.querySelector(".mail-pieces-jointes-btn").innerHTML = mail.piecesJointes;
+    } else {
+        clone.querySelector(".mail-pieces-jointes-btn").style.display = "none"; // Cache les pièces jointes pour le mail de Zimmerman
+    }
     DOM.contenumail.appendChild(clone);
 
     const trashIcon = document.getElementById("trash");
@@ -214,6 +217,13 @@ const recupererEmailsAleatoires = () => {
         // liste des mails qui restent sans doublons
         const mailsRestants = [];
         
+        // Place le mail avec l'ID 0 en premier
+        const mailZimmermann = emailsFromSource.find(mail => mail.id === 0);
+        emailsFromSource = emailsFromSource.filter(mail => mail.id !== 0); // Retire le mail de Zimmermann
+        if (mailZimmermann) {
+            emailsFromSource.unshift(mailZimmermann); // Place en première position
+        }
+
         // ajoute les emails dans mailsrestants
         for (let i = 0; i < emailsFromSource.length; i++) {
             mailsRestants.push(emailsFromSource[i]);
@@ -256,7 +266,7 @@ const supprimerMail = (mail) => {
     
     const index = emails.findIndex(item => item.id === mail.id); // on cherche l'inde du mail que l'on veut supp
     if (index !== -1) {
-        sessionSatisfaction.v -= 5;
+        if(mail.id !== 0) sessionSatisfaction.v -= 5;
         // on ajoute le mail à la liste des emails supp
         
         emailsDelete.push(emails[index]);
@@ -346,11 +356,10 @@ const verifIfDayPassed = () => {
         if (differenceTime > 0) {
             addEmailAfterDayPassed(differenceTime);
         }
-        // Met à jour le jour du dernier 
+        // Met à jour le jour du dernier
         sessionLastCheckedDay = currentDay;
-    }
+    }  
 };
-
 
 
 const addEmailAfterDayPassed = (differenceTime) => {
@@ -359,12 +368,12 @@ const addEmailAfterDayPassed = (differenceTime) => {
 
     // Filtre les e-mails qui sont dans aucuns des deux (delete & mails)
     let nouveauxEmails = mails.filter(mail => {
-        return !emails.some(e => e.id === mail.id) && !emailsDelete.some(e => e.id === mail.id); // si mon mail actuelle est pas == a ma liste et delete alors c good
+        return !emails.some(e => e.id === mail.id) && !emailsDelete.some(e => e.id === mail.id);
     });
 
     // Ajoute 3 nouveaux e-mails (si disponibles)
-    let emailsAjoutes = nouveauxEmails.slice(0, 3 * differenceTime );
-    emails.push(...emailsAjoutes);
+    let emailsAjoutes = nouveauxEmails.slice(0, 3 * differenceTime);
+    emails.unshift(...emailsAjoutes);
 
     // Met à jour les données et l'affichage
     sessionEmails.v = emails;
@@ -372,22 +381,10 @@ const addEmailAfterDayPassed = (differenceTime) => {
     afficherMessages();
     mettreAJourCompteurNonLus();
 };
- 
+
 recupererEmailsAleatoires();
 mettreAJourCompteurNonLus();
 verifIfDayPassed();
-
-/*  
-TODO
- - bouton lu/non lu  FAIT
- - mettre en forme (à droite et milieu) 
- - add metttre dans la corbeille
- - add gris FAIT
- - mail du Z généré automatique au début
- - mail où on est obligée d'ouvrir le mail du Z sinon peut pas
- - add les données de mélissa
- - cheff supreme departement
-*/
 
 
 

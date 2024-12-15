@@ -1,5 +1,16 @@
 const mails = [
     {
+        "id": 0,
+        "destinataire": "Moi",
+        "expediteur": "ma.zimmermann@unistra.fr",
+        "objet": "Bienvenue chez nous",
+        "contenu": "Bonjour, \n\n Bienvenue en tant que Data Librarian ! Je suis ravi de t’accueillir dans ce rôle essentiel. \n\nPour faciliter ta prise de fonction, une sélection de notes et de ressources laissées par ton prédécesseur est à ta disposition dans l'application 'notes' sur le bureau. Ces documents ont été pensés pour te guider dans tes premières étapes et t’aider à te familiariser avec les aspects clés du poste. Ils contiennent des repères utiles pour que tu puisses avancer sereinement. \n\nEncore une fois, bienvenue ! Je te souhaite beaucoup de succès dans cette nouvelle aventure. \n\nMathieu Zimmermann",
+        "date": "01-12-2024",
+        "heure": "10:00:00",
+        "nom": "Mathieu Zimmermann",
+        "lu": false
+    },
+    {
         "id": 1,
         "destinataire": "Moi",
         "expediteur": "jean.dupont@ventes.com",
