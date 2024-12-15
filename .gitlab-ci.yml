@@ -10,7 +10,7 @@ variables:
   NODE_ENV: production
 
 before_script:
-  - apt-get update && apt-get install -y dpkg-dev fakeroot makeself xz
+  - apt-get update && apt-get install -y dpkg-dev fakeroot makeself xz-utils
   - npm install --include=dev
 
 build_deb:
