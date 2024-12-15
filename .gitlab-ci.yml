@@ -1,8 +1,10 @@
 image: node:22
 
 stages:
-  - build
+  - makedeb
   - makeself
+  - maketar
+
 
 variables:
   NODE_ENV: production
@@ -11,25 +13,37 @@ before_script:
   - apt-get update && apt-get install -y dpkg-dev fakeroot zip makeself
   - npm install --include=dev
 
-build_application:
+build_deb:
 #  only:
 #    - tags 
-  stage: build
+  stage: makedeb
   script:
     - npm run make
-    - echo "echo Starting Infodex-Infinity... ; ./infodex-infinity --no-sandbox >/dev/null 2>&1" > out/infodex-infinity-linux-x64/makeselfstartup.sh
   artifacts:
     paths:
-      - out/make/
+      - out/make/deb/x64/
 
 build_makeself:
 #  only:
 #    - tags 
   stage: makeself
   script:
+    - npm run package
     - mkdir -p out/makeself/x64/
     - echo "echo Starting Infodex-Infinity... ; ./infodex-infinity --no-sandbox >/dev/null 2>&1" > out/infodex-infinity-linux-x64/makeselfstartup.sh
     - makeself --nomd5 --nocrc --nox11 out/infodex-infinity-linux-x64/ out/makeself/x64/infodex-infinity.run infodex-infinity sh makeselfstartup.sh
   artifacts:
     paths:
-      - out/makeself
+      - out/makeself/x64/
+
+build_tar:
+#  only:
+#    - tags 
+  stage: maketar
+  script:
+    - npm run package
+    - mkdir -p out/maketar/x64/
+    - tar -czvf out/maketar/x64/infodex-infinity.tar.gz out/infodex-infinity-linux-x64/
+  artifacts:
+    paths:
+      - out/maketar/x64/
