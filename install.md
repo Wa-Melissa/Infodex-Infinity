@@ -66,3 +66,9 @@
 
 **⚠️ Attention : ces instructions sont fournies à titre purement indicatif et sont volontairement imprécises. Nous ne recommandons pas ce type d'installation. Aucune assistance ne sera fournie pour les installations non officiellement prises en charge.**
 
+1. Assurez d'avoir installé Node.JS 22 et NPM.
+2. Clonez ce repository: `git clone https://git.unistra.fr/t3-les-autres-ind-cis/the-email-game/`
+3. Sautez à la dernière release (tag): `git checkout tags/vX.X.X`
+4. Installez les dépendances locales: `npm install --include=dev`
+5. Si nécessaire, configurez electron-forge en modifiant le fichier ./forge.config.js
+6. Lancez la génération: `npm run make`
