@@ -217,7 +217,7 @@ setTimeout(() => { // wait 1sec
 	//Show first message notification
 	Swal.fire({
 		position: "top",
-		title: "<b>Nouveau message</b>",
+		title: "<b>Nouveau mail</b>",
 		html: "<b>De:</b>\u00a0Mathieu\u00a0Zimmermann<br><b>Object</b>:\u00a0Bienvenue chez nous",
 		showConfirmButton: false,
 		icon: "warning",
