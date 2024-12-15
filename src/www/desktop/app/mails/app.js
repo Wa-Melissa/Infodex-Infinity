@@ -56,7 +56,8 @@ const afficherMail = (mail, li) => {
     if (mail.lu) nameElement.innerHTML = `${mail.nom}`;
     else nameElement.innerHTML = `<strong>${mail.nom}</strong>`;
 
-    //ajoute le bouton et le nom au conteneur
+    //ajo
+add email from zimmermanute le bouton et le nom au conteneur
     nameContainer.appendChild(btnLu);
     nameContainer.appendChild(nameElement);
 
@@ -200,7 +201,7 @@ const recupererEmailsAleatoires = () => {
 
         switch (sessionDifficulty.v) {
 			case 1:
-				nbEmail = 5;
+				nbEmail = 25;
 				break;
 			case 2:
 				nbEmail = 50;
