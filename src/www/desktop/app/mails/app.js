@@ -56,8 +56,6 @@ const afficherMail = (mail, li) => {
     if (mail.lu) nameElement.innerHTML = `${mail.nom}`;
     else nameElement.innerHTML = `<strong>${mail.nom}</strong>`;
 
-    //ajo
-add email from zimmermanute le bouton et le nom au conteneur
     nameContainer.appendChild(btnLu);
     nameContainer.appendChild(nameElement);
 
