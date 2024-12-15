@@ -45,4 +45,4 @@ build_tar:
     - XZ_OPT=-e9 tar cJf infodex-infinity.tar.xz out/infodex-infinity-linux-x64/
   artifacts:
     paths:
-      - infodex-infinity.tar.gz
+      - infodex-infinity.tar.xz
