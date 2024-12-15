@@ -1,3 +1,7 @@
+/**
+ * @module www_gameover_renderer
+ */
+
 const DOM = createDOMReferences({
 	photo: "#photo",
     text: "#text",

@@ -1,3 +1,7 @@
+/**
+ * @module www_login_renderer2
+ */
+
 const DOM = createDOMReferences({
 	difficulty_submit: "#difficulty-submit",
 	difficulty_select: "#difficulty-select",

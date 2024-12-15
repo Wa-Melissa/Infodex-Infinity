@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: desktop/app/dataViewer/app.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: desktop/app/dataViewer/app.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @module www_desktop_app_dataviewer
  */
 
@@ -12,7 +40,6 @@ const DOM = createDOMReferences({
 });
 
 broadcastUpdateAppName("DataViewer");
-sessionDesktopAppExitLocked.v = true;
 const broadCastOpenApp = new BroadcastChannel("open_app");	
 
 /**
@@ -38,7 +65,7 @@ let settings = {
 	maxErrors: convertPercentageToErrorRate(sessionSkill.v), // Max allowed errors (%)
 	minErrors: 0.1, // Minimum error threshold
 	minCols: 3, // Minimum number of dataset columns
-	maxCols: 8, // Maximum number of dataset columns (<= columnCreator.size())
+	maxCols: 8, // Maximum number of dataset columns (&lt;= columnCreator.size())
 	columnCreators: [ // Functions to generate dataset columns
 		createYears,createNaturals,createCountries,createProba,
 		createCities,createSocMedias, createNames, createVegetables,
@@ -65,7 +92,7 @@ class Dataset{
 		this._columnCreators = settings.columnCreators.slice();
 
 		//Randomly determine the number of columns within the range [minCols, maxCols]
-		settings.minCols = (settings.minCols < 1) ? 1 : settings.minCols;
+		settings.minCols = (settings.minCols &lt; 1) ? 1 : settings.minCols;
 		settings.maxCols = (settings.minCols > settings.maxCols) ? settings.minCols : settings.maxCols;
 		let nbCols = Math.floor(Math.random() * (settings.maxCols - settings.minCols + 1)) + settings.minCols;
 
@@ -113,26 +140,26 @@ class Dataset{
 		let tableClass = "class=\"w3-table w3-striped w3-bordered w3-table-all w3-hoverable w3-card-4\"";//Les classes pour la presentation esthetique
 		let tableStyle = "style=\"border-top:none;\"";
 		// Initialize the table HTML string
-		let monHtml = "<table "+tableClass+tableStyle+" id=\"myTable\" >";
+		let monHtml = "&lt;table "+tableClass+tableStyle+" id=\"myTable\" >";
 
 		// Add the table header row with column titles
-		monHtml += "\n\t<thead>\n\t\t<tr class=\"w3-black\">";
+		monHtml += "\n\t&lt;thead>\n\t\t&lt;tr class=\"w3-black\">";
 		this._columnsList.map((v) => {
-			monHtml += "\n\t\t\t<th scope=\"col\">" + v._title + "</th>";
+			monHtml += "\n\t\t\t&lt;th scope=\"col\">" + v._title + "&lt;/th>";
 		});
-		monHtml += "\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t<tr>";
+		monHtml += "\n\t\t&lt;/tr>\n\t&lt;/thead>\n\t&lt;tbody>\n\t\t&lt;tr>";
 
 		 // Populate the table body with data for each row
 		Array(this._nbRows).fill(0).map((_,i) => { // Loop through each row
-			monHtml += "\n\t\t<tr>";
+			monHtml += "\n\t\t&lt;tr>";
 			this._columnsList.map((v) => { // Loop through each column
-				monHtml += '\n\t\t\t<td class="cell">' + v._dataList[i] + "</td>";//On affiche la valeur de la colone
+				monHtml += '\n\t\t\t&lt;td class="cell">' + v._dataList[i] + "&lt;/td>";//On affiche la valeur de la colone
 			});
-		monHtml += "\n\t\t</tr>";
+		monHtml += "\n\t\t&lt;/tr>";
 		});
 
 		 // Close the table structure
-		monHtml += "\n\t\t</tr>\n\t</tbody>\n</table>";
+		monHtml += "\n\t\t&lt;/tr>\n\t&lt;/tbody>\n&lt;/table>";
 		// Insertion
 		DOM.tab_container.innerHTML = monHtml;
 		
@@ -160,7 +187,7 @@ const selectionManagement = (selectionList) => {
 
 
 			// Check if the coordinates are already in the selection list
-			const index = selectionList.findIndex(item => item[0] === rowIndex && item[1] === colIndex);
+			const index = selectionList.findIndex(item => item[0] === rowIndex &amp;&amp; item[1] === colIndex);
             // Update the selection list
 			if(index === -1){
 				selectionList.push(coord);
@@ -228,8 +255,8 @@ const selectionEnd = (selectionList, dataset) => {
 		});
 
 		// If the last column has not been counted, count its errors
-		if(currentColIndex < dataset._columnsList.length -1){
-			while(currentColIndex < dataset._columnsList.length -1){
+		if(currentColIndex &lt; dataset._columnsList.length -1){
+			while(currentColIndex &lt; dataset._columnsList.length -1){
 				currentColIndex ++;
 				let currentCol= dataset._columnsList[currentColIndex];
 				errorIndices = currentCol._errorIndices ;
@@ -267,12 +294,8 @@ const selectionEnd = (selectionList, dataset) => {
 			 // Increase skills based on the number of errors found
 			sessionSkill.v += settings.skillsChange * nbFound;
 			sessionTimePassed.v += 2; // Increase time passed
-		} else return;
-
-		const email = sessionEmails.v[sessionLastOpenedEmail.v];
-		email.objet = '<i class="fa-solid fa-reply"></i> ' + email.objet;
-		sessionEmailsDelete.v = [...sessionEmailsDelete.v, email];
-		sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
+		}
+		// If the user cancels, do nothing
 		broadCastOpenApp.postMessage("mails");
 	};
 };
@@ -310,4 +333,26 @@ async function swalExitLocked() {
 	sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
 	sessionSatisfaction.v -= 5;
 	broadCastOpenApp.postMessage("mails");
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-www_common.html">www_common</a></li><li><a href="module-www_desktop_app_agenda.html">www_desktop_app_agenda</a></li><li><a href="module-www_desktop_app_dataviewer.html">www_desktop_app_dataviewer</a></li><li><a href="module-www_desktop_app_dataviewer_maker.html">www_desktop_app_dataviewer_maker</a></li><li><a href="module-www_desktop_app_mails.html">www_desktop_app_mails</a></li><li><a href="module-www_desktop_renderer.html">www_desktop_renderer</a></li><li><a href="module-www_gameover_renderer.html">www_gameover_renderer</a></li><li><a href="module-www_login_renderer.html">www_login_renderer</a></li><li><a href="module-www_login_renderer2.html">www_login_renderer2</a></li><li><a href="module-www_login_renderer3.html">www_login_renderer3</a></li></ul><h3>Classes</h3><ul><li><a href="module-www_common-sessionHandler.html">sessionHandler</a></li><li><a href="module-www_common-storageHandler.html">storageHandler</a></li><li><a href="module-www_desktop_app_dataviewer_maker-Column.html">Column</a></li><li><a href="module-www_desktop_app_dataviewer-Dataset.html">Dataset</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Dec 14 2024 11:43:57 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
