@@ -4,7 +4,7 @@
 
 ## Installation sur les distributions Debian-like (Debian, Mint, Ubuntu...)
 
-1. Téléchargez la dernière version `.deb` de **Infodex Infinity** depuis la page [release](/t3-les-autres-ind-cis/the-email-game/-/releases).
+1. Téléchargez la dernière version `.deb` de **Infodex Infinity** depuis la page [release](https://git.unistra.fr/t3-les-autres-ind-cis/the-email-game/-/releases).
    
 2. Ouvrez un terminal et naviguez vers le dossier où le fichier a été téléchargé.
 
@@ -17,7 +17,7 @@
 
 ## Execution "Portable" sur d'autres distributions Linux
 
-1. Téléchargez le fichier auto-extractible `.run` pour **Infodex Infinity** depuis la page [release](/t3-les-autres-ind-cis/the-email-game/-/releases).
+1. Téléchargez le fichier auto-extractible `.run` pour **Infodex Infinity** depuis la page [release](https://git.unistra.fr/t3-les-autres-ind-cis/the-email-game/-/releases).
 
 ### Avec un Terminal:
 2. Ouvrez un terminal et naviguez vers le dossier où le fichier a été téléchargé.
@@ -42,7 +42,7 @@
 
 ## Installation non-portable "tarball-like" sur d'autres distributions Linux
 
-1. Téléchargez le fichier auto-extractible `.run` pour **Infodex Infinity** depuis la page [release](/t3-les-autres-ind-cis/the-email-game/-/releases).
+1. Téléchargez le fichier auto-extractible `.run` pour **Infodex Infinity** depuis la page [release](https://git.unistra.fr/t3-les-autres-ind-cis/the-email-game/-/releases).
 
 2. Ouvrez un terminal et naviguez vers le dossier où le fichier a été téléchargé.
 
