@@ -1,6 +1,6 @@
 # Installation de Infodex Infinity sous Linux (amd64)
 
-** Nous recommandons fortement l'instalaltion par le package .deb**
+### Nous recommandons fortement l'installation par le package .deb
 
 ## Installation sur les distributions Debian-like (Debian, Mint, Ubuntu...)
 
@@ -19,7 +19,7 @@
 
 1. Téléchargez le fichier auto-extractible `.run` pour **Infodex Infinity** depuis la page [release](/t3-les-autres-ind-cis/the-email-game/-/releases).
 
-**Avec un Terminal:**
+### Avec un Terminal:
 2. Ouvrez un terminal et naviguez vers le dossier où le fichier a été téléchargé.
 
 3. Ajoutez les droits d'exécution au fichier :
@@ -34,13 +34,13 @@
    ./infodex-infinity.run
    ```
 
-**Avec votre environnement graphique**
-3. Ajoutez les droits d'exécution au fichier : Accedez aux propriétés du fichier puis Activer l'option "Executer comme un programme" ou similaire.
+### Avec votre environnement graphique:
+2. Ajoutez les droits d'exécution au fichier : Accedez aux propriétés du fichier puis Activer l'option "Executer comme un programme" ou similaire.
 
-4. Exécutez le fichier auto-extractible comme un programme (Souvent click-droit -> "Executer comme un programme")
+3. Exécutez le fichier auto-extractible comme un programme (Souvent click-droit -> "Executer comme un programme")
 
 
-### Installation non-portable "tarball-like" sur d'autres distributions Linux
+## Installation non-portable "tarball-like" sur d'autres distributions Linux
 
 1. Téléchargez le fichier auto-extractible `.run` pour **Infodex Infinity** depuis la page [release](/t3-les-autres-ind-cis/the-email-game/-/releases).
 
@@ -61,3 +61,8 @@
    ```bash
    ./infodex-infinity
    ```
+
+# Installation de Infodex Infinity sous Système d'exploitation (Windows, MacOS...) ou architecture non supporté (arm64, aarch64...)
+
+**⚠️ Attention : ces instructions sont fournies à titre purement indicatif et sont volontairement imprécises. Nous ne recommandons pas ce type d'installation. Aucune assistance ne sera fournie pour les installations non officiellement prises en charge.**
+
