@@ -2,12 +2,12 @@
 L'équipe de developpement supporte l'installation d'Infodex Infinity sous **Linux** sur architecture **amd64**.
 Les autres installation ne sont pas officiellement supporté bien que peuvent fonctionner si vous avez les capcité d'adadpter sensiblement le processus de compilation et de packaging a votre plateforme, nous ne fournirons aucune assitance.
 
-Nous recommandons l'[installation via un package](#installation-sur-les-distributions-debian-like-debian-mint-ubuntu) .deb si disponible pour votre plateforme, sinon, utilisez une [execution portable](#execution-portable-sur-dautres-distributions-linux) ou l'[extraction](#installation-non-portable-tarball-like-sur-dautres-distributions-linux) des fichiers.
-Pour les utilisateurs avancés, la [compilation depuis les sources](#installation-de-infodex-infinity-sous-système-dexploitation-windows-macos-ou-architecture-non-supporté-arm64-aarch64) reste une option.
+Nous recommandons l'[installation via un package](#installation-sur-les-distributions-debian-like-debian-mint-ubuntu) .deb si disponible pour votre plateforme, sinon, utilisez une [execution portable](#execution-portable) ou l'[extraction](#installation-non-portable-tarball-like) des fichiers.
+Pour les utilisateurs avancés, la [compilation depuis les sources](#compilation-depuis-les-sources) reste une option.
 
 # Installation de Infodex Infinity sous Linux (amd64)
 
-> L'application sera installé par apt/dpkg comme un programme standard. Une icone de bureau sera autmatiquement crée pour vous permettre dans lancer le jeu depuis le menu de votre environnement graphique. Cette methode d'installation requiert les droits administrateur/root. SI ne vous les avez pas, utilisez une [execution portable](#execution-portable-sur-dautres-distributions-linux) ou par [extraction](#installation-non-portable-tarball-like-sur-dautres-distributions-linux)
+> L'application sera installé par apt/dpkg comme un programme standard. Une icone de bureau sera autmatiquement crée pour vous permettre dans lancer le jeu depuis le menu de votre environnement graphique. Cette methode d'installation requiert les droits administrateur/root. SI ne vous les avez pas, utilisez une [execution portable](#execution-portable) ou par [extraction](#installation-non-portable-tarball-like)
 
 ## Installation sur les distributions Debian-like (Debian, Mint, Ubuntu...)
 
@@ -22,7 +22,7 @@ Pour les utilisateurs avancés, la [compilation depuis les sources](#installatio
    ```
 4. Lancez le jeu depuis le menu de votre environnement graphique.
 
-## Execution "Portable" sur d'autres distributions Linux
+## Execution "Portable"
 
 > L'execution portable permet de d'extraire et de lancer le jeu dans un dossier temporaire qui sera automatiquement supprimé dès le jeu fermé. Il n'y a aucune installation et le lancement peut se faire sans les droits administrateur/root.
 
@@ -49,7 +49,7 @@ Pour les utilisateurs avancés, la [compilation depuis les sources](#installatio
 3. Exécutez le fichier auto-extractible comme un programme (Souvent click-droit -> "Executer comme un programme")
 
 
-## Installation non-portable "tarball-like" sur d'autres distributions Linux
+## Installation non-portable "tarball-like"
 
 1. Téléchargez le fichier auto-extractible `.run` pour **Infodex Infinity** depuis la page [release](https://git.unistra.fr/t3-les-autres-ind-cis/the-email-game/-/releases).
 
@@ -79,7 +79,7 @@ Pour les utilisateurs avancés, la [compilation depuis les sources](#installatio
    ./infodex-infinity
    ```
 
-# Installation de Infodex Infinity sous Système d'exploitation (Windows, MacOS...) ou architecture non supporté (arm64, aarch64...)
+# Compilation depuis les sources
 
 **⚠️ Attention : ces instructions sont fournies à titre purement indicatif et sont volontairement imprécises. Nous ne recommandons pas ce type d'installation. Aucune assistance ne sera fournie pour les installations non officiellement prises en charge.**
 
