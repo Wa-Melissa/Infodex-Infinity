@@ -1,4 +1,4 @@
-//Liste de noms de villes
+// City names list
 const cities = [
 	"Tokyo",
 	"Delhi",
@@ -222,7 +222,7 @@ const cities = [
 	"Nairobi"
 ];
 
-//liste de noms de pays
+// Contry names list
 const countries = [
 	"Afghanistan",
 	"Albanie",
@@ -401,7 +401,7 @@ const countries = [
 	"Zimbabwe"
 ];
 
-//Liste de noms de reseaux sociaux
+// Social media names list
 const socialNetworks = [
 	"Facebook",
 	"Twitter",
@@ -452,11 +452,10 @@ const socialNetworks = [
 	"ResearchGate",
 	"Doximity",
 	"Ravelry",
-	"Patreon",
-	"Ning"
+	"Patreon"
 ];
 
-//Liste de prenoms
+// First names list (Male,Female and Unisex)
 const names = [
 	"Liam",
 	"Noah",
@@ -552,7 +551,7 @@ const names = [
 ];
 
 
-//Liste de legumes
+// Vegetables list
 const vegetables = [
 	"Carotte", "Pomme de terre", "Patate douce", "Navet", "Radis", "Betterave", "Rutabaga", "Topinambour",
 	"Céleri-rave", "Igname", "Manioc", "Salsifis", "Oignon", "Ail", "Échalote", "Poireau", "Fenouil", 
@@ -567,7 +566,7 @@ const vegetables = [
 	"Piment", "Jalapeño", "Piment d'Espelette", "Cayenne", "Tabasco", "Habanero", "Ancho", "Paprika"
 ];
 
-//Liste de sports
+// Sport names list
 const sports = [
 	"Football", "Basketball", "Tennis", "Volleyball", "Baseball", "Rugby", "Golf", "Natation", "Athlétisme", "Escrime",
 	"Hockey sur glace", "Hockey sur gazon", "Handball", "Badminton", "Squash", "Boxe", "Karaté", "Judo", "Taekwondo",
@@ -578,7 +577,7 @@ const sports = [
 ];
 
 
-//Liste de climats
+// List of climates
 const climates = [
     "Équatorial", "Tropical", "Subtropical", "Désertique", "Méditerranéen",
     "Océanique", "Continental", "Polaire", "Montagnard", "Tempéré",
@@ -589,7 +588,7 @@ const climates = [
     "Taïga", "Tropical sec", "Tempéré humide", "Désert froid"
 ];
 
-//Liste de couleurs
+// List of colors
 const colors = [
     "Rouge", "Bleu", "Vert", "Jaune", "Orange", "Violet", "Rose", "Marron", "Noir", "Blanc",
     "Gris", "Cyan", "Magenta", "Turquoise", "Beige", "Bordeaux", "Ivoire", "Lavande",
@@ -607,7 +606,7 @@ const colors = [
     "Bleu denim", "Vert d'eau", "Jaune poussin", "Or rose", "Bleu pastel", "Vert tilleul"
 ];
 
-//Liste de métiers
+//List of jobs
 const jobs = [
 	"Médecin", "Infirmier", "Enseignant", "Développeur", "Avocat", "Architecte", "Ingénieur", "Plombier", "Électricien",
 	"Écrivain", "Journaliste", "Pharmacien", "Comptable", "Chef cuisinier", "Agriculteur", "Chercheur", "Secrétaire",
@@ -626,15 +625,14 @@ const jobs = [
 	"Clown", "Animateur radio", "Influenceur", "Streamer"
 ];
 
-//Liste des mois de l'annee
+// List of all the months of the year
 const months = [
 	"Janvier","Février","Mars","Avril","Mai","Juin","Juillet",
 	"Aout","Septembre","Octobre","Novembre","Decembre"
-  ];
+];
 
-
-  //Liste d'animaux de tous types
-  const animals = [
+// List of animals of all types
+const animals = [
 	"Chat", "Chien", "Cheval", "Lapin", "Hamster", "Poisson rouge", "Perroquet", 
 	"Canari", "Tortue", "Cochon d'Inde", "Lion", "Tigre", "Éléphant", 
 	"Girafe", "Zèbre", "Hippopotame", "Rhinocéros", "Antilope", "Gorille", 
@@ -652,30 +650,29 @@ const months = [
 	"Abeille", "Fourmi", "Guêpe", "Papillon", "Moustique", "Libellule", 
 	"Coccinelle", "Scarabée", "Scorpion", "Grenouille", 
 	"Crapaud", "Salamandre", "Triton", "Esturgeon", "Morue"
-  ];
+];
   
 
-  //Liste de genres et de sous-genres de musique
-  const music = [
-	// Genres principaux
+// List of music genres and subgenres
+const music = [
+	// Main genres
 	"Pop", "Rock", "Jazz", "Blues", "Classique", "Hip-hop", "Rap", 
 	"Électro", "R&B", "Soul", "Funk", "Country", "Reggae", "Folk", 
 	"Disco", "Techno", "House", "Trap", "Dubstep", "Trance",
 
-	// Sous-genres du Rock, jazz et electro
+	// Rock, jazz and electro subgenres
 	"Rock alternatif", "Hard rock", "Punk rock", "Metal", "Heavy metal",
 	"Swing", "Ragtime", "Acid jazz", " Free Jazz",
   	"Drum and bass", "Hardstyle", "Lo-fi", 
   
-	// Genres traditionnels et  world music
+	// Traditional subgenres and world music
 	"Flamenco", "Samba", "Tango",  "Salsa", "Merengue", 
 	"Reggaeton", "K-pop", "J-pop", "Afrobeats",
 	"Chanson française", "Gospel",
   
-	// Variétés modernes
+	// Modern varieties
 	"Electropop", "Pop rock", "Indie pop", 
-  
-  ];
+];
   
   
   
