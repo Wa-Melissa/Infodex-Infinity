@@ -12,6 +12,7 @@ const DOM = createDOMReferences({
 });
 
 broadcastUpdateAppName("DataViewer");
+sessionDesktopAppExitLocked.v = true;
 const broadCastOpenApp = new BroadcastChannel("open_app");	
 
 /**
@@ -266,8 +267,12 @@ const selectionEnd = (selectionList, dataset) => {
 			 // Increase skills based on the number of errors found
 			sessionSkill.v += settings.skillsChange * nbFound;
 			sessionTimePassed.v += 2; // Increase time passed
-		}
-		// If the user cancels, do nothing
+		} else return;
+
+		const email = sessionEmails.v[sessionLastOpenedEmail.v];
+		email.objet = '<i class="fa-solid fa-reply"></i> ' + email.objet;
+		sessionEmailsDelete.v = [...sessionEmailsDelete.v, email];
+		sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
 		broadCastOpenApp.postMessage("mails");
 	};
 };

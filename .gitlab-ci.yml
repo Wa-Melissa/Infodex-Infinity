@@ -14,8 +14,8 @@ before_script:
   - npm install --include=dev
 
 build_deb:
-#  only:
-#    - tags 
+  only:
+    - tags 
   stage: makedeb
   script:
     - npm run make
@@ -25,8 +25,8 @@ build_deb:
       - infodex-infinity.deb
 
 build_makeself:
-#  only:
-#    - tags 
+  only:
+    - tags 
   stage: makeself
   script:
     - npm run package
@@ -36,13 +36,13 @@ build_makeself:
     paths:
       - infodex-infinity.run
 
-build_tar:
+#build_tar:
 #  only:
 #    - tags 
-  stage: maketar
-  script:
-    - npm run package
-    - XZ_OPT=-e9 tar cJf infodex-infinity.tar.xz out/infodex-infinity-linux-x64/
-  artifacts:
-    paths:
-      - infodex-infinity.tar.xz
+#  stage: maketar
+#  script:
+#    - npm run package
+#    - XZ_OPT=-e9 tar cJf infodex-infinity.tar.xz out/infodex-infinity-linux-x64/
+#  artifacts:
+#    paths:
+#      - infodex-infinity.tar.xz
