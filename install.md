@@ -44,19 +44,27 @@
 
 1. Téléchargez le fichier auto-extractible `.run` pour **Infodex Infinity** depuis la page [release](/t3-les-autres-ind-cis/the-email-game/-/releases).
 
-1. Exécutez le fichier avec les options suivantes :
+2. Ouvrez un terminal et naviguez vers le dossier où le fichier a été téléchargé.
+
+3. Ajoutez les droits d'exécution au fichier :
+
+   ```bash
+   chmod +x infodex-infinity.run
+   ```
+
+4. Exécutez le fichier avec les options suivantes :
 
    ```bash
    ./infodex-infinity.run --target ./infodex-infinity/ --noexec
    ```
 
-2. Accédez au dossier `infodex-infinity/` :
+5. Accédez au dossier `infodex-infinity/` :
 
    ```bash
    cd infodex-infinity/
    ```
 
-3. Exécutez l'exécutable **Infodex Infinity** :
+6. Exécutez l'exécutable **Infodex Infinity** :
 
    ```bash
    ./infodex-infinity
