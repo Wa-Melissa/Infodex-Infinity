@@ -7,7 +7,7 @@ Pour les utilisateurs avancés, la [compilation depuis les sources](#installatio
 
 # Installation de Infodex Infinity sous Linux (amd64)
 
-### Nous recommandons fortement l'installation par le package .deb
+> L'application sera installé par apt/dpkg comme un programme standard. Une icone de bureau sera autmatiquement crée pour vous permettre dans lancer le jeu depuis le menu de votre environnement graphique. Cette methode d'installation requiert les droits administrateur/root. SI ne vous les avez pas, utilisez une [execution portable](#execution-portable-sur-dautres-distributions-linux) ou par [extraction](#installation-non-portable-tarball-like-sur-dautres-distributions-linux)
 
 ## Installation sur les distributions Debian-like (Debian, Mint, Ubuntu...)
 
@@ -23,6 +23,8 @@ Pour les utilisateurs avancés, la [compilation depuis les sources](#installatio
 4. Lancez le jeu depuis le menu de votre environnement graphique.
 
 ## Execution "Portable" sur d'autres distributions Linux
+
+> L'execution portable permet de d'extraire et de lancer le jeu dans un dossier temporaire qui sera automatiquement supprimé dès le jeu fermé. Il n'y a aucune installation et le lancement peut se faire sans les droits administrateur/root.
 
 1. Téléchargez le fichier auto-extractible `.run` pour **Infodex Infinity** depuis la page [release](https://git.unistra.fr/t3-les-autres-ind-cis/the-email-game/-/releases).
 
