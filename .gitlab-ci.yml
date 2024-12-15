@@ -42,7 +42,7 @@ build_tar:
   stage: maketar
   script:
     - npm run package
-    - tar -czvf infodex-infinity.tar.gz out/infodex-infinity-linux-x64/
+    - GZIP=-9 tar -czvf infodex-infinity.tar.gz out/infodex-infinity-linux-x64/
   artifacts:
     paths:
       - infodex-infinity.tar.gz
