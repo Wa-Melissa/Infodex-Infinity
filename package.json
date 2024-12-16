@@ -1,7 +1,7 @@
 {
 	"name": "infodex-infinity",
 	"productName": "infodex-infinity",
-	"version": "1.0.2",
+	"version": "1.0.4",
 	"description": "The Data Librarian Game",
 	"main": "src/index.js",
 	"scripts": {
