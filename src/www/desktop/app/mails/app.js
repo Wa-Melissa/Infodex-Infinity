@@ -23,7 +23,6 @@ let activeBox = "inbox"; //savoir où on est
 let emails = sessionEmails.v;
 let emailsDelete = sessionEmailsDelete.v;
 DOM.boitereception.classList.add('active');
-
 DOM.boitereception.addEventListener("click", () => switchFolder("inbox"));
 DOM.corbeille.addEventListener("click", () => switchFolder("trash"));
 
@@ -227,14 +226,16 @@ const recupererEmailsAleatoires = () => {
         // ajoute les emails dans mailsrestants
         for (let i = 0; i < emailsFromSource.length; i++) {
             mailsRestants.push(emailsFromSource[i]);
-            if (mailsRestants.length + 1> nbEmail) break; // on arrêtes on a assez d'emails
+            if (mailsRestants.length + 1 > nbEmail) break; // on arrêtes on a assez d'emails
         }
 
         emails.push(...mailsRestants);
         // sauvegarde ces emails dans sessionStorage
         sessionEmails.v = emails;
+        updateEmailDatesToToday();
     }
     // affiche les emails dans la liste
+  
     afficherMessages();
 }
 
@@ -336,44 +337,91 @@ const afficherMessagesDelete = () => {
 
 const verifIfDayPassed = () => {
     const currentDay = Math.floor(sessionTimePassed.v / 8);
-    let sessionLastCheckedDay = Math.floor(sesssionLastTimePassed.v / 8);
+    let LastCheckedDay = Math.floor(sesssionLastTimePassed.v / 8);
 
     // Vérifie si le jour a changé depuis la dernière vérification
-    if (currentDay !== sessionLastCheckedDay) {
-        const differenceTime = currentDay - sessionLastCheckedDay;
+    if (currentDay !== LastCheckedDay) {
+        const differenceTime = currentDay - LastCheckedDay;
 
-        if (differenceTime > 0) {
-            addEmailAfterDayPassed(differenceTime);
-        }
-        // Met à jour le jour du dernier
-        sessionLastCheckedDay = currentDay;
-    }  
+        addEmailAfterDayPassed(differenceTime);
+        LastCheckedDay = currentDay;
+    }
 };
-
 
 const addEmailAfterDayPassed = (differenceTime) => {
     // Mélange les e-mails disponibles
     melangerTableau(mails);
 
-    // Filtre les e-mails qui sont dans aucuns des deux (delete & mails)
+    // Filtre les e-mails qui ne sont pas déjà dans les boîtes existantes (inbox et corbeille)
     let nouveauxEmails = mails.filter(mail => {
         return !emails.some(e => e.id === mail.id) && !emailsDelete.some(e => e.id === mail.id);
     });
 
-    // Ajoute 3 nouveaux e-mails (si disponibles)
-    let emailsAjoutes = nouveauxEmails.slice(0, 3 * differenceTime);
+    let emailsAjoutes = [];
+    const today = new Date();
+    const currentDay = Math.floor(sessionTimePassed.v / 8);
+
+    for (let day = 0; day < differenceTime; day++) {
+        let dateCourante = new Date(today);
+        dateCourante.setDate(today.getDate() + currentDay - day); 
+        const formattedDate = formatDateToString(dateCourante);
+
+        const emailsPourCeJour = nouveauxEmails.splice(0, 3).map(mail => {
+            return { ...mail, date: formattedDate }; 
+        });
+
+        emailsAjoutes.push(...emailsPourCeJour);
+    }
+
+    // Ajoute les nouveaux e-mails en tête de liste
     emails.unshift(...emailsAjoutes);
 
-    // Met à jour les données et l'affichage
+    // Met à jour les données de session et l'affichage
     sessionEmails.v = emails;
     sesssionLastTimePassed.v = sessionTimePassed.v;
     afficherMessages();
     mettreAJourCompteurNonLus();
+    
 };
+
+
+
+const openZimmermannEmailIfFirstTime = () => {
+    if (sessionOpenFirstTime.v) { 
+        const mailZimmermann = emails.find(mail => mail.id === 0);
+        if (mailZimmermann) {
+            const liElements = DOM.messageList.querySelectorAll('li'); 
+            const liZimmermann = Array.from(liElements).find(li => {
+                const nameElement = li.querySelector('span');
+                return nameElement && nameElement.textContent.trim() === mailZimmermann.nom;
+            });
+
+            if (liZimmermann) {
+                afficherContenuMail(mailZimmermann, liZimmermann); 
+                sessionOpenFirstTime.v = false; 
+            }
+        }
+    }
+};
+
+const formatDateToString = (date) => {
+    const day = String(date.getDate()).padStart(2, '0'); 
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`; 
+}
+
+const updateEmailDatesToToday = () => {
+    const todayDate = formatDateToString(new Date());
+    emails = emails.map(mail => ({ ...mail, date: todayDate }));
+    sessionEmails.v = emails;
+}
+
 
 recupererEmailsAleatoires();
 mettreAJourCompteurNonLus();
 verifIfDayPassed();
+openZimmermannEmailIfFirstTime();
 
 
 

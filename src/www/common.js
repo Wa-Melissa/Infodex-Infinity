@@ -99,6 +99,7 @@ const sessionEventsPassed = new sessionHandler("events_passed");
 const sessionEmailsDelete = new sessionHandler("emails_detele");
 const sessionDesktopAppExitLocked = new sessionHandler("desktop_app_exit_locked");
 const sesssionLastTimePassed = new sessionHandler("last_time_passsed");
+const sessionOpenFirstTime = new sessionHandler("session_open");
 
 /**
  * Redirects caller EIC to a Page.
@@ -146,6 +147,7 @@ const initGameSession = (difficulty  = 1) => {
 	sessionLastOpenedEmail.v = -1; // -1 is an instable value
 	sessionDesktopAppExitLocked.v = false;
 	sesssionLastTimePassed.v = 0;
+	sessionOpenFirstTime.v = true;
 }
 
 /**
