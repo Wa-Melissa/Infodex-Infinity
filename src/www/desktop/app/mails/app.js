@@ -160,8 +160,8 @@ const switchFolder = (dossier) => {
         DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
         DOM.contenumail.innerHTML = `
         <div class ="w3-center">
-        <h2>Contenu de l'email</h2>
-        <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; // Remet le texte par défaut
+        <h2>Contenu de l'e-mail</h2>
+        <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; // Remet le texte par défaut
         DOM.boitereception.classList.remove('active'); // Pour mettre le fond en gris selon où on est
         DOM.corbeille.classList.add('active'); 
         afficherMessagesDelete();
@@ -171,8 +171,8 @@ const switchFolder = (dossier) => {
         DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
         DOM.contenumail.innerHTML = `
         <div class ="w3-center">
-        <h2>Contenu de l'email</h2>
-        <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; // Remet le texte par défaut
+        <h2>Contenu de l'e-mail</h2>
+        <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; // Remet le texte par défaut
         DOM.boitereception.classList.add('active');
         DOM.corbeille.classList.remove('active');
         afficherMessages();
@@ -276,23 +276,12 @@ const supprimerMail = (mail) => {
         DOM.messageList.innerHTML = '';
         DOM.contenumail.innerHTML = `
         <div class ="w3-center">
-        <h2>Contenu de l'email</h2>
-        <p>Veuillez sélectionner un email pour afficher son contenu.</p>`; 
+        <h2>Contenu de l'e-mail</h2>
+        <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; 
 
         // Met à jour l'affichage
         afficherMessages();
         mettreAJourCompteurNonLus();
-        
-
-        // // Réinitialise le contenu affiché (si on supprime un email sélectionné)
-        // if (lastSelectedLi && lastSelectedLi.dataset.id === mail.id) {
-        //     DOM.contenumail.innerHTML = `
-        //     <div class="w3-center">
-        //         <h2>Contenu de l'email</h2>
-        //         <p>Veuillez sélectionner un email pour afficher son contenu.</p>
-        //     </div>`;
-        //     lastSelectedLi = null;
-        // }
     }
 };
 

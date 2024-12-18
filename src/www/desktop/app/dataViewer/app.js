@@ -238,7 +238,7 @@ const selectionEnd = (selectionList, dataset) => {
 		}
 		
 		//Debug and tests
-		alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbErr+"---"+selectionList.length);
+		//alert("nombre d'erreurs trouvées: "+nbFound+"/"+nbErr+"---"+selectionList.length);
 
 		if(selectionList.length == 0){
 			let nbCorrupt = nbErr - nbFound;

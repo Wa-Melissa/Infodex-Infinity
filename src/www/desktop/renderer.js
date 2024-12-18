@@ -62,7 +62,7 @@ const closeApp = (force = false) => {
 	}
 	DOM.app_iframe.src = "blank.html";
 	DOM.app_container.style.display = "none";
-	document.title = "Infodex Infinity - Desktop"
+	document.title = "Infodex Infinity - Bureau"
 	DOM.app_name.innerHTML = "";
 }
 DOM.app_close_btn.addEventListener("click", ()=> (closeApp()));
@@ -157,6 +157,11 @@ sessionTimePassed.attachEvent((event) => { //Event to update clock and detect ne
 		toast: true,
 		timer: 3000,
 		timerProgressBar: true,
+		didOpen: () => {
+			Swal.getPopup().addEventListener('click', () => {
+			  	Swal.close();
+			});
+		}
 	});
 })
 
@@ -224,5 +229,11 @@ setTimeout(() => { // wait 1sec
 		toast: true,
 		timer: 6000,
 		timerProgressBar: true,
+		didOpen: () => {
+			Swal.getPopup().addEventListener('click', () => {
+			  	Swal.close();
+				loadApp("mails");
+			});
+		}
 	});
 }, 1200)
