@@ -5,7 +5,7 @@ Les autres installation ne sont pas officiellement supporté bien que peuvent fo
 Sous linux, nous recommandons l'[installation via un package](#installation-sur-les-distributions-debian-like-debian-mint-ubuntu) .deb si disponible pour votre plateforme, sinon, utilisez une [exécution portable](#execution-portable) ou l'[extraction](#installation-non-portable-tarball-like) des fichiers.
 Pour les utilisateurs avancés, la [compilation depuis les sources](#compilation-depuis-les-sources) reste une option.
 
-# Installation de Infodex Infinity sous Windows (x64)
+# 🪟 Installation de Infodex Infinity sous Windows (x64)
 
 > Sous Windows, seul le déploiement via un installateur 'Squirrel' est supporté officiellement. Une icône sur le bureau est créée automatiquement. L'application sera également disponible dans la liste des applications.
 
@@ -13,7 +13,7 @@ Pour les utilisateurs avancés, la [compilation depuis les sources](#compilation
 2. Exécutez cet installateur et attendez la fin de l'installation.
 3. Une fois l'application installée, elle se lance automatiquement.
 
-# Installation de Infodex Infinity sous Linux (amd64)
+# 🐧 Installation de Infodex Infinity sous Linux (amd64)
 
 > L'application sera installée par apt/dpkg comme un programme standard. Une icône de bureau sera automatiquement créée pour vous permettre de lancer le jeu depuis le menu de votre environnement graphique. Cette méthode d'installation requiert les droits administrateur/root. Si ne vous les avez pas, utilisez une [exécution portable](#execution-portable) ou par [extraction](#installation-non-portable-tarball-like)
 
