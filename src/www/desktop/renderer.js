@@ -148,21 +148,24 @@ sessionSatisfaction.attachEvent((event) => { //Event to detect win
 sessionTimePassed.attachEvent((event) => { //Event to update clock and detect new day
 	updateClock();
 	
-	if (Math.floor(event.oldValue / 8) != Math.floor(event.newValue / 8)) Swal.fire({
-		position: "top",
-		title: "<b>Nouvelle journée</b>",
-		text:"Vous passez à une nouvelle journée de travail !",
-		showConfirmButton: false,
-		icon: "info",
-		toast: true,
-		timer: 3000,
-		timerProgressBar: true,
-		didOpen: () => {
-			Swal.getPopup().addEventListener('click', () => {
-			  	Swal.close();
-			});
-		}
-	});
+	if (Math.floor(event.oldValue / 8) != Math.floor(event.newValue / 8)){
+		Swal.fire({
+			position: "top",
+			title: "<b>Nouvelle journée</b>",
+			text:"Vous passez à une nouvelle journée de travail !",
+			showConfirmButton: false,
+			icon: "info",
+			toast: true,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: () => {
+				Swal.getPopup().addEventListener('click', () => {
+					Swal.close();
+				});
+			}
+		});
+		sessionSatisfaction.v -= Math.floor(0.25 * sessionEmails.v.length);
+	}
 })
 
 
