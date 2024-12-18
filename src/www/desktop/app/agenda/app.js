@@ -26,7 +26,7 @@ const Queue = Swal.mixin({
 DOM.addEvent_button.addEventListener("click", async () => {
     let firstStepResult = await Queue.fire({
         title: 'Créer un nouvel événement',
-        text: "Un évènement est une formation que vous organisez pour les usagers afin d'améliorer leurs compétences, mais cela vous prend du temps. Vous pouvez aussi prendre congé ou simuler une maladie, mais cela aura un impact sur le délai de réponse, donc sur la satisfaction des usagers.",
+        text: "Un événement est une formation que vous organisez pour les usagers afin d'améliorer leurs compétences, mais cela vous prend du temps. Vous pouvez aussi prendre congé ou simuler une maladie, mais cela aura un impact sur le délai de réponse, donc sur la satisfaction des usagers.",
         currentProgressStep: 0,
     });
     if (firstStepResult.isDismissed) return;
@@ -56,14 +56,14 @@ DOM.addEvent_button.addEventListener("click", async () => {
     let secondStepResult = await Queue.fire({
         title: 'Créer un nouvel événement',
         input: "select",
-        inputPlaceholder: "Selectionnez un type d'évenement...",
+        inputPlaceholder: "Sélectionnez un type d'évenement...",
         inputOptions,
         currentProgressStep: 1,
         inputValidator: (value) => {
             return new Promise((resolve) => {
                 console.log(value);
                 if (value == "") {
-                    resolve("Vous devez séléctionner un type d'évenements.");
+                    resolve("Vous devez sélectionner un type d'événements.");
                 } else {
                     resolve();
                 }
@@ -74,7 +74,7 @@ DOM.addEvent_button.addEventListener("click", async () => {
 
     let thirdStepResult = await Queue.fire({
         title: 'Créer un nouvel événement',
-        text: "L'événement va se lancer immédiatement. Confirmez-vous l'execution ?",
+        text: "L'événement va se lancer immédiatement. Confirmez-vous l'exécution ?",
         currentProgressStep: 2,
         confirmButtonText: 'Confirmer',
     });
