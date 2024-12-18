@@ -4,7 +4,7 @@ const mails = [
         "destinataire": "Moi",
         "expediteur": "ma.zimmermann@unistra.fr",
         "objet": "Bienvenue chez nous",
-        "contenu": "Bonjour, \n\n Bienvenue en tant que Data Librarian ! Je suis ravi de t’accueillir dans ce rôle essentiel. \n\nPour faciliter ta prise de fonction, une sélection de notes et de ressources laissées par ton prédécesseur est à ta disposition dans l'application 'notes' sur le bureau. Ces documents ont été pensés pour te guider dans tes premières étapes et t’aider à te familiariser avec les aspects clés du poste. Ils contiennent des repères utiles pour que tu puisses avancer sereinement. \n\nEncore une fois, bienvenue ! Je te souhaite beaucoup de succès dans cette nouvelle aventure. \n\nMathieu Zimmermann",
+        "contenu": "Bonjour, \n\n Bienvenue ! Je suis ravi de t’accueillir dans ce rôle essentiel. Les chercheurs comptent sur toi pour répondre à leurs mails et corriger leurs erreurs.\n\nPour faciliter ta prise de fonctions, une sélection de notes laissées par ton prédécesseur est à ta disposition dans l'application 'Notes' sur le bureau. Elles contiennent des repères utiles pour que tu puisses te familiariser avec les aspects clés du poste. \n\nEncore une fois, bienvenue ! Je te souhaite beaucoup de succès dans cette nouvelle aventure.\n\nCordialement,\nMathieu Zimmermann\nChef Départemental Suprême",
         "date": "01-12-2024",
         "heure": "10:00:00",
         "nom": "Mathieu Zimmermann",
