@@ -70,3 +70,14 @@ Développé par Le Parti de son Excellence Pr. Ali, Infodex Infinity propose une
 
 - Consulter l'avancée dans le jeu
 - Consulter les taux de corruption de la base, de satisfaction, et de compétence des chercheurs
+
+
+# Informations renvoyées au joueur
+- Jour courant avec nombres d'heures restantes dans la journée
+- Application Note (Guide du débutant)
+- Premier e-mail (de M. Zimmermann)
+- Jauge de satisfaction des chercheurs
+- Jauge de compétances des chercheurs
+- Jauge de corruption de la base de données (Et detail: Taux, Nombre de données)
+- Nombre d'email non-lus
+
