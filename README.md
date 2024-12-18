@@ -13,12 +13,13 @@ Plusieurs éléments sont mesurés durant la partie : la satisfaction des cherch
 ### Application Base de Donnée "Miracle DB"
 ![](screenshots/database.png)
 
-
+### Application Correction des données "DataViewer"
+![](screenshots/dataviewer.png)
 
 ## Installation
 
 Installation simple sur Windows et Linux: [Voir les instuctions d'installation](install.md)
-
+(Installation possible sur d'autres plateformes)
 
 ## Enjeux de la formation
 
