@@ -1,6 +1,6 @@
 # Avant-propos
 L'équipe de developpement supporte l'installation d'Infodex Infinity sous **Windows** et **Linux** sur architecture **amd64**.
-Les autres installation ne sont pas officiellement supporté bien que peuvent fonctionner si vous avez les capcité d'adadpter sensiblement le processus de compilation et de packaging a votre plateforme, nous ne fournirons aucune assitance.
+Les autres installation ne sont pas officiellement supporté bien que peuvent fonctionner si vous avez les capcité d'adapter sensiblement le processus de compilation et de packaging à votre plateforme, nous ne fournirons aucune assistance.
 
 Sous linux, nous recommandons l'[installation via un package](#installation-sur-les-distributions-debian-like-debian-mint-ubuntu) .deb si disponible pour votre plateforme, sinon, utilisez une [exécution portable](#execution-portable) ou l'[extraction](#installation-non-portable-tarball-like) des fichiers.
 Pour les utilisateurs avancés, la [compilation depuis les sources](#compilation-depuis-les-sources) reste une option.
