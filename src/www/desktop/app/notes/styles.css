@@ -20,7 +20,7 @@ body {
   
   .page {
     width: 100%;
-    padding: 40px;
+    padding: 80px;
     background: linear-gradient(
       180deg, 
       #f8f4e3 98%, 
@@ -51,7 +51,7 @@ body {
   .content {
     text-align: justify;
     column-count: 2; /* deux colonnes pour l'effet livre */
-    column-gap: 130px;
+    column-gap: 180px;
   }
   
   h1 {
@@ -60,7 +60,7 @@ body {
     padding-bottom: 10px;
   }
   
-  p {
+  p, ul {
     font-size: 1.2rem;
   }
   
