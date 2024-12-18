@@ -347,35 +347,52 @@ const verifIfDayPassed = () => {
         }
         // Met à jour le jour du dernier
         sessionLastCheckedDay = currentDay;
-    }  
+    }
 };
-
 
 const addEmailAfterDayPassed = (differenceTime) => {
     // Mélange les e-mails disponibles
     melangerTableau(mails);
 
-    // Filtre les e-mails qui sont dans aucuns des deux (delete & mails)
+    // Filtre les e-mails qui ne sont pas déjà dans les boîtes existantes (inbox et corbeille)
     let nouveauxEmails = mails.filter(mail => {
         return !emails.some(e => e.id === mail.id) && !emailsDelete.some(e => e.id === mail.id);
     });
 
-    // Ajoute 3 nouveaux e-mails (si disponibles)
-    let emailsAjoutes = nouveauxEmails.slice(0, 3 * differenceTime);
+   
+    let emailsAjoutes = [];
+    const today = new Date();
+
+    for (let day = 1; day <= differenceTime; day++) {
+        // Calcule la date pour ce jour spécifique
+        let dateCourante = new Date(today);
+        dateCourante.setDate(today.getDate() + day); 
+        const formattedDate = formatDateToString(dateCourante);
+
+        const emailsPourCeJour = nouveauxEmails.splice(0, 3).map(mail => {
+            return { ...mail, date: formattedDate }; 
+        });
+
+        emailsAjoutes.unshift(...emailsPourCeJour);
+    }
+
+    // Ajoute les nouveaux e-mails en tête de liste
     emails.unshift(...emailsAjoutes);
 
-    // Met à jour les données et l'affichage
+    // Met à jour les données de session et l'affichage
     sessionEmails.v = emails;
     sesssionLastTimePassed.v = sessionTimePassed.v;
     afficherMessages();
     mettreAJourCompteurNonLus();
 };
 
+
+
 const openZimmermannEmailIfFirstTime = () => {
     if (sessionOpenFirstTime.v) { 
         const mailZimmermann = emails.find(mail => mail.id === 0);
         if (mailZimmermann) {
-            const liElements = DOM.messageList.querySelectorAll('li');
+            const liElements = DOM.messageList.querySelectorAll('li'); 
             const liZimmermann = Array.from(liElements).find(li => {
                 const nameElement = li.querySelector('span');
                 return nameElement && nameElement.textContent.trim() === mailZimmermann.nom;
@@ -388,6 +405,13 @@ const openZimmermannEmailIfFirstTime = () => {
         }
     }
 };
+
+const formatDateToString = (date) => {
+    const day = String(date.getDate()).padStart(2, '0'); 
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`; 
+}
 
 
 recupererEmailsAleatoires();
