@@ -7,9 +7,11 @@ Pour les utilisateurs avancés, la [compilation depuis les sources](#compilation
 
 # Installation de Infodex Infinity sous Windows (x64)
 
+> Sous Windows, seul le déploiement via un installateur 'Squirrel' est supporté officiellement. Une icône sur le bureau est créée automatiquement. L'application sera également disponible dans la liste des applications.
+
 1. Téléchargez la dernière version `.exe` de **Infodex Infinity** depuis la page [release](https://git.unistra.fr/t3-les-autres-ind-cis/the-email-game/-/releases).
 2. Exécutez cet installateur et attendez la fin de l'installation.
-3. Une fois l'application installée, elle se lance automatiquement et une icône sur le bureau est créée automatiquement.
+3. Une fois l'application installée, elle se lance automatiquement.
 
 # Installation de Infodex Infinity sous Linux (amd64)
 
