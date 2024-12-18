@@ -11,12 +11,11 @@ Ce document développe :
 
 Nous avons identifié les objectifs suivants :
 
-- Acquérir les bases du métier de bibliothécaire de données
+- Présenter le métier de bibliothécaire de données et ses enjeux (délais, satisfaction, compétence...)
 - Évaluer ses compétences de manière réaliste (choisir un niveau de difficulté adapté)
 - Effectuer son travail de manière professionnelle (ne pas supprimer les emails ni simuler un arrêt maladie)
 - Adopter une stratégie à long terme (former même si cela réduit temporairement la satisfaction, pour ensuite l'augmenter)
 - Gérer son temps efficacement (la durée d'une journée est limitée, tandis que le travail continue d'affluer)
-- Présenter le métier de bibliothécaire de données et ses enjeux (délais, satisfaction, compétence...)
 
 # Présentation du Jeu
 
@@ -26,15 +25,16 @@ Le jeu se déroule dans un univers réaliste, simulant le quotidien d’un gesti
 
 **Gameplay** : En mode solo, le joueur résout des problèmes de gestion de données : correction d’erreurs, prévention des pertes d’information, et sensibilisation des utilisateurs à de meilleures pratiques.
 
-**Graphismes** : En 2D réaliste, simulant l’écran d’un ordinateur professionnel. Le jeu est disponible sur Linux et Windows.
+**Graphismes** : En 2D réaliste, simulant l’écran d’un ordinateur professionnel.
 
-Développé par Le Parti de son Excellence Pr. Ali, Infodex Infinity propose une approche interactive et pédagogique des défis rencontrés par les professionnels de la gestion des données scientifiques.
+Développé par Le Parti de son Excellence Pr. Ali, Infodex Infinity propose une approche interactive et pédagogique des défis rencontrés par les professionnels de la gestion des données scientifiques. Le jeu est disponible sur Linux et Windows.
 
 # Actions du joueur
 
-## Page de login
+### Page de login
 
 - Sélectionner une difficulté
+- Quitter le jeu
 
 ### Bureau
 
