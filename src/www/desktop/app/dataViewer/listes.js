@@ -628,7 +628,7 @@ const jobs = [
 // List of all the months of the year
 const months = [
 	"Janvier","Février","Mars","Avril","Mai","Juin","Juillet",
-	"Aout","Septembre","Octobre","Novembre","Décembre"
+	"Août","Septembre","Octobre","Novembre","Décembre"
 ];
 
 // List of animals of all types
