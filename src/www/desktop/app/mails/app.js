@@ -39,10 +39,10 @@ const displayEmail = (mail, li) => {
     nameContainer.style.alignItems = 'center';
 
     // Add the "mark as unread" button
-    const btnRead = document.createElement('div');
-    btnRead.className = 'btn-lu';
-    btnRead.style.marginRight = '10px'; 
-    btnRead.addEventListener('click', (event) => {
+    const btnLu = document.createElement('div');
+    btnLu.className = 'btn-lu';
+    btnLu.style.marginRight = '10px'; 
+    btnLu.addEventListener('click', (event) => {
         event.stopPropagation(); // Prevent the email from opening when clicking the button
         mail.lu = !mail.lu;
         displayEmail(mail, li);
@@ -101,7 +101,7 @@ const displayMessages = () => {
 
         displayEmail(mail, li);
 
-        li.addEventListener('click', () => afficherContenuMail(mail, li));
+        li.addEventListener('click', () => displayEmailContent(mail, li));
         DOM.messageList.appendChild(li);
     });
 };
@@ -112,7 +112,7 @@ const displayMessages = () => {
  * @param {Object} mail - The email object.
  * @param {HTMLElement} li - The list item element representing the email.
  */
-const afficherContenuMail = (mail, li) => {
+const displayEmailContent = (mail, li) => {
     if (lastSelectedLi !== null) {
         lastSelectedLi.style.backgroundColor = "";  // Reset the background color
     }
@@ -148,7 +148,7 @@ const afficherContenuMail = (mail, li) => {
 
     const trashIcon = document.getElementById("trash");
     trashIcon.addEventListener("click", () => {
-        supprimerMail(mail);
+        deleteEmail(mail);
     });
 
     updateUnreadCount();
@@ -192,7 +192,7 @@ const switchFolder = (dossier) => {
  * Shuffle an array randomly.
  * @param {Array} array - The array to shuffle.
  */
-const melangerTableau = (array) => {
+const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1)); 
         [array[i], array[j]] = [array[j], array[i]]; 
@@ -202,14 +202,15 @@ const melangerTableau = (array) => {
 /**
  * Retrieve random emails to populate the inbox.
  */
-const recupererEmailsAleatoires = () => {
+const retrieveRandomEmails = () => {
     if (emails.length === 0) {  
        
-        let emailsFromSource = [...mails]; // on copie
-        melangerTableau(emailsFromSource); 
+        let emailsFromSource = [...mails]; // Copy the source emails
+        shuffleArray(emailsFromSource); // Shuffle the email list
         
         let nbEmail;
 
+        // Set the number of emails based on session difficulty
         switch (sessionDifficulty.v) {
 			case 1:
 				nbEmail = 25;
@@ -227,44 +228,46 @@ const recupererEmailsAleatoires = () => {
 				nbEmail = 25;
 		}
 
-        // liste des mails qui restent sans doublons
+        // List of remaining emails (without duplicates)
         const mailsRestants = [];
         
-        // Place le mail avec l'ID 0 en premier
+        // Place the email with ID 0 (Zimmermann) first
         const mailZimmermann = emailsFromSource.find(mail => mail.id === 0);
-        emailsFromSource = emailsFromSource.filter(mail => mail.id !== 0); // Retire le mail de Zimmermann
+        emailsFromSource = emailsFromSource.filter(mail => mail.id !== 0); // Remove Zimmermann email
         if (mailZimmermann) {
-            emailsFromSource.unshift(mailZimmermann); // Place en première position
+            emailsFromSource.unshift(mailZimmermann); // Add Zimmermann email to the beginning
         }
 
-        // ajoute les emails dans mailsrestants
+        // Add emails to the remainingEmails list
         for (let i = 0; i < emailsFromSource.length; i++) {
             mailsRestants.push(emailsFromSource[i]);
-            if (mailsRestants.length + 1 > nbEmail) break; // on arrêtes on a assez d'emails
+            if (mailsRestants.length + 1 > nbEmail) break; // Stop when enough emails are added
         }
 
         emails.push(...mailsRestants);
-        // sauvegarde ces emails dans sessionStorage
+        // Save these emails in sessionStorage
         sessionEmails.v = emails;
         updateEmailDatesToToday();
     }
-    // affiche les emails dans la liste
-  
+
+    // Display emails in the list
     displayMessages();
 }
 
-
+/**
+ * Update the unread email count and update the UI accordingly.
+ */
 const updateUnreadCount = () => {
     let nonLus = 0; 
 
-    // Parcourt tous les emails
+    // Loop through all emails to count unread ones
     for (let i = 0; i < emails.length; i++) {
         if (!emails[i].lu) { 
             nonLus++;
         }
     }
 
-    // Met à jour le compteur sur l'interface
+    // Update the UI counter
     if (nonLus > 0) {
         DOM.countmail.textContent = nonLus; 
         DOM.countmail.style.display = "inline-block"; 
@@ -277,13 +280,16 @@ const updateUnreadCount = () => {
     }
 }
 
-const supprimerMail = (mail) => {
+/**
+ * Delete an email and move it to the trash.
+ */
+const deleteEmail = (mail) => {
     
-    const index = emails.findIndex(item => item.id === mail.id); // on cherche l'inde du mail que l'on veut supp
+    const index = emails.findIndex(item => item.id === mail.id); // Find the index of the email to delete
     if (index !== -1) {
-        if(mail.id !== 0) sessionSatisfaction.v -= 5;
-        // on ajoute le mail à la liste des emails supp
+        if(mail.id !== 0) sessionSatisfaction.v -= 5; // Decrease satisfaction score for non-Zimmermann emails
         
+        // Add the email to the deleted emails list
         emailsDelete.push(emails[index]);
         emails.splice(index, 1);
         sessionEmails.v = emails;
@@ -294,15 +300,17 @@ const supprimerMail = (mail) => {
         <h2>Contenu de l'e-mail</h2>
         <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; 
 
-        // Met à jour l'affichage
+        // Update the UI
         displayMessages();
         updateUnreadCount();
     }
 };
 
 
-// Colonne à droite
-const afficherContenuMailDelete = (mail, li) => {
+/**
+ * Display the content of a deleted email in the right panel.
+ */
+const displayDeletedEmailContent = (mail, li) => {
     if (lastSelectedLi !== null) {
         lastSelectedLi.style.backgroundColor = ""; // Remet la couleur d'origine
     }
@@ -334,7 +342,9 @@ const afficherContenuMailDelete = (mail, li) => {
 
 }
 
-
+/**
+ * Display all deleted emails in the UI.
+ */
 const displayMessagesDelete = () => {
     emailsDelete.map(mail => {
         const li = document.createElement('li');
@@ -343,12 +353,15 @@ const displayMessagesDelete = () => {
 
         displayEmail(mail, li);
 
-        li.addEventListener('click', () => afficherContenuMailDelete(mail, li));
+        li.addEventListener('click', () => displayDeletedEmailContent(mail, li));
         DOM.messageList.appendChild(li);
     });
     
 }
 
+/**
+ * Verify if a day has passed since the last session check.
+ */
 const verifIfDayPassed = () => {
     const currentDay = Math.floor(sessionTimePassed.v / 8);
     let LastCheckedDay = Math.floor(sesssionLastTimePassed.v / 8);
@@ -362,9 +375,12 @@ const verifIfDayPassed = () => {
     }
 };
 
+/**
+ * Add new emails based on the number of days passed.
+ */
 const addEmailAfterDayPassed = (differenceTime) => {
     // Mélange les e-mails disponibles
-    melangerTableau(mails);
+    shuffleArray(mails);
 
     // Filtre les e-mails qui ne sont pas déjà dans les boîtes existantes (inbox et corbeille)
     let nouveauxEmails = mails.filter(mail => {
@@ -398,6 +414,9 @@ const addEmailAfterDayPassed = (differenceTime) => {
     
 };
 
+/**
+ * Open the Zimmermann email if it is the first time the user opens the application.
+ */
 const openZimmermannEmailIfFirstTime = () => {
     if (sessionOpenFirstTime.v) { 
         const mailZimmermann = emails.find(mail => mail.id === 0);
@@ -409,13 +428,16 @@ const openZimmermannEmailIfFirstTime = () => {
             });
 
             if (liZimmermann) {
-                afficherContenuMail(mailZimmermann, liZimmermann); 
+                displayEmailContent(mailZimmermann, liZimmermann); 
                 sessionOpenFirstTime.v = false; 
             }
         }
     }
 };
 
+/**
+ * Format a Date object into a string (DD-MM-YYYY).
+ */
 const formatDateToString = (date) => {
     const day = String(date.getDate()).padStart(2, '0'); 
     const month = String(date.getMonth() + 1).padStart(2, '0'); 
@@ -423,14 +445,17 @@ const formatDateToString = (date) => {
     return `${day}-${month}-${year}`; 
 }
 
+/**
+ * Update the date of all emails to today.
+ */
 const updateEmailDatesToToday = () => {
     const todayDate = formatDateToString(new Date());
     emails = emails.map(mail => ({ ...mail, date: todayDate }));
     sessionEmails.v = emails;
 }
 
-
-recupererEmailsAleatoires();
+// Initialize functions on page load
+retrieveRandomEmails();
 updateUnreadCount();
 verifIfDayPassed();
 openZimmermannEmailIfFirstTime();
