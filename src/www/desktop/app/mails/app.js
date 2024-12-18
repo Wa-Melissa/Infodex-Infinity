@@ -63,34 +63,27 @@ const afficherMail = (mail, li) => {
     li.appendChild(nameContainer);
 
     // Ajoute l'objet et la date
+    const contentContainer = document.createElement('div');
+    contentContainer.style.display = 'flex';
+    contentContainer.style.justifyContent = 'space-between';
+    contentContainer.style.alignItems = 'center';
+
     const contentElement = document.createElement('div');
     if (mail.lu) contentElement.innerHTML = `<em>${mail.objet}</em>`;
     else contentElement.innerHTML = `<strong><em>${mail.objet}</em></strong>`;
-    
-    contentElement.innerHTML += `<span class="w3-right-align" style="float: right; width: auto;">${mail.date}</span>`;
+
+    const dateElement = document.createElement('span');
+    dateElement.style.whiteSpace = 'nowrap'; 
+    dateElement.innerHTML = `${mail.date}`;
+
+    contentContainer.appendChild(contentElement);
+    contentContainer.appendChild(dateElement);
 
     // on ajoute le contenu à l'élément li
-    li.appendChild(contentElement);
+    li.appendChild(contentContainer);
+
 }
 
-/* V0 Test du début
-
-// Colonne du milieu
-function afficherMessages() {
-    
-    // Génère 5 premiers messsages (test) --> à changer car de façon random
-    mails.slice(0, 5).forEach(mail => { // on copie les 5 premiers elements dans un tableau que l'on reparcours --> à changer of course
-        const li = document.createElement('li');
-        li.style.borderBottom = "1px solid lightgray";
-        li.style.cursor = "pointer"; 
-
-        afficherMail(mail, li);
-        // Ajouter un event pour afficher le contenu du message quand on clique sur le msg
-        li.addEventListener('click', () => afficherContenuMail(mail, li));
-        
-        DOM.messageList.appendChild(li);
-    });
-}*/
 
 const afficherMessages = () => {
     DOM.messageList.innerHTML = ''; // Vide la liste des messages
@@ -383,8 +376,6 @@ const addEmailAfterDayPassed = (differenceTime) => {
     mettreAJourCompteurNonLus();
     
 };
-
-
 
 const openZimmermannEmailIfFirstTime = () => {
     if (sessionOpenFirstTime.v) { 
