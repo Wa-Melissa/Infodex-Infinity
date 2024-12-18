@@ -371,9 +371,29 @@ const addEmailAfterDayPassed = (differenceTime) => {
     mettreAJourCompteurNonLus();
 };
 
+const openZimmermannEmailIfFirstTime = () => {
+    if (sessionOpenFirstTime.v) { 
+        const mailZimmermann = emails.find(mail => mail.id === 0);
+        if (mailZimmermann) {
+            const liElements = DOM.messageList.querySelectorAll('li');
+            const liZimmermann = Array.from(liElements).find(li => {
+                const nameElement = li.querySelector('span');
+                return nameElement && nameElement.textContent.trim() === mailZimmermann.nom;
+            });
+
+            if (liZimmermann) {
+                afficherContenuMail(mailZimmermann, liZimmermann); 
+                sessionOpenFirstTime.v = false; 
+            }
+        }
+    }
+};
+
+
 recupererEmailsAleatoires();
 mettreAJourCompteurNonLus();
 verifIfDayPassed();
+openZimmermannEmailIfFirstTime();
 
 
 
