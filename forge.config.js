@@ -13,10 +13,6 @@ module.exports = {
 			config: {},
 		},
 		{
-			name: '@electron-forge/maker-zip',
-			platforms: ['darwin', "win32"],
-		},
-		{
 			name: '@electron-forge/maker-dmg',
 			config: {
 				background: './src/www/desktop/bg.jpg',
