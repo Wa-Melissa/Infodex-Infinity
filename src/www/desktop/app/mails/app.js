@@ -282,6 +282,7 @@ const updateUnreadCount = () => {
 
 /**
  * Delete an email and move it to the trash.
+ * @param {Object} mail - The email object to delete.
  */
 const deleteEmail = (mail) => {
     
@@ -309,12 +310,15 @@ const deleteEmail = (mail) => {
 
 /**
  * Display the content of a deleted email in the right panel.
+ * Highlights the selected email in the list and updates the details in the right panel.
+ * @param {Object} mail - The email object to display (contains `id`, `contenu`, etc.).
+ * @param {HTMLElement} li - The `<li>` element representing the email in the list.
  */
 const displayDeletedEmailContent = (mail, li) => {
     if (lastSelectedLi !== null) {
-        lastSelectedLi.style.backgroundColor = ""; // Remet la couleur d'origine
+        lastSelectedLi.style.backgroundColor = ""; // Reset the background color
     }
-    // met la couleur sur le mail séléctionné
+    // Highlight the selected email
     li.style.backgroundColor = "#e0f7fa"; 
     lastSelectedLi = li;
 
@@ -323,10 +327,10 @@ const displayDeletedEmailContent = (mail, li) => {
     li.style.backgroundColor = "#e0f7fa";
     
     
-    const index = emails.findIndex(item => item.id === mail.id);  //un mail = un od
+    const index = emails.findIndex(item => item.id === mail.id);  // Find the email index
     if (index !== -1) {
-        emails[index] = mail;  // Met à jour l'email dans le tableau
-        sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
+        emails[index] = mail;  // Update the email in the array
+        sessionEmails.v = emails;  // Save to sessionStorage
     }
 
     const contenuFormate = mail.contenu.replace(/\n/g, "<br>");
@@ -375,8 +379,11 @@ const verifIfDayPassed = () => {
     }
 };
 
+
 /**
- * Add new emails based on the number of days passed.
+ * Add new emails to the inbox based on the number of days passed.
+ * Updates the email list with new emails for each day that has passed.
+ * @param {number} differenceTime - The number of days that have passed since the last check.
  */
 const addEmailAfterDayPassed = (differenceTime) => {
     // Mélange les e-mails disponibles
@@ -437,6 +444,8 @@ const openZimmermannEmailIfFirstTime = () => {
 
 /**
  * Format a Date object into a string (DD-MM-YYYY).
+ * @param {Date} date - The date object to format.
+ * @returns {string} - The formatted date as a string.
  */
 const formatDateToString = (date) => {
     const day = String(date.getDate()).padStart(2, '0'); 
@@ -453,6 +462,7 @@ const updateEmailDatesToToday = () => {
     emails = emails.map(mail => ({ ...mail, date: todayDate }));
     sessionEmails.v = emails;
 }
+
 
 // Initialize functions on page load
 retrieveRandomEmails();
