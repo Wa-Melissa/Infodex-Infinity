@@ -16,10 +16,10 @@ broadcastUpdateAppName("JaiMail - Boite de réception");
 const broadCastOpenApp= new BroadcastChannel("open_app");
 
 
-// # id, . class , - classe dynamique (qui peut ne pas exister quand on créer le DOM)
-// Récupérer le dernier mail séléctionné
-let lastSelectedLi = null;
-let activeBox = "inbox"; //savoir où on est 
+
+
+let lastSelectedLi = null; // Retrieve the last selected email
+let activeBox = "inbox"; // To know the current active folder
 let emails = sessionEmails.v;
 let emailsDelete = sessionEmailsDelete.v;
 DOM.boitereception.classList.add('active');
@@ -27,30 +27,34 @@ DOM.boitereception.addEventListener("click", () => switchFolder("inbox"));
 DOM.corbeille.addEventListener("click", () => switchFolder("trash"));
 
 
-
-const afficherMail = (mail, li) => {
-    // Crée un conteneur pour le nom et le bouton
+/**
+ * Display an email inside the email list.
+ * @param {Object} mail - The email object.
+ * @param {HTMLElement} li - The list item element representing the email.
+ */
+const displayEmail = (mail, li) => {
+    // Create a container for the sender's name and the "mark as unread" button
     const nameContainer = document.createElement('div');
     nameContainer.style.display = 'flex';
     nameContainer.style.alignItems = 'center';
 
-    // Ajoute le bouton pour marquer comme non lu
-    const btnLu = document.createElement('div');
-    btnLu.className = 'btn-lu';
-    btnLu.style.marginRight = '10px'; // Ajoute une marge à droite pour espacer le bouton du nom
-    btnLu.addEventListener('click', (event) => {
-        event.stopPropagation(); // pour pas que le mail s'ouvre en même temps
+    // Add the "mark as unread" button
+    const btnRead = document.createElement('div');
+    btnRead.className = 'btn-lu';
+    btnRead.style.marginRight = '10px'; 
+    btnRead.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent the email from opening when clicking the button
         mail.lu = !mail.lu;
-        afficherMail(mail, li);
+        displayEmail(mail, li);
         let index = emails.findIndex(item => item.id === mail.id);
         if (index !== -1) {
             emails[index] = mail;
             sessionEmails.v = emails;
         }
-        mettreAJourCompteurNonLus();
+        updateUnreadCount();
     });
 
-    // add le nom de l'expéditeur
+    // Add the sender's name
     const nameElement = document.createElement('span');
     if (mail.lu) nameElement.innerHTML = `${mail.nom}`;
     else nameElement.innerHTML = `<strong>${mail.nom}</strong>`;
@@ -58,11 +62,11 @@ const afficherMail = (mail, li) => {
     nameContainer.appendChild(btnLu);
     nameContainer.appendChild(nameElement);
 
-    // add le container à li
-    li.innerHTML = ''; // efface le contenu existant
+    // Add the container to the list item
+    li.innerHTML = ''; // Clear existing content
     li.appendChild(nameContainer);
 
-    // Ajoute l'objet et la date
+    // Add the subject and date
     const contentContainer = document.createElement('div');
     contentContainer.style.display = 'flex';
     contentContainer.style.justifyContent = 'space-between';
@@ -79,20 +83,23 @@ const afficherMail = (mail, li) => {
     contentContainer.appendChild(contentElement);
     contentContainer.appendChild(dateElement);
 
-    // on ajoute le contenu à l'élément li
+    // Add the content container to the list item
     li.appendChild(contentContainer);
 
 }
 
 
-const afficherMessages = () => {
-    DOM.messageList.innerHTML = ''; // Vide la liste des messages
+/**
+ * Display the list of emails in the current folder.
+ */
+const displayMessages = () => {
+    DOM.messageList.innerHTML = '';  // Clear the message list
     emails.forEach(mail => {
         const li = document.createElement('li');
         li.style.borderBottom = "1px solid lightgray";
         li.style.cursor = "pointer";
 
-        afficherMail(mail, li);
+        displayEmail(mail, li);
 
         li.addEventListener('click', () => afficherContenuMail(mail, li));
         DOM.messageList.appendChild(li);
@@ -100,24 +107,28 @@ const afficherMessages = () => {
 };
 
 
-// Colonne à droite
+/**
+ * Display the content of the selected email in the right panel.
+ * @param {Object} mail - The email object.
+ * @param {HTMLElement} li - The list item element representing the email.
+ */
 const afficherContenuMail = (mail, li) => {
     if (lastSelectedLi !== null) {
-        lastSelectedLi.style.backgroundColor = ""; // Remet la couleur d'origine
+        lastSelectedLi.style.backgroundColor = "";  // Reset the background color
     }
-    // met la couleur sur le mail séléctionné
+    // Highlight the selected email
     li.style.backgroundColor = "#e0f7fa"; 
     lastSelectedLi = li;
 
     mail.lu = true;
-    afficherMail(mail, li);
+    displayEmail(mail, li);
     li.style.backgroundColor = "#e0f7fa";
     
     
-    const index = emails.findIndex(item => item.id === mail.id);  //un mail = un od
+    const index = emails.findIndex(item => item.id === mail.id); // Find the email index
     if (index !== -1) {
-        emails[index] = mail;  // Met à jour l'email dans le tableau
-        sessionEmails.v = emails;  // Sauvegarde dans sessionStorage
+        emails[index] = mail;  // Update the email in the array
+        sessionEmails.v = emails;  // Save to sessionStorage
     }
     sessionLastOpenedEmail.v = index;
     const contenuFormate = mail.contenu.replace(/\n/g, "<br>");
@@ -127,10 +138,11 @@ const afficherContenuMail = (mail, li) => {
     clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
     clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
     clone.querySelector(".mail-contenu").innerHTML = contenuFormate;
-    if (mail.id !== 0) { // Si ce n'est pas le mail de Zimmerman, affiche les pièces jointes
+
+    if (mail.id !== 0) {  // If not Zimmerman's email, display attachments
         clone.querySelector(".mail-pieces-jointes-btn").innerHTML = mail.piecesJointes;
     } else {
-        clone.querySelector(".mail-pieces-jointes-btn").style.display = "none"; // Cache les pièces jointes pour le mail de Zimmerman
+        clone.querySelector(".mail-pieces-jointes-btn").style.display = "none"; // Hide attachments for Zimmerman's email
     }
     DOM.contenumail.appendChild(clone);
 
@@ -139,40 +151,47 @@ const afficherContenuMail = (mail, li) => {
         supprimerMail(mail);
     });
 
-    mettreAJourCompteurNonLus();
+    updateUnreadCount();
 
     
 }
 
+/**
+ * Switch between inbox and trash folders.
+ * @param {string} folder - The folder to switch to ("inbox" or "trash").
+ */
 const switchFolder = (dossier) => {
     activeBox = dossier;
     if (dossier === "trash") {
         broadcastUpdateAppName("JaiMail - Corbeille");
-        DOM.messageList.innerHTML = ''; // Vide la liste des messages
-        DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
+        DOM.messageList.innerHTML = ''; // Clear the message list
+        DOM.contenumail.innerHTML = ''; // Clear the email content
         DOM.contenumail.innerHTML = `
         <div class ="w3-center">
         <h2>Contenu de l'e-mail</h2>
-        <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; // Remet le texte par défaut
-        DOM.boitereception.classList.remove('active'); // Pour mettre le fond en gris selon où on est
+        <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; // Reset the default text
+        DOM.boitereception.classList.remove('active'); // Set the active folder styling
         DOM.corbeille.classList.add('active'); 
-        afficherMessagesDelete();
+        displayMessagesDelete();
     } else {
         broadcastUpdateAppName("JaiMail - Boite de réception");
-        DOM.messageList.innerHTML = ''; // Vide la liste des messages
-        DOM.contenumail.innerHTML = ''; // Vide le contenu du mail
+        DOM.messageList.innerHTML = ''; 
+        DOM.contenumail.innerHTML = ''; 
         DOM.contenumail.innerHTML = `
         <div class ="w3-center">
         <h2>Contenu de l'e-mail</h2>
-        <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; // Remet le texte par défaut
+        <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; 
         DOM.boitereception.classList.add('active');
         DOM.corbeille.classList.remove('active');
-        afficherMessages();
+        displayMessages();
     }
 }
 
 
-
+/**
+ * Shuffle an array randomly.
+ * @param {Array} array - The array to shuffle.
+ */
 const melangerTableau = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1)); 
@@ -180,7 +199,9 @@ const melangerTableau = (array) => {
     }
 }
 
-
+/**
+ * Retrieve random emails to populate the inbox.
+ */
 const recupererEmailsAleatoires = () => {
     if (emails.length === 0) {  
        
@@ -229,11 +250,11 @@ const recupererEmailsAleatoires = () => {
     }
     // affiche les emails dans la liste
   
-    afficherMessages();
+    displayMessages();
 }
 
 
-const mettreAJourCompteurNonLus = () => {
+const updateUnreadCount = () => {
     let nonLus = 0; 
 
     // Parcourt tous les emails
@@ -274,8 +295,8 @@ const supprimerMail = (mail) => {
         <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; 
 
         // Met à jour l'affichage
-        afficherMessages();
-        mettreAJourCompteurNonLus();
+        displayMessages();
+        updateUnreadCount();
     }
 };
 
@@ -290,7 +311,7 @@ const afficherContenuMailDelete = (mail, li) => {
     lastSelectedLi = li;
 
     mail.lu = true;
-    afficherMail(mail, li);
+    displayEmail(mail, li);
     li.style.backgroundColor = "#e0f7fa";
     
     
@@ -309,18 +330,18 @@ const afficherContenuMailDelete = (mail, li) => {
     clone.querySelector(".mail-contenu").innerHTML = contenuFormate;
     DOM.contenumail.appendChild(clone);
  
-    mettreAJourCompteurNonLus();
+    updateUnreadCount();
 
 }
 
 
-const afficherMessagesDelete = () => {
+const displayMessagesDelete = () => {
     emailsDelete.map(mail => {
         const li = document.createElement('li');
         li.style.borderBottom = "1px solid lightgray";
         li.style.cursor = "pointer";
 
-        afficherMail(mail, li);
+        displayEmail(mail, li);
 
         li.addEventListener('click', () => afficherContenuMailDelete(mail, li));
         DOM.messageList.appendChild(li);
@@ -372,8 +393,8 @@ const addEmailAfterDayPassed = (differenceTime) => {
     // Met à jour les données de session et l'affichage
     sessionEmails.v = emails;
     sesssionLastTimePassed.v = sessionTimePassed.v;
-    afficherMessages();
-    mettreAJourCompteurNonLus();
+    displayMessages();
+    updateUnreadCount();
     
 };
 
@@ -410,7 +431,7 @@ const updateEmailDatesToToday = () => {
 
 
 recupererEmailsAleatoires();
-mettreAJourCompteurNonLus();
+updateUnreadCount();
 verifIfDayPassed();
 openZimmermannEmailIfFirstTime();
 
