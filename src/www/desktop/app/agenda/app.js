@@ -40,7 +40,9 @@ DOM.addEvent_button.addEventListener("click", async () => {
         },
         Congés: {
             oneday: "Prendre sa journée",
-            twoday: "Prendre sa journée et simuler une maladie demain"
+            twoday: "Prendre sa journée et simuler une maladie demain",
+            strike: "Participer à une grève pendant une semaine",
+            resign: "Démissionner (et faire exploser la base de données ... Kboom)"
         }
     }
 
@@ -167,6 +169,15 @@ const handleEvent = async (eventType) => {
     if (eventType == "twoday") {
         sessionTimePassed.v += 16 - (sessionTimePassed.v % 8);
         sessionSatisfaction.v -= 16 - (sessionTimePassed.v % 8);
+        return;
+    }
+    if (eventType == "strike") {
+        sessionTimePassed.v += (8*5) - (sessionTimePassed.v % 8);
+        sessionSatisfaction.v -= (8*5) - (sessionTimePassed.v % 8);
+        return;
+    }
+    if (eventType == "resign") {
+        sessionSatisfaction.v = 0;
         return;
     }
     if (eventType == "format") {
