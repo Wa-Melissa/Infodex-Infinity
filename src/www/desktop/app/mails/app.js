@@ -16,8 +16,6 @@ broadcastUpdateAppName("JaiMail - Boite de réception");
 const broadCastOpenApp= new BroadcastChannel("open_app");
 
 
-
-
 let lastSelectedLi = null; // Retrieve the last selected email
 let activeBox = "inbox"; // To know the current active folder
 let emails = sessionEmails.v;
@@ -39,10 +37,10 @@ const displayEmail = (mail, li) => {
     nameContainer.style.alignItems = 'center';
 
     // Add the "mark as unread" button
-    const btnLu = document.createElement('div');
-    btnLu.className = 'btn-lu';
-    btnLu.style.marginRight = '10px'; 
-    btnLu.addEventListener('click', (event) => {
+    const btnRead = document.createElement('div');
+    btnRead.className = 'btn-lu';
+    btnRead.style.marginRight = '10px'; 
+    btnRead.addEventListener('click', (event) => {
         event.stopPropagation(); // Prevent the email from opening when clicking the button
         mail.lu = !mail.lu;
         displayEmail(mail, li);
@@ -59,7 +57,7 @@ const displayEmail = (mail, li) => {
     if (mail.lu) nameElement.innerHTML = `${mail.nom}`;
     else nameElement.innerHTML = `<strong>${mail.nom}</strong>`;
 
-    nameContainer.appendChild(btnLu);
+    nameContainer.appendChild(btnRead);
     nameContainer.appendChild(nameElement);
 
     // Add the container to the list item
@@ -131,13 +129,13 @@ const displayEmailContent = (mail, li) => {
         sessionEmails.v = emails;  // Save to sessionStorage
     }
     sessionLastOpenedEmail.v = index;
-    const contenuFormate = mail.contenu.replace(/\n/g, "<br>");
+    const contentFormate = mail.contenu.replace(/\n/g, "<br>");
     DOM.contenumail.innerHTML = "";
     const clone = DOM.mailTemplate.content.cloneNode(true);
     clone.querySelector(".mail-objet").innerHTML = mail.objet;
     clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
     clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
-    clone.querySelector(".mail-contenu").innerHTML = contenuFormate;
+    clone.querySelector(".mail-contenu").innerHTML = contentFormate;
 
     if (mail.id !== 0) {  // If not Zimmerman's email, display attachments
         clone.querySelector(".mail-pieces-jointes-btn").innerHTML = mail.piecesJointes;
@@ -258,18 +256,18 @@ const retrieveRandomEmails = () => {
  * Update the unread email count and update the UI accordingly.
  */
 const updateUnreadCount = () => {
-    let nonLus = 0; 
+    let unread = 0; 
 
     // Loop through all emails to count unread ones
     for (let i = 0; i < emails.length; i++) {
         if (!emails[i].lu) { 
-            nonLus++;
+            unread++;
         }
     }
 
     // Update the UI counter
-    if (nonLus > 0) {
-        DOM.countmail.textContent = nonLus; 
+    if (unread > 0) {
+        DOM.countmail.textContent = unread; 
         DOM.countmail.style.display = "inline-block"; 
         DOM.boitereception.style.fontWeight = "bold";
         DOM.countmail.style.fontSize = "calc(90%)"; 
@@ -333,13 +331,13 @@ const displayDeletedEmailContent = (mail, li) => {
         sessionEmails.v = emails;  // Save to sessionStorage
     }
 
-    const contenuFormate = mail.contenu.replace(/\n/g, "<br>");
+    const contentFormate = mail.contenu.replace(/\n/g, "<br>");
     DOM.contenumail.innerHTML = "";
     const clone = DOM.mailTemplateDelete.content.cloneNode(true);
     clone.querySelector(".mail-objet").innerHTML = mail.objet;
     clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
     clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
-    clone.querySelector(".mail-contenu").innerHTML = contenuFormate;
+    clone.querySelector(".mail-contenu").innerHTML = contentFormate;
     DOM.contenumail.appendChild(clone);
  
     updateUnreadCount();
@@ -390,11 +388,11 @@ const addEmailAfterDayPassed = (differenceTime) => {
     shuffleArray(mails);
 
     // Filtre les e-mails qui ne sont pas déjà dans les boîtes existantes (inbox et corbeille)
-    let nouveauxEmails = mails.filter(mail => {
+    let newEmails = mails.filter(mail => {
         return !emails.some(e => e.id === mail.id) && !emailsDelete.some(e => e.id === mail.id);
     });
 
-    let emailsAjoutes = [];
+    let emailsAdded = [];
     const today = new Date();
     const currentDay = Math.floor(sessionTimePassed.v / 8);
 
@@ -403,15 +401,15 @@ const addEmailAfterDayPassed = (differenceTime) => {
         dateCourante.setDate(today.getDate() + currentDay - day); 
         const formattedDate = formatDateToString(dateCourante);
 
-        const emailsPourCeJour = nouveauxEmails.splice(0, 3).map(mail => {
+        const emailsPourCeJour = newEmails.splice(0, 3).map(mail => {
             return { ...mail, date: formattedDate }; 
         });
 
-        emailsAjoutes.push(...emailsPourCeJour);
+        emailsAdded.push(...emailsPourCeJour);
     }
 
     // Ajoute les nouveaux e-mails en tête de liste
-    emails.unshift(...emailsAjoutes);
+    emails.unshift(...emailsAdded);
 
     // Met à jour les données de session et l'affichage
     sessionEmails.v = emails;
