@@ -95,7 +95,8 @@ Pour les utilisateurs avancés, la [compilation depuis les sources](#compilation
 
 1. Assurez d'avoir installé Node.JS 22 et NPM.
 2. Clonez ce repository: `git clone https://git.unistra.fr/t3-les-autres-ind-cis/the-email-game/ ./infodex-infinity`
-3. Sautez à la dernière release (tag): `git checkout tags/vX.X.X`
-4. Installez les dépendances locales: `npm install --include=dev`
-5. Si nécessaire, configurez electron-forge en modifiant le fichier ./forge.config.js
-6. Lancez la génération: `npm run make`
+3. Allez dans le dossier: `cd ./infodex-infinity`
+4. Sautez à la dernière release (tag): `git checkout tags/vX.X.X`
+5. Installez les dépendances locales: `npm install --include=dev`
+6. Si nécessaire, configurez electron-forge en modifiant le fichier ./forge.config.js
+7. Lancez la génération: `npm run make`
