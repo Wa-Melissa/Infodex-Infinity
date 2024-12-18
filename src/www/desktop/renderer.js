@@ -62,7 +62,7 @@ const closeApp = (force = false) => {
 	}
 	DOM.app_iframe.src = "blank.html";
 	DOM.app_container.style.display = "none";
-	document.title = "Infodex Infinity - Desktop"
+	document.title = "Infodex Infinity - Bureau"
 	DOM.app_name.innerHTML = "";
 }
 DOM.app_close_btn.addEventListener("click", ()=> (closeApp()));
