@@ -214,3 +214,25 @@ const broadcastUpdateAppName = (name) => {
 	bc.postMessage(name);
 	bc.close();
 }
+
+/**
+ * Converts a floating-point number to a string
+ * and keeps only the digits before the second digit
+ * after the decimal point.
+ *
+ * @param {number} num - The floating-point number to convert.
+ * @returns {string} - The formatted string.
+ */
+const convertFloatToStringTwoDecimal = (num) => {
+    // Convert the floating-point number to a string
+    let numStr = num.toString();
+  
+    // Find the position of the decimal point
+    let [integerPart, decimalPart] = numStr.split('.');
+
+    // Keep only the first and second digit after the decimal point
+    let newDecimalPart = decimalPart ? decimalPart.slice(0, 2) : '';
+    let result = newDecimalPart ? `${integerPart}.${newDecimalPart}` : integerPart;
+
+    return result;
+}

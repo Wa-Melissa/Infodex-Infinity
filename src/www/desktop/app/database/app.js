@@ -17,7 +17,7 @@ const corruptionRate = (sessionDbTotalCells.v == 0) ? 0 : sessionDbCorruptedCell
 //Fill database stats
 DOM.total_rows.innerText = sessionDbTotalCells.v;
 DOM.corrupted_rows.innerText = sessionDbCorruptedCells.v;
-DOM.corruption_rate.innerText = Math.floor(corruptionRate * 10) / 10 + "%";
+DOM.corruption_rate.innerText = convertFloatToStringTwoDecimal(corruptionRate) + "%";
 DOM.corruption_rate_bar.style.width = corruptionRate * (100 / 5) + "%";
 
 //Fill user stats
