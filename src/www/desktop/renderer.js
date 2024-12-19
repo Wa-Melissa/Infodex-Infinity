@@ -161,6 +161,10 @@ sessionTimePassed.attachEvent((event) => { //Event to update clock and detect ne
 			didOpen: () => {
 				Swal.getPopup().addEventListener('click', () => {
 					Swal.close();
+					closeApp(true);
+					setTimeout(() => {
+						loadApp("database");		
+					}, 100)
 				});
 			}
 		});
