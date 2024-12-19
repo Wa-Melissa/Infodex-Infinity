@@ -1,7 +1,7 @@
 {
 	"name": "infodex-infinity",
 	"productName": "infodex-infinity",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "The Data Librarian Game",
 	"main": "src/index.js",
 	"scripts": {
@@ -19,9 +19,7 @@
 		"@electron-forge/cli": "^7.4.0",
 		"@electron-forge/maker-deb": "^7.4.0",
 		"@electron-forge/maker-dmg": "^7.5.0",
-		"@electron-forge/maker-rpm": "^7.4.0",
 		"@electron-forge/maker-squirrel": "^7.4.0",
-		"@electron-forge/maker-zip": "^7.4.0",
 		"@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
 		"@electron-forge/plugin-fuses": "^7.4.0",
 		"@electron/fuses": "^1.8.0",
