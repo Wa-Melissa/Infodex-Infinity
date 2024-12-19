@@ -138,7 +138,9 @@ const displayEmailContent = (mail, li) => {
     const contentFormate = mail.contenu.replace(/\n/g, "<br>");
     DOM.contenumail.innerHTML = "";
     const clone = DOM.mailTemplate.content.cloneNode(true);
-    clone.querySelector(".mail-objet").innerHTML = mail.objet;
+    if(mail.urgent) clone.querySelector(".mail-objet").innerHTML = `[Urgent] ${mail.objet}`;
+    else clone.querySelector(".mail-objet").innerHTML = mail.objet;
+
     clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
     clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
     clone.querySelector(".mail-contenu").innerHTML = contentFormate;
