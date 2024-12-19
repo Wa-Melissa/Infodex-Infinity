@@ -46,7 +46,7 @@ let settings = {
 		createLifeExpectancy, createJobs, createAnimals, createMusics,
 		createMonths
 	],
-	statisfactionChange: 0.5, // Satisfaction change per error
+	satisfactionChange: 3, // Satisfaction change per dataset
 	skillsChange: 0.5, // Skill change per error
 }
 
@@ -223,7 +223,7 @@ const selectionEnd = (selectionList, dataset) => {
 			}
 			else{
 				// False errors
-				sessionSatisfaction.v -= settings.statisfactionChange; // Decrease satisfaction for incorrect selection
+				sessionSatisfaction.v -= settings.satisfactionChange * 0.5; // Decrease satisfaction for incorrect selection
 			}
 		});
 
@@ -259,11 +259,11 @@ const selectionEnd = (selectionList, dataset) => {
 		if(result.isConfirmed) {
 			let nbCorrupt = nbErr - nbFound;
 			addToBase(nbCorrupt,dataset); // Add the corrected data to the base
-			sessionSatisfaction.v += settings.statisfactionChange * nbErr; // Increase satisfaction based on number of errors
+			sessionSatisfaction.v += settings.satisfactionChange * 1.5; // Increase satisfaction based
 			sessionTimePassed.v += 4;  // Increase time passed
 		} else if(result.isDenied){
 			// Decrease satisfaction for the found errors
-			sessionSatisfaction.v -= settings.statisfactionChange * nbFound;
+			sessionSatisfaction.v -= settings.satisfactionChange;
 			 // Increase skills based on the number of errors found
 			sessionSkill.v += settings.skillsChange * nbFound;
 			sessionTimePassed.v += 2; // Increase time passed

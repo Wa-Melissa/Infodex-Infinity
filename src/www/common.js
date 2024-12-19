@@ -138,7 +138,14 @@ const initGameSession = (difficulty  = 1) => {
 	sessionDifficulty.v = difficulty;
 	sessionDbCorruptedCells.v = 1;
 	sessionDbTotalCells.v = 50;
-	sessionSatisfaction.v = 50;
+	sessionSatisfaction.v = (() => {
+		switch (difficulty){
+			case 1: return 50;
+			case 2: return 40;
+			case 3: return 25;
+			default: return 15;
+		}
+	})();
 	sessionSkill.v = 10;
 	sessionEmails.v = [];
 	sessionTimePassed.v = 0; //hours
