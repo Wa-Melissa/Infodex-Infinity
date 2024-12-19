@@ -3,10 +3,10 @@
  */
 const DOM = createDOMReferences({
     messageList : "#message-list",
-    contenumail : "#contenu-mail",
-    boitereception : "#boite-reception",
-    btnlu : ".btn-lu",
-    corbeille: "#corbeille",
+    emailContent : "#contenu-mail",
+    inbox : "#boite-reception",
+    btnRead : ".btn-lu",
+    trash: "#corbeille",
     countmail : "#countmail",
     mailTemplate : "#mail-template",
     mailTemplateDelete : "#mail-template-delete"
@@ -20,11 +20,11 @@ let lastSelectedLi = null; // Retrieve the last selected email
 let activeBox = "inbox"; // To know the current active folder
 let emails = sessionEmails.v;
 let emailsDelete = sessionEmailsDelete.v;
-DOM.boitereception.classList.add('active');
+DOM.inbox.classList.add('active');
 
  
-DOM.boitereception.addEventListener("click", () => switchFolder("inbox"));
-DOM.corbeille.addEventListener("click", () => switchFolder("trash"));
+DOM.inbox.addEventListener("click", () => switchFolder("inbox"));
+DOM.trash.addEventListener("click", () => switchFolder("trash"));
 
 
 /**
@@ -136,7 +136,7 @@ const displayEmailContent = (mail, li) => {
     }
     sessionLastOpenedEmail.v = index;
     const contentFormate = mail.content.replace(/\n/g, "<br>");
-    DOM.contenumail.innerHTML = "";
+    DOM.emailContent.innerHTML = "";
     const clone = DOM.mailTemplate.content.cloneNode(true);
     if(mail.urgent) clone.querySelector(".mail-objet").innerHTML = `[Urgent] ${mail.object}`;
     else clone.querySelector(".mail-objet").innerHTML = mail.object;
@@ -150,7 +150,7 @@ const displayEmailContent = (mail, li) => {
     } else {
         clone.querySelector(".mail-pieces-jointes-btn").style.display = "none"; // Hide attachments for Zimmerman's email
     }
-    DOM.contenumail.appendChild(clone);
+    DOM.emailContent.appendChild(clone);
 
     const trashIcon = document.getElementById("trash");
     trashIcon.addEventListener("click", () => {
@@ -171,24 +171,24 @@ const switchFolder = (dossier) => {
     if (dossier === "trash") {
         broadcastUpdateAppName("JaiMail - Corbeille");
         DOM.messageList.innerHTML = ''; // Clear the message list
-        DOM.contenumail.innerHTML = ''; // Clear the email content
-        DOM.contenumail.innerHTML = `
+        DOM.emailContent.innerHTML = ''; // Clear the email content
+        DOM.emailContent.innerHTML = `
         <div class ="w3-center">
         <h2>Contenu de l'e-mail</h2>
         <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; // Reset the default text
-        DOM.boitereception.classList.remove('active'); // Set the active folder styling
-        DOM.corbeille.classList.add('active'); 
+        DOM.inbox.classList.remove('active'); // Set the active folder styling
+        DOM.trash.classList.add('active'); 
         displayMessagesDelete();
     } else {
         broadcastUpdateAppName("JaiMail - Boite de réception");
         DOM.messageList.innerHTML = ''; 
-        DOM.contenumail.innerHTML = ''; 
-        DOM.contenumail.innerHTML = `
+        DOM.emailContent.innerHTML = ''; 
+        DOM.emailContent.innerHTML = `
         <div class ="w3-center">
         <h2>Contenu de l'e-mail</h2>
         <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; 
-        DOM.boitereception.classList.add('active');
-        DOM.corbeille.classList.remove('active');
+        DOM.inbox.classList.add('active');
+        DOM.trash.classList.remove('active');
         displayMessages();
     }
 }
@@ -258,12 +258,12 @@ const updateUnreadCount = () => {
     if (unread > 0) {
         DOM.countmail.textContent = unread; 
         DOM.countmail.style.display = "inline-block"; 
-        DOM.boitereception.style.fontWeight = "bold";
+        DOM.inbox.style.fontWeight = "bold";
         DOM.countmail.style.fontSize = "calc(90%)"; 
     } else {
         DOM.countmail.textContent = ""; 
         DOM.countmail.style.display = "none"; 
-        DOM.boitereception.style.fontWeight = "normal";
+        DOM.inbox.style.fontWeight = "normal";
     }
 }
 
@@ -283,7 +283,7 @@ const deleteEmail = (mail) => {
         sessionEmails.v = emails;
         sessionEmailsDelete.v = emailsDelete;
         DOM.messageList.innerHTML = '';
-        DOM.contenumail.innerHTML = `
+        DOM.emailContent.innerHTML = `
         <div class ="w3-center">
         <h2>Contenu de l'e-mail</h2>
         <p>Veuillez sélectionner un e-mail pour afficher son contenu.</p>`; 
@@ -321,13 +321,13 @@ const displayDeletedEmailContent = (mail, li) => {
     }
 
     const contentFormate = mail.content.replace(/\n/g, "<br>");
-    DOM.contenumail.innerHTML = "";
+    DOM.emailContent.innerHTML = "";
     const clone = DOM.mailTemplateDelete.content.cloneNode(true);
     clone.querySelector(".mail-objet").innerHTML = mail.object;
     clone.querySelector(".mail-expediteur").innerHTML = mail.sender;
     clone.querySelector(".mail-destinataire").innerHTML = mail.recipient;
     clone.querySelector(".mail-contenu").innerHTML = contentFormate;
-    DOM.contenumail.appendChild(clone);
+    DOM.emailContent.appendChild(clone);
  
     updateUnreadCount();
 
