@@ -19,8 +19,8 @@ if (success){
     DOM.photo.src = success_photos[randomIndex]; //Get random photo
     DOM.text.innerHTML = success_text[randomIndex]; //Get random text
     DOM.text.innerHTML += "<br>Tu as atteint une satisfaction de " + Math.trunc(Math.min(sessionSatisfaction.v,100)*100)/100 
-    + "% et les usagers ont atteint " + Math.trunc(Math.min(sessionSkill.v,100)*100)/100 + "% de compétences. "
-    + "La base était corrompue à "+ ((sessionDbCorruptedCells.v / sessionDbTotalCells.v) * 100) + "%  ;) <br>"; //Generate and show message
+    + "% et les usagers ont atteint " + convertFloatToStringTwoDecimal(sessionSkill.v) + "% de compétences. "
+    + "La base était corrompue à "+ convertFloatToStringTwoDecimal(((sessionDbCorruptedCells.v / sessionDbTotalCells.v) * 100)) + "%  ;) <br>"; //Generate and show message
 }
 else{
     const randomIndex = Math.floor(Math.random() * failure_photos.length);

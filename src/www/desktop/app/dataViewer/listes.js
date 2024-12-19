@@ -404,7 +404,7 @@ const countries = [
 // Social media names list
 const socialNetworks = [
 	"Facebook",
-	"X",
+	"X Corp",
 	"Instagram",
 	"LinkedIn",
 	"Snapchat",

@@ -87,19 +87,19 @@ class storageHandler {
 
 
 // Declare all session variables
-const sessionDbTotalCells = new sessionHandler("db_total_rows");
-const sessionDbCorruptedCells = new sessionHandler("db_corrupted_rows");
-const sessionDifficulty = new sessionHandler("difficulty");
-const sessionEmails = new sessionHandler("emails");
-const sessionLastOpenedEmail = new sessionHandler("last_open_email");
-const sessionSatisfaction = new sessionHandler("satisfaction");
-const sessionSkill = new sessionHandler("skill");
-const sessionTimePassed = new sessionHandler("time_passed");
-const sessionEventsPassed = new sessionHandler("events_passed");
-const sessionEmailsDelete = new sessionHandler("emails_detele");
-const sessionDesktopAppExitLocked = new sessionHandler("desktop_app_exit_locked");
-const sesssionLastTimePassed = new sessionHandler("last_time_passsed");
-const sessionOpenFirstTime = new sessionHandler("session_open");
+const sessionDbTotalCells = new sessionHandler("b28ce115-fdc7-4d0c-85b1-6a70b505faaa");
+const sessionDbCorruptedCells = new sessionHandler("95c7e455-2c49-4b00-94f5-df4e26182077");
+const sessionDifficulty = new sessionHandler("dbded7ff-d434-4078-bc7b-52812829d2a2");
+const sessionEmails = new sessionHandler("de078f50-f8e9-4f7e-bfef-b64c76f2690a");
+const sessionLastOpenedEmail = new sessionHandler("0aa6a888-5a7f-49e2-9eac-7aced441784b");
+const sessionSatisfaction = new sessionHandler("bf22a77b-cfc6-447b-b37d-820ccb6170fc");
+const sessionSkill = new sessionHandler("7b4c4658-3be5-4572-9043-35c7871c6fe2");
+const sessionTimePassed = new sessionHandler("74355bfa-e654-4d28-a211-790ab8904db8");
+const sessionEventsPassed = new sessionHandler("55ad2e1b-b8fa-4717-8fb5-0d4402ad96aa");
+const sessionEmailsDelete = new sessionHandler("f3160c6e-ebe4-4d40-b1ce-83f7d2e1d906");
+const sessionDesktopAppExitLocked = new sessionHandler("01ffd302-9435-4700-9d15-818a6cdbc3fc");
+const sesssionLastTimePassed = new sessionHandler("0bfb3eb1-9b4e-454b-8596-7d6f847ec822");
+const sessionOpenFirstTime = new sessionHandler("0ae8dc62-58fb-4fd7-9d9c-7a5b23663446");
 
 /**
  * Redirects caller EIC to a Page.
@@ -213,4 +213,26 @@ const broadcastUpdateAppName = (name) => {
 	const bc = new BroadcastChannel("update_app_title");
 	bc.postMessage(name);
 	bc.close();
+}
+
+/**
+ * Converts a floating-point number to a string
+ * and keeps only the digits before the second digit
+ * after the decimal point.
+ *
+ * @param {number} num - The floating-point number to convert.
+ * @returns {string} - The formatted string.
+ */
+const convertFloatToStringTwoDecimal = (num) => {
+    // Convert the floating-point number to a string
+    let numStr = num.toString();
+  
+    // Find the position of the decimal point
+    let [integerPart, decimalPart] = numStr.split('.');
+
+    // Keep only the first and second digit after the decimal point
+    let newDecimalPart = decimalPart ? decimalPart.slice(0, 2) : '';
+    let result = newDecimalPart ? `${integerPart}.${newDecimalPart}` : integerPart;
+
+    return result;
 }

@@ -134,17 +134,25 @@ window.addEventListener("load", async () => {
 
 //React to session values changes
 sessionDbTotalCells.attachEvent((event) => {  //Event to detect database corruption > 5%
-	if ((sessionDbCorruptedCells.v / sessionDbTotalCells.v) < 0.05) return;
+	if ((sessionDbCorruptedCells.v / event.newValue) < 0.05) return;
 	endGameSession(false);
 })
 sessionSatisfaction.attachEvent((event) => { //Event to detect satisfaction drop below 0
-	if (sessionSatisfaction.v > 0) return;
+	if (event.newValue > 0) return;
 	endGameSession(false);
 })
 sessionSatisfaction.attachEvent((event) => { //Event to detect win
-	if (sessionSatisfaction.v <= 80 || sessionSkill.v <= 80) return;
+	if (event.newValue <= 80 || sessionSkill.v <= 80) return;
 	endGameSession(true);
 })
+
+sessionSatisfaction.attachEvent((event) => { //Event cap satisfaction at 100
+	if (event.newValue > 100) sessionSatisfaction.v = 100;
+})
+sessionSkill.attachEvent((event) => { //Event cap skill at 100
+	if (event.newValue > 100) sessionSkill.v = 100;
+})
+
 sessionTimePassed.attachEvent((event) => { //Event to update clock and detect new day
 	updateClock();
 	

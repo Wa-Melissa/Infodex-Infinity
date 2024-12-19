@@ -22,7 +22,7 @@ const broadCastOpenApp = new BroadcastChannel("open_app");
  * @returns {number} - The error rate in [minRangeValue, maxRangeValue].
  */
 const convertPercentageToErrorRate = (percentage) => {
-    const minRangeValue = 0.155;
+    const minRangeValue = 0.14;
     const maxRangeValue = 0.17;
     
     // Calculer la valeur interpolée
@@ -259,7 +259,7 @@ const selectionEnd = (selectionList, dataset) => {
 		if(result.isConfirmed) {
 			let nbCorrupt = nbErr - nbFound;
 			addToBase(nbCorrupt,dataset); // Add the corrected data to the base
-			sessionSatisfaction.v += settings.satisfactionChange * 1.5; // Increase satisfaction based
+			sessionSatisfaction.v += settings.satisfactionChange * 2.5; // Increase satisfaction based
 			sessionTimePassed.v += 4;  // Increase time passed
 		} else if(result.isDenied){
 			// Decrease satisfaction for the found errors
