@@ -203,7 +203,7 @@ const shuffleArray = (array) => {
  * Retrieve random emails to populate the inbox.
  */
 const retrieveRandomEmails = () => {
-    if (emails.length === 0) {  
+    if (emails.length === 0 && sessionOpenFirstTime.v) {  
        
         let emailsFromSource = [...mails]; // Copy the source emails
         shuffleArray(emailsFromSource); // Shuffle the email list
