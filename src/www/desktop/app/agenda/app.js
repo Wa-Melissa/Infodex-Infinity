@@ -190,21 +190,21 @@ const handleEvent = async (eventType) => {
     }
     if (eventType == "communication") {
         sessionTimePassed.v += 16;
-        sessionSatisfaction.v -= 16;
+        sessionSatisfaction.v -= 8;
         sessionSkill.v += 8;
         await formationDoneSwal();
         return;
     }
     if (eventType == "aberrancy") {
         sessionTimePassed.v += 24;
-        sessionSatisfaction.v -= 20;
+        sessionSatisfaction.v -= 10;
         sessionSkill.v += 10;
         await formationDoneSwal();
         return;
     }
     if (eventType == "verification") {
         sessionTimePassed.v += 12;
-        sessionSatisfaction.v -= 11;
+        sessionSatisfaction.v -= 6;
         sessionSkill.v += 5;
         await formationDoneSwal();
         return;
