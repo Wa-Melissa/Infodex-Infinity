@@ -164,7 +164,8 @@ sessionTimePassed.attachEvent((event) => { //Event to update clock and detect ne
 				});
 			}
 		});
-		sessionSatisfaction.v -= Math.floor(0.25 * sessionEmails.v.length);
+		sessionSatisfaction.v -= 0.5 * sessionEmails.v.length;
+		sessionSatisfaction.v -= sessionEmails.v.filter((v) => v.urgent).length;
 	}
 })
 

@@ -45,7 +45,7 @@ DOM.addEvent_button.addEventListener("click", async () => {
             resign: "Démissionner (et faire exploser la base de données ... Kboom)"
         }
     }
-
+    /*
     //Delete already used training
     sessionEventsPassed.v.forEach((e) => {
         if (!e.isTraining) return;
@@ -55,6 +55,7 @@ DOM.addEvent_button.addEventListener("click", async () => {
     if (Object.keys(inputOptions.Formations).length == 0) {
         delete inputOptions.Formations;
     }
+    */
     let secondStepResult = await Queue.fire({
         title: 'Créer un nouvel événement',
         input: "select",
