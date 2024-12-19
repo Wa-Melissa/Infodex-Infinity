@@ -404,7 +404,7 @@ const countries = [
 // Social media names list
 const socialNetworks = [
 	"Facebook",
-	"Twitter",
+	"X",
 	"Instagram",
 	"LinkedIn",
 	"Snapchat",
@@ -438,14 +438,12 @@ const socialNetworks = [
 	"Twitch",
 	"Mastodon",
 	"MeWe",
-	"Ello",
 	"Diaspora",
 	"Mix",
 	"Flipboard",
 	"Yelp",
 	"Letterboxd",
 	"Snapfish",
-	"BlackPlanet",
 	"Couchsurfing",
 	"Goodreads",
 	"Steam",
