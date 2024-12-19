@@ -253,7 +253,7 @@ const selectionEnd = (selectionList, dataset) => {
 			showDenyButton: true,
 			showCancelButton: true,
 			confirmButtonText: 'Corriger les erreurs et intégrer les données dans la base',
-			denyButtonText: `Renvoyer les données au chercheur pour correction`,
+			denyButtonText: `Renvoyer les données au chercheur pour qu'il les corrige`,
 			cancelButtonText: 'Retour'
 		});
 		if(result.isConfirmed) {
