@@ -15,21 +15,31 @@ const DOM = createDOMReferences({
 broadcastUpdateAppName("JaiMail - Boite de réception");
 const broadCastOpenApp= new BroadcastChannel("open_app");
 
-
 let lastSelectedLi = null; // Retrieve the last selected email
 let activeBox = "inbox"; // To know the current active folder
 let emails = sessionEmails.v;
 let emailsDelete = sessionEmailsDelete.v;
-DOM.inbox.classList.add('active');
 
- 
+
+DOM.inbox.classList.add('active');
+// Add a click event listener to the inbox element - it's to change folder
 DOM.inbox.addEventListener("click", () => switchFolder("inbox"));
 DOM.trash.addEventListener("click", () => switchFolder("trash"));
 
 
 /**
  * Display an email inside the email list.
+ * 
  * @param {Object} mail - The email object.
+ * @param {number} mail.id - The ID of the email.
+ * @param {string} mail.recipient - The recipient of the email.
+ * @param {string} mail.sender - The sender of the email.
+ * @param {string} mail.object - The subject of the email.
+ * @param {string} mail.content - The content of the email.
+ * @param {string[]} mail.attachments - A list of attachments.
+ * @param {string} mail.name - The name of the sender.
+ * @param {boolean} mail.read - Whether the email has been read.
+ * @param {boolean} mail.urgent - Whether the email is marked as urgent
  * @param {HTMLElement} li - The list item element representing the email.
  */
 const displayEmail = (mail, li) => {
@@ -56,13 +66,15 @@ const displayEmail = (mail, li) => {
 
     // Add the sender's name
     const nameElement = document.createElement('span');
+
+    // Display the sender's name as bold if the email is unread
     if (mail.read) nameElement.innerHTML = `${mail.name}`;
     else nameElement.innerHTML = `<strong>${mail.name}</strong>`;
 
     nameContainer.appendChild(btnRead);
     nameContainer.appendChild(nameElement);
 
-    // Add the container to the list item
+    // Clear existing content in the list item and add the name container
     li.innerHTML = ''; // Clear existing content
     li.appendChild(nameContainer);
 
@@ -74,16 +86,18 @@ const displayEmail = (mail, li) => {
 
     let contentElement = document.createElement('div');
 
+    // Set the content based on whether the email is urgent and/or read
     if (mail.urgent && mail.read) contentElement.innerHTML = `<span style="color:red;">[Urgent] </span><em>${mail.object}</em>`;
     else if (!mail.urgent && mail.read) contentElement.innerHTML = `<em>${mail.object}</em>`;
     else if (mail.urgent && !mail.read) contentElement.innerHTML = `<strong><span style="color:red;">[Urgent] </span><em>${mail.object}</em></strong>`;
     else contentElement.innerHTML = `<strong><em>${mail.object}</em></strong>`;
     
-
+    // Create an element for the email's date
     const dateElement = document.createElement('span');
     dateElement.style.whiteSpace = 'nowrap'; 
     dateElement.innerHTML = `${mail.date}`;
 
+    // Append the subject and date to the content container
     contentContainer.appendChild(contentElement);
     contentContainer.appendChild(dateElement);
 
@@ -113,7 +127,17 @@ const displayMessages = () => {
 
 /**
  * Display the content of the selected email in the right panel.
+ * 
  * @param {Object} mail - The email object.
+ * @param {number} mail.id - The ID of the email.
+ * @param {string} mail.recipient - The recipient of the email.
+ * @param {string} mail.sender - The sender of the email.
+ * @param {string} mail.object - The subject of the email.
+ * @param {string} mail.content - The content of the email.
+ * @param {string[]} mail.attachments - A list of attachments.
+ * @param {string} mail.name - The name of the sender.
+ * @param {boolean} mail.read - Whether the email has been read.
+ * @param {boolean} mail.urgent - Whether the email is marked as urgent
  * @param {HTMLElement} li - The list item element representing the email.
  */
 const displayEmailContent = (mail, li) => {
@@ -158,17 +182,17 @@ const displayEmailContent = (mail, li) => {
     });
 
     updateUnreadCount();
-
     
 }
 
 /**
  * Switch between inbox and trash folders.
+ * 
  * @param {string} folder - The folder to switch to ("inbox" or "trash").
  */
-const switchFolder = (dossier) => {
-    activeBox = dossier;
-    if (dossier === "trash") {
+const switchFolder = (folder) => {
+    activeBox = folder;
+    if (folder === "trash") {
         broadcastUpdateAppName("JaiMail - Corbeille");
         DOM.messageList.innerHTML = ''; // Clear the message list
         DOM.emailContent.innerHTML = ''; // Clear the email content
@@ -179,7 +203,8 @@ const switchFolder = (dossier) => {
         DOM.inbox.classList.remove('active'); // Set the active folder styling
         DOM.trash.classList.add('active'); 
         displayMessagesDelete();
-    } else {
+    } 
+    else {
         broadcastUpdateAppName("JaiMail - Boite de réception");
         DOM.messageList.innerHTML = ''; 
         DOM.emailContent.innerHTML = ''; 
@@ -196,6 +221,7 @@ const switchFolder = (dossier) => {
 
 /**
  * Shuffle an array randomly.
+ * 
  * @param {Array} array - The array to shuffle.
  */
 const shuffleArray = (array) => {
@@ -206,7 +232,7 @@ const shuffleArray = (array) => {
 }
 
 /**
- * Retrieve random emails to populate the inbox.
+ * Collect random emails to fill the inbox at the start of the game.
  */
 const retrieveRandomEmails = () => {
     if (emails.length === 0 && sessionOpenFirstTime.v) {  
@@ -217,7 +243,7 @@ const retrieveRandomEmails = () => {
         let nbEmail = 5;
 
         // List of remaining emails (without duplicates)
-        const mailsRestants = [];
+        const remainingEmails = [];
         
         // Place the email with ID 0 (Zimmermann) first
         const mailZimmermann = emailsFromSource.find(mail => mail.id === 0);
@@ -228,11 +254,11 @@ const retrieveRandomEmails = () => {
 
         // Add emails to the remainingEmails list
         for (let i = 0; i < emailsFromSource.length; i++) {
-            mailsRestants.push(emailsFromSource[i]);
-            if (mailsRestants.length + 1 > nbEmail) break; // Stop when enough emails are added
+            remainingEmails.push(emailsFromSource[i]);
+            if (remainingEmails.length + 1 > nbEmail) break; // Stop when enough emails are added
         }
 
-        emails.push(...mailsRestants);
+        emails.push(...remainingEmails);
         // Save these emails in sessionStorage
         sessionEmails.v = emails;
         updateEmailDatesToToday();
@@ -269,7 +295,17 @@ const updateUnreadCount = () => {
 
 /**
  * Delete an email and move it to the trash.
- * @param {Object} mail - The email object to delete.
+ * 
+ * @param {Object} mail - The email object.
+ * @param {number} mail.id - The ID of the email.
+ * @param {string} mail.recipient - The recipient of the email.
+ * @param {string} mail.sender - The sender of the email.
+ * @param {string} mail.object - The subject of the email.
+ * @param {string} mail.content - The content of the email.
+ * @param {string[]} mail.attachments - A list of attachments.
+ * @param {string} mail.name - The name of the sender.
+ * @param {boolean} mail.read - Whether the email has been read.
+ * @param {boolean} mail.urgent - Whether the email is marked as urgent
  */
 const deleteEmail = (mail) => {
     
@@ -298,7 +334,19 @@ const deleteEmail = (mail) => {
 /**
  * Display the content of a deleted email in the right panel.
  * Highlights the selected email in the list and updates the details in the right panel.
- * @param {Object} mail - The email object to display (contains `id`, `contenu`, etc.).
+ * 
+ * @param {Object} mail - The email object.
+ * @param {number} mail.id - The ID of the email.
+ * @param {string} mail.recipient - The recipient of the email.
+ * @param {string} mail.sender - The sender of the email.
+ * @param {string} mail.object - The subject of the email.
+ * @param {string} mail.recipient - The recipient of the email.
+ * @param {string} mail.sender - The sender of the email.
+ * @param {string} mail.content - The content of the email.
+ * @param {string[]} mail.attachments - A list of attachments.
+ * @param {string} mail.name - The name of the sender.
+ * @param {boolean} mail.read - Whether the email has been read.
+ * @param {boolean} mail.urgent - Whether the email is marked as urgent
  * @param {HTMLElement} li - The `<li>` element representing the email in the list.
  */
 const displayDeletedEmailContent = (mail, li) => {
@@ -370,13 +418,14 @@ const verifIfDayPassed = () => {
 /**
  * Add new emails to the inbox based on the number of days passed.
  * Updates the email list with new emails for each day that has passed.
+ * 
  * @param {number} differenceTime - The number of days that have passed since the last check.
  */
 const addEmailAfterDayPassed = (differenceTime) => {
-    // Mélange les e-mails disponibles
+    //Mix available e-mails
     shuffleArray(mails);
 
-    // Filtre les e-mails qui ne sont pas déjà dans les boîtes existantes (inbox et corbeille)
+    // Filter e-mails not already in existing boxes (inbox and recycle garbage can)
     let newEmails = mails.filter(mail => {
         return !emails.some(e => e.id === mail.id) && !emailsDelete.some(e => e.id === mail.id);
     });
@@ -386,9 +435,9 @@ const addEmailAfterDayPassed = (differenceTime) => {
     const currentDay = Math.floor(sessionTimePassed.v / 8);
 
     for (let day = 0; day < differenceTime; day++) {
-        let dateCourante = new Date(today);
-        dateCourante.setDate(today.getDate() + currentDay - day); 
-        const formattedDate = formatDateToString(dateCourante);
+        let todayDate = new Date(today);
+        todayDate.setDate(today.getDate() + currentDay - day); 
+        const formattedDate = formatDateToString(todayDate);
 
         const nombreMailsPourCeJour = Math.floor(Math.random() * 2) + 2;
 
@@ -399,10 +448,10 @@ const addEmailAfterDayPassed = (differenceTime) => {
         emailsAdded.push(...emailsPourCeJour);
     }
 
-    // Ajoute les nouveaux e-mails en tête de liste
+    // Adds new e-mails to the top of the list
     emails.unshift(...emailsAdded);
 
-    // Met à jour les données de session et l'affichage
+    // Updates session data and display
     updateUrgentField(emailsAdded);
     sessionEmails.v = emails;
     sesssionLastTimePassed.v = sessionTimePassed.v;
@@ -434,6 +483,7 @@ const openZimmermannEmailIfFirstTime = () => {
 
 /**
  * Format a Date object into a string (DD-MM-YYYY).
+ * 
  * @param {Date} date - The date object to format.
  * @returns {string} - The formatted date as a string.
  */
@@ -454,6 +504,22 @@ const updateEmailDatesToToday = () => {
 }
 
 
+/**
+ * Updates the `urgent` property of each email in the provided email list.
+ * Assigns a 10% probability for an email to be marked as urgent.
+ * 
+ * @param {Object} emailList - The list of email objects to update.
+ * @param {number} emailList.id - The ID of the email.
+ * @param {string} emailList.recipient - The recipient of the email.
+ * @param {string} emailList.sender - The sender of the email.
+ * @param {string} emailList.object - The subject of the email.
+ * @param {string} emailList.content - The content of the email.
+ * @param {string[]} emailList.attachments - A list of attachments.
+ * @param {string} emailList.name - The name of the sender.
+ * @param {boolean} emailList.read - Whether the email has been read.
+ * @param {boolean} emailList.urgent - Whether the email is marked as urgent
+ */
+
 const updateUrgentField = (emailList) => {
     emailList.forEach(email => {
         if (Math.random() <= 0.1) {
@@ -470,11 +536,3 @@ retrieveRandomEmails();
 updateUnreadCount();
 verifIfDayPassed();
 openZimmermannEmailIfFirstTime();
-
-
-
-
-/*
-je veux que mtn tu me fasses une fonction qui permet de generer dans le l'object mail un champ "urgent" bolean où tu mets à false dans tous les cas sauf une où 
-C'est genre 5% tu temps tu mets à true !
-*/
