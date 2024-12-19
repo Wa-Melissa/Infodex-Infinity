@@ -145,6 +145,14 @@ sessionSatisfaction.attachEvent((event) => { //Event to detect win
 	if (sessionSatisfaction.v <= 80 || sessionSkill.v <= 80) return;
 	endGameSession(true);
 })
+
+sessionSatisfaction.attachEvent((event) => { //Event cap satisfaction at 100
+	if (sessionSatisfaction.v > 100) sessionSatisfaction.v = 100;
+})
+sessionSkill.attachEvent((event) => { //Event cap skill at 100
+	if (sessionSkill.v > 100) sessionSkill.v = 100;
+})
+
 sessionTimePassed.attachEvent((event) => { //Event to update clock and detect new day
 	updateClock();
 	
