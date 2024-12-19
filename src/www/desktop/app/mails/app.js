@@ -198,7 +198,7 @@ const shuffleArray = (array) => {
         [array[i], array[j]] = [array[j], array[i]]; 
     }
 }
-// 5 % urgent
+
 /**
  * Retrieve random emails to populate the inbox.
  */
@@ -230,7 +230,7 @@ const retrieveRandomEmails = () => {
         // Save these emails in sessionStorage
         sessionEmails.v = emails;
         updateEmailDatesToToday();
-    }
+    } 
 
     // Display emails in the list
     displayMessages();
@@ -385,7 +385,9 @@ const addEmailAfterDayPassed = (differenceTime) => {
         dateCourante.setDate(today.getDate() + currentDay - day); 
         const formattedDate = formatDateToString(dateCourante);
 
-        const emailsPourCeJour = newEmails.splice(0, 3).map(mail => {
+        const nombreMailsPourCeJour = Math.floor(Math.random() * 2) + 2;
+
+        const emailsPourCeJour = newEmails.splice(0, nombreMailsPourCeJour).map(mail => {
             return { ...mail, date: formattedDate }; 
         });
 
@@ -444,6 +446,7 @@ const updateEmailDatesToToday = () => {
     emails = emails.map(mail => ({ ...mail, date: todayDate }));
     sessionEmails.v = emails;
 }
+
 
 
 // Initialize functions on page load
