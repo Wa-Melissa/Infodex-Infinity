@@ -21,6 +21,8 @@ let activeBox = "inbox"; // To know the current active folder
 let emails = sessionEmails.v;
 let emailsDelete = sessionEmailsDelete.v;
 DOM.boitereception.classList.add('active');
+
+ 
 DOM.boitereception.addEventListener("click", () => switchFolder("inbox"));
 DOM.corbeille.addEventListener("click", () => switchFolder("trash"));
 
@@ -196,7 +198,7 @@ const shuffleArray = (array) => {
         [array[i], array[j]] = [array[j], array[i]]; 
     }
 }
-
+// 5 % urgent
 /**
  * Retrieve random emails to populate the inbox.
  */
@@ -206,25 +208,7 @@ const retrieveRandomEmails = () => {
         let emailsFromSource = [...mails]; // Copy the source emails
         shuffleArray(emailsFromSource); // Shuffle the email list
         
-        let nbEmail;
-
-        // Set the number of emails based on session difficulty
-        switch (sessionDifficulty.v) {
-			case 1:
-				nbEmail = 25;
-				break;
-			case 2:
-				nbEmail = 50;
-				break;
-			case 3:
-				nbEmail = 90;
-				break;
-			case 4:
-				nbEmail = 150;
-				break;
-			default:
-				nbEmail = 25;
-		}
+        let nbEmail = 5;
 
         // List of remaining emails (without duplicates)
         const mailsRestants = [];
