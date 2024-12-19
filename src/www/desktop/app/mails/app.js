@@ -72,9 +72,13 @@ const displayEmail = (mail, li) => {
     contentContainer.style.justifyContent = 'space-between';
     contentContainer.style.alignItems = 'center';
 
-    const contentElement = document.createElement('div');
-    if (mail.lu) contentElement.innerHTML = `<em>${mail.objet}</em>`;
+    let contentElement = document.createElement('div');
+
+    if (mail.urgent && mail.lu) contentElement.innerHTML = `<span style="color:red;">[Urgent] </span><em>${mail.objet}</em>`;
+    else if (!mail.urgent && mail.lu) contentElement.innerHTML = `<em>${mail.objet}</em>`;
+    else if (mail.urgent && !mail.lu) contentElement.innerHTML = `<strong><span style="color:red;">[Urgent] </span><em>${mail.objet}</em></strong>`;
     else contentElement.innerHTML = `<strong><em>${mail.objet}</em></strong>`;
+    
 
     const dateElement = document.createElement('span');
     dateElement.style.whiteSpace = 'nowrap'; 
@@ -85,8 +89,8 @@ const displayEmail = (mail, li) => {
 
     // Add the content container to the list item
     li.appendChild(contentContainer);
-
 }
+
 
 
 /**
@@ -230,9 +234,8 @@ const retrieveRandomEmails = () => {
         // Save these emails in sessionStorage
         sessionEmails.v = emails;
         updateEmailDatesToToday();
+        updateUrgentField(emails);
     } 
-
-    // Display emails in the list
     displayMessages();
 }
 
@@ -398,6 +401,7 @@ const addEmailAfterDayPassed = (differenceTime) => {
     emails.unshift(...emailsAdded);
 
     // Met à jour les données de session et l'affichage
+    updateUrgentField(emailsAdded);
     sessionEmails.v = emails;
     sesssionLastTimePassed.v = sessionTimePassed.v;
     displayMessages();
@@ -448,6 +452,16 @@ const updateEmailDatesToToday = () => {
 }
 
 
+const updateUrgentField = (emailList) => {
+    emailList.forEach(email => {
+        if (Math.random() <= 0.1) {
+            email.urgent = true; 
+        } 
+        else {
+            email.urgent = false; 
+        }
+    });
+};
 
 // Initialize functions on page load
 retrieveRandomEmails();
@@ -458,3 +472,7 @@ openZimmermannEmailIfFirstTime();
 
 
 
+/*
+je veux que mtn tu me fasses une fonction qui permet de generer dans le l'object mail un champ "urgent" bolean où tu mets à false dans tous les cas sauf une où 
+C'est genre 5% tu temps tu mets à true !
+*/
