@@ -176,6 +176,7 @@ sessionTimePassed.attachEvent((event) => { //Event to update clock and detect ne
 				});
 			}
 		});
+		console.log(`Found ${sessionEmails.v.length} mail waiting for response including ${sessionEmails.v.filter((v) => v.urgent).length} urgent.`)
 		sessionSatisfaction.v -= 0.5 * sessionEmails.v.length;
 		sessionSatisfaction.v -= sessionEmails.v.filter((v) => v.urgent).length;
 	}
