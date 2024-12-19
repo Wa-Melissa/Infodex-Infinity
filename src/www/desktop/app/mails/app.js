@@ -44,7 +44,7 @@ const displayEmail = (mail, li) => {
     btnRead.style.marginRight = '10px'; 
     btnRead.addEventListener('click', (event) => {
         event.stopPropagation(); // Prevent the email from opening when clicking the button
-        mail.lu = !mail.lu;
+        mail.read = !mail.read;
         displayEmail(mail, li);
         let index = emails.findIndex(item => item.id === mail.id);
         if (index !== -1) {
@@ -56,8 +56,8 @@ const displayEmail = (mail, li) => {
 
     // Add the sender's name
     const nameElement = document.createElement('span');
-    if (mail.lu) nameElement.innerHTML = `${mail.nom}`;
-    else nameElement.innerHTML = `<strong>${mail.nom}</strong>`;
+    if (mail.read) nameElement.innerHTML = `${mail.name}`;
+    else nameElement.innerHTML = `<strong>${mail.name}</strong>`;
 
     nameContainer.appendChild(btnRead);
     nameContainer.appendChild(nameElement);
@@ -74,10 +74,10 @@ const displayEmail = (mail, li) => {
 
     let contentElement = document.createElement('div');
 
-    if (mail.urgent && mail.lu) contentElement.innerHTML = `<span style="color:red;">[Urgent] </span><em>${mail.objet}</em>`;
-    else if (!mail.urgent && mail.lu) contentElement.innerHTML = `<em>${mail.objet}</em>`;
-    else if (mail.urgent && !mail.lu) contentElement.innerHTML = `<strong><span style="color:red;">[Urgent] </span><em>${mail.objet}</em></strong>`;
-    else contentElement.innerHTML = `<strong><em>${mail.objet}</em></strong>`;
+    if (mail.urgent && mail.read) contentElement.innerHTML = `<span style="color:red;">[Urgent] </span><em>${mail.object}</em>`;
+    else if (!mail.urgent && mail.read) contentElement.innerHTML = `<em>${mail.object}</em>`;
+    else if (mail.urgent && !mail.read) contentElement.innerHTML = `<strong><span style="color:red;">[Urgent] </span><em>${mail.object}</em></strong>`;
+    else contentElement.innerHTML = `<strong><em>${mail.object}</em></strong>`;
     
 
     const dateElement = document.createElement('span');
@@ -124,7 +124,7 @@ const displayEmailContent = (mail, li) => {
     li.style.backgroundColor = "#e0f7fa"; 
     lastSelectedLi = li;
 
-    mail.lu = true;
+    mail.read = true;
     displayEmail(mail, li);
     li.style.backgroundColor = "#e0f7fa";
     
@@ -135,18 +135,18 @@ const displayEmailContent = (mail, li) => {
         sessionEmails.v = emails;  // Save to sessionStorage
     }
     sessionLastOpenedEmail.v = index;
-    const contentFormate = mail.contenu.replace(/\n/g, "<br>");
+    const contentFormate = mail.content.replace(/\n/g, "<br>");
     DOM.contenumail.innerHTML = "";
     const clone = DOM.mailTemplate.content.cloneNode(true);
-    if(mail.urgent) clone.querySelector(".mail-objet").innerHTML = `[Urgent] ${mail.objet}`;
-    else clone.querySelector(".mail-objet").innerHTML = mail.objet;
+    if(mail.urgent) clone.querySelector(".mail-objet").innerHTML = `[Urgent] ${mail.object}`;
+    else clone.querySelector(".mail-objet").innerHTML = mail.object;
 
-    clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
-    clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
+    clone.querySelector(".mail-expediteur").innerHTML = mail.sender;
+    clone.querySelector(".mail-destinataire").innerHTML = mail.recipient;
     clone.querySelector(".mail-contenu").innerHTML = contentFormate;
 
     if (mail.id !== 0) {  // If not Zimmerman's email, display attachments
-        clone.querySelector(".mail-pieces-jointes-btn").innerHTML = mail.piecesJointes;
+        clone.querySelector(".mail-pieces-jointes-btn").innerHTML = mail.attachments;
     } else {
         clone.querySelector(".mail-pieces-jointes-btn").style.display = "none"; // Hide attachments for Zimmerman's email
     }
@@ -249,7 +249,7 @@ const updateUnreadCount = () => {
 
     // Loop through all emails to count unread ones
     for (let i = 0; i < emails.length; i++) {
-        if (!emails[i].lu) { 
+        if (!emails[i].read) { 
             unread++;
         }
     }
@@ -309,7 +309,7 @@ const displayDeletedEmailContent = (mail, li) => {
     li.style.backgroundColor = "#e0f7fa"; 
     lastSelectedLi = li;
 
-    mail.lu = true;
+    mail.read = true;
     displayEmail(mail, li);
     li.style.backgroundColor = "#e0f7fa";
     
@@ -320,12 +320,12 @@ const displayDeletedEmailContent = (mail, li) => {
         sessionEmails.v = emails;  // Save to sessionStorage
     }
 
-    const contentFormate = mail.contenu.replace(/\n/g, "<br>");
+    const contentFormate = mail.content.replace(/\n/g, "<br>");
     DOM.contenumail.innerHTML = "";
     const clone = DOM.mailTemplateDelete.content.cloneNode(true);
-    clone.querySelector(".mail-objet").innerHTML = mail.objet;
-    clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
-    clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
+    clone.querySelector(".mail-objet").innerHTML = mail.object;
+    clone.querySelector(".mail-expediteur").innerHTML = mail.sender;
+    clone.querySelector(".mail-destinataire").innerHTML = mail.recipient;
     clone.querySelector(".mail-contenu").innerHTML = contentFormate;
     DOM.contenumail.appendChild(clone);
  
@@ -421,7 +421,7 @@ const openZimmermannEmailIfFirstTime = () => {
             const liElements = DOM.messageList.querySelectorAll('li'); 
             const liZimmermann = Array.from(liElements).find(li => {
                 const nameElement = li.querySelector('span');
-                return nameElement && nameElement.textContent.trim() === mailZimmermann.nom;
+                return nameElement && nameElement.textContent.trim() === mailZimmermann.name;
             });
 
             if (liZimmermann) {
