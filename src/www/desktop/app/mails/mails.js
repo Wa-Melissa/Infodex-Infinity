@@ -1164,7 +1164,7 @@ let mails = [
         "id": 97,
         "recipient": "Moi",
         "sender": "peter.smith@usconsulting.com",
-        "object": "Tendances du marché américain en",
+        "object": "Tendances du marché américain",
         "content": "Bonjour,\n\nVeuillez trouver ci-joint les tendances du marché américain pour. Ce document examine les changements clés, les prévisions économiques et les opportunités pour les entreprises opérant aux États-Unis.\n\nMerci de bien vouloir examiner ce rapport et de me faire part de vos retours.\n\nCordialement,\nPeter Smith",
         "attachments": [
             "tendances_marche_americain.pdf"
