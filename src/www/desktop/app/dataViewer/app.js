@@ -22,7 +22,7 @@ const broadCastOpenApp = new BroadcastChannel("open_app");
  * @returns {number} - The error rate in [minRangeValue, maxRangeValue].
  */
 const convertPercentageToErrorRate = (percentage) => {
-    const minRangeValue = 0.155;
+    const minRangeValue = 0.14;
     const maxRangeValue = 0.17;
     
     // Calculer la valeur interpolée
