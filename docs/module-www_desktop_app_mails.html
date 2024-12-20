@@ -166,7 +166,7 @@ Updates the email list with new emails for each day that has passed.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line370">line 370</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line424">line 424</a>
     </li></ul></dd>
     
 
@@ -262,7 +262,240 @@ Updates the email list with new emails for each day that has passed.
 
             
 
-            <td class="description last">The email object to delete.</td>
+            <td class="description last">The email object.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recipient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The recipient of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sender of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The subject of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The content of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>attachments</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A list of attachments.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the sender.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>read</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the email has been read.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>urgent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the email is marked as urgent</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -303,7 +536,7 @@ Updates the email list with new emails for each day that has passed.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line269">line 269</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line310">line 310</a>
     </li></ul></dd>
     
 
@@ -400,7 +633,286 @@ Highlights the selected email in the list and updates the details in the right p
 
             
 
-            <td class="description last">The email object to display (contains `id`, `contenu`, etc.).</td>
+            <td class="description last">The email object.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recipient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The recipient of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sender of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The subject of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recipient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The recipient of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sender of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The content of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>attachments</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A list of attachments.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the sender.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>read</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the email has been read.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>urgent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the email is marked as urgent</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -464,7 +976,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line299">line 299</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line352">line 352</a>
     </li></ul></dd>
     
 
@@ -560,7 +1072,240 @@ Highlights the selected email in the list and updates the details in the right p
 
             
 
-            <td class="description last">The email object.</td>
+            <td class="description last">The email object.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recipient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The recipient of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sender of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The subject of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The content of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>attachments</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A list of attachments.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the sender.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>read</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the email has been read.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>urgent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the email is marked as urgent</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -624,7 +1369,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line35">line 35</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -720,7 +1465,240 @@ Highlights the selected email in the list and updates the details in the right p
 
             
 
-            <td class="description last">The email object.</td>
+            <td class="description last">The email object.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recipient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The recipient of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sender of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The subject of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The content of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>attachments</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A list of attachments.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the sender.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>read</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the email has been read.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>urgent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the email is marked as urgent</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -784,7 +1762,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line115">line 115</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line143">line 143</a>
     </li></ul></dd>
     
 
@@ -872,7 +1850,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line95">line 95</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line113">line 113</a>
     </li></ul></dd>
     
 
@@ -960,7 +1938,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line334">line 334</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line387">line 387</a>
     </li></ul></dd>
     
 
@@ -1097,7 +2075,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line434">line 434</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line490">line 490</a>
     </li></ul></dd>
     
 
@@ -1207,7 +2185,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line411">line 411</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line466">line 466</a>
     </li></ul></dd>
     
 
@@ -1251,7 +2229,7 @@ Highlights the selected email in the list and updates the details in the right p
 
 
 <div class="description">
-    Retrieve random emails to populate the inbox.
+    Collect random emails to fill the inbox at the start of the game.
 </div>
 
 
@@ -1295,7 +2273,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line205">line 205</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line237">line 237</a>
     </li></ul></dd>
     
 
@@ -1432,7 +2410,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line195">line 195</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line227">line 227</a>
     </li></ul></dd>
     
 
@@ -1569,7 +2547,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line163">line 163</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line193">line 193</a>
     </li></ul></dd>
     
 
@@ -1657,7 +2635,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line444">line 444</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line500">line 500</a>
     </li></ul></dd>
     
 
@@ -1745,7 +2723,378 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line242">line 242</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line273">line 273</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~updateUrgentField"><span class="type-signature">(inner) </span>updateUrgentField<span class="signature">(emailList)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates the `urgent` property of each email in the provided email list.
+Assigns a 10% probability for an email to be marked as urgent.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>emailList</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The list of email objects to update.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recipient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The recipient of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sender of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The subject of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The content of the email.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>attachments</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A list of attachments.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the sender.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>read</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the email has been read.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>urgent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the email is marked as urgent</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line523">line 523</a>
     </li></ul></dd>
     
 
@@ -1833,7 +3182,7 @@ Highlights the selected email in the list and updates the details in the right p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line351">line 351</a>
+        <a href="desktop_app_mails_app.js.html">desktop/app/mails/app.js</a>, <a href="desktop_app_mails_app.js.html#line404">line 404</a>
     </li></ul></dd>
     
 
@@ -1885,7 +3234,7 @@ Highlights the selected email in the list and updates the details in the right p
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Dec 19 2024 13:33:12 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Dec 19 2024 15:53:36 GMT+0100 (heure normale d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

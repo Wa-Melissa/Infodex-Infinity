@@ -270,7 +270,7 @@ const selectionEnd = (selectionList, dataset) => {
 		} else return;
 
 		const email = sessionEmails.v[sessionLastOpenedEmail.v];
-		email.objet = '<i class="fa-solid fa-reply"></i> ' + email.objet;
+		email.object = '<i class="fa-solid fa-reply"></i> ' + email.object;
 		sessionEmailsDelete.v = [...sessionEmailsDelete.v, email];
 		sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
 		broadCastOpenApp.postMessage("mails");
