@@ -163,6 +163,7 @@ const formationDoneSwal = async () => {
 const handleEvent = async (eventType) => {
     generateAgenda();
     if (eventType == "oneday") {
+        if (sessionEmails.v.length == 0) return;
         sessionTimePassed.v += 8 - (sessionTimePassed.v % 8);
         sessionSatisfaction.v -= 8 - (sessionTimePassed.v % 8);
         return;
