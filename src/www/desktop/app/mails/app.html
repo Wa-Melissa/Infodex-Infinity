@@ -38,15 +38,15 @@
 
 </style>
 <body>
-  <!-- Barre de titre -->
+  <!-- Title bar -->
   <div class="w3-container w3-top w3-padding w3-teal" style="height: 60px; display: flex; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
     <i class="fas fa-envelope w3-xxlarge w3-text-white" style="margin-right: 15px;"></i>
     <h1 class="w3-text-white" style="margin: 0; font-size: 24px; font-weight: 400;">JaiMail</h1>
   </div>
 
-  <!-- Conteneur principal -->
+  <!-- Main container -->
   <div class="w3-row" style="margin-top: 60px;">
-    <!-- La sidebar/menu des dossiers -->
+    <!-- The sidebar/folder menu -->
     <nav class="w3-sidebar w3-light-grey w3-bar-block w3-rightbar" 
         style="width: 270px; height: 100vh; position: fixed;">
       <h3 class="w3-bar-item">Dossiers</h3>
@@ -55,17 +55,17 @@
       </a>
       <a href="#" class="w3-bar-item w3-button" id="corbeille"><i class="fa-solid fa-trash" style="margin-right: 10px;"></i>Corbeille</a>
     </nav>
-
-    <!-- Contenu principal, avec un espace pour la sidebar -->
+    
+  <!-- Main content, with space for the sidebar -->
     <div class="w3-row" style="margin-left: 270px;">
       <!-- Colonne de la liste des emails (à gauche) -->
       <div class="w3-col" style="width: 45%; height: 100vh; ">
         <ul class="w3-ul" id="message-list">
-          <!-- Les emails s'affichent ici -->
+          <!-- Emails appear here -->
         </ul>
       </div>
 
-    <!-- Colonne du contenu de l'email (à droite) -->
+    <!-- Email content column (right) -->
     <div class="w3-col" style="width: 55%; height: 100vh; border-left: 1px solid lightgray; ">
       <div id="contenu-mail">
         <div class ="w3-center">
