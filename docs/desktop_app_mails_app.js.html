@@ -114,12 +114,13 @@ const displayEmail = (mail, li) => {
 
     let contentElement = document.createElement('div');
 
-    if (mail.urgent &amp;&amp; mail.lu) contentElement.innerHTML = `&lt;span style="color:red;">[Urgent] &lt;/span>&lt;em>${mail.objet}&lt;/em>`;
-    else if (!mail.urgent &amp;&amp; mail.lu) contentElement.innerHTML = `&lt;em>${mail.objet}&lt;/em>`;
-    else if (mail.urgent &amp;&amp; !mail.lu) contentElement.innerHTML = `&lt;strong>&lt;span style="color:red;">[Urgent] &lt;/span>&lt;em>${mail.objet}&lt;/em>&lt;/strong>`;
-    else contentElement.innerHTML = `&lt;strong>&lt;em>${mail.objet}&lt;/em>&lt;/strong>`;
+    // Set the content based on whether the email is urgent and/or read
+    if (mail.urgent &amp;&amp; mail.read) contentElement.innerHTML = `&lt;span style="color:red;">[Urgent] &lt;/span>&lt;em>${mail.object}&lt;/em>`;
+    else if (!mail.urgent &amp;&amp; mail.read) contentElement.innerHTML = `&lt;em>${mail.object}&lt;/em>`;
+    else if (mail.urgent &amp;&amp; !mail.read) contentElement.innerHTML = `&lt;strong>&lt;span style="color:red;">[Urgent] &lt;/span>&lt;em>${mail.object}&lt;/em>&lt;/strong>`;
+    else contentElement.innerHTML = `&lt;strong>&lt;em>${mail.object}&lt;/em>&lt;/strong>`;
     
-
+    // Create an element for the email's date
     const dateElement = document.createElement('span');
     dateElement.style.whiteSpace = 'nowrap'; 
     dateElement.innerHTML = `${mail.date}`;
@@ -131,7 +132,6 @@ const displayEmail = (mail, li) => {
     // Add the content container to the list item
     li.appendChild(contentContainer);
 }
-
 
 
 
@@ -190,11 +190,11 @@ const displayEmailContent = (mail, li) => {
     const contentFormate = mail.content.replace(/\n/g, "&lt;br>");
     DOM.emailContent.innerHTML = "";
     const clone = DOM.mailTemplate.content.cloneNode(true);
-    if(mail.urgent) clone.querySelector(".mail-objet").innerHTML = `[Urgent] ${mail.objet}`;
-    else clone.querySelector(".mail-objet").innerHTML = mail.objet;
+    if(mail.urgent) clone.querySelector(".mail-objet").innerHTML = `[Urgent] ${mail.object}`;
+    else clone.querySelector(".mail-objet").innerHTML = mail.object;
 
-    clone.querySelector(".mail-expediteur").innerHTML = mail.expediteur;
-    clone.querySelector(".mail-destinataire").innerHTML = mail.destinataire;
+    clone.querySelector(".mail-expediteur").innerHTML = mail.sender;
+    clone.querySelector(".mail-destinataire").innerHTML = mail.recipient;
     clone.querySelector(".mail-contenu").innerHTML = contentFormate;
 
     if (mail.id !== 0) {  // If not Zimmerman's email, display attachments
@@ -290,7 +290,6 @@ const retrieveRandomEmails = () => {
         // Save these emails in sessionStorage
         sessionEmails.v = emails;
         updateEmailDatesToToday();
-        updateUrgentField(emails);
         updateUrgentField(emails);
     } 
     displayMessages();
@@ -480,7 +479,7 @@ const addEmailAfterDayPassed = (differenceTime) => {
     // Adds new e-mails to the top of the list
     emails.unshift(...emailsAdded);
 
-    // Met à jour les données de session et l'affichage
+    // Updates session data and display
     updateUrgentField(emailsAdded);
     sessionEmails.v = emails;
     sesssionLastTimePassed.v = sessionTimePassed.v;
@@ -532,16 +531,23 @@ const updateEmailDatesToToday = () => {
     sessionEmails.v = emails;
 }
 
+
 /**
- * Updates the 'urgent' field for each email in the provided list.
- * The first email (with an id of 0) is always marked as not urgent.
- * For other emails, the 'urgent' field is assigned randomly with 
- * a 10% chance of being marked as urgent.
- *
- * @param {Object[]} emailList - The list of emails to update.
- * @param {number} emailList[].id - The unique identifier of the email.
- * @param {boolean} emailList[].urgent - Indicates whether the email is urgent or not.
+ * Updates the `urgent` property of each email in the provided email list.
+ * Assigns a 10% probability for an email to be marked as urgent.
+ * 
+ * @param {Object} emailList - The list of email objects to update.
+ * @param {number} emailList.id - The ID of the email.
+ * @param {string} emailList.recipient - The recipient of the email.
+ * @param {string} emailList.sender - The sender of the email.
+ * @param {string} emailList.object - The subject of the email.
+ * @param {string} emailList.content - The content of the email.
+ * @param {string[]} emailList.attachments - A list of attachments.
+ * @param {string} emailList.name - The name of the sender.
+ * @param {boolean} emailList.read - Whether the email has been read.
+ * @param {boolean} emailList.urgent - Whether the email is marked as urgent
  */
+
 const updateUrgentField = (emailList) => {
     emailList.forEach(email => {
         if (email.id == 0) return (email.urgent = false); //First email (Zimmermann) is never urgent
@@ -559,14 +565,7 @@ retrieveRandomEmails();
 updateUnreadCount();
 verifIfDayPassed();
 openZimmermannEmailIfFirstTime();
-
-
-
-
-/*
-je veux que mtn tu me fasses une fonction qui permet de generer dans le l'object mail un champ "urgent" bolean où tu mets à false dans tous les cas sauf une où 
-C'est genre 5% tu temps tu mets à true !
-*/</code></pre>
+</code></pre>
         </article>
     </section>
 
@@ -582,7 +581,7 @@ C'est genre 5% tu temps tu mets à true !
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Fri Dec 20 2024 09:53:51 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Fri Dec 20 2024 10:01:37 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
