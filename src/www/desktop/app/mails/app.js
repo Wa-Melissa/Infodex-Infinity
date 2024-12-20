@@ -453,9 +453,19 @@ const updateEmailDatesToToday = () => {
     sessionEmails.v = emails;
 }
 
-
+/**
+ * Updates the 'urgent' field for each email in the provided list.
+ * The first email (with an id of 0) is always marked as not urgent.
+ * For other emails, the 'urgent' field is assigned randomly with 
+ * a 10% chance of being marked as urgent.
+ *
+ * @param {Object[]} emailList - The list of emails to update.
+ * @param {number} emailList[].id - The unique identifier of the email.
+ * @param {boolean} emailList[].urgent - Indicates whether the email is urgent or not.
+ */
 const updateUrgentField = (emailList) => {
     emailList.forEach(email => {
+        if (email.id == 0) return (email.urgent = false); //First email (Zimmermann) is never urgent
         if (Math.random() <= 0.1) {
             email.urgent = true; 
         } 
