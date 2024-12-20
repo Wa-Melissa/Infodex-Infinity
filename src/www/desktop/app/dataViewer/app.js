@@ -244,6 +244,8 @@ const selectionEnd = (selectionList, dataset) => {
 			let nbCorrupt = nbErr - nbFound;
 			addToBase(nbCorrupt,dataset);  // Add corrupt data to the base
 			sessionTimePassed.v += 2; // Increase time passed
+			sessionSatisfaction.v += settings.satisfactionChange * 2.5; // Increase satisfaction based
+			closeAppOnFinished();
 			return;
 		}
 
@@ -268,14 +270,27 @@ const selectionEnd = (selectionList, dataset) => {
 			sessionSkill.v += settings.skillsChange * nbFound;
 			sessionTimePassed.v += 2; // Increase time passed
 		} else return;
-
-		const email = sessionEmails.v[sessionLastOpenedEmail.v];
-		email.object = '<i class="fa-solid fa-reply"></i> ' + email.object;
-		sessionEmailsDelete.v = [...sessionEmailsDelete.v, email];
-		sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
-		broadCastOpenApp.postMessage("mails");
+		closeAppOnFinished();
 	};
 };
+
+/**
+ * Closes the application by marking the currently opened email as finished.
+ * This function modifies the email object by adding a reply icon,
+ * adds it to the list of emails to delete, and updates the list of
+ * opened emails by removing the finished email. It then sends a message
+ * to indicate that the application should be reopened.
+ *
+ * @function closeAppOnFinished
+ * @returns {void} This function does not return anything.
+ */
+const closeAppOnFinished = () => {
+	const email = sessionEmails.v[sessionLastOpenedEmail.v];
+	email.object = '<i class="fa-solid fa-reply"></i> ' + email.object;
+	sessionEmailsDelete.v = [...sessionEmailsDelete.v, email];
+	sessionEmails.v = sessionEmails.v.toSpliced(sessionLastOpenedEmail.v, 1);
+	broadCastOpenApp.postMessage("mails");
+}
 
 /**
  * Updates the number of corrupted data cells and the total number of data cells in the dataset in two session variables
