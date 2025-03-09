@@ -1,4 +1,10 @@
-# Infodex-Infinity
+# Infodex-Infinity : Serious game about data librarians
+
+### Contexte du projet
+
+- en trinôme avec **Florian Schmuck** ([FloX-Dev](https://github.com/FloX-Dev)) et **Priscillia Brucker**
+- Durée: 16 semaines
+- En deuxième année de BUT (septembre - décembre 2024)
 
 Infodex-Infinity est un jeu sérieux immersif qui propose aux joueurs d'incarner un data librarian. Plongé dans un faux système d'exploitation "DataLibrarian OS", le joueur doit gérer une base de données et répondre aux demandes d'ajout de données provenant des chercheurs. Ce projet vise à sensibiliser aux enjeux et responsabilités des métiers de data librarian, tout en offrant une expérience ludique et éducative.
 
